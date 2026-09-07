@@ -1,0 +1,182 @@
+@import "tailwindcss";
+
+/* Restrained, premium type system — one clean grotesque (Inter) everywhere.
+   Mapping --font-serif to Inter too converts the old Playfair headings to a
+   modest sans without touching every component. */
+@theme {
+  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-serif: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+@layer base {
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  /* Tighter, cleaner headings by default */
+  h1, h2, h3 {
+    letter-spacing: -0.02em;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Scroll reveal — fail-safe. Hidden state only applies once JS adds .js-reveal,
+   so without JS everything stays visible. Observer adds .is-revealed on entry.
+--------------------------------------------------------------------------- */
+.js-reveal [data-reveal] {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 0.6s cubic-bezier(0.22, 0.61, 0.36, 1),
+    transform 0.6s cubic-bezier(0.22, 0.61, 0.36, 1);
+  will-change: opacity, transform;
+}
+.js-reveal [data-reveal='left'] { transform: translateX(-36px); }
+.js-reveal [data-reveal='right'] { transform: translateX(36px); }
+.js-reveal [data-reveal='scale'] { transform: scale(0.95); }
+.js-reveal [data-reveal].is-revealed {
+  opacity: 1;
+  transform: none;
+}
+
+/* Staggered children — parent gets [data-stagger]; its direct children cascade */
+.js-reveal [data-stagger] > * {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.55s cubic-bezier(0.22, 0.61, 0.36, 1),
+    transform 0.55s cubic-bezier(0.22, 0.61, 0.36, 1);
+  will-change: opacity, transform;
+}
+.js-reveal [data-stagger].is-revealed > * {
+  opacity: 1;
+  transform: none;
+}
+.js-reveal [data-stagger].is-revealed > *:nth-child(1) { transition-delay: 0.03s; }
+.js-reveal [data-stagger].is-revealed > *:nth-child(2) { transition-delay: 0.08s; }
+.js-reveal [data-stagger].is-revealed > *:nth-child(3) { transition-delay: 0.13s; }
+.js-reveal [data-stagger].is-revealed > *:nth-child(4) { transition-delay: 0.18s; }
+.js-reveal [data-stagger].is-revealed > *:nth-child(5) { transition-delay: 0.23s; }
+.js-reveal [data-stagger].is-revealed > *:nth-child(6) { transition-delay: 0.28s; }
+.js-reveal [data-stagger].is-revealed > *:nth-child(n + 7) { transition-delay: 0.32s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .js-reveal [data-reveal],
+  .js-reveal [data-stagger] > * {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Hero ambient aurora — slow drifting brand glows behind the headline.
+   Purely decorative; disabled under reduced-motion.
+--------------------------------------------------------------------------- */
+.hero-aurora {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(80px);
+  opacity: 0.55;
+  will-change: transform;
+}
+
+.hero-aurora--a {
+  top: 8%;
+  right: 12%;
+  width: 46vw;
+  max-width: 620px;
+  height: 46vw;
+  max-height: 620px;
+  background: radial-gradient(circle at 50% 50%, rgba(40, 106, 91, 0.20), rgba(220, 237, 231, 0) 68%);
+  animation: hero-drift-a 22s ease-in-out infinite;
+}
+
+.hero-aurora--b {
+  bottom: 2%;
+  left: 6%;
+  width: 38vw;
+  max-width: 500px;
+  height: 38vw;
+  max-height: 500px;
+  background: radial-gradient(circle at 50% 50%, rgba(23, 61, 53, 0.14), rgba(23, 61, 53, 0) 70%);
+  animation: hero-drift-b 26s ease-in-out infinite;
+}
+
+@keyframes hero-drift-a {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50%      { transform: translate3d(-4%, 6%, 0) scale(1.12); }
+}
+
+@keyframes hero-drift-b {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50%      { transform: translate3d(5%, -5%, 0) scale(1.08); }
+}
+
+/* Fine film grain to kill flat-gradient banding on large light surfaces */
+.grain-overlay {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  mix-blend-mode: multiply;
+}
+
+/* Button sheen sweep — a specular glint crosses primary/white buttons on hover */
+.btn-sheen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 55%;
+  pointer-events: none;
+  transform: translateX(-180%) skewX(-18deg);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.30),
+    transparent
+  );
+}
+.group:hover .btn-sheen {
+  animation: btn-sheen-sweep 0.85s ease;
+}
+@keyframes btn-sheen-sweep {
+  0%   { transform: translateX(-180%) skewX(-18deg); }
+  100% { transform: translateX(320%) skewX(-18deg); }
+}
+
+/* Animated moving-colour border on button hover (no scale) --------------- */
+@property --btn-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+@keyframes btn-border-spin {
+  to { --btn-angle: 360deg; }
+}
+.btn-glow-border::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 2px; /* border thickness */
+  background: conic-gradient(
+    from var(--btn-angle),
+    #8fc7d4, #a9d8e4, #ffffff, #3d7773, #8fc7d4
+  );
+  /* show the gradient only in the padding ring → a border, not a fill */
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 4;
+}
+.btn-glow-border:hover::before {
+  opacity: 1;
+  animation: btn-border-spin 2.4s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-aurora { animation: none !important; }
+  .btn-sheen { animation: none !important; }
+  .btn-glow-border:hover::before { animation: none !important; }
+}

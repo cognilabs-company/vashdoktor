@@ -1,0 +1,6 @@
+{
+  "name": "Dental Implant Center",
+  "description": "Advanced dental implant treatment with digital diagnostics, precision planning and modern implant technology.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

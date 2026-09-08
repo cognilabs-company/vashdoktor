@@ -15,7 +15,7 @@ export function FAQ() {
       <div className="max-w-[1440px] mx-auto px-6 sm:px-8 lg:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
           {/* Left Column: Heading */}
-          <div data-stagger className="lg:col-span-5 sticky top-28">
+          <div data-stagger="left" className="lg:col-span-5 sticky top-28">
             <TechnicalBadge code="BEMOR MA'LUMOTI" label="KO'P BERILADIGAN" />
 
             <h2 className="mt-6 text-3xl sm:text-4xl lg:text-[2.5rem] font-medium font-serif tracking-tight text-white leading-[1.08]">

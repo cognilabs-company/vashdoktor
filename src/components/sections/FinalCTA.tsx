@@ -23,7 +23,7 @@ export function FinalCTA({ onOpenConsultation }: FinalCTAProps) {
       <div className="relative z-10 max-w-[1440px] mx-auto px-6 sm:px-8 lg:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           {/* Left Column: Headline & Action */}
-          <div data-stagger className="lg:col-span-8 flex flex-col items-start">
+          <div data-stagger="left" className="lg:col-span-8 flex flex-col items-start">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.06] border border-white/10 backdrop-blur-md text-[11px] font-mono text-[#8fc7d4] uppercase tracking-widest mb-6">
               <span className="h-1.5 w-1.5 rounded-full bg-[#8fc7d4] animate-pulse" />
               <span>KONSULTATSIYA & DIAGNOSTIKA</span>

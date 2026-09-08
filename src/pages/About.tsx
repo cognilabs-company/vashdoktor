@@ -1,5 +1,7 @@
 import { HeartHandshake, Microscope, ShieldCheck, Users } from 'lucide-react';
 import { PageHero } from '../components/layout/PageHero';
+import { ProcessSection } from '../components/sections/ProcessSection';
+import { FounderSection } from '../components/sections/FounderSection';
 import { FinalCTA } from '../components/sections/FinalCTA';
 import { TechnicalBadge } from '../components/ui/TechnicalBadge';
 import { CLINIC_CONFIG } from '../lib/clinicConfig';
@@ -32,7 +34,7 @@ export function About() {
       {/* Story */}
       <section className="relative w-full border-t border-white/10 bg-[#0a141d] py-20 lg:py-28">
         <div className="mx-auto grid max-w-[1440px] items-center gap-12 px-6 sm:px-8 lg:grid-cols-2 lg:gap-16 lg:px-12">
-          <div data-reveal>
+          <div data-reveal="left">
             <TechnicalBadge label="Bizning missiya" variant="dark" />
             <h2 className="mt-6 font-serif text-[clamp(1.9rem,4vw,3rem)] font-medium leading-[1.08] tracking-tight text-white">
               Sog‘lom tabassum — sog‘lom hayotning boshlanishi
@@ -49,7 +51,7 @@ export function About() {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-4" data-stagger>
+          <div className="grid grid-cols-2 gap-4" data-stagger="right">
             {STATS.map((s) => (
               <div key={s.label} className="rounded-2xl border border-white/10 bg-white/[0.04] p-6 backdrop-blur-md">
                 <div className="font-serif text-3xl font-medium text-white lg:text-4xl">{s.value}</div>
@@ -63,7 +65,7 @@ export function About() {
       {/* Values */}
       <section className="relative w-full border-t border-white/10 bg-[#0b1720] py-20 lg:py-28">
         <div className="mx-auto max-w-[1440px] px-6 sm:px-8 lg:px-12">
-          <div className="max-w-2xl" data-reveal>
+          <div className="max-w-2xl" data-reveal="left">
             <TechnicalBadge label="Qadriyatlar" variant="dark" />
             <h2 className="mt-6 font-serif text-[clamp(1.9rem,4vw,3rem)] font-medium leading-[1.08] tracking-tight text-white">
               Nima uchun bizni tanlaydilar
@@ -71,8 +73,11 @@ export function About() {
           </div>
           <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4" data-stagger>
             {VALUES.map((v) => (
-              <div key={v.title} className="rounded-2xl border border-white/10 bg-white/[0.04] p-6 backdrop-blur-md">
-                <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#8fc7d4]/12 text-[#a9d8e4] ring-1 ring-white/10">
+              <div
+                key={v.title}
+                className="group rounded-2xl border border-white/10 bg-white/[0.04] p-6 backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:border-[#8fc7d4]/40"
+              >
+                <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#8fc7d4]/12 text-[#a9d8e4] ring-1 ring-white/10 transition-colors group-hover:bg-[#8fc7d4]/20">
                   <v.icon className="h-5 w-5" strokeWidth={1.6} />
                 </span>
                 <h3 className="mt-5 font-serif text-lg font-medium tracking-tight text-white">{v.title}</h3>
@@ -82,6 +87,12 @@ export function About() {
           </div>
         </div>
       </section>
+
+      {/* How we work */}
+      <ProcessSection bg="#0a141d" />
+
+      {/* Founder — the trust anchor of the author clinic */}
+      <FounderSection bg="#0b1720" />
 
       <FinalCTA onOpenConsultation={openConsultation} />
     </>

@@ -30,22 +30,26 @@
     transform 0.6s cubic-bezier(0.22, 0.61, 0.36, 1);
   will-change: opacity, transform;
 }
-.js-reveal [data-reveal='left'] { transform: translateX(-36px); }
-.js-reveal [data-reveal='right'] { transform: translateX(36px); }
+.js-reveal [data-reveal='left'] { transform: translateX(-44px) scale(0.985); }
+.js-reveal [data-reveal='right'] { transform: translateX(44px) scale(0.985); }
+.js-reveal [data-reveal='up'] { transform: translateY(48px); }
 .js-reveal [data-reveal='scale'] { transform: scale(0.95); }
 .js-reveal [data-reveal].is-revealed {
   opacity: 1;
   transform: none;
 }
 
-/* Staggered children — parent gets [data-stagger]; its direct children cascade */
+/* Staggered children — parent gets [data-stagger]; its direct children cascade.
+   Direction variants: default = up from bottom, ='left' / ='right' slide in. */
 .js-reveal [data-stagger] > * {
   opacity: 0;
-  transform: translateY(22px);
-  transition: opacity 0.55s cubic-bezier(0.22, 0.61, 0.36, 1),
-    transform 0.55s cubic-bezier(0.22, 0.61, 0.36, 1);
+  transform: translateY(26px);
+  transition: opacity 0.6s cubic-bezier(0.22, 0.61, 0.36, 1),
+    transform 0.6s cubic-bezier(0.22, 0.61, 0.36, 1);
   will-change: opacity, transform;
 }
+.js-reveal [data-stagger='left'] > * { transform: translateX(-44px) scale(0.985); }
+.js-reveal [data-stagger='right'] > * { transform: translateX(44px) scale(0.985); }
 .js-reveal [data-stagger].is-revealed > * {
   opacity: 1;
   transform: none;

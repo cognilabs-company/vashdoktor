@@ -6,6 +6,7 @@ import { VideoText } from '../components/sections/VideoText';
 import { FAQ } from '../components/sections/FAQ';
 import { FinalCTA } from '../components/sections/FinalCTA';
 import { ServicesSection } from '../components/sections/ServicesSection';
+import { FounderSection } from '../components/sections/FounderSection';
 import { DoctorsSection } from '../components/sections/DoctorsSection';
 import { featuredServices } from '../lib/services';
 import { DOCTORS } from '../lib/doctors';
@@ -34,11 +35,14 @@ export function Home() {
       <Technology />
       <VideoText />
 
+      {/* Founder — the trust anchor (author clinic), before the team grid */}
+      <FounderSection />
+
       <DoctorsSection
         doctors={DOCTORS}
-        title="Tajribali shifokorlar jamoasi"
-        subtitle="Har bir yo‘nalish bo‘yicha mutaxassislar — sizga va oilangizga g‘amxo‘rlik qiladi."
-        cta={{ label: 'Barcha doktorlar', to: '/doctors' }}
+        title="Bosh shifokor rahbarligidagi jamoa"
+        subtitle="Har bir mutaxassis — bir maktabdan. Bosh shifokorning tajribasi butun jamoaga o‘tadi."
+        cta={{ label: 'Butun jamoa', to: '/doctors' }}
       />
 
       <FAQ />

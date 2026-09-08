@@ -1,5 +1,6 @@
 import { PageHero } from '../components/layout/PageHero';
 import { ServicesSection } from '../components/sections/ServicesSection';
+import { ProcessSection } from '../components/sections/ProcessSection';
 import { FinalCTA } from '../components/sections/FinalCTA';
 import { SERVICES } from '../lib/services';
 import { useClinicUI } from '../lib/uiContext';
@@ -17,8 +18,10 @@ export function Services() {
         services={SERVICES}
         eyebrow="To‘liq ro‘yxat"
         title="Nimalarni taklif qilamiz"
+        subtitle="Xizmatlarni yo‘nalishlar bo‘yicha guruhladik — kerakli bo‘limni oson topasiz."
         detailed
       />
+      <ProcessSection />
       <FinalCTA onOpenConsultation={openConsultation} />
     </>
   );

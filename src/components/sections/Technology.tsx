@@ -38,7 +38,7 @@ export function Technology() {
         {/* Asymmetrical Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
           {/* LEFT COLUMN: Large Editorial Typography */}
-          <div data-stagger className="lg:col-span-5 flex flex-col items-start sticky top-28">
+          <div data-stagger="left" className="lg:col-span-5 flex flex-col items-start sticky top-28">
             <TechnicalBadge code="RAQAMLI JARAYON" label="KLINIK PROTOKOL" />
 
             <h2 className="mt-6 text-3xl sm:text-4xl lg:text-[2.5rem] font-medium font-serif tracking-tight text-white leading-[1.08]">

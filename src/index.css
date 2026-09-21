@@ -184,3 +184,60 @@
   .btn-sheen { animation: none !important; }
   .btn-glow-border:hover::before { animation: none !important; }
 }
+
+/* ---------------------------------------------------------------------------
+   Doctors constellation — a slow-turning light ring around the chief portrait
+--------------------------------------------------------------------------- */
+@property --ring-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+@keyframes chief-ring-spin {
+  to { --ring-angle: 360deg; }
+}
+.chief-ring::before {
+  content: "";
+  position: absolute;
+  inset: -14px;
+  border-radius: 38px;
+  padding: 1px;
+  background: conic-gradient(
+    from var(--ring-angle),
+    transparent 0deg,
+    rgba(143, 199, 212, 0.85) 50deg,
+    transparent 110deg,
+    transparent 200deg,
+    rgba(143, 199, 212, 0.35) 250deg,
+    transparent 320deg
+  );
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  animation: chief-ring-spin 14s linear infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+@media (prefers-reduced-motion: reduce) {
+  .chief-ring::before { animation: none !important; }
+}
+
+/* ---------------------------------------------------------------------------
+   Services page — marquee ticker
+--------------------------------------------------------------------------- */
+@keyframes marquee {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(-50%, 0, 0); }
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee var(--marquee-duration, 40s) linear infinite;
+  will-change: transform;
+}
+.marquee:hover .marquee-track { animation-play-state: paused; }
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation: none !important; }
+}

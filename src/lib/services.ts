@@ -15,13 +15,47 @@ export interface Service {
   featured?: boolean; // highlighted on the home page
 }
 
+// TEMPORARY stock imagery (Unsplash) for the category chapters until the
+// clinic's own photos land in /public.
+const stock = (id: string, w = 1200) => `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=${w}&q=80`;
+
 // Ordered categories — drive the grouped layout on the Services page.
-export const SERVICE_CATEGORIES: { key: ServiceCategory; label: string; note: string }[] = [
-  { key: 'profilaktika', label: 'Profilaktika & Diagnostika', note: "Sog'lom tabassumni saqlash — kasallikning oldini olishdan boshlanadi." },
-  { key: 'davolash', label: 'Davolash', note: "Kariesdan kanal va milk davolashgacha — og'riqsiz va aniq." },
-  { key: 'estetika', label: 'Estetika & Ortodontiya', note: 'Tishlarni to‘g‘rilash, oqartirish va mukammal tabassum dizayni.' },
-  { key: 'jarrohlik', label: 'Jarrohlik & Tiklash', note: "Implantatsiya, protezlash va murakkab jarrohlik — bir joyda." },
+export const SERVICE_CATEGORIES: { key: ServiceCategory; label: string; note: string; image: string; caption: string }[] = [
+  {
+    key: 'profilaktika',
+    label: 'Profilaktika & Diagnostika',
+    note: "Sog'lom tabassumni saqlash — kasallikning oldini olishdan boshlanadi.",
+    image: stock('1600170311833-c2cf5280ce49'),
+    caption: 'Raqamli rentgen. Har bir tashxis shu yerdan boshlanadi.',
+  },
+  {
+    key: 'davolash',
+    label: 'Davolash',
+    note: "Kariesdan kanal va milk davolashgacha — og'riqsiz va aniq.",
+    image: stock('1606811841689-23dfddce3e95'),
+    caption: 'Davolash kabineti. Shifokor rentgenni bemor bilan birga ko‘radi.',
+  },
+  {
+    key: 'estetika',
+    label: 'Estetika & Ortodontiya',
+    note: 'Tishlarni to‘g‘rilash, oqartirish va mukammal tabassum dizayni.',
+    image: stock('1609840114035-3c981b782dfe'),
+    caption: 'Shaffof kappa — ko‘zga tashlanmaydigan ortodontiya.',
+  },
+  {
+    key: 'jarrohlik',
+    label: 'Jarrohlik & Tiklash',
+    note: "Implantatsiya, protezlash va murakkab jarrohlik — bir joyda.",
+    image: stock('1593022356769-11f762e25ed9'),
+    caption: 'Implant modeli. Bemorga jarayonni shu modelda tushuntiramiz.',
+  },
 ];
+
+/** Clinic imagery for the "why us" bento (temporary stock). */
+export const CLINIC_IMAGES = {
+  interior: stock('1598256989800-fe5f95da9787'),
+  xray: stock('1588776814546-1ffcf47267a5', 900),
+};
 
 export const servicesByCategory = (key: ServiceCategory) => SERVICES.filter((s) => s.category === key);
 

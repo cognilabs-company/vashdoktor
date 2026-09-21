@@ -1,28 +1,39 @@
-import { PageHero } from '../components/layout/PageHero';
-import { ServicesSection } from '../components/sections/ServicesSection';
+import { useCallback, useState } from 'react';
+import { ServicesHero } from '../components/services/ServicesHero';
+import { ServiceChapters } from '../components/services/ServiceChapters';
+import { ServiceCatalog, type CatalogFilter } from '../components/services/ServiceCatalog';
+import { ServiceDialog } from '../components/services/ServiceDialog';
+import { Principles } from '../components/services/Principles';
 import { ProcessSection } from '../components/sections/ProcessSection';
 import { FinalCTA } from '../components/sections/FinalCTA';
-import { SERVICES } from '../lib/services';
+import type { Service } from '../lib/services';
 import { useClinicUI } from '../lib/uiContext';
 
 export function Services() {
   const { openConsultation } = useClinicUI();
+  // shared between the chapter cards ("to‘liq ro‘yxat") and the catalogue tabs
+  const [filter, setFilter] = useState<CatalogFilter>('all');
+  // the open detail sheet; it morphs out of a catalogue row, but just fades
+  // in when opened from a chapter (those rows carry no shared layout)
+  const [open, setOpen] = useState<{ service: Service; morph: boolean } | null>(null);
+  const close = useCallback(() => setOpen(null), []);
+
   return (
     <>
-      <PageHero
-        eyebrow="Xizmatlar"
-        title="Barcha stomatologik xizmatlar"
-        subtitle="Profilaktika, davolash, estetika, ortodontiya va jarrohlik — tishga oid barcha proseduralar bitta klinikada, zamonaviy standartlar asosida."
-      />
-      <ServicesSection
-        services={SERVICES}
-        eyebrow="To‘liq ro‘yxat"
-        title="Nimalarni taklif qilamiz"
-        subtitle="Xizmatlarni yo‘nalishlar bo‘yicha guruhladik — kerakli bo‘limni oson topasiz."
-        detailed
-      />
-      <ProcessSection />
+      <ServicesHero onOpenConsultation={openConsultation} />
+      <ServiceChapters onPickCategory={setFilter} onOpenService={(s) => setOpen({ service: s, morph: false })} />
+      <ServiceCatalog filter={filter} onFilter={setFilter} onOpenService={(s) => setOpen({ service: s, morph: true })} />
+      <Principles />
+      <ProcessSection bg="#0a141d" />
       <FinalCTA onOpenConsultation={openConsultation} />
+
+      <ServiceDialog
+        service={open?.service ?? null}
+        morph={open?.morph ?? true}
+        onClose={close}
+        onOpenConsultation={openConsultation}
+        onPick={(s) => setOpen({ service: s, morph: false })}
+      />
     </>
   );
 }

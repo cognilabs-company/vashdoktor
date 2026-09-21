@@ -91,7 +91,7 @@ export function Layout() {
         open3DViewer: () => setIs3DViewerOpen(true),
       }}
     >
-      <div className="relative min-h-screen bg-[#0a141d] text-[#eaf2f4] font-sans antialiased overflow-x-hidden selection:bg-[#8fc7d4] selection:text-[#0a141d]">
+      <div className="relative min-h-screen bg-[#0a141d] text-[#eaf2f4] font-sans antialiased overflow-x-clip selection:bg-[#8fc7d4] selection:text-[#0a141d]">
         <Navbar
           onOpenConsultation={() => setIsConsultationOpen(true)}
           onOpen3DViewer={() => setIs3DViewerOpen(true)}

@@ -1,7 +1,14 @@
-import { CalendarCheck, ScanLine, ClipboardList, Smile } from 'lucide-react';
+import { CalendarCheck, ScanLine, ClipboardList, Smile, type LucideIcon } from 'lucide-react';
 import { TechnicalBadge } from '../ui/TechnicalBadge';
 
-const STEPS = [
+export interface ProcessStep {
+  icon: LucideIcon;
+  step: string;
+  title: string;
+  text: string;
+}
+
+const STEPS: ProcessStep[] = [
   {
     icon: CalendarCheck,
     step: '01',
@@ -33,6 +40,7 @@ interface Props {
   eyebrow?: string;
   title?: string;
   subtitle?: string;
+  steps?: ProcessStep[]; // defaults to the patient journey
 }
 
 export function ProcessSection({
@@ -40,6 +48,7 @@ export function ProcessSection({
   eyebrow = 'Jarayon',
   title = 'Qanday ishlaymiz',
   subtitle = "Har bir bemor bir xil aniq yo'ldan o'tadi — tashxisdan natijagacha shaffof va oldindan tushunarli.",
+  steps = STEPS,
 }: Props) {
   return (
     <section className="relative w-full border-t border-white/10 py-20 lg:py-28" style={{ backgroundColor: bg }}>
@@ -55,7 +64,7 @@ export function ProcessSection({
         <div className="relative mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-4" data-stagger>
           {/* connecting line on large screens */}
           <div className="pointer-events-none absolute left-0 right-0 top-6 hidden h-px bg-gradient-to-r from-transparent via-[#8fc7d4]/25 to-transparent lg:block" />
-          {STEPS.map((s) => (
+          {steps.map((s) => (
             <div key={s.step} className="relative">
               <div className="flex items-center gap-4">
                 <span className="relative z-10 flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-[#8fc7d4]/30 bg-[#0a141d] text-[#a9d8e4]">

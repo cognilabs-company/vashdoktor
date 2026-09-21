@@ -1,9 +1,34 @@
 import React, { useState } from 'react';
 import { FAQ_ITEMS } from '../../lib/clinicConfig';
+import type { FAQItem } from '../../types';
 import { TechnicalBadge } from '../ui/TechnicalBadge';
 import { Plus, Minus, HelpCircle } from 'lucide-react';
 
-export function FAQ() {
+interface Props {
+  items?: FAQItem[];
+  code?: string;
+  eyebrow?: string;
+  title?: React.ReactNode;
+  subtitle?: string;
+  aside?: { title: string; text: string };
+}
+
+export function FAQ({
+  items = FAQ_ITEMS,
+  code = "BEMOR MA'LUMOTI",
+  eyebrow = "KO'P BERILADIGAN",
+  title = (
+    <>
+      Bilishingiz kerak bo&#39;lgan <br />
+      <span className="font-medium text-[#8fc7d4]">hamma narsa.</span>
+    </>
+  ),
+  subtitle = 'Klinik faktlar, davolash muddati va biologik integratsiya tafsilotlari tibbiy shaffoflik bilan tushuntirilgan.',
+  aside = {
+    title: 'Aniq holat bo‘yicha savolingiz bormi?',
+    text: 'Klinik jamoamiz raqamli CBCT skanlarni ko‘rib chiqadi va 24 soat ichida individual diagnostik takliflar beradi.',
+  },
+}: Props = {}) {
   const [openIdx, setOpenIdx] = useState<number | null>(0);
 
   const toggle = (idx: number) => {
@@ -16,31 +41,26 @@ export function FAQ() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
           {/* Left Column: Heading */}
           <div data-stagger="left" className="lg:col-span-5 sticky top-28">
-            <TechnicalBadge code="BEMOR MA'LUMOTI" label="KO'P BERILADIGAN" />
+            <TechnicalBadge code={code} label={eyebrow} />
 
             <h2 className="mt-6 text-3xl sm:text-4xl lg:text-[2.5rem] font-medium font-serif tracking-tight text-white leading-[1.08]">
-              Bilishingiz kerak bo&#39;lgan <br />
-              <span className="font-medium text-[#8fc7d4]">hamma narsa.</span>
+              {title}
             </h2>
 
-            <p className="mt-6 text-base sm:text-lg text-[#a7c2cb] font-light leading-relaxed max-w-md">
-              Klinik faktlar, davolash muddati va biologik integratsiya tafsilotlari tibbiy shaffoflik bilan tushuntirilgan.
-            </p>
+            <p className="mt-6 text-base sm:text-lg text-[#a7c2cb] font-light leading-relaxed max-w-md">{subtitle}</p>
 
             <div className="mt-8 p-6 rounded-2xl bg-white/[0.05] border border-white/10 backdrop-blur-md text-xs text-[#7f9aa4] space-y-2">
               <div className="font-semibold text-white flex items-center gap-1.5">
                 <HelpCircle className="h-4 w-4 text-[#8fc7d4]" />
-                <span>Aniq holat bo&#39;yicha savolingiz bormi?</span>
+                <span>{aside.title}</span>
               </div>
-              <p>
-                Klinik jamoamiz raqamli CBCT skanlarni ko&#39;rib chiqadi va 24 soat ichida individual diagnostik takliflar beradi.
-              </p>
+              <p>{aside.text}</p>
             </div>
           </div>
 
           {/* Right Column: Accordion */}
           <div data-stagger className="lg:col-span-7 space-y-4">
-            {FAQ_ITEMS.map((item, idx) => {
+            {items.map((item, idx) => {
               const isOpen = openIdx === idx;
 
               return (

@@ -5,15 +5,22 @@ interface Props {
   name: string;
   className?: string;
   rounded?: string; // tailwind rounding class
+  loading?: 'lazy' | 'eager'; // eager for above-the-fold portraits
 }
 
 /** Doctor portrait — real photo if `photo` is set, otherwise an intentional,
  * premium placeholder frame (never a random stock face). Swap in the real
  * professional photo via the data file's `photo` path. */
-export function Portrait({ photo, name, className = '', rounded = 'rounded-2xl' }: Props) {
+export function Portrait({ photo, name, className = '', rounded = 'rounded-2xl', loading = 'lazy' }: Props) {
   if (photo) {
     return (
-      <img src={photo} alt={name} loading="lazy" className={`${rounded} object-cover ${className}`} />
+      <img
+        src={photo}
+        alt={name}
+        loading={loading}
+        referrerPolicy="no-referrer"
+        className={`${rounded} object-cover ${className}`}
+      />
     );
   }
   return (

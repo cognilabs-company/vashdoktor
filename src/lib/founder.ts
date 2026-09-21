@@ -26,7 +26,9 @@ export const FOUNDER = {
   title: 'Asoschi va bosh shifokor',
   // shown on the chief-doctor page under the name
   credentials: 'Stomatolog-implantolog · Oliy toifali mutaxassis',
-  photo: '', // e.g. '/team/founder.jpg' — leave empty to show the placeholder frame
+  // e.g. '/team/founder.jpg' — TEMPORARY Unsplash stock portrait until the real one lands;
+  // set to '' to show the placeholder frame instead.
+  photo: 'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&crop=faces&w=1000&q=80',
   // 2–3 sentence personal statement — WHY this clinic exists (in the founder's voice)
   statement:
     "Men klinikani bitta oddiy ishonch ustiga qurdim: har bir bemor xuddi o'z oilam a'zosidek qabul qilinishi kerak. 20 yillik amaliyot davomida shuni angladim — texnologiya muhim, lekin eng muhimi — odamga bo'lgan munosabat. Shuning uchun bu yerda har bir davolash men shaxsan ishonadigan standartlar asosida olib boriladi.",

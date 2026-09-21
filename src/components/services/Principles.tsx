@@ -1,8 +1,7 @@
-import { Phone } from 'lucide-react';
-import { CLINIC_CONFIG } from '../../lib/clinicConfig';
 import { CLINIC_IMAGES } from '../../lib/services';
 import { CountUp } from '../ui/CountUp';
 import { Eyebrow } from './Eyebrow';
+import { FLOW } from '../../lib/flow';
 
 const PRINCIPLES = [
   {
@@ -31,17 +30,13 @@ const PRINCIPLES = [
  * principles on the right. */
 export function Principles() {
   return (
-    <section className="relative w-full border-t border-white/10 bg-[#0b1720] py-20 lg:py-28">
+    <section data-bg={FLOW.green} className="relative w-full py-20 lg:py-28">
       <div className="mx-auto grid max-w-[1440px] gap-12 px-6 sm:px-8 lg:grid-cols-12 lg:gap-8 lg:px-12">
         <div className="lg:sticky lg:top-28 lg:col-span-5 lg:self-start" data-reveal="left">
           <Eyebrow>Qanday ishlaymiz</Eyebrow>
           <h2 className="mt-5 font-serif text-[clamp(1.9rem,4vw,3.1rem)] font-medium leading-[1.06] tracking-tight text-white">
             Biz shunchaki tish davolamaymiz —<br className="hidden sm:block" /> odam bilan ishlaymiz.
           </h2>
-          <p className="mt-5 max-w-md text-[15px] leading-relaxed text-[#a7c2cb]">
-            Bu beshta qoida klinikada har kuni ishlaydi. Ular reklama uchun emas — biz shunday ishlashni
-            o‘zimiz uchun qulay deb topganmiz.
-          </p>
 
           <figure className="mt-9 max-w-md">
             <img
@@ -51,9 +46,7 @@ export function Principles() {
               referrerPolicy="no-referrer"
               className="aspect-[4/3] w-full rounded-2xl border border-white/10 object-cover"
             />
-            <figcaption className="mt-3 text-[12px] leading-snug text-[#7f9aa4]">
-              Davolash kabineti. Sokin va yorug‘ — bemor derazaga qarab o‘tiradi, asboblarga emas.
-            </figcaption>
+            <figcaption className="mt-3 text-[12px] text-[#7f9aa4]">Davolash kabineti.</figcaption>
           </figure>
 
           <div className="mt-9 flex items-baseline gap-8 border-t border-white/10 pt-6">
@@ -82,17 +75,6 @@ export function Principles() {
               </div>
             </li>
           ))}
-          <li className="grid grid-cols-[2.5rem_1fr] gap-x-4 py-7">
-            <span />
-            <div className="text-[14px] leading-relaxed text-[#8fb0ba]">
-              Savol bo‘lsa, qo‘ng‘iroq qiling — administrator emas, navbatchi shifokor javob beradi.{' '}
-              <a href={`tel:${CLINIC_CONFIG.phone}`} className="inline-flex items-center gap-1.5 whitespace-nowrap text-white underline decoration-white/25 underline-offset-[5px] hover:decoration-[#8fc7d4]">
-                <Phone className="h-3.5 w-3.5 text-[#8fc7d4]" />
-                {CLINIC_CONFIG.phone}
-              </a>
-              <span className="block text-[12px] text-[#5c7580]">{CLINIC_CONFIG.hours}</span>
-            </div>
-          </li>
         </ol>
       </div>
     </section>

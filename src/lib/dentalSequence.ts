@@ -13,7 +13,7 @@ export function getFrameSrc(frame: number): string {
   return `/dental_video_rgba/ezgif-frame-${String(n).padStart(3, '0')}.png`;
 }
 
-export type PhaseId = 'skanlash' | 'rejalash' | 'ornatish';
+export type PhaseId = 'skanlash' | 'rejalash' | 'davolash';
 
 export interface Phase {
   id: PhaseId;
@@ -29,14 +29,16 @@ export interface Phase {
 }
 
 // Phase boundaries mapped to the video's pacing (240 frames):
-// 01 SKANLASH (scan) 1-65 · 02 REJALASH (implant plan) 66-110 · 03 O'RNATISH 111-240
+// 01 SKANLASH (scan) 1-65 · 02 REJALASH (plan) 66-110 · 03 DAVOLASH 111-240
+// The footage is an implant, but the copy frames the three steps as the path
+// EVERY treatment in the clinic takes — the implant is the worked example.
 export const PHASES: Phase[] = [
   {
     id: 'skanlash',
     index: '01 / 03',
     step: '01',
     title: 'SKANLASH',
-    body: '3D skanlash orqali jag‘ va tishlarning aniq raqamli modeli yaratiladi.',
+    body: 'Jag‘ va tishlar 3D skanerda o‘qiladi — aniq raqamli model. Har qanday davolash shu yerdan boshlanadi.',
     start: 1,
     end: 65,
     poster: 45,
@@ -46,17 +48,17 @@ export const PHASES: Phase[] = [
     index: '02 / 03',
     step: '02',
     title: 'REJALASH',
-    body: 'Implantning joylashuvi, burchagi va chuqurligi oldindan aniq rejalashtiriladi.',
+    body: 'Shifokor davolashni shu modelda rejalashtiradi. Reja va narx — oldindan.',
     start: 66,
     end: 110,
     poster: 90,
   },
   {
-    id: 'ornatish',
+    id: 'davolash',
     index: '03 / 03',
     step: '03',
-    title: 'O‘RNATISH',
-    body: 'Implant rejalashtirilgan pozitsiyaga o‘rnatiladi va tabiiy ko‘rinishdagi crown bilan yakunlanadi.',
+    title: 'DAVOLASH',
+    body: 'Reja aniq — davolash. Implant misolida: aniq joyga, keramik tish bilan.',
     start: 111,
     end: 240,
     poster: 236,
@@ -67,7 +69,7 @@ export const PHASES: Phase[] = [
 export const phaseIndexFromFrame = (frame: number): number =>
   frame <= PHASES[0].end ? 0 : frame <= PHASES[1].end ? 1 : 2;
 
-// Optional secondary copy for the O'RNATISH sub-stages (frame-driven).
+// Optional secondary copy for the DAVOLASH sub-stages (frame-driven).
 export const subCopyForFrame = (frame: number): string => {
   if (frame <= 110) return '';
   if (frame <= 135) return 'Rejalashtirilgan joy tayyorlanadi.';

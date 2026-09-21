@@ -31,6 +31,7 @@ export interface ClinicConfig {
     telegram: string;
     linkedin: string;
   };
+  map?: { lat: number; lng: number; directions: string };
 }
 
 export interface ProcessStep {

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { FAQ_ITEMS } from '../../lib/clinicConfig';
 import type { FAQItem } from '../../types';
 import { TechnicalBadge } from '../ui/TechnicalBadge';
+import { FLOW } from '../../lib/flow';
 import { Plus, Minus, HelpCircle } from 'lucide-react';
 
 interface Props {
@@ -24,10 +25,7 @@ export function FAQ({
     </>
   ),
   subtitle = 'Klinik faktlar, davolash muddati va biologik integratsiya tafsilotlari tibbiy shaffoflik bilan tushuntirilgan.',
-  aside = {
-    title: 'Aniq holat bo‘yicha savolingiz bormi?',
-    text: 'Klinik jamoamiz raqamli CBCT skanlarni ko‘rib chiqadi va 24 soat ichida individual diagnostik takliflar beradi.',
-  },
+  aside,
 }: Props = {}) {
   const [openIdx, setOpenIdx] = useState<number | null>(0);
 
@@ -36,7 +34,7 @@ export function FAQ({
   };
 
   return (
-    <section id="faq" className="py-28 sm:py-36 bg-[#0a141d] border-t border-white/10 overflow-hidden">
+    <section id="faq" data-bg={FLOW.blue} className="py-28 sm:py-36 overflow-hidden">
       <div className="max-w-[1440px] mx-auto px-6 sm:px-8 lg:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
           {/* Left Column: Heading */}
@@ -49,13 +47,15 @@ export function FAQ({
 
             <p className="mt-6 text-base sm:text-lg text-[#a7c2cb] font-light leading-relaxed max-w-md">{subtitle}</p>
 
-            <div className="mt-8 p-6 rounded-2xl bg-white/[0.05] border border-white/10 backdrop-blur-md text-xs text-[#7f9aa4] space-y-2">
-              <div className="font-semibold text-white flex items-center gap-1.5">
-                <HelpCircle className="h-4 w-4 text-[#8fc7d4]" />
-                <span>{aside.title}</span>
+            {aside && (
+              <div className="mt-8 p-6 rounded-2xl bg-white/[0.05] border border-white/10 text-xs text-[#7f9aa4] space-y-2">
+                <div className="font-semibold text-white flex items-center gap-1.5">
+                  <HelpCircle className="h-4 w-4 text-[#8fc7d4]" />
+                  <span>{aside.title}</span>
+                </div>
+                <p>{aside.text}</p>
               </div>
-              <p>{aside.text}</p>
-            </div>
+            )}
           </div>
 
           {/* Right Column: Accordion */}

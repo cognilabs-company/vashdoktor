@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
-import { ArrowUpRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import { Button } from '../components/ui/Button';
 
 interface HeroProps {
@@ -8,10 +9,10 @@ interface HeroProps {
 
 const clampN = (v: number, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 
-const CARDS = [
-  { value: '15+ yil', label: 'Klinik tajriba' },
-  { value: '20 000+', label: 'Baxtli bemor' },
-  { value: '12', label: 'Stomatologik yo‘nalish' },
+const FACTS = [
+  { value: '15+', label: 'yil' },
+  { value: '20 000+', label: 'bemor' },
+  { value: '12', label: 'xizmat' },
 ];
 
 /**
@@ -74,42 +75,43 @@ export function Hero({ onOpenConsultation }: HeroProps) {
       <div className="absolute inset-0 bg-[linear-gradient(0deg,rgba(6,13,21,0.8),rgba(6,13,21,0.1)_42%,transparent_62%)]" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_52%,rgba(4,10,16,0.5))]" />
 
-      {/* glass stat cards — top-left */}
-      <div className="absolute left-6 top-24 z-10 hidden flex-col gap-3 sm:flex lg:left-14 lg:top-28">
-        {CARDS.map((c) => (
-          <div
-            key={c.label}
-            className="w-56 rounded-2xl border border-white/15 bg-white/[0.08] px-5 py-4 shadow-[0_10px_40px_rgba(0,0,0,0.35)] backdrop-blur-md"
-          >
-            <div className="text-lg font-semibold text-white">{c.value}</div>
-            <div className="mt-0.5 text-[12px] text-[#c6dbe1]">{c.label}</div>
-          </div>
-        ))}
-      </div>
-
-      {/* headline + copy + CTA — bottom-left */}
-      <div ref={contentRef} className="absolute bottom-[12vh] left-6 z-10 max-w-2xl will-change-transform lg:left-14">
-        <div className="mb-4 font-mono text-[11px] uppercase tracking-[0.28em] text-[#a9d8e4]">
-          Zamonaviy stomatologiya klinikasi
+      {/* headline + CTA — bottom-left. No paragraph: the picture says it. */}
+      <div ref={contentRef} className="absolute bottom-[14vh] left-6 z-10 max-w-3xl will-change-transform lg:left-14">
+        <div className="mb-5 inline-flex items-center gap-3 text-[13px] text-[#a9d8e4]">
+          <span className="h-px w-7 bg-[#a9d8e4]/70" />
+          Stomatologiya · Toshkent
         </div>
         <h1 className="text-[13vw] leading-[0.95] tracking-[-0.03em] sm:text-6xl lg:text-[5rem]">
           <span className="block font-light text-white/90">Butun oila uchun</span>
           <span className="block font-semibold">sog&#8216;lom tabassum.</span>
         </h1>
-        <p className="mt-6 max-w-md text-[15px] font-light leading-relaxed text-[#c6dbe1]">
-          Profilaktikadan implantatsiyagacha — tishga oid barcha xizmatlar bir joyda.
-          Og&#8216;riqsiz, xavfsiz va zamonaviy yondashuv.
-        </p>
-        <div className="mt-7">
+        <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
           <Button
             variant="white"
             size="lg"
             onClick={onOpenConsultation}
             icon={<ArrowUpRight className="h-4 w-4" />}
           >
-            Xizmatni tanlash
+            Qabulga yozilish
           </Button>
+          <Link
+            to="/services"
+            className="group inline-flex items-center gap-1.5 text-sm text-[#c6dbe1] underline decoration-white/25 underline-offset-[6px] transition-colors hover:text-white hover:decoration-[#8fc7d4]"
+          >
+            Barcha xizmatlar
+            <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+          </Link>
         </div>
+      </div>
+
+      {/* three numbers, one quiet line — bottom-right */}
+      <div className="absolute bottom-[14vh] right-6 z-10 hidden items-end divide-x divide-white/15 lg:flex lg:right-14">
+        {FACTS.map((f) => (
+          <div key={f.label} className="px-6 text-right first:pl-0 last:pr-0">
+            <div className="font-serif text-3xl font-medium leading-none text-white">{f.value}</div>
+            <div className="mt-1.5 text-[12px] text-[#c6dbe1]">{f.label}</div>
+          </div>
+        ))}
       </div>
 
       {/* dive-in dissolve — fades to the section colour at the peak of the zoom */}

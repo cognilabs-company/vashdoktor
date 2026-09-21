@@ -55,6 +55,11 @@ export const SERVICE_CATEGORIES: { key: ServiceCategory; label: string; note: st
 export const CLINIC_IMAGES = {
   interior: stock('1598256989800-fe5f95da9787'),
   xray: stock('1588776814546-1ffcf47267a5', 900),
+  hero: stock('1445527815219-ecbfec67492e', 1800), // services page hero
+  // first-visit stepper (home)
+  consult: stock('1606811841689-23dfddce3e95'),
+  plan: stock('1600170311833-c2cf5280ce49'),
+  room: stock('1629909613654-28e377c37b09'),
 };
 
 export const servicesByCategory = (key: ServiceCategory) => SERVICES.filter((s) => s.category === key);

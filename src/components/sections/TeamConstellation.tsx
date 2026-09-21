@@ -487,9 +487,8 @@ function ConstellationStage({ doctors, eyebrow, title, subtitle }: Props) {
 
         {/* footer: scroll hint (fades out) + reveal counter */}
         <div className="pointer-events-none absolute inset-x-0 bottom-5 z-[3] flex items-end justify-between px-6 sm:px-8 lg:px-12">
-          <div ref={hintRef} className="flex items-center gap-2 text-[11px] text-[#7f9aa4]">
-            <ChevronDown className="h-4 w-4 animate-bounce text-[#8fc7d4]" />
-            Pastga suring — jamoa bilan tanishing
+          <div ref={hintRef} className="flex items-center text-[#8fc7d4]">
+            <ChevronDown className="h-5 w-5 animate-bounce" />
           </div>
           <div className="flex items-center gap-3">
             <div className="flex gap-1">

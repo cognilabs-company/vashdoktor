@@ -241,3 +241,31 @@
 @media (prefers-reduced-motion: reduce) {
   .marquee-track { animation: none !important; }
 }
+
+/* ---------------------------------------------------------------------------
+   First-visit stepper (home) — slow push-in on the active photo + the
+   auto-advance progress bar
+--------------------------------------------------------------------------- */
+@keyframes kenburns {
+  from { transform: scale(1.02); }
+  to   { transform: scale(1.1); }
+}
+@keyframes step-progress {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+.step-photo-active { animation: kenburns 7s ease-out forwards; }
+.step-progress { transform-origin: left; animation: step-progress var(--step-duration, 5s) linear forwards; }
+.step-progress.is-paused { animation-play-state: paused; }
+@media (prefers-reduced-motion: reduce) {
+  .step-photo-active { animation: none !important; }
+  .step-progress { animation: none !important; transform: scaleX(1); }
+}
+
+/* Implant hero — the jaw drifts gently, like it is floating in the studio */
+@keyframes implant-float {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(-0.4deg); }
+  50%      { transform: translate3d(0, -12px, 0) rotate(0.4deg); }
+}
+.implant-float { animation: implant-float 7s ease-in-out infinite; will-change: transform; }
+@media (prefers-reduced-motion: reduce) { .implant-float { animation: none !important; } }

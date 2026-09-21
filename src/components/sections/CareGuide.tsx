@@ -3,6 +3,7 @@ import { CARE_GUIDE, DOCTORS } from '../../lib/doctors';
 import { FOUNDER } from '../../lib/founder';
 import { TechnicalBadge } from '../ui/TechnicalBadge';
 import { Portrait } from '../ui/Portrait';
+import { FLOW } from '../../lib/flow';
 
 const ICONS: Record<string, LucideIcon> = { Zap, Sparkles, Anchor, AlignHorizontalDistributeCenter, Baby, Stethoscope };
 
@@ -20,7 +21,7 @@ interface Props {
 /** "Which doctor do I need?" — everyday complaints routed to the right person. */
 export function CareGuide({ onOpenConsultation }: Props) {
   return (
-    <section className="relative w-full border-t border-white/10 bg-[#0b1720] py-20 lg:py-28">
+    <section data-bg={FLOW.teal} className="relative w-full py-20 lg:py-28">
       <div className="mx-auto max-w-[1440px] px-6 sm:px-8 lg:px-12">
         <div className="flex flex-wrap items-end justify-between gap-6" data-reveal="left">
           <div className="max-w-2xl">
@@ -28,9 +29,6 @@ export function CareGuide({ onOpenConsultation }: Props) {
             <h2 className="mt-6 font-serif text-[clamp(2rem,4.5vw,3.5rem)] font-medium leading-[1.05] tracking-tight text-white">
               Kimga murojaat qilish kerak?
             </h2>
-            <p className="mt-5 max-w-xl text-base leading-relaxed text-[#a7c2cb] sm:text-lg">
-              Shikoyatingizni toping — qaysi shifokor bilan boshlash kerakligini ko‘rsatamiz. Ishonchingiz komil bo‘lmasa, administrator yo‘naltiradi.
-            </p>
           </div>
           <button
             onClick={onOpenConsultation}

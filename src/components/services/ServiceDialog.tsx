@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
-import { X, ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { X, ArrowRight, Rotate3d } from 'lucide-react';
 import { SERVICES, SERVICE_CATEGORIES, type Service } from '../../lib/services';
 
 export const categoryLabel = (key: Service['category']) => SERVICE_CATEGORIES.find((c) => c.key === key)?.label ?? key;
@@ -91,9 +92,7 @@ export function ServiceDialog({ service: s, morph = true, onClose, onOpenConsult
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1, transition: { delay: 0.28 } }}
               >
-                <p className="text-[13px] leading-snug text-[#7f9aa4]">
-                  Narx va muddat ko‘rikdan keyin aniq aytiladi —<br className="hidden sm:block" /> avval tashxis, keyin reja.
-                </p>
+                <p className="text-[13px] text-[#7f9aa4]">Narx va muddat — ko‘rikdan keyin.</p>
                 <button
                   onClick={() => {
                     onClose();
@@ -105,6 +104,20 @@ export function ServiceDialog({ service: s, morph = true, onClose, onOpenConsult
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </button>
               </motion.div>
+
+              {s.slug === 'implantatsiya' && (
+                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1, transition: { delay: 0.3 } }} className="mt-6">
+                  <Link
+                    to="/implantatsiya"
+                    onClick={onClose}
+                    className="inline-flex items-center gap-2 rounded-xl border border-[#8fc7d4]/30 bg-[#8fc7d4]/[0.07] px-4 py-3 text-[13px] text-white transition-colors hover:bg-[#8fc7d4]/[0.14]"
+                  >
+                    <Rotate3d className="h-4 w-4 text-[#8fc7d4]" />
+                    Implant 3D modelda
+                    <ArrowRight className="h-3.5 w-3.5" />
+                  </Link>
+                </motion.div>
+              )}
 
               {(() => {
                 const related = SERVICES.filter((x) => x.category === s.category && x.slug !== s.slug);

@@ -4,6 +4,7 @@ import type { Doctor } from '../../lib/doctors';
 import { FOUNDER } from '../../lib/founder';
 import { TechnicalBadge } from '../ui/TechnicalBadge';
 import { Portrait } from '../ui/Portrait';
+import { FLOW } from '../../lib/flow';
 
 interface Props {
   doctors: Doctor[];
@@ -12,11 +13,12 @@ interface Props {
   subtitle?: string;
   cta?: { label: string; to: string };
   featureFounder?: boolean; // show the founder as a prominent first card (doctors page)
+  compact?: boolean; // photo + name + role only (home page)
 }
 
-export function DoctorsSection({ doctors, eyebrow = 'Jamoa', title, subtitle, cta, featureFounder }: Props) {
+export function DoctorsSection({ doctors, eyebrow = 'Jamoa', title, subtitle, cta, featureFounder, compact }: Props) {
   return (
-    <section id="doctors" className="relative w-full border-t border-white/10 bg-[#0b1720] py-20 lg:py-28">
+    <section id="doctors" data-bg={FLOW.base} className="relative w-full py-20 lg:py-28">
       <div className="mx-auto max-w-[1440px] px-6 sm:px-8 lg:px-12">
         <div className="max-w-2xl" data-reveal="left">
           <TechnicalBadge label={eyebrow} variant="dark" />
@@ -61,8 +63,24 @@ export function DoctorsSection({ doctors, eyebrow = 'Jamoa', title, subtitle, ct
         )}
 
         {/* team grid */}
-        <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4" data-stagger>
-          {doctors.map((d) => (
+        <div className={`grid gap-6 sm:grid-cols-2 lg:grid-cols-4 ${compact ? 'mt-10 gap-4' : 'mt-8'}`} data-stagger>
+          {doctors.map((d) => compact ? (
+            <Link
+              key={d.id}
+              to="/doctors"
+              className="group relative block aspect-[4/5] overflow-hidden rounded-2xl border border-white/10 bg-[#0d1d28]"
+            >
+              <Portrait photo={d.photo} name={d.name} rounded="rounded-none" className="h-full w-full transition-transform duration-[1.2s] ease-out group-hover:scale-[1.05]" />
+              <div className="absolute inset-0 bg-[linear-gradient(to_top,#0a141d_5%,rgba(10,20,29,0.5)_35%,transparent_60%)]" />
+              <span className="absolute left-4 top-4 rounded-full bg-[#0a141d]/70 px-2.5 py-1 text-[11px] text-[#a9d8e4] ring-1 ring-white/10">
+                {d.experience}
+              </span>
+              <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5">
+                <h3 className="font-serif text-lg font-medium leading-tight tracking-tight text-white">{d.name}</h3>
+                <p className="mt-1 text-[13px] text-[#8fc7d4]">{d.role}</p>
+              </div>
+            </Link>
+          ) : (
             <article
               key={d.id}
               className="group overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] transition-colors duration-300 hover:border-[#8fc7d4]/40"

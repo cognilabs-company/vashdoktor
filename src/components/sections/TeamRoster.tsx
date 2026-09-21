@@ -4,6 +4,7 @@ import { DOCTORS } from '../../lib/doctors';
 import { FOUNDER } from '../../lib/founder';
 import { TechnicalBadge } from '../ui/TechnicalBadge';
 import { Portrait } from '../ui/Portrait';
+import { FLOW } from '../../lib/flow';
 
 interface Props {
   onOpenConsultation: () => void;
@@ -12,16 +13,13 @@ interface Props {
 /** The whole team as a scannable list — one row per doctor, booking on each. */
 export function TeamRoster({ onOpenConsultation }: Props) {
   return (
-    <section id="roster" className="relative w-full border-t border-white/10 bg-[#0a141d] py-20 lg:py-28">
+    <section id="roster" data-bg={FLOW.ink} className="relative w-full py-20 lg:py-28">
       <div className="mx-auto max-w-[1440px] px-6 sm:px-8 lg:px-12">
         <div className="max-w-2xl" data-reveal="left">
           <TechnicalBadge label="Ro‘yxat" variant="dark" />
           <h2 className="mt-6 font-serif text-[clamp(2rem,4.5vw,3.5rem)] font-medium leading-[1.05] tracking-tight text-white">
             Butun jamoa — bir qarashda
           </h2>
-          <p className="mt-5 max-w-xl text-base leading-relaxed text-[#a7c2cb] sm:text-lg">
-            Istagan shifokoringizga to‘g‘ridan-to‘g‘ri yoziling. Barcha qabul yagona protokol bo‘yicha o‘tadi.
-          </p>
         </div>
 
         <div className="mt-12 overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03]" data-stagger>

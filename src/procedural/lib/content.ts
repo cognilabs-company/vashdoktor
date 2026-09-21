@@ -35,7 +35,7 @@ export const SECTIONS: Section[] = [
     id: 'anatomy',
     eyebrow: 'Anatomiya',
     title: ['Beshta qism —', 'bitta vazifa.'],
-    body: 'Scroll qiling — implant komponentlarga ajraladi. Crown, abutment, titanium implant, gingiva va jag‘ suyagi birgalikda ishlaydi.',
+    body: 'Crown, abutment, titanium implant, gingiva va jag‘ suyagi — birgalikda ishlaydi.',
     stats: [
       { value: '5', label: 'Komponent' },
       { value: 'Grade IV', label: 'Titanium' },

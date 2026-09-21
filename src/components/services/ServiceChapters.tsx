@@ -4,6 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ArrowUpRight, ArrowRight } from 'lucide-react';
 import { SERVICES, SERVICE_CATEGORIES, type Service, type ServiceCategory } from '../../lib/services';
 import { Eyebrow } from './Eyebrow';
+import { FLOW } from '../../lib/flow';
 import { useMediaQuery } from '../../hooks/useMediaQuery';
 import { useReducedMotion } from '../../hooks/useReducedMotion';
 import { scrollToEl } from '../../lib/scroll';
@@ -58,19 +59,17 @@ export function ServiceChapters({ onPickCategory, onOpenService }: Props) {
   }, [stack]);
 
   return (
-    <section className="relative w-full bg-[#0b1720] py-20 lg:py-28">
+    <section data-bg={FLOW.teal} className="relative w-full py-16 lg:py-24">
+      {/* bridge from the photo hero above */}
+      <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-[#070f17] to-transparent" />
       <div className="mx-auto max-w-[1440px] px-6 sm:px-8 lg:px-12">
         <div className="grid gap-6 lg:grid-cols-12" data-reveal>
           <div className="lg:col-span-7">
             <Eyebrow>Yo‘nalishlar</Eyebrow>
             <h2 className="mt-5 font-serif text-[clamp(1.9rem,4vw,3.1rem)] font-medium leading-[1.06] tracking-tight text-white">
-              To‘rt yo‘nalish. Ko‘pincha bittasi kifoya,
-              <br className="hidden sm:block" /> ba’zida ikkitasi qo‘shilib ketadi.
+              To‘rt yo‘nalish
             </h2>
           </div>
-          <p className="max-w-md self-end text-[15px] leading-relaxed text-[#a7c2cb] lg:col-span-4 lg:col-start-9">
-            Pastga suring — bo‘limlar bir-birining ustiga yig‘ilib boradi. Ichidagi xizmatni bossangiz, tafsilotlari ochiladi.
-          </p>
         </div>
 
         <div ref={rootRef} className={`mt-14 ${stack ? 'space-y-[16vh] pb-[8vh]' : 'space-y-8'}`}>

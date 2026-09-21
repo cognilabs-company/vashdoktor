@@ -1,6 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import type Lenis from 'lenis';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Outlet, useLocation } from 'react-router-dom';
 import { initSmoothScroll } from '../../lib/animations';
+import { scrollToEl } from '../../lib/scroll';
+import { useSectionFlow } from '../../lib/flow';
 import { ClinicUIContext } from '../../lib/uiContext';
 import { Navbar } from './Navbar';
 import { Footer } from './Footer';
@@ -8,9 +12,13 @@ import { ConsultationModal } from './ConsultationModal';
 import { InteractiveViewerModal } from '../three/InteractiveViewerModal';
 
 export function Layout() {
-  const { pathname } = useLocation();
+  const { pathname, hash } = useLocation();
   const [isConsultationOpen, setIsConsultationOpen] = useState(false);
   const [is3DViewerOpen, setIs3DViewerOpen] = useState(false);
+  const rootRef = useRef<HTMLDivElement>(null);
+
+  // Background colour glides between [data-bg] sections as you scroll.
+  useSectionFlow(rootRef, pathname);
 
   // Lenis smooth scroll — once for the whole app.
   useEffect(() => {
@@ -18,10 +26,24 @@ export function Layout() {
     return cleanup;
   }, []);
 
-  // Jump to top on every route change.
-  useEffect(() => {
+  // Every route opens at the very top — before paint, and through Lenis so a
+  // smooth-scroll still in flight cannot drag the page back down. The browser's
+  // own restoration is switched off so reload/back behave the same. A #hash
+  // target is honoured once the new page has laid out.
+  useLayoutEffect(() => {
+    if ('scrollRestoration' in window.history) window.history.scrollRestoration = 'manual';
+    const lenis = (window as unknown as { __lenis?: Lenis }).__lenis;
+    lenis?.scrollTo(0, { immediate: true, force: true });
     window.scrollTo(0, 0);
-  }, [pathname]);
+    document.documentElement.scrollTop = 0;
+    const refresh = window.setTimeout(() => ScrollTrigger.refresh(), 150);
+    if (!hash) return () => window.clearTimeout(refresh);
+    const t = window.setTimeout(() => scrollToEl(hash, -80), 350);
+    return () => {
+      window.clearTimeout(refresh);
+      window.clearTimeout(t);
+    };
+  }, [pathname, hash]);
 
   // Scroll-reveal + parallax — re-armed on every route so new page elements
   // animate in. Fail-safe: nothing can stay hidden (2s fallback reveals all).
@@ -91,7 +113,7 @@ export function Layout() {
         open3DViewer: () => setIs3DViewerOpen(true),
       }}
     >
-      <div className="relative min-h-screen bg-[#0a141d] text-[#eaf2f4] font-sans antialiased overflow-x-clip selection:bg-[#8fc7d4] selection:text-[#0a141d]">
+      <div ref={rootRef} className="relative min-h-screen bg-[#0a141d] text-[#eaf2f4] font-sans antialiased overflow-x-clip selection:bg-[#8fc7d4] selection:text-[#0a141d]">
         <Navbar
           onOpenConsultation={() => setIsConsultationOpen(true)}
           onOpen3DViewer={() => setIs3DViewerOpen(true)}

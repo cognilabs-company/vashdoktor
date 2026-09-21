@@ -12,6 +12,7 @@ import { Portrait } from '../components/ui/Portrait';
 import { DOCTORS, DOCTORS_FAQ } from '../lib/doctors';
 import { FOUNDER } from '../lib/founder';
 import { useClinicUI } from '../lib/uiContext';
+import { FLOW } from '../lib/flow';
 
 const STANDARDS = [
   {
@@ -33,10 +34,10 @@ const STANDARDS = [
 
 // How a doctor becomes part of the school — the "one standard" made concrete.
 const SCHOOL_STEPS: ProcessStep[] = [
-  { icon: UserCheck, step: '01', title: 'Tanlov', text: "Faqat diplom emas — qo'l mahorati, mas'uliyat va bemorga munosabat baholanadi." },
-  { icon: BookOpen, step: '02', title: 'Ichki o‘quv dasturi', text: "Bosh shifokor protokollari bo'yicha 6 oylik nazariy va amaliy tayyorgarlik." },
-  { icon: Eye, step: '03', title: 'Nazorat ostida amaliyot', text: 'Birinchi bemorlar bosh shifokor ishtirokida qabul qilinadi, har bir holat tahlil qilinadi.' },
-  { icon: Users, step: '04', title: 'Mustaqil qabul + konsilium', text: "Mustaqil ishlaydi; murakkab holatlar haftalik konsiliumda birga ko'rib chiqiladi." },
+  { icon: UserCheck, step: '01', title: 'Tanlov', text: 'Diplom emas — qo‘l mahorati va bemorga munosabat.' },
+  { icon: BookOpen, step: '02', title: 'Ichki o‘quv dasturi', text: 'Bosh shifokor protokollari bo‘yicha 6 oy.' },
+  { icon: Eye, step: '03', title: 'Nazorat ostida amaliyot', text: 'Birinchi bemorlar — bosh shifokor ishtirokida.' },
+  { icon: Users, step: '04', title: 'Mustaqil qabul', text: 'Murakkab holatlar — haftalik konsiliumda.' },
 ];
 
 export function Doctors() {
@@ -57,7 +58,7 @@ export function Doctors() {
       <CareGuide onOpenConsultation={openConsultation} />
 
       {/* One school, one standard — the author-clinic promise, in the chief's voice */}
-      <section className="relative w-full overflow-hidden border-t border-white/10 bg-[#0a141d] py-20 lg:py-28">
+      <section data-bg={FLOW.blue} className="relative w-full overflow-hidden py-20 lg:py-28">
         <div className="pointer-events-none absolute -right-[10%] top-1/3 h-[420px] w-[420px] rounded-full bg-[#8fc7d4]/8 blur-[110px]" />
         <div className="relative mx-auto max-w-[1440px] px-6 sm:px-8 lg:px-12">
           <div className="grid gap-12 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:gap-16">
@@ -119,10 +120,9 @@ export function Doctors() {
 
       {/* How a doctor joins the school */}
       <ProcessSection
-        bg="#0b1720"
+        flow={FLOW.green}
         eyebrow="Maktab"
         title="Shifokor bizda qanday shakllanadi"
-        subtitle="“Bir standart” — shior emas, jarayon. Har bir yangi shifokor to‘rt bosqichdan o‘tadi."
         steps={SCHOOL_STEPS}
       />
 
@@ -139,11 +139,7 @@ export function Doctors() {
             <span className="font-medium text-[#8fc7d4]">ko‘p so‘raladigan savollar.</span>
           </>
         }
-        subtitle="Shifokor tanlash, bosh shifokor qabuli va bolalar bilan birinchi tashrif — eng ko‘p beriladigan savollarga qisqa javoblar."
-        aside={{
-          title: 'Qaysi shifokor kerakligini bilmayapsizmi?',
-          text: 'Konsultatsiya so‘rovini qoldiring — administrator shikoyatingizga qarab mos mutaxassis va eng yaqin bo‘sh vaqtni taklif qiladi.',
-        }}
+        subtitle="Shifokor tanlash, bosh shifokor qabuli, bolalar bilan birinchi tashrif."
       />
 
       <FinalCTA onOpenConsultation={openConsultation} />

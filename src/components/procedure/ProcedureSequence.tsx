@@ -70,7 +70,7 @@ function interpKeys(kf: Key[], frame: number): { x: number; s: number } {
  * The whole canvas repositions/scales per phase via CSS transform while the
  * frame sequence stays continuous. Scroll (relative to THIS section) is the
  * single source of truth. Manual pin (CSS sticky broken here by the root's
- * overflow-x-hidden), same pattern as VideoText. The section stays pinned until
+ * overflow-x-hidden). The section stays pinned until
  * progress === 1 (frame 300 held), so the next section can't enter early.
  */
 export function ProcedureSequence() {
@@ -267,11 +267,11 @@ export function ProcedureSequence() {
         {/* LAYER 3 — eyebrow + progress (aligned to the same container) */}
         <div className="pointer-events-none absolute inset-0 z-30">
           <div className="absolute inset-x-0 top-20 mx-auto max-w-[1600px] px-6 md:top-24 md:px-[clamp(24px,5vw,96px)]">
-            <TechnicalBadge label="Klinik jarayon" variant="dark" />
+            <TechnicalBadge label="Har bir davolash — uch bosqich" variant="dark" />
           </div>
 
           <h2 className="sr-only">
-            Implant o‘rnatish jarayoni — skanlash, rejalash, o‘rnatish
+            Davolash jarayoni — skanlash, rejalash, davolash (implant misolida)
           </h2>
 
           <div className="absolute inset-x-0 bottom-6 mx-auto max-w-[1600px] px-6 md:bottom-8 md:px-[clamp(24px,5vw,96px)]">
@@ -291,9 +291,9 @@ function ProcedureReduced() {
     <section id="jarayon" className="relative w-full bg-[#0a141d] py-24 lg:py-32">
       <div className="mx-auto max-w-[1440px] px-6 sm:px-8 lg:px-12">
         <div className="mb-14">
-          <TechnicalBadge label="Klinik jarayon" variant="dark" />
+          <TechnicalBadge label="Har bir davolash — uch bosqich" variant="dark" />
           <h2 className="mt-6 font-serif text-[clamp(2rem,5vw,3.25rem)] font-medium leading-tight tracking-tight text-white">
-            Implant o‘rnatish jarayoni
+            Davolash jarayoni — implant misolida
           </h2>
         </div>
 

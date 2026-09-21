@@ -1,6 +1,7 @@
 import { CountUp } from '../ui/CountUp';
 import { DOCTORS } from '../../lib/doctors';
 import { FOUNDER } from '../../lib/founder';
+import { FLOW } from '../../lib/flow';
 
 // Derived from the data files so the band never drifts from the team list.
 const years = (s: string) => parseInt(s, 10) || 0;
@@ -17,7 +18,9 @@ const STATS = [
 /** Compact numbers band right after the constellation — the team at a glance. */
 export function TeamStats() {
   return (
-    <section className="relative w-full border-t border-white/10 bg-[#0a141d]">
+    <section data-bg={FLOW.base} className="relative w-full">
+      {/* bridge from the opaque constellation stage above */}
+      <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-[#0b1720] to-transparent" />
       <div
         className="mx-auto grid max-w-[1440px] grid-cols-2 px-6 sm:px-8 lg:grid-cols-4 lg:px-12 [&>*]:border-white/10 [&>*:nth-child(even)]:border-l [&>*:nth-child(even)]:pl-6 [&>*:nth-child(n+3)]:border-t lg:[&>*:nth-child(n+3)]:border-t-0 lg:[&>*:not(:first-child)]:border-l lg:[&>*:not(:first-child)]:pl-10"
         data-stagger

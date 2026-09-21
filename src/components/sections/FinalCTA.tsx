@@ -3,6 +3,7 @@ import { CLINIC_CONFIG } from '../../lib/clinicConfig';
 import { Button } from '../ui/Button';
 import { Phone, Calendar, ShieldCheck, ArrowRight, Clock, MapPin } from 'lucide-react';
 import { TechnicalBadge } from '../ui/TechnicalBadge';
+import { FLOW } from '../../lib/flow';
 
 interface FinalCTAProps {
   onOpenConsultation: () => void;
@@ -10,9 +11,10 @@ interface FinalCTAProps {
 
 export function FinalCTA({ onOpenConsultation }: FinalCTAProps) {
   return (
-    <section className="py-28 sm:py-36 bg-[linear-gradient(135deg,#0b1b26,#123443)] text-white relative overflow-hidden">
+    <section data-bg={FLOW.deep} className="py-28 sm:py-36 text-white relative overflow-hidden">
       {/* Background Decorative Gradient & Geometry */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(143,199,212,0.22),transparent_70%)] pointer-events-none" />
+      {/* glow sits well inside the section so it never draws a seam at the edges */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_45%_at_82%_48%,rgba(143,199,212,0.14),transparent_70%)] pointer-events-none" />
       <div
         data-parallax="0.16"
         className="absolute -bottom-24 -right-24 text-[16vw] font-serif font-light text-white/[0.03] select-none pointer-events-none will-change-transform"

@@ -7,34 +7,53 @@ import { Portrait } from '../ui/Portrait';
 /** Home-page founder screen — the trust anchor. Sits after the 3D sequence,
  * before the doctors grid. Photo + name + "asoschi va bosh shifokor" + key
  * numbers + a short personal statement + a link to the full /bosh-shifokor page. */
-export function FounderSection({ bg = '#0a141d' }: { bg?: string } = {}) {
+export function FounderSection({ bg = '#0a141d', compact = false, flow }: { bg?: string; compact?: boolean; flow?: string } = {}) {
   return (
-    <section className="relative w-full overflow-hidden border-t border-white/10 py-20 lg:py-28" style={{ backgroundColor: bg }}>
+    <section
+      data-bg={flow}
+      className={`relative w-full overflow-hidden py-20 lg:py-28 ${flow ? '' : 'border-t border-white/10'}`}
+      style={flow ? undefined : { backgroundColor: bg }}
+    >
       <div className="pointer-events-none absolute -left-[8%] top-1/3 h-[380px] w-[380px] rounded-full bg-[#8fc7d4]/8 blur-[110px]" />
       <div className="relative mx-auto grid max-w-[1440px] items-center gap-10 px-6 sm:px-8 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-16 lg:px-12">
         {/* portrait */}
         <div className="relative mx-auto w-full max-w-sm lg:max-w-none" data-reveal="left">
           <Portrait photo={FOUNDER.photo} name={FOUNDER.name} className="aspect-[4/5] w-full" />
-          <div className="absolute -bottom-5 left-5 right-5 rounded-2xl border border-white/10 bg-[#0b1720]/90 px-5 py-4 backdrop-blur-md">
-            <div className="font-serif text-lg font-medium text-white">{FOUNDER.name}</div>
-            <div className="mt-0.5 text-[13px] text-[#8fc7d4]">{FOUNDER.title}</div>
-          </div>
+          {!compact && (
+            <div className="absolute -bottom-5 left-5 right-5 rounded-2xl border border-white/10 bg-[#0b1720]/90 px-5 py-4">
+              <div className="font-serif text-lg font-medium text-white">{FOUNDER.name}</div>
+              <div className="mt-0.5 text-[13px] text-[#8fc7d4]">{FOUNDER.title}</div>
+            </div>
+          )}
         </div>
 
         {/* content */}
         <div data-reveal="right">
           <TechnicalBadge label="Asoschi" variant="dark" />
-          <h2 className="mt-6 font-serif text-[clamp(1.9rem,4vw,3.25rem)] font-medium leading-[1.06] tracking-tight text-white">
-            Klinika orqasidagi shifokor
-          </h2>
+          {compact ? (
+            <>
+              <h2 className="mt-6 font-serif text-[clamp(1.9rem,4vw,3.25rem)] font-medium leading-[1.08] tracking-tight text-white">
+                “{FOUNDER.shortStatement}”
+              </h2>
+              <p className="mt-4 text-[14px] text-[#8fb0ba]">
+                <span className="text-white">{FOUNDER.name}</span> · {FOUNDER.title}
+              </p>
+            </>
+          ) : (
+            <>
+              <h2 className="mt-6 font-serif text-[clamp(1.9rem,4vw,3.25rem)] font-medium leading-[1.06] tracking-tight text-white">
+                Klinika orqasidagi shifokor
+              </h2>
 
-          <div className="mt-6 flex gap-4">
-            <Quote className="h-7 w-7 shrink-0 text-[#8fc7d4]/50" />
-            <p className="text-base leading-relaxed text-[#c6dbe1] sm:text-lg">{FOUNDER.statement}</p>
-          </div>
+              <div className="mt-6 flex gap-4">
+                <Quote className="h-7 w-7 shrink-0 text-[#8fc7d4]/50" />
+                <p className="text-base leading-relaxed text-[#c6dbe1] sm:text-lg">{FOUNDER.statement}</p>
+              </div>
+            </>
+          )}
 
-          <div className="mt-9 grid grid-cols-2 gap-x-8 gap-y-6 border-t border-white/10 pt-8 sm:grid-cols-4">
-            {FOUNDER.heroStats.map((s) => (
+          <div className={`mt-9 grid grid-cols-2 gap-x-8 gap-y-6 border-t border-white/10 pt-8 ${compact ? 'sm:grid-cols-3' : 'sm:grid-cols-4'}`}>
+            {(compact ? FOUNDER.heroStats.slice(0, 3) : FOUNDER.heroStats).map((s) => (
               <div key={s.label}>
                 <div className="font-serif text-2xl font-medium text-white lg:text-3xl">{s.value}</div>
                 <div className="mt-1 text-[12px] leading-snug text-[#8fb0ba]">{s.label}</div>

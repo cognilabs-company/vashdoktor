@@ -8,6 +8,7 @@ import { ProcessSection } from '../components/sections/ProcessSection';
 import { FinalCTA } from '../components/sections/FinalCTA';
 import type { Service } from '../lib/services';
 import { useClinicUI } from '../lib/uiContext';
+import { FLOW } from '../lib/flow';
 
 export function Services() {
   const { openConsultation } = useClinicUI();
@@ -24,7 +25,7 @@ export function Services() {
       <ServiceChapters onPickCategory={setFilter} onOpenService={(s) => setOpen({ service: s, morph: false })} />
       <ServiceCatalog filter={filter} onFilter={setFilter} onOpenService={(s) => setOpen({ service: s, morph: true })} />
       <Principles />
-      <ProcessSection bg="#0a141d" />
+      <ProcessSection flow={FLOW.blue} />
       <FinalCTA onOpenConsultation={openConsultation} />
 
       <ServiceDialog

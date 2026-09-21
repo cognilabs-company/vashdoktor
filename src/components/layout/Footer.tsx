@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { CLINIC_CONFIG } from '../../lib/clinicConfig';
-import { ArrowUp, MapPin, Phone, Mail, Clock, Instagram, Send, Linkedin, ShieldCheck } from 'lucide-react';
+import { ArrowUp, MapPin, Phone, Mail, Clock, Instagram, Send, Linkedin } from 'lucide-react';
+import { FLOW } from '../../lib/flow';
 
 export function Footer() {
   const scrollToTop = () => {
@@ -8,7 +9,7 @@ export function Footer() {
   };
 
   return (
-    <footer className="bg-[#070f17] text-white pt-20 pb-12 border-t border-white/10">
+    <footer data-bg={FLOW.footer} className="text-white pt-20 pb-12">
       <div className="max-w-[1440px] mx-auto px-6 sm:px-8 lg:px-12">
         {/* Main Columns Grid */}
         <div data-stagger className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 pb-16 border-b border-white/10">
@@ -77,6 +78,7 @@ export function Footer() {
             <ul className="space-y-2.5 text-sm text-[#a7c2cb] font-light">
               <li><Link to="/" className="hover:text-white transition-colors">Bosh sahifa</Link></li>
               <li><Link to="/services" className="hover:text-white transition-colors">Xizmatlar</Link></li>
+              <li><Link to="/implantatsiya" className="hover:text-white transition-colors">Implantatsiya (3D)</Link></li>
               <li><Link to="/about" className="hover:text-white transition-colors">Biz haqimizda</Link></li>
               <li><Link to="/doctors" className="hover:text-white transition-colors">Doktorlar</Link></li>
             </ul>
@@ -117,7 +119,7 @@ export function Footer() {
           </div>
 
           <div className="flex items-center gap-6">
-            <span>ISO 13485 tibbiy uskuna standartlari</span>
+            <span>Litsenziya raqami: [—]</span>
             <button
               onClick={scrollToTop}
               className="flex items-center gap-1 text-[#a7c2cb] hover:text-white transition-colors cursor-pointer"

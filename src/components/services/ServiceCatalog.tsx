@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from 'motion/react';
 import { ArrowUpRight } from 'lucide-react';
 import { SERVICES, SERVICE_CATEGORIES, type Service, type ServiceCategory } from '../../lib/services';
 import { Eyebrow } from './Eyebrow';
+import { FLOW } from '../../lib/flow';
 import { categoryLabel } from './ServiceDialog';
 
 export type CatalogFilter = ServiceCategory | 'all';
@@ -27,7 +28,7 @@ export function ServiceCatalog({ filter, onFilter, onOpenService }: Props) {
   const visible = filter === 'all' ? SERVICES : SERVICES.filter((s) => s.category === filter);
 
   return (
-    <section id="catalog" className="relative w-full border-t border-white/10 bg-[#0a141d] py-20 lg:py-28">
+    <section id="catalog" data-bg={FLOW.base} className="relative w-full py-20 lg:py-28">
       <div className="mx-auto max-w-[1440px] px-6 sm:px-8 lg:px-12">
         <div className="grid gap-8 lg:grid-cols-12" data-reveal>
           <div className="lg:col-span-5">
@@ -35,9 +36,6 @@ export function ServiceCatalog({ filter, onFilter, onOpenService }: Props) {
             <h2 className="mt-5 font-serif text-[clamp(1.9rem,4vw,3.1rem)] font-medium leading-[1.06] tracking-tight text-white">
               Nimalarni qilamiz
             </h2>
-            <p className="mt-4 max-w-md text-[15px] leading-relaxed text-[#a7c2cb]">
-              Ro‘yxat qisqa — chunki biz qila olmaydigan narsani yozmaymiz. Qatorni bossangiz, tafsilotlar ochiladi.
-            </p>
           </div>
 
           {/* text tabs with a sliding underline */}
@@ -97,9 +95,7 @@ export function ServiceCatalog({ filter, onFilter, onOpenService }: Props) {
           </AnimatePresence>
         </motion.ol>
 
-        <p className="mt-6 text-[12px] leading-relaxed text-[#5c7580]">
-          * Narxlar ko‘rikdan keyin, davolash rejasi bilan birga aytiladi. Telefon orqali ham so‘rashingiz mumkin.
-        </p>
+        <p className="mt-6 text-[12px] text-[#5c7580]">* Narx — ko‘rikdan keyin, davolash rejasi bilan birga.</p>
       </div>
     </section>
   );

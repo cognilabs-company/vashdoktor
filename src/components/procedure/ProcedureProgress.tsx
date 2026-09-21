@@ -2,7 +2,7 @@ import type { MutableRefObject } from 'react';
 import { PHASES } from '../../lib/dentalSequence';
 
 /**
- * Restrained 3-step indicator (01 SKANLASH · 02 REJALASH · 03 O'RNATISH).
+ * Restrained 3-step indicator (01 SKANLASH · 02 REJALASH · 03 DAVOLASH).
  * The parent writes the active step (colour) and the fill bar's scaleX from its
  * rAF — no React state per scroll frame. Accent = the site teal, no neon.
  */

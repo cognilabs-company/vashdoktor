@@ -1,7 +1,25 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import { Button } from '../components/ui/Button';
+import { HeroTooth } from '../components/three/HeroTooth';
+import { useMediaQuery } from '../hooks/useMediaQuery';
+import { useReducedMotion } from '../hooks/useReducedMotion';
+
+import { ARTWORK_FRAME } from '../components/three/molarSdf';
+
+// The 3D tooth is laid over its spot on the toothless plate (/hero-empty.jpg),
+// following the image's object-cover crop.
+const { imgW: IMG_W, imgH: IMG_H } = ARTWORK_FRAME;
+
+const webglOk = () => {
+  try {
+    const c = document.createElement('canvas');
+    return !!(c.getContext('webgl2') || c.getContext('webgl'));
+  } catch {
+    return false;
+  }
+};
 
 interface HeroProps {
   onOpenConsultation: () => void;
@@ -16,12 +34,57 @@ const FACTS = [
 ];
 
 /**
- * Hero — a single cinematic image (tooth on a glowing podium over icy water).
- * No WebGL here (keeps the page light); text + glass cards are overlaid with
- * gradient scrims for legibility over the bright scene.
+ * Hero — a cinematic plate (podium over icy water) with a real 3D molar
+ * turning slowly above the podium. Until the 3D tooth has painted, the
+ * original artwork (tooth included) sits on top and then fades away, so the
+ * swap is never seen. Phones / reduced-motion / no-WebGL keep the still image.
  */
 export function Hero({ onOpenConsultation }: HeroProps) {
-  const imgRef = useRef<HTMLImageElement | null>(null);
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const imgRef = useRef<HTMLDivElement | null>(null);
+  const toothBoxRef = useRef<HTMLDivElement | null>(null);
+  const wide = useMediaQuery('(min-width: 768px)');
+  const reduced = useReducedMotion();
+  const [gl] = useState(webglOk);
+  // dev-only comparison modes: ?tooth=still (3D held in the artwork pose, no
+  // cover), ?tooth=matte (same, flat magenta), ?tooth=ref (artwork only),
+  // ?tooth=empty (plate only)
+  const debug = import.meta.env.DEV ? new URLSearchParams(window.location.search).get('tooth') : null;
+  const live = wide && !reduced && gl && debug !== 'ref';
+  const [toothReady, setToothReady] = useState(false);
+  const [onScreen, setOnScreen] = useState(true);
+
+  // keep the canvas box glued to the tooth's spot in the object-cover image
+  useEffect(() => {
+    if (!live) return;
+    const section = sectionRef.current;
+    const box = toothBoxRef.current;
+    if (!section || !box) return;
+    const place = () => {
+      const W = section.clientWidth;
+      const H = section.clientHeight;
+      const s = Math.max(W / IMG_W, H / IMG_H);
+      const ox = (W - IMG_W * s) / 2;
+      const oy = (H - IMG_H * s) / 2;
+      const size = ARTWORK_FRAME.box * s;
+      box.style.width = `${size}px`;
+      box.style.height = `${size}px`;
+      box.style.left = `${ox + ARTWORK_FRAME.cx * s - size / 2}px`;
+      box.style.top = `${oy + ARTWORK_FRAME.cy * s - size / 2}px`;
+    };
+    place();
+    const ro = new ResizeObserver(place);
+    ro.observe(section);
+    return () => ro.disconnect();
+  }, [live]);
+
+  // stop rendering the tooth once the hero has left the screen
+  useEffect(() => {
+    if (!live || !sectionRef.current) return;
+    const io = new IntersectionObserver(([e]) => setOnScreen(e.isIntersecting), { threshold: 0 });
+    io.observe(sectionRef.current);
+    return () => io.disconnect();
+  }, [live]);
   const contentRef = useRef<HTMLDivElement | null>(null);
   const fadeRef = useRef<HTMLDivElement | null>(null);
   const factsRef = useRef<HTMLDivElement | null>(null);
@@ -60,17 +123,37 @@ export function Hero({ onOpenConsultation }: HeroProps) {
   }, []);
 
   return (
-    <section className="relative min-h-[100svh] w-full overflow-hidden bg-[#070f17] text-white">
-      {/* background image (scroll-zoom) */}
-      <img
-        ref={imgRef}
-        src="/hero.png"
-        alt="Zamonaviy stomatologiya klinikasi"
-        className="absolute inset-0 h-full w-full object-cover will-change-transform"
-        style={{ transformOrigin: 'center center' }}
-        loading="eager"
-        fetchPriority="high"
-      />
+    <section ref={sectionRef} className="relative min-h-[100svh] w-full overflow-hidden bg-[#070f17] text-white">
+      {/* the scene (scroll-zoom): plate + 3D tooth move together */}
+      <div ref={imgRef} className="absolute inset-0 will-change-transform" style={{ transformOrigin: 'center center' }}>
+        {live && (
+          <img
+            src="/hero-empty.jpg"
+            alt=""
+            aria-hidden="true"
+            className="absolute inset-0 h-full w-full object-cover"
+            loading="eager"
+            fetchPriority="high"
+          />
+        )}
+        {live && debug !== 'empty' && (
+          <div ref={toothBoxRef} className="absolute">
+            {/* soft light behind the tooth, like the glow in the artwork */}
+            <div className="pointer-events-none absolute inset-[22%] rounded-full bg-[#dfeef7]/20 blur-[70px]" />
+            <HeroTooth className="absolute inset-0" active={onScreen} still={debug === 'still' || debug === 'matte'} matte={debug === 'matte'} onReady={() => setToothReady(true)} />
+          </div>
+        )}
+        {/* the original artwork — the fallback, and the cover until the 3D tooth is ready */}
+        <img
+          src="/hero.jpg"
+          alt="Zamonaviy stomatologiya klinikasi"
+          className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${
+            live && (toothReady || debug === 'still' || debug === 'matte' || debug === 'empty') ? 'opacity-0' : 'opacity-100'
+          }`}
+          loading="eager"
+          fetchPriority="high"
+        />
+      </div>
 
       {/* legibility scrims: darken the left column + the bottom, gentle vignette */}
       <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(6,13,21,0.82),rgba(6,13,21,0.32)_38%,transparent_66%)]" />

@@ -1,6 +1,5 @@
-import { Hero } from '../procedural/Hero';
+import { HeroReveal } from '../components/home/HeroReveal';
 import { ProcedureSequence } from '../components/procedure/ProcedureSequence';
-import { HomeServices } from '../components/home/HomeServices';
 import { ImplantTeaser } from '../components/home/ImplantTeaser';
 import { Testimonials } from '../components/home/Testimonials';
 import { ContactMap } from '../components/home/ContactMap';
@@ -24,11 +23,10 @@ export function Home() {
 
   return (
     <>
-      <Hero onOpenConsultation={openConsultation} />
+      {/* the hero pins; the services panel opens out of its middle */}
+      <HeroReveal onOpenConsultation={openConsultation} />
 
-      <HomeServices />
-
-      {/* After the hero "dive-in", the 3D jaw emerges: scan → plan → treat */}
+      {/* 3D jaw: scan → plan → treat */}
       <ProcedureSequence />
 
       <ImplantTeaser onOpen3DViewer={open3DViewer} />

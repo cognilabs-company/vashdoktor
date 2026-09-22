@@ -24,6 +24,7 @@ export function Hero({ onOpenConsultation }: HeroProps) {
   const imgRef = useRef<HTMLImageElement | null>(null);
   const contentRef = useRef<HTMLDivElement | null>(null);
   const fadeRef = useRef<HTMLDivElement | null>(null);
+  const factsRef = useRef<HTMLDivElement | null>(null);
 
   // Cinematic "dive-in": as you scroll out of the hero the image zooms hard
   // toward the centre (feels like flying INTO the scene) + a slight blur, while
@@ -44,6 +45,7 @@ export function Hero({ onOpenConsultation }: HeroProps) {
         contentRef.current.style.opacity = String(clampN(1 - p * 1.7));
         contentRef.current.style.transform = `translate3d(0, ${(-p * 90).toFixed(1)}px, 0) scale(${(1 - p * 0.08).toFixed(3)})`;
       }
+      if (factsRef.current) factsRef.current.style.opacity = String(clampN(1 - p * 1.7));
       if (fadeRef.current) fadeRef.current.style.opacity = e.toFixed(3); // dissolve to dark
     };
     const onScroll = () => {
@@ -105,7 +107,7 @@ export function Hero({ onOpenConsultation }: HeroProps) {
       </div>
 
       {/* three numbers, one quiet line — bottom-right */}
-      <div className="absolute bottom-[14vh] right-6 z-10 hidden items-end divide-x divide-white/15 lg:flex lg:right-14">
+      <div ref={factsRef} className="absolute bottom-[14vh] right-6 z-10 hidden items-end divide-x divide-white/15 lg:flex lg:right-14">
         {FACTS.map((f) => (
           <div key={f.label} className="px-6 text-right first:pl-0 last:pr-0">
             <div className="font-serif text-3xl font-medium leading-none text-white">{f.value}</div>

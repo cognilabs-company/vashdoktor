@@ -5,12 +5,20 @@ import { Eyebrow } from '../services/Eyebrow';
 import { FLOW } from '../../lib/flow';
 
 /** Four photo tiles — one per direction. The picture carries the meaning; the
- * service names are there for whoever reads on. Each tile opens its chapter. */
-export function HomeServices() {
+ * service names are there for whoever reads on. Each tile opens its chapter.
+ *
+ * `staged`: rendered inside the hero reveal (HeroReveal) — fills exactly one
+ * viewport, tile heights follow the viewport, and the scroll-reveal attributes
+ * are swapped for data hooks the reveal timeline animates. */
+export function HomeServices({ staged = false }: { staged?: boolean } = {}) {
   return (
-    <section id="services" data-bg={FLOW.base} className="relative w-full py-16 lg:py-24">
-      <div className="mx-auto max-w-[1440px] px-6 sm:px-8 lg:px-12">
-        <div className="flex flex-wrap items-end justify-between gap-4" data-reveal>
+    <section
+      id="services"
+      data-bg={FLOW.base}
+      className={staged ? 'relative flex h-full w-full flex-col justify-center pt-16' : 'relative w-full py-16 lg:py-24'}
+    >
+      <div className="mx-auto w-full max-w-[1440px] px-6 sm:px-8 lg:px-12">
+        <div className="flex flex-wrap items-end justify-between gap-4" {...(staged ? { 'data-head': '' } : { 'data-reveal': '' })}>
           <div>
             <Eyebrow>Xizmatlar</Eyebrow>
             <h2 className="mt-4 font-serif text-[clamp(1.9rem,4vw,3.1rem)] font-medium leading-[1.06] tracking-tight text-white">
@@ -26,14 +34,17 @@ export function HomeServices() {
           </Link>
         </div>
 
-        <div className="mt-8 grid grid-cols-2 gap-3 lg:grid-cols-4 lg:gap-4" data-stagger>
+        <div className="mt-8 grid grid-cols-2 gap-3 lg:grid-cols-4 lg:gap-4" {...(staged ? { 'data-tiles': '' } : { 'data-stagger': '' })}>
           {SERVICE_CATEGORIES.map((c, i) => {
             const items = SERVICES.filter((s) => s.category === c.key);
             return (
               <Link
                 key={c.key}
                 to={`/services#chapter-${c.key}`}
-                className="group relative block aspect-[3/4] overflow-hidden rounded-2xl border border-white/10 bg-[#0d1d28] sm:aspect-[4/5]"
+                data-tile={staged ? '' : undefined}
+                className={`group relative block overflow-hidden rounded-2xl border border-white/10 bg-[#0d1d28] ${
+                  staged ? 'h-[26svh] lg:h-[min(46svh,440px)]' : 'aspect-[3/4] sm:aspect-[4/5]'
+                }`}
               >
                 <img
                   src={c.image}

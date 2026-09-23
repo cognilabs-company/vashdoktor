@@ -1,4 +1,5 @@
-import { HeroReveal } from '../components/home/HeroReveal';
+import { HeroFlight } from '../components/home/HeroFlight';
+import { ImplantReveal } from '../components/home/ImplantReveal';
 import { ProcedureSequence } from '../components/procedure/ProcedureSequence';
 import { ImplantTeaser } from '../components/home/ImplantTeaser';
 import { Testimonials } from '../components/home/Testimonials';
@@ -23,8 +24,12 @@ export function Home() {
 
   return (
     <>
-      {/* the hero pins; the services panel opens out of its middle */}
-      <HeroReveal onOpenConsultation={openConsultation} />
+      {/* scroll flies the camera through the fjord, stopping at each of the
+          four service directions, and ends inside the fog */}
+      <HeroFlight onOpenConsultation={openConsultation} />
+
+      {/* out of that fog: the implant takes itself apart, then back together */}
+      <ImplantReveal onOpen3DViewer={open3DViewer} onOpenConsultation={openConsultation} />
 
       {/* 3D jaw: scan → plan → treat */}
       <ProcedureSequence />

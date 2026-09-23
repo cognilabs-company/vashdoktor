@@ -269,3 +269,48 @@
 }
 .implant-float { animation: implant-float 7s ease-in-out infinite; will-change: transform; }
 @media (prefers-reduced-motion: reduce) { .implant-float { animation: none !important; } }
+
+/* ---------------------------------------------------------------------------
+   Hero flight — the service card at each stop: its rows cascade in once the
+   card itself is on screen (the card's own fade is driven by scroll in JS)
+--------------------------------------------------------------------------- */
+.flight-card .flight-card-el {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.5s cubic-bezier(0.22, 0.61, 0.36, 1), transform 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+.flight-card.is-in .flight-card-el {
+  opacity: 1;
+  transform: none;
+}
+.flight-card.is-in .flight-card-el:nth-child(1) { transition-delay: 0.05s; }
+.flight-card.is-in .flight-card-el:nth-child(2) { transition-delay: 0.1s; }
+.flight-card.is-in .flight-card-el:nth-child(3) { transition-delay: 0.15s; }
+.flight-card.is-in .flight-card-el:nth-child(4) { transition-delay: 0.2s; }
+.flight-card.is-in .flight-card-el:nth-child(5) { transition-delay: 0.25s; }
+.flight-card.is-in ul .flight-card-el:nth-child(1) { transition-delay: 0.18s; }
+.flight-card.is-in ul .flight-card-el:nth-child(2) { transition-delay: 0.24s; }
+.flight-card.is-in ul .flight-card-el:nth-child(3) { transition-delay: 0.3s; }
+.flight-card.is-in ul .flight-card-el:nth-child(4) { transition-delay: 0.36s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .flight-card .flight-card-el { opacity: 1 !important; transform: none !important; transition: none !important; }
+}
+
+/* A service card breaks out of the rock face the way a sheet of paper that was
+   balled up opens: angular creases across it that flatten as it arrives. The
+   outline is dented in JS (clip-path); this is only the crease shading. */
+.flight-crease {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+  background:
+    linear-gradient(115deg, rgba(255, 255, 255, 0.7) 0 13%, rgba(0, 0, 0, 0.6) 13% 26%, rgba(255, 255, 255, 0.4) 26% 38%, rgba(0, 0, 0, 0.35) 38% 49%, transparent 49%),
+    linear-gradient(-58deg, rgba(0, 0, 0, 0.55) 0 17%, rgba(255, 255, 255, 0.6) 17% 30%, transparent 30% 57%, rgba(0, 0, 0, 0.5) 57% 70%, rgba(255, 255, 255, 0.35) 70% 81%, transparent 81%),
+    linear-gradient(27deg, transparent 0 23%, rgba(255, 255, 255, 0.45) 23% 33%, rgba(0, 0, 0, 0.5) 33% 45%, transparent 45% 73%, rgba(255, 255, 255, 0.35) 73% 83%, transparent 83%);
+}
+@media (prefers-reduced-motion: reduce) {
+  .flight-crease { display: none; }
+}

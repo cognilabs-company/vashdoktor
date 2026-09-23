@@ -1,5 +1,5 @@
 import { forwardRef, useEffect, useImperativeHandle, useRef } from 'react';
-import { getFrameSrc, PRIORITY_FRAMES, TOTAL_FRAMES } from '../../lib/dentalSequence';
+import { getFrameSrc as dentalSrc, PRIORITY_FRAMES as DENTAL_PRIORITY, TOTAL_FRAMES as DENTAL_TOTAL } from '../../lib/dentalSequence';
 
 const DPR_CAP = 1.75;
 // Memory guard: 300 decoded 1280×720 frames ≈ 1 GB RAM → GC stutter/lag. Keep a
@@ -13,6 +13,16 @@ export interface SequenceCanvasHandle {
   draw: (frame: number) => void;
 }
 
+interface Props {
+  className?: string;
+  /** which sequence to play — defaults to the dental procedure frames */
+  src?: (frame: number) => string;
+  total?: number;
+  priority?: number[];
+  /** 'contain' keeps the whole frame (dental model); 'cover' fills the box (hero flight) */
+  fit?: 'contain' | 'cover';
+}
+
 /**
  * One <canvas> that renders the current frame of the 300-image dental sequence,
  * drawing the ORIGINAL frames verbatim — no masking / keying / filters / blur.
@@ -23,8 +33,11 @@ export interface SequenceCanvasHandle {
  * - single clean draw: source image → canvas (no offscreen/intermediate scaling)
  * No React state per frame — the parent calls `draw(frame)` from its rAF.
  */
-export const SequenceCanvas = forwardRef<SequenceCanvasHandle, { className?: string }>(
-  function SequenceCanvas({ className }, apiRef) {
+export const SequenceCanvas = forwardRef<SequenceCanvasHandle, Props>(
+  function SequenceCanvas(
+    { className, src: getFrameSrc = dentalSrc, total: TOTAL_FRAMES = DENTAL_TOTAL, priority: PRIORITY_FRAMES = DENTAL_PRIORITY, fit = 'contain' },
+    apiRef
+  ) {
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
     const cache = useRef<Map<number, HTMLImageElement>>(new Map());
     const currentFrame = useRef(1);
@@ -76,7 +89,7 @@ export const SequenceCanvas = forwardRef<SequenceCanvasHandle, { className?: str
       ctx.clearRect(0, 0, cssW, cssH);
       const iw = img.naturalWidth;
       const ih = img.naturalHeight;
-      const scale = Math.min(cssW / iw, cssH / ih); // contain — real image dims
+      const scale = fit === 'cover' ? Math.max(cssW / iw, cssH / ih) : Math.min(cssW / iw, cssH / ih);
       const dw = iw * scale;
       const dh = ih * scale;
       ctx.drawImage(img, (cssW - dw) / 2, (cssH - dh) / 2, dw, dh);

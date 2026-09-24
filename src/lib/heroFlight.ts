@@ -4,12 +4,19 @@
 // thick fog, which is handed over — still white — to the implant section below.
 //
 // Part 1 of the footage holds two headlands: the granite cliff on the right
-// (frames ~70-130) and the snow dome on the left (frames ~165-210). When part 2
+// (frames ~53-145) and the snow dome on the left (frames ~150-205). When part 2
 // is cut in, add its two stops to STOP_SPEC — everything below derives from it.
 
 import { SERVICE_CATEGORIES, SERVICES, type ServiceCategory } from './services';
 
 export const TOTAL_FRAMES = 240;
+
+/** The camera stops dead once it is deep in the fog: measured frame-to-frame,
+ * motion runs at full speed into frame 213 and then drops to nothing — frames
+ * 214-240 are the same still image. Playing them would spend a screenful of
+ * scroll on a frozen picture and show that hard stop, so the flight ends on the
+ * last frame that still moves and the fog overlay carries it from there. */
+export const LAST_FRAME = 213;
 
 /** /hero_flight/frame-060.webp for frame 60 */
 export const getFrameSrc = (frame: number) =>
@@ -24,8 +31,8 @@ export interface Stop {
 
 /** Each stop sits on a frame where one half of the picture is open water. */
 const STOP_SPEC: { frame: number; side: 'left' | 'right'; key: ServiceCategory }[] = [
-  { frame: 96, side: 'left', key: 'profilaktika' }, // granite cliff fills the right
-  { frame: 186, side: 'right', key: 'davolash' }, // snow dome fills the left
+  { frame: 70, side: 'left', key: 'profilaktika' }, // granite cliff fills the right
+  { frame: 182, side: 'right', key: 'davolash' }, // snow dome fills the left
 ];
 
 export const STOPS: Stop[] = STOP_SPEC.map(({ frame, side, key }) => {
@@ -50,8 +57,8 @@ const SEGMENTS: { frames: [number, number]; weight: number; stop?: number }[] = 
     out.push({ frames: [stop.frame, stop.frame], weight: HOLD_WEIGHT, stop: i });
     from = stop.frame;
   });
-  out.push({ frames: [from, TOTAL_FRAMES], weight: (TOTAL_FRAMES - from) * TRAVEL_PER_FRAME });
-  out.push({ frames: [TOTAL_FRAMES, TOTAL_FRAMES], weight: 0.4 }); // hold the fog
+  out.push({ frames: [from, LAST_FRAME], weight: (LAST_FRAME - from) * TRAVEL_PER_FRAME });
+  out.push({ frames: [LAST_FRAME, LAST_FRAME], weight: 0.28 }); // a short beat of white
   return out;
 })();
 
@@ -81,7 +88,7 @@ export function progressToFrame(p: number): number {
       return a + (z - a) * Math.min(1, Math.max(0, t));
     }
   }
-  return TOTAL_FRAMES;
+  return LAST_FRAME;
 }
 
 /** 0..1 visibility of each stop's card at this progress (fades in/out around its hold) */
@@ -105,7 +112,7 @@ export const headlineOpacity = (p: number) => 1 - Math.min(1, Math.max(0, (p - B
 
 /** frames worth fetching first: every stop, the ends, and a coarse ladder */
 export const PRIORITY_FRAMES = [
-  1, TOTAL_FRAMES,
+  1, LAST_FRAME,
   ...STOPS.map((s) => s.frame),
-  ...Array.from({ length: 30 }, (_, i) => 1 + i * 8),
+  ...Array.from({ length: 27 }, (_, i) => 1 + i * 8),
 ];

@@ -100,6 +100,7 @@ function Flight({ onOpenConsultation }: Props) {
   const canvasRef = useRef<SequenceCanvasHandle | null>(null);
   const headlineRef = useRef<HTMLDivElement | null>(null);
   const hintRef = useRef<HTMLDivElement | null>(null);
+  const scrimRef = useRef<HTMLDivElement | null>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
   const riftRefs = useRef<(HTMLDivElement | null)[]>([]);
   const creaseRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -194,9 +195,10 @@ function Flight({ onOpenConsultation }: Props) {
         headlineRef.current.style.transform = `translate3d(0, ${((1 - head) * -40).toFixed(1)}px, 0)`;
       }
       if (hintRef.current) hintRef.current.style.opacity = head.toFixed(3);
+      if (scrimRef.current) scrimRef.current.style.opacity = head.toFixed(3);
       // the flight ends inside fog and stays there: the section below opens in
       // the same white-blue, so the cloud is handed over instead of being cut
-      if (fogRef.current) fogRef.current.style.opacity = clampN((eased - 0.88) / 0.08).toFixed(3);
+      if (fogRef.current) fogRef.current.style.opacity = clampN((eased - 0.925) / 0.05).toFixed(3);
 
       raf = requestAnimationFrame(tick);
     };
@@ -232,13 +234,21 @@ function Flight({ onOpenConsultation }: Props) {
         <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(0deg,rgba(6,13,21,0.75),rgba(6,13,21,0.12)_42%,transparent_65%)]" />
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_45%,rgba(4,10,16,0.45))]" />
 
+        {/* the opening frame is bright water and sky — a scrim under the words
+            only while they are on screen, so nothing is darkened in the flight */}
+        <div
+          ref={scrimRef}
+          style={{ opacity: 0 }}
+          className="pointer-events-none absolute inset-0 bg-[linear-gradient(290deg,rgba(5,12,20,0.6),rgba(5,12,20,0.26)_38%,transparent_64%)]"
+        />
+
         {/* opening headline */}
-        <div ref={headlineRef} className="pointer-events-none absolute bottom-[14vh] left-6 z-10 max-w-3xl lg:left-14">
+        <div ref={headlineRef} className="pointer-events-none absolute bottom-[14vh] right-6 z-10 w-[min(56vw,660px)] lg:right-14">
           <div className="mb-5 inline-flex items-center gap-3 text-[13px] text-[#a9d8e4]">
             <span className="h-px w-7 bg-[#a9d8e4]/70" />
             Stomatologiya · Toshkent
           </div>
-          <h1 className="text-[12vw] leading-[0.95] tracking-[-0.03em] text-white sm:text-6xl lg:text-[5rem]">
+          <h1 className="text-[12vw] leading-[0.95] tracking-[-0.03em] text-white sm:text-5xl lg:text-[4.2rem]">
             <span className="block font-light text-white/90">Butun oila uchun</span>
             <span className="block font-semibold">sog&#8216;lom tabassum.</span>
           </h1>
@@ -257,9 +267,9 @@ function Flight({ onOpenConsultation }: Props) {
         </div>
 
         {/* three numbers, bottom right — same as before */}
-        <div ref={hintRef} className="pointer-events-none absolute bottom-[14vh] right-6 z-10 hidden items-end divide-x divide-white/15 lg:flex lg:right-14">
+        <div ref={hintRef} className="pointer-events-none absolute bottom-[14vh] left-6 z-10 hidden items-end divide-x divide-white/15 lg:flex lg:left-14">
           {FACTS.map((f) => (
-            <div key={f.label} className="px-6 text-right first:pl-0 last:pr-0">
+            <div key={f.label} className="px-6 first:pl-0 last:pr-0">
               <div className="font-serif text-3xl font-medium leading-none text-white">{f.value}</div>
               <div className="mt-1.5 text-[12px] text-[#c6dbe1]">{f.label}</div>
             </div>

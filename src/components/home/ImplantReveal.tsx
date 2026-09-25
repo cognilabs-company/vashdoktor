@@ -9,6 +9,8 @@ import { useReducedMotion } from '../../hooks/useReducedMotion';
 import { FLOW } from '../../lib/flow';
 
 const clampN = (v: number, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+/** where the opening shot puts the implant, measured off the baked frames */
+const MODEL_AT = '37% 46%';
 const smoothstep = (a: number, b: number, x: number) => {
   const t = clampN((x - a) / (b - a));
   return t * t * (3 - 2 * t);
@@ -38,6 +40,8 @@ function Reveal({ onOpen3DViewer, onOpenConsultation }: Props) {
   const sectionRef = useRef<HTMLElement | null>(null);
   const stageRef = useRef<HTMLDivElement | null>(null);
   const fogRef = useRef<HTMLDivElement | null>(null);
+  const fogFlatRef = useRef<HTMLDivElement | null>(null);
+  const bloomRef = useRef<HTMLDivElement | null>(null);
   const modelRef = useRef<HTMLDivElement | null>(null);
   const panelRefs = useRef<(HTMLDivElement | null)[]>([]);
   // the showcase reads this every frame — no React state on the scroll path
@@ -53,6 +57,7 @@ function Reveal({ onOpen3DViewer, onOpenConsultation }: Props) {
     let raf = 0;
     let lastPhase = '';
     let wasLive = false;
+    let wasMounted = false;
     const setPin = (phase: string, top: string, bottom: string) => {
       if (phase === lastPhase) return;
       lastPhase = phase;
@@ -71,20 +76,47 @@ function Reveal({ onOpen3DViewer, onOpenConsultation }: Props) {
       else if (-rect.top < total) setPin('pinned', '0px', 'auto');
       else setPin('after', 'auto', '0px');
 
-      // the canvas is built while the flight's fog still covers the screen
-      const near = rect.top < vh * 2 && rect.bottom > -vh * 0.2;
+      // Build the scene while the flight is still in its opening seconds —
+      // compiling shaders and uploading geometry takes long enough that doing
+      // it just before the section arrives means scrolling into a blank stage.
+      // The hero flight is ~7.8 viewports tall, so this lands a moment after
+      // the first frames of the video.
+      if (!wasMounted && rect.top < vh * 7) {
+        wasMounted = true;
+        setMounted(true);
+      }
+      // ...but only start drawing every frame once it is nearly on screen
+      const near = rect.top < vh * 1.5 && rect.bottom > -vh * 0.2;
       if (near !== wasLive) {
         wasLive = near;
         setLive(near);
-        if (near) setMounted(true);
       }
 
       // the whole sequence, played inside this one pinned stage
       const op = clampN((p - 0.02) / 0.96);
       showcaseProgress.current = op;
 
-      if (fogRef.current) fogRef.current.style.opacity = (1 - smoothstep(0, 0.045, p)).toFixed(3);
-      if (modelRef.current) modelRef.current.style.opacity = smoothstep(0.004, 0.04, p).toFixed(3);
+      // Coming out of the flight's cloud the mist does not just fade: it opens
+      // around the implant first, so the eye lands on the model and the rest of
+      // the frame follows. MODEL_AT is where the opening shot puts it.
+      // A flat sheet carries the handover from the flight — the opening must
+      // never show as a speck on the seam — and lifts once the gap behind it is
+      // already wide and soft.
+      if (fogFlatRef.current) fogFlatRef.current.style.opacity = (1 - smoothstep(0, 0.022, p)).toFixed(3);
+      if (fogRef.current) {
+        const r = smoothstep(0, 0.06, p) * 160;
+        fogRef.current.style.background = `radial-gradient(circle at ${MODEL_AT}, rgba(219,231,239,0) ${(r * 0.45).toFixed(1)}%, rgba(219,231,239,1) ${r.toFixed(1)}%)`;
+        fogRef.current.style.opacity = (1 - smoothstep(0.05, 0.085, p)).toFixed(3);
+      }
+      if (modelRef.current) {
+        modelRef.current.style.opacity = smoothstep(0.008, 0.045, p).toFixed(3);
+        // a breath of settle, so it arrives rather than simply appears
+        modelRef.current.style.transform = `scale(${(1.05 - smoothstep(0, 0.075, p) * 0.05).toFixed(4)})`;
+      }
+      // light blooms where the mist parts, then goes
+      if (bloomRef.current) {
+        bloomRef.current.style.opacity = (Math.sin(Math.PI * clampN(p / 0.085)) * 0.6).toFixed(3);
+      }
 
       // one block of words per shot, in and out on its own window
       for (let i = 0; i < SECTION_RANGES.length; i++) {
@@ -117,14 +149,32 @@ function Reveal({ onOpen3DViewer, onOpenConsultation }: Props) {
         className="left-0 h-[100svh] w-full overflow-hidden"
         style={{ position: 'absolute', top: 0 }}
       >
-        <div ref={modelRef} className="absolute inset-0" style={{ opacity: 0 }}>
+        <div ref={modelRef} className="absolute inset-0 will-change-transform" style={{ opacity: 0 }}>
           {mounted && (
             <ImplantShowcase className="absolute inset-0 h-full w-full" progressRef={showcaseProgress} active={live} />
           )}
         </div>
 
-        {/* the fog the flight ended in, still filling the frame — it clears here */}
-        <div ref={fogRef} className="pointer-events-none absolute inset-0 z-20 bg-[#dbe7ef]" style={{ opacity: 1 }} />
+        {/* the fog the flight ended in, still filling the frame — it opens here */}
+        <div
+          ref={fogRef}
+          className="pointer-events-none absolute inset-0 z-20"
+          style={{ opacity: 1, background: '#dbe7ef' }}
+        />
+        <div
+          ref={fogFlatRef}
+          className="pointer-events-none absolute inset-0 z-[21] bg-[#dbe7ef]"
+          style={{ opacity: 1 }}
+        />
+        {/* the light that comes through the opening */}
+        <div
+          ref={bloomRef}
+          className="pointer-events-none absolute inset-0 z-[25] mix-blend-screen"
+          style={{
+            opacity: 0,
+            background: `radial-gradient(40% 46% at ${MODEL_AT}, rgba(169,216,228,0.55), transparent 70%)`,
+          }}
+        />
 
         {/* each shot's words, always on the side the model is not */}
         {SECTIONS.map((s, i) => {

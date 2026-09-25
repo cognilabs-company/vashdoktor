@@ -83,7 +83,9 @@ export function ImplantShowcase({ progressRef, active = true, className = '' }: 
     <div className={className}>
       {(
         <Canvas
-          frameloop={active ? 'always' : 'never'}
+          // mounted early so the scene is compiled and warm; 'demand' renders
+          // it once and then idles until the section is actually on screen
+          frameloop={active ? 'always' : 'demand'}
           dpr={dpr}
           gl={{
             antialias: true,

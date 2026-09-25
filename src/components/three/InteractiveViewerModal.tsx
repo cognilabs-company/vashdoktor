@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { DentalImplantScene } from './DentalImplantScene';
+import { ImplantSequence } from '../../procedural/ImplantSequence';
+import { useWebGL } from '../../hooks/useWebGL';
 import { X, RotateCcw, Layers, ZoomIn, ShieldCheck, Sparkles } from 'lucide-react';
 
 interface InteractiveViewerModalProps {
@@ -11,6 +13,10 @@ export function InteractiveViewerModal({ isOpen, onClose }: InteractiveViewerMod
   const [explodeValue, setExplodeValue] = useState<number>(0.35);
   const [selectedLayer, setSelectedLayer] = useState<'crown' | 'abutment' | 'implant' | 'all'>('all');
   const [useRealModel, setUseRealModel] = useState<boolean>(true);
+  const webgl = useWebGL();
+  // without a WebGL context the slider scrubs the baked sequence instead —
+  // 0 = assembled, 1 = fully apart, skipping the per-part close-ups
+  const readProgress = useCallback(() => 0.08 + explodeValue * 0.34, [explodeValue]);
 
   if (!isOpen) return null;
 
@@ -28,7 +34,7 @@ export function InteractiveViewerModal({ isOpen, onClose }: InteractiveViewerMod
                 3D Interactive Dental Implant Inspector
               </h3>
               <p className="text-xs text-[#68716D]">
-                Drag to rotate 360° • Pinch / scroll to zoom • Adjust exploded layer separation
+                {webgl ? 'Drag to rotate 360° • Pinch / scroll to zoom • Adjust exploded layer separation' : 'Adjust exploded layer separation'}
               </p>
             </div>
           </div>
@@ -44,16 +50,20 @@ export function InteractiveViewerModal({ isOpen, onClose }: InteractiveViewerMod
 
         {/* 3D Canvas Area */}
         <div className="relative flex-1 w-full bg-gradient-to-b from-[#FFFFFF] to-[#F1F3F0]">
-          <DentalImplantScene
-            manualExplode={explodeValue}
-            isInteractiveModal={true}
-            enableOrbitControls={true}
-            useRealModel={useRealModel}
-            className="w-full h-full"
-          />
+          {webgl ? (
+            <DentalImplantScene
+              manualExplode={explodeValue}
+              isInteractiveModal={true}
+              enableOrbitControls={true}
+              useRealModel={useRealModel}
+              className="w-full h-full"
+            />
+          ) : (
+            <ImplantSequence className="absolute inset-0 bg-[#0a141d]" getProgress={readProgress} />
+          )}
 
-          {/* Procedural ⇄ Scanned model toggle */}
-          <div className="absolute top-6 right-6 flex flex-col items-end gap-1.5">
+          {/* Procedural ⇄ Scanned model toggle — WebGL only */}
+          <div className={`absolute top-6 right-6 flex-col items-end gap-1.5 ${webgl ? 'flex' : 'hidden'}`}>
             <div className="inline-flex items-center rounded-full bg-white/90 p-1 shadow-lg backdrop-blur-md border border-black/8 text-xs font-medium">
               <button
                 onClick={() => setUseRealModel(true)}

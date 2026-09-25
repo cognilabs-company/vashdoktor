@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useCallback, useRef } from 'react';
 import { Canvas } from '@react-three/fiber';
 import * as THREE from 'three';
 import { ImplantModel } from './components/ImplantModel';
@@ -11,25 +11,14 @@ import { SectionBlock } from './components/SectionBlock';
 import { ProgressRail } from './components/ProgressRail';
 import { SECTIONS } from './lib/content';
 import { ANNOTATIONS } from './lib/annotations';
+import { ImplantSequence } from './ImplantSequence';
+import { view } from './lib/state';
 import { useReducedMotion } from '../hooks/useReducedMotion';
 import { useDevicePerformance } from '../hooks/useDevicePerformance';
+import { useWebGL } from '../hooks/useWebGL';
 
 interface Props {
   onOpenConsultation: () => void;
-}
-
-/** true if the browser can actually create a WebGL context (fails when hardware
- * acceleration is off / GPU blocklisted → r3f would otherwise render black). */
-function supportsWebGL(): boolean {
-  try {
-    const c = document.createElement('canvas');
-    return !!(
-      window.WebGLRenderingContext &&
-      (c.getContext('webgl2') || c.getContext('webgl') || c.getContext('experimental-webgl'))
-    );
-  } catch {
-    return false;
-  }
 }
 
 /**
@@ -42,7 +31,7 @@ function supportsWebGL(): boolean {
 export function ProceduralExperience({ onOpenConsultation }: Props) {
   const reduced = useReducedMotion();
   const perf = useDevicePerformance();
-  const [webgl] = useState(supportsWebGL);
+  const webgl = useWebGL();
 
   const rootRef = useRef<HTMLDivElement | null>(null);
   const canvasLayerRef = useRef<HTMLDivElement | null>(null);
@@ -51,6 +40,8 @@ export function ProceduralExperience({ onOpenConsultation }: Props) {
   const annotationRefs = useRef<Record<string, HTMLDivElement | null>>({});
   const modelGroupRef = useRef<THREE.Group | null>(null);
   const railRef = useRef<HTMLDivElement | null>(null);
+  // the scroll engine writes this every frame whether or not WebGL exists
+  const readProgress = useCallback(() => view.overallProgress, []);
 
   const dpr = Math.min(perf.dpr, 1.35);
   const full = !perf.isLowEnd && !perf.isMobile;
@@ -88,11 +79,15 @@ export function ProceduralExperience({ onOpenConsultation }: Props) {
             <AnnotationRig groupRef={modelGroupRef} annotationRefs={annotationRefs} />
             {!reduced && <Effects full={full} />}
           </Canvas>
-        ) : null}
+        ) : (
+          // no WebGL context to be had — play the baked scrub of the same scene
+          <ImplantSequence className="absolute inset-0" getProgress={readProgress} />
+        )}
       </div>
 
-      {/* leader-line annotations (desktop) — positioned by AnnotationRig */}
-      <div className="fixed inset-0 z-10 pointer-events-none hidden lg:block">
+      {/* leader-line annotations (desktop) — positioned by AnnotationRig.
+          The baked sequence brings its own, so this block is for WebGL only. */}
+      <div className={`fixed inset-0 z-10 pointer-events-none hidden ${webgl ? 'lg:block' : ''}`}>
         {ANNOTATIONS.map((a) => (
           <div
             key={a.id}

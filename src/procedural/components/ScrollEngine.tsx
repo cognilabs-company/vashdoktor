@@ -44,9 +44,12 @@ export function ScrollEngine({ rootRef, panelRefs, progressRef, canvasLayerRef, 
       }
       view.model.objectScale = 1;
       // active section layout → object side (opposite the text column)
-      let layout = SECTION_RANGES[0].layout;
+      // `op < r.end` never matches the last range at op === 1, so start from the
+      // closing shot and walk back — otherwise the object snaps across the
+      // screen on the very last frame
+      let layout = SECTION_RANGES[SECTION_RANGES.length - 1].layout;
       for (const r of SECTION_RANGES) {
-        if (op >= r.start && op < r.end) {
+        if (op < r.end) {
           layout = r.layout;
           break;
         }

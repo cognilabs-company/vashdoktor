@@ -1,4 +1,4 @@
-import { useRef, useState, type MutableRefObject } from 'react';
+import { useCallback, useRef, type MutableRefObject } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 import { ImplantModel } from './components/ImplantModel';
@@ -9,25 +9,14 @@ import { Effects } from './components/Effects';
 import { ANNOTATIONS } from './lib/annotations';
 import { view, applySectionScroll, clamp } from './lib/state';
 import { SECTION_RANGES, TOTAL_VH, layoutToObjectX } from './lib/content';
+import { ImplantSequence } from './ImplantSequence';
 import { useReducedMotion } from '../hooks/useReducedMotion';
 import { useDevicePerformance } from '../hooks/useDevicePerformance';
+import { useWebGL } from '../hooks/useWebGL';
 
 /** How tall a host section must be for the sequence to play at its own pace:
  * the experience's own scroll length plus the pinned viewport. */
 export const SHOWCASE_VH = TOTAL_VH + 100;
-
-/** true if the browser can actually create a WebGL context */
-function supportsWebGL(): boolean {
-  try {
-    const c = document.createElement('canvas');
-    return !!(
-      window.WebGLRenderingContext &&
-      (c.getContext('webgl2') || c.getContext('webgl') || c.getContext('experimental-webgl'))
-    );
-  } catch {
-    return false;
-  }
-}
 
 /** Writes the shared view from our own scroll value, before anything reads it —
  * the same mapping the full experience's scroll engine uses, so the camera
@@ -47,9 +36,12 @@ function Driver({ progressRef }: { progressRef: MutableRefObject<number> }) {
       return;
     }
     view.model.objectScale = 1;
-    let layout = SECTION_RANGES[0].layout;
+    // `op < r.end` never matches the last range at op === 1, so start from the
+    // closing shot and walk back — otherwise the model snaps across the screen
+    // on the very last frame
+    let layout = SECTION_RANGES[SECTION_RANGES.length - 1].layout;
     for (const r of SECTION_RANGES) {
-      if (op >= r.start && op < r.end) {
+      if (op < r.end) {
         layout = r.layout;
         break;
       }
@@ -76,16 +68,20 @@ interface Props {
 export function ImplantShowcase({ progressRef, active = true, className = '' }: Props) {
   const reduced = useReducedMotion();
   const perf = useDevicePerformance();
-  const [webgl] = useState(supportsWebGL);
+  const webgl = useWebGL();
   const modelGroupRef = useRef<THREE.Group | null>(null);
   const annotationRefs = useRef<Record<string, HTMLDivElement | null>>({});
+  const readProgress = useCallback(() => progressRef.current, [progressRef]);
 
   const dpr = Math.min(perf.dpr, 1.35);
   const full = !perf.isLowEnd && !perf.isMobile;
 
+  // no WebGL context to be had — play the baked scrub of the same scene
+  if (!webgl) return <ImplantSequence className={className} getProgress={readProgress} />;
+
   return (
     <div className={className}>
-      {webgl && (
+      {(
         <Canvas
           frameloop={active ? 'always' : 'never'}
           dpr={dpr}

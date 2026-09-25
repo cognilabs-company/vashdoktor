@@ -191,12 +191,15 @@ function Reveal({ onOpen3DViewer, onOpenConsultation }: Props) {
         const r = SECTION_RANGES[i];
         const pad = Math.min(0.035, (r.end - r.start) * 0.3);
         const last = i === SECTION_RANGES.length - 1;
-        // the closing words hold until the jaw comes up, then hand over to it
+        // The closing words stay exactly where they are while the implant sinks
+        // out of frame — the tooth is what moves, not the text. They only hand
+        // over once the jaw has started to rise in its place.
         const o =
           clampN(Math.min((op - r.start) / pad, last ? 1 : (r.end - op) / pad)) *
-          (last ? 1 - smoothstep(0, 0.1, q) : 1);
+          (last ? 1 - smoothstep(0.34, 0.46, q) : 1);
         el.style.opacity = o.toFixed(3);
-        el.style.transform = `translate3d(0, ${((1 - o) * 18).toFixed(1)}px, 0)`;
+        // no drift on the closing block: it holds its position until it goes
+        el.style.transform = last ? 'none' : `translate3d(0, ${((1 - o) * 18).toFixed(1)}px, 0)`;
         el.style.pointerEvents = o > 0.6 ? 'auto' : 'none';
       }
 

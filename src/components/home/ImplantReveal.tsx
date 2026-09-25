@@ -2,6 +2,12 @@ import { useLayoutEffect, useRef, useState } from 'react';
 import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { ImplantShowcase, SHOWCASE_VH } from '../../procedural/ImplantShowcase';
+import { SequenceCanvas, type SequenceCanvasHandle } from '../procedure/SequenceCanvas';
+import {
+  getFrameSrc as getJawFrameSrc,
+  PRIORITY_FRAMES as JAW_PRIORITY,
+  TOTAL_FRAMES as JAW_FRAMES,
+} from '../../lib/dentalSequence';
 import { SECTIONS, SECTION_RANGES } from '../../procedural/lib/content';
 import { Button } from '../ui/Button';
 import { useMediaQuery } from '../../hooks/useMediaQuery';
@@ -11,6 +17,16 @@ import { FLOW } from '../../lib/flow';
 const clampN = (v: number, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 /** where the opening shot puts the implant, measured off the baked frames */
 const MODEL_AT = '37% 46%';
+
+// The finale: the implant we just built goes into a jaw. The footage is the
+// clinic's own procedure sequence; frame 120 is the drilled socket with no tool
+// in shot, and 240 is the finished jaw. Measured on the 1280x720 frame, the
+// socket sits at (635, 423) and a seated fixture is 70 x 236 px.
+const FINALE_VH = 190;
+const JAW_OPEN = 120; // socket drilled, nothing above it yet
+const SOCKET = { x: 635 / 1280, y: 423 / 720 };
+/** share of the pinned scroll the implant sequence itself owns */
+const SHOW_SHARE = (SHOWCASE_VH - 100) / (SHOWCASE_VH + FINALE_VH - 100);
 const smoothstep = (a: number, b: number, x: number) => {
   const t = clampN((x - a) / (b - a));
   return t * t * (3 - 2 * t);
@@ -42,6 +58,9 @@ function Reveal({ onOpen3DViewer, onOpenConsultation }: Props) {
   const fogRef = useRef<HTMLDivElement | null>(null);
   const fogFlatRef = useRef<HTMLDivElement | null>(null);
   const bloomRef = useRef<HTMLDivElement | null>(null);
+  const jawRef = useRef<HTMLDivElement | null>(null);
+  const jawCanvasRef = useRef<SequenceCanvasHandle | null>(null);
+  const endRef = useRef<HTMLDivElement | null>(null);
   const modelRef = useRef<HTMLDivElement | null>(null);
   const panelRefs = useRef<(HTMLDivElement | null)[]>([]);
   // the showcase reads this every frame — no React state on the scroll path
@@ -59,6 +78,7 @@ function Reveal({ onOpen3DViewer, onOpenConsultation }: Props) {
     let wasLive = false;
     let wasMounted = false;
     let lastRadius = -1; // a full-viewport gradient is expensive to restyle
+    let lastJawFrame = -1;
     const setPin = (phase: string, top: string, bottom: string) => {
       if (phase === lastPhase) return;
       lastPhase = phase;
@@ -93,9 +113,33 @@ function Reveal({ onOpen3DViewer, onOpenConsultation }: Props) {
         setLive(near);
       }
 
-      // the whole sequence, played inside this one pinned stage
-      const op = clampN((p - 0.02) / 0.96);
+      // the implant sequence owns the first part of the stage, the finale the rest
+      const op = clampN((clampN(p / SHOW_SHARE) - 0.02) / 0.96);
       showcaseProgress.current = op;
+      const q = clampN((p - SHOW_SHARE) / (1 - SHOW_SHARE));
+
+      // FINALE — the jaw comes up under the implant, the implant goes down into
+      // the socket, and the footage carries it from there to a finished tooth
+      if (jawRef.current) {
+        const inJaw = smoothstep(0, 0.12, q);
+        jawRef.current.style.opacity = inJaw.toFixed(3);
+        jawRef.current.style.visibility = inJaw < 0.01 ? 'hidden' : 'visible';
+      }
+      if (endRef.current) {
+        const t = smoothstep(0.84, 0.95, q);
+        endRef.current.style.opacity = t.toFixed(3);
+        endRef.current.style.transform = `translate3d(0, ${((1 - t) * 20).toFixed(1)}px, 0)`;
+        endRef.current.style.pointerEvents = t > 0.7 ? 'auto' : 'none';
+      }
+      if (jawCanvasRef.current) {
+        // hold on the open socket while the implant is still on its way down,
+        // then play through to the finished jaw
+        const f = Math.round(JAW_OPEN + smoothstep(0.34, 1, q) * (JAW_FRAMES - JAW_OPEN));
+        if (f !== lastJawFrame) {
+          lastJawFrame = f;
+          jawCanvasRef.current.draw(f);
+        }
+      }
 
       // Coming out of the flight's cloud the mist does not just fade: it opens
       // around the implant first, so the eye lands on the model and the rest of
@@ -119,9 +163,15 @@ function Reveal({ onOpen3DViewer, onOpenConsultation }: Props) {
         fogRef.current.style.opacity = (1 - smoothstep(0.05, 0.085, p)).toFixed(3);
       }
       if (modelRef.current) {
-        modelRef.current.style.opacity = smoothstep(0.008, 0.045, p).toFixed(3);
-        // a breath of settle, so it arrives rather than simply appears
-        modelRef.current.style.transform = `scale(${(1.05 - smoothstep(0, 0.075, p) * 0.05).toFixed(4)})`;
+        // in out of the mist, then down into the socket at the end
+        const land = smoothstep(0.04, 0.34, q);
+        const sc = (1.05 - smoothstep(0, 0.075, p) * 0.05) * (1 - land * 0.6);
+        const dx = land * (SOCKET.x - 0.5) * 100;
+        const dy = land * (SOCKET.y - 0.5) * 100;
+        modelRef.current.style.opacity = (
+          smoothstep(0.008, 0.045, p) * (1 - smoothstep(0.24, 0.36, q))
+        ).toFixed(3);
+        modelRef.current.style.transform = `translate3d(${dx.toFixed(2)}vw, ${dy.toFixed(2)}vh, 0) scale(${sc.toFixed(4)})`;
       }
       // light blooms where the mist parts, then goes
       if (bloomRef.current) {
@@ -138,8 +188,11 @@ function Reveal({ onOpen3DViewer, onOpenConsultation }: Props) {
         if (!el) continue;
         const r = SECTION_RANGES[i];
         const pad = Math.min(0.035, (r.end - r.start) * 0.3);
-        const last = i === SECTION_RANGES.length - 1; // the closing words stay up
-        const o = clampN(Math.min((op - r.start) / pad, last ? 1 : (r.end - op) / pad));
+        const last = i === SECTION_RANGES.length - 1;
+        // the closing words hold until the jaw comes up, then hand over to it
+        const o =
+          clampN(Math.min((op - r.start) / pad, last ? 1 : (r.end - op) / pad)) *
+          (last ? 1 - smoothstep(0, 0.1, q) : 1);
         el.style.opacity = o.toFixed(3);
         el.style.transform = `translate3d(0, ${((1 - o) * 18).toFixed(1)}px, 0)`;
         el.style.pointerEvents = o > 0.6 ? 'auto' : 'none';
@@ -156,13 +209,30 @@ function Reveal({ onOpen3DViewer, onOpenConsultation }: Props) {
       ref={sectionRef}
       data-bg={FLOW.base}
       className="relative w-full"
-      style={{ height: `${SHOWCASE_VH}vh`, backgroundColor: FLOW.base }}
+      style={{ height: `${SHOWCASE_VH + FINALE_VH}vh`, backgroundColor: FLOW.base }}
     >
       <div
         ref={stageRef}
         className="left-0 h-[100svh] w-full overflow-hidden"
         style={{ position: 'absolute', top: 0 }}
       >
+        {/* the jaw the implant lands in */}
+        <div
+          ref={jawRef}
+          className="absolute inset-0"
+          // kept to its own side of the stage, so the words never sit on it
+          style={{ opacity: 0, visibility: 'hidden', transform: 'translate3d(11vw, 2vh, 0) scale(0.8)' }}
+        >
+          <SequenceCanvas
+            ref={jawCanvasRef}
+            className="absolute inset-0 block h-full w-full"
+            src={getJawFrameSrc}
+            total={JAW_FRAMES}
+            priority={JAW_PRIORITY}
+            fit="contain"
+          />
+        </div>
+
         <div ref={modelRef} className="absolute inset-0" style={{ opacity: 0 }}>
           {mounted && (
             <ImplantShowcase className="absolute inset-0 h-full w-full" progressRef={showcaseProgress} active={live} />
@@ -255,6 +325,32 @@ function Reveal({ onOpen3DViewer, onOpenConsultation }: Props) {
             </div>
           );
         })}
+        {/* the last word, once the tooth is in and the jaw is whole */}
+        <div
+          ref={endRef}
+          className="absolute left-6 top-1/2 z-30 w-[min(30vw,380px)] -translate-y-1/2 lg:left-14"
+          style={{ opacity: 0 }}
+        >
+          <div className="mb-5 inline-flex items-center gap-3 text-[13px] text-[#8fc7d4]">
+            <span className="h-px w-7 bg-[#8fc7d4]/60" />
+            Va joyida
+          </div>
+          <h2 className="font-serif text-[clamp(1.8rem,3.6vw,2.9rem)] font-medium leading-[1.05] tracking-tight text-white">
+            O‘z tishingizdan <span className="text-[#8fc7d4]">farq qilmaydi.</span>
+          </h2>
+          <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
+            <Button variant="white" size="lg" onClick={onOpenConsultation} icon={<ArrowUpRight className="h-4 w-4" />}>
+              Konsultatsiyaga yozilish
+            </Button>
+            <Link
+              to="/implantatsiya"
+              className="group inline-flex items-center gap-1.5 text-sm text-[#c6dbe1] underline decoration-white/25 underline-offset-[6px] transition-colors hover:text-white hover:decoration-[#8fc7d4]"
+            >
+              Implantatsiya sahifasi
+              <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+            </Link>
+          </div>
+        </div>
       </div>
     </section>
   );

@@ -1,6 +1,5 @@
 import { HeroFlight } from '../components/home/HeroFlight';
 import { ImplantReveal } from '../components/home/ImplantReveal';
-import { ProcedureSequence } from '../components/procedure/ProcedureSequence';
 import { ImplantTeaser } from '../components/home/ImplantTeaser';
 import { Testimonials } from '../components/home/Testimonials';
 import { ContactMap } from '../components/home/ContactMap';
@@ -28,11 +27,10 @@ export function Home() {
           four service directions, and ends inside the fog */}
       <HeroFlight onOpenConsultation={openConsultation} />
 
-      {/* out of that fog: the implant takes itself apart, then back together */}
+      {/* out of that fog: the implant takes itself apart, goes back together,
+          and lands in the jaw — the procedure footage carries the last beat, so
+          it is no longer told a second time in its own section below */}
       <ImplantReveal onOpen3DViewer={open3DViewer} onOpenConsultation={openConsultation} />
-
-      {/* 3D jaw: scan → plan → treat */}
-      <ProcedureSequence />
 
       <ImplantTeaser onOpen3DViewer={open3DViewer} />
 

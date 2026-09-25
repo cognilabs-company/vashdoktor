@@ -1,16 +1,22 @@
-// Frame-sequence config for the scroll-driven dental procedure section.
+// Frame-sequence config for the scroll-driven dental procedure footage — the
+// jaw the implant lands in at the end of the home page's implant story.
 // Frames come from the supplied video (Dental_implant_3D_animation_process…mp4,
-// 240 frames @ 24fps): each frame extracted and keyed to alpha (checkerboard
-// backdrop removed) → served VERBATIM as transparent RGBA PNG from
-// /public/dental_video_rgba/. Canvas draws them directly (clearRect + drawImage),
+// 240 frames @ 24fps), keyed to alpha and served as transparent WebP from
+// /public/dental_seq/. The canvas draws them directly (clearRect + drawImage),
 // no runtime processing.
+//
+// The key left a hard 0-or-255 alpha, which showed as a stair-stepped outline
+// once the jaw was drawn large, so the alpha is feathered by a pixel. WebP at
+// q80 carries the same picture (2/255 mean difference where the jaw actually
+// is, alpha bit-exact) for a twenty-first of the weight: 672 KB a frame as PNG
+// against 32 KB.
 
 export const TOTAL_FRAMES = 240;
 
-/** /dental_video_rgba/ezgif-frame-052.png for frame 52 (zero-padded to 3 digits). */
+/** /dental_seq/frame-052.webp for frame 52 (zero-padded to 3 digits). */
 export function getFrameSrc(frame: number): string {
   const n = Math.min(TOTAL_FRAMES, Math.max(1, Math.round(frame)));
-  return `/dental_video_rgba/ezgif-frame-${String(n).padStart(3, '0')}.png`;
+  return `/dental_seq/frame-${String(n).padStart(3, '0')}.webp`;
 }
 
 export type PhaseId = 'skanlash' | 'rejalash' | 'davolash';

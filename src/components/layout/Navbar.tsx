@@ -33,14 +33,14 @@ export function Navbar({ onOpenConsultation, onOpen3DViewer }: NavbarProps) {
     <header
       className={`fixed top-0 inset-x-0 z-40 transition-all duration-300 ${
         isScrolled
-          ? 'py-3.5 bg-[#0a141d]/80 backdrop-blur-md border-b border-white/10'
+          ? 'py-3.5 bg-[var(--c-bg)]/80 backdrop-blur-md border-b border-white/10'
           : 'py-5 bg-transparent'
       }`}
     >
       <div className="max-w-[1440px] mx-auto px-6 sm:px-8 lg:px-12 flex items-center justify-between">
         {/* Brand Logo */}
         <Link to="/" className="flex items-center gap-3 group">
-          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#8fc7d4]/15 border border-white/15 text-[#a9d8e4] transition-transform group-hover:scale-105">
+          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[var(--c-accent)]/15 border border-white/15 text-[var(--c-accent-2)] transition-transform group-hover:scale-105">
             <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M12 2C8 2 5 5 5 9c0 3 1.5 6 3 9l4 4 4-4c1.5-3 3-6 3-9 0-4-3-7-7-7z" strokeLinecap="round" strokeLinejoin="round" />
               <path d="M9 13h6" strokeLinecap="round" />
@@ -51,7 +51,7 @@ export function Navbar({ onOpenConsultation, onOpen3DViewer }: NavbarProps) {
             <span className="text-xs font-bold tracking-[0.2em] uppercase leading-none text-white">
               {CLINIC_CONFIG.name}
             </span>
-            <span className="text-[10px] font-medium tracking-[0.14em] uppercase mt-0.5 text-[#8fb0ba]">
+            <span className="text-[10px] font-medium tracking-[0.14em] uppercase mt-0.5 text-[var(--c-text-3)]">
               STOMATOLOGIYA KLINIKASI
             </span>
           </div>
@@ -73,7 +73,7 @@ export function Navbar({ onOpenConsultation, onOpen3DViewer }: NavbarProps) {
                 <>
                   {link.label}
                   <span
-                    className={`absolute bottom-0 left-0 h-0.5 transition-all duration-300 bg-[#a9d8e4] ${
+                    className={`absolute bottom-0 left-0 h-0.5 transition-all duration-300 bg-[var(--c-accent-2)] ${
                       isActive ? 'w-full' : 'w-0 group-hover:w-full'
                     }`}
                   />
@@ -87,7 +87,7 @@ export function Navbar({ onOpenConsultation, onOpen3DViewer }: NavbarProps) {
         <div className="hidden lg:flex items-center gap-3">
           <button
             onClick={onOpen3DViewer}
-            className="flex items-center gap-1.5 px-3.5 py-2 text-xs font-medium rounded-full border transition-all cursor-pointer text-[#a9d8e4] bg-[#8fc7d4]/10 hover:bg-[#8fc7d4]/20 border-[#8fc7d4]/25"
+            className="flex items-center gap-1.5 px-3.5 py-2 text-xs font-medium rounded-full border transition-all cursor-pointer text-[var(--c-accent-2)] bg-[var(--c-accent)]/10 hover:bg-[var(--c-accent)]/20 border-[var(--c-accent)]/25"
           >
             <Sliders className="h-3.5 w-3.5" />
             <span>3D model ko&#8216;rigi</span>
@@ -121,7 +121,7 @@ export function Navbar({ onOpenConsultation, onOpen3DViewer }: NavbarProps) {
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-[#0a141d]/95 backdrop-blur-xl border-b border-white/10 px-6 py-6 space-y-4 shadow-xl">
+        <div className="md:hidden bg-[var(--c-bg)]/95 backdrop-blur-xl border-b border-white/10 px-6 py-6 space-y-4 shadow-xl">
           <nav className="flex flex-col space-y-3">
             {navLinks.map((link) => (
               <NavLink
@@ -129,7 +129,7 @@ export function Navbar({ onOpenConsultation, onOpen3DViewer }: NavbarProps) {
                 to={link.to}
                 onClick={() => setMobileMenuOpen(false)}
                 className={({ isActive }) =>
-                  `text-base py-2 border-b border-white/10 ${isActive ? 'text-[#a9d8e4]' : 'text-white/85'}`
+                  `text-base py-2 border-b border-white/10 ${isActive ? 'text-[var(--c-accent-2)]' : 'text-white/85'}`
                 }
               >
                 {link.label}
@@ -145,7 +145,7 @@ export function Navbar({ onOpenConsultation, onOpen3DViewer }: NavbarProps) {
               }}
               className="w-full flex items-center justify-center gap-2 py-3 rounded-full bg-white/[0.06] border border-white/10 text-xs font-mono text-white"
             >
-              <Sliders className="h-4 w-4 text-[#a9d8e4]" />
+              <Sliders className="h-4 w-4 text-[var(--c-accent-2)]" />
               <span>3D modelni ochish</span>
             </button>
 

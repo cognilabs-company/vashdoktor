@@ -271,23 +271,23 @@ export function ImplantStory({ onOpenConsultation, onOpen3DViewer }: ImplantStor
     };
   }, []);
 
-  const label = 'text-[10.5px] font-mono tracking-[0.22em] text-[#286A5B] uppercase mb-3.5';
+  const label = 'text-[10.5px] font-mono tracking-[0.22em] text-[var(--c-green)] uppercase mb-3.5';
   const heading =
-    'text-2xl sm:text-3xl lg:text-[2rem] font-serif font-medium text-[#101715] leading-[1.15] tracking-[-0.02em]';
+    'text-2xl sm:text-3xl lg:text-[2rem] font-serif font-medium text-[var(--c-ink)] leading-[1.15] tracking-[-0.02em]';
   const body = 'mt-3.5 text-sm sm:text-[15px] text-[#5F6B66] font-normal leading-relaxed';
 
   return (
     <section
       id="implant-story"
       ref={storyRef}
-      className="relative w-full bg-[#F5F7F4] text-[#101715] select-none"
+      className="relative w-full bg-[var(--c-paper-2)] text-[var(--c-ink)] select-none"
     >
       <div
         ref={stageRef}
         className="story-stage relative w-full h-[100svh] min-h-[640px] overflow-hidden"
       >
         {/* Subtle spatial grid (very faint, purely atmospheric) */}
-        <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(to_right,#14201c05_1px,transparent_1px),linear-gradient(to_bottom,#14201c05_1px,transparent_1px)] bg-[size:5rem_5rem] -z-10" />
+        <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(to_right,var(--c-ink-3)05_1px,transparent_1px),linear-gradient(to_bottom,var(--c-ink-3)05_1px,transparent_1px)] bg-[size:5rem_5rem] -z-10" />
 
         {/* Soft studio backdrop — gentle depth so the solid model reads against the light page */}
         <div className="absolute inset-0 -z-[5] pointer-events-none bg-[radial-gradient(ellipse_78%_66%_at_50%_48%,rgba(16,27,23,0.07),rgba(16,27,23,0.02)_55%,transparent_78%)]" />
@@ -300,17 +300,17 @@ export function ImplantStory({ onOpenConsultation, onOpen3DViewer }: ImplantStor
         {/* HUD — top status bar */}
         <div className="absolute top-0 inset-x-0 z-20 px-6 sm:px-8 lg:px-12 py-6 flex items-center justify-between pointer-events-none">
           <div className="flex items-center gap-2.5">
-            <span className="h-2 w-2 rounded-full bg-[#286A5B] animate-pulse" />
-            <span className="text-[11px] font-mono tracking-widest text-[#747D79] uppercase">
+            <span className="h-2 w-2 rounded-full bg-[var(--c-green)] animate-pulse" />
+            <span className="text-[11px] font-mono tracking-widest text-[var(--c-ink-text)] uppercase">
               {activeChapter} // {storyProgress}%
             </span>
           </div>
           {onOpen3DViewer && (
             <button
               onClick={onOpen3DViewer}
-              className="pointer-events-auto hidden sm:inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/80 hover:bg-white text-xs font-mono text-[#101715] border border-black/8 shadow-xs backdrop-blur-sm transition-all hover:scale-105 cursor-pointer"
+              className="pointer-events-auto hidden sm:inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/80 hover:bg-white text-xs font-mono text-[var(--c-ink)] border border-black/8 shadow-xs backdrop-blur-sm transition-all hover:scale-105 cursor-pointer"
             >
-              <Sliders className="h-3 w-3 text-[#286A5B]" />
+              <Sliders className="h-3 w-3 text-[var(--c-green)]" />
               <span>360° Manual Inspector</span>
             </button>
           )}
@@ -324,7 +324,7 @@ export function ImplantStory({ onOpenConsultation, onOpen3DViewer }: ImplantStor
             <h2 className={`${heading} mt-5`}>
               A tooth, <br />
               rebuilt from <br />
-              <span className="font-medium text-[#173D35]">the foundation.</span>
+              <span className="font-medium text-[var(--c-green-deep)]">the foundation.</span>
             </h2>
             <p className={body}>
               From planning to the final restoration, each layer is designed around
@@ -342,23 +342,23 @@ export function ImplantStory({ onOpenConsultation, onOpen3DViewer }: ImplantStor
             <div className={label}>02 / ANATOMY</div>
             <h3 className={heading}>
               The strength sits <br />
-              <span className="font-medium text-[#173D35]">below the surface.</span>
+              <span className="font-medium text-[var(--c-green-deep)]">below the surface.</span>
             </h3>
             <p className={body}>
               Three engineered components — ceramic crown, titanium abutment and root
               fixture — working as one biological structure.
             </p>
-            <div className="mt-6 space-y-2.5 text-xs text-[#101715]/80 font-medium">
+            <div className="mt-6 space-y-2.5 text-xs text-[var(--c-ink)]/80 font-medium">
               <div className="flex items-center gap-2.5">
-                <span className="h-1.5 w-1.5 rounded-full bg-[#286A5B]" />
+                <span className="h-1.5 w-1.5 rounded-full bg-[var(--c-green)]" />
                 <span>01 · Monolithic zirconia crown</span>
               </div>
               <div className="flex items-center gap-2.5">
-                <span className="h-1.5 w-1.5 rounded-full bg-[#286A5B]" />
+                <span className="h-1.5 w-1.5 rounded-full bg-[var(--c-green)]" />
                 <span>02 · Precision titanium abutment</span>
               </div>
               <div className="flex items-center gap-2.5">
-                <span className="h-1.5 w-1.5 rounded-full bg-[#286A5B]" />
+                <span className="h-1.5 w-1.5 rounded-full bg-[var(--c-green)]" />
                 <span>03 · Grade 5 titanium fixture</span>
               </div>
             </div>
@@ -369,13 +369,13 @@ export function ImplantStory({ onOpenConsultation, onOpen3DViewer }: ImplantStor
             <div className={label}>03 / MATERIAL</div>
             <h3 className={heading}>
               Engineered <br />
-              <span className="font-medium text-[#173D35]">to integrate.</span>
+              <span className="font-medium text-[var(--c-green-deep)]">to integrate.</span>
             </h3>
             <p className={body}>
               A Grade 5 titanium fixture with a micro-textured surface — biocompatible,
               engineered to become a stable part of the jaw.
             </p>
-            <div className="mt-6 flex flex-wrap gap-2.5 text-[11px] font-mono text-[#286A5B]">
+            <div className="mt-6 flex flex-wrap gap-2.5 text-[11px] font-mono text-[var(--c-green)]">
               <span className="px-3 py-1 rounded-full bg-white border border-black/8">Ti-6Al-4V</span>
               <span className="px-3 py-1 rounded-full bg-white border border-black/8">SLA SURFACE</span>
               <span className="px-3 py-1 rounded-full bg-white border border-black/8">OSSEOINTEGRATION</span>
@@ -387,7 +387,7 @@ export function ImplantStory({ onOpenConsultation, onOpen3DViewer }: ImplantStor
             <div className={label}>04 / GUIDED PLACEMENT</div>
             <h3 className={heading}>
               Placed with <br />
-              <span className="font-medium text-[#173D35]">precision.</span>
+              <span className="font-medium text-[var(--c-green-deep)]">precision.</span>
             </h3>
             <p className={body}>
               Angle, depth and position are digitally planned before treatment begins,
@@ -400,7 +400,7 @@ export function ImplantStory({ onOpenConsultation, onOpen3DViewer }: ImplantStor
             <div className={label}>05 / RESTORATION</div>
             <h3 className={heading}>
               Assembled as <br />
-              <span className="font-medium text-[#173D35]">one unit.</span>
+              <span className="font-medium text-[var(--c-green-deep)]">one unit.</span>
             </h3>
             <p className={body}>
               The abutment seats into the fixture, then the ceramic crown — a single,
@@ -413,7 +413,7 @@ export function ImplantStory({ onOpenConsultation, onOpen3DViewer }: ImplantStor
             <div className={label}>06 / THE RESULT</div>
             <h3 className={heading}>
               Designed to <br />
-              <span className="font-medium text-[#173D35]">feel natural.</span>
+              <span className="font-medium text-[var(--c-green-deep)]">feel natural.</span>
             </h3>
             <p className={body}>
               Natural aesthetics, biocompatible stability and long-term functional
@@ -428,8 +428,8 @@ export function ImplantStory({ onOpenConsultation, onOpen3DViewer }: ImplantStor
         </div>
 
         {/* Bottom scroll hint */}
-        <div className="absolute bottom-0 inset-x-0 z-20 px-6 sm:px-8 lg:px-12 py-5 flex items-center gap-2 text-xs text-[#747D79] pointer-events-none">
-          <ChevronDown className="h-4 w-4 text-[#286A5B] animate-bounce" />
+        <div className="absolute bottom-0 inset-x-0 z-20 px-6 sm:px-8 lg:px-12 py-5 flex items-center gap-2 text-xs text-[var(--c-ink-text)] pointer-events-none">
+          <ChevronDown className="h-4 w-4 text-[var(--c-green)] animate-bounce" />
           <span className="font-mono text-[11px] uppercase tracking-wider">Scroll to explore</span>
         </div>
       </div>

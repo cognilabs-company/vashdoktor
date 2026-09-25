@@ -123,7 +123,7 @@ export function Hero({ onOpenConsultation }: HeroProps) {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative min-h-[100svh] w-full overflow-hidden bg-[#070f17] text-white">
+    <section ref={sectionRef} className="relative min-h-[100svh] w-full overflow-hidden bg-[var(--c-bg-deep)] text-white">
       {/* the scene (scroll-zoom): plate + 3D tooth move together */}
       <div ref={imgRef} className="absolute inset-0 will-change-transform" style={{ transformOrigin: 'center center' }}>
         {live && (
@@ -162,8 +162,8 @@ export function Hero({ onOpenConsultation }: HeroProps) {
 
       {/* headline + CTA — bottom-left. No paragraph: the picture says it. */}
       <div ref={contentRef} className="absolute bottom-[14vh] left-6 z-10 max-w-3xl will-change-transform lg:left-14">
-        <div className="mb-5 inline-flex items-center gap-3 text-[13px] text-[#a9d8e4]">
-          <span className="h-px w-7 bg-[#a9d8e4]/70" />
+        <div className="mb-5 inline-flex items-center gap-3 text-[13px] text-[var(--c-accent-2)]">
+          <span className="h-px w-7 bg-[var(--c-accent-2)]/70" />
           Stomatologiya · Toshkent
         </div>
         <h1 className="text-[13vw] leading-[0.95] tracking-[-0.03em] sm:text-6xl lg:text-[5rem]">
@@ -181,7 +181,7 @@ export function Hero({ onOpenConsultation }: HeroProps) {
           </Button>
           <Link
             to="/services"
-            className="group inline-flex items-center gap-1.5 text-sm text-[#c6dbe1] underline decoration-white/25 underline-offset-[6px] transition-colors hover:text-white hover:decoration-[#8fc7d4]"
+            className="group inline-flex items-center gap-1.5 text-sm text-[var(--c-text)] underline decoration-white/25 underline-offset-[6px] transition-colors hover:text-white hover:decoration-[var(--c-accent)]"
           >
             Barcha xizmatlar
             <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
@@ -194,7 +194,7 @@ export function Hero({ onOpenConsultation }: HeroProps) {
         {FACTS.map((f) => (
           <div key={f.label} className="px-6 text-right first:pl-0 last:pr-0">
             <div className="font-serif text-3xl font-medium leading-none text-white">{f.value}</div>
-            <div className="mt-1.5 text-[12px] text-[#c6dbe1]">{f.label}</div>
+            <div className="mt-1.5 text-[12px] text-[var(--c-text)]">{f.label}</div>
           </div>
         ))}
       </div>
@@ -202,7 +202,7 @@ export function Hero({ onOpenConsultation }: HeroProps) {
       {/* dive-in dissolve — fades to the section colour at the peak of the zoom */}
       <div
         ref={fadeRef}
-        className="pointer-events-none absolute inset-0 z-30 bg-[#0a141d] will-change-[opacity]"
+        className="pointer-events-none absolute inset-0 z-30 bg-[var(--c-bg)] will-change-[opacity]"
         style={{ opacity: 0 }}
       />
     </section>

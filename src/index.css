@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "./palettes.css";
 
 /* Restrained, premium type system — one clean grotesque (Inter) everywhere.
    Mapping --font-serif to Inter too converts the old Playfair headings to a

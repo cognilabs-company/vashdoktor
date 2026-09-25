@@ -34,11 +34,11 @@ export function Preloader({ ready }: Props) {
       style={{ opacity: done ? 0 : 1, pointerEvents: done ? 'none' : 'auto' }}
     >
       <div className="flex flex-col items-center gap-6">
-        <div className="text-[13px] font-mono tracking-[0.34em] uppercase text-[#3D7773]">
+        <div className="text-[13px] font-mono tracking-[0.34em] uppercase text-[var(--c-green-3)]">
           Implant System
         </div>
         <div className="h-px w-40 overflow-hidden bg-[#141c1a]/10">
-          <div className={`h-full bg-[#173D35] ${done ? 'w-full' : 'animate-[preload_1.4s_ease-in-out_infinite]'}`} />
+          <div className={`h-full bg-[var(--c-green-deep)] ${done ? 'w-full' : 'animate-[preload_1.4s_ease-in-out_infinite]'}`} />
         </div>
       </div>
       <style>{`

@@ -33,7 +33,7 @@ export function ImplantLighting({ scrollProgress = 0, isLowEnd = false }: Implan
         <directionalLight
           position={[0, 6, -6]}
           intensity={1.4}
-          color="#DCEDE7"
+          color="var(--c-green-soft)"
         />
       )}
 

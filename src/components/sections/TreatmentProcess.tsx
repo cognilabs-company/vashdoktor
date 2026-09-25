@@ -8,7 +8,7 @@ export function TreatmentProcess() {
   const [activeStep, setActiveStep] = useState(0);
 
   return (
-    <section id="process" className="py-24 sm:py-32 bg-[#F7F8F6] border-t border-black/5 overflow-hidden">
+    <section id="process" className="py-24 sm:py-32 bg-[var(--c-paper)] border-t border-black/5 overflow-hidden">
       <div className="max-w-[1440px] mx-auto px-6 sm:px-8 lg:px-12">
         {/* Section Header */}
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-20">
@@ -34,7 +34,7 @@ export function TreatmentProcess() {
                   onClick={() => setActiveStep(idx)}
                   className={`cursor-pointer rounded-2xl p-6 sm:p-7 transition-all duration-300 border ${
                     isSelected
-                      ? 'bg-white shadow-md border-[#246B5B]/30'
+                      ? 'bg-white shadow-md border-[var(--c-green-2)]/30'
                       : 'bg-white/60 hover:bg-white/90 border-black/5'
                   }`}
                 >
@@ -42,41 +42,41 @@ export function TreatmentProcess() {
                     <div className="flex items-center gap-4">
                       <span
                         className={`font-mono text-lg sm:text-xl font-medium transition-colors ${
-                          isSelected ? 'text-[#246B5B]' : 'text-[#68716D]'
+                          isSelected ? 'text-[var(--c-green-2)]' : 'text-[var(--c-ink-text-2)]'
                         }`}
                       >
                         {step.number}
                       </span>
-                      <h3 className="text-lg sm:text-xl font-serif text-[#111816] font-normal">
+                      <h3 className="text-lg sm:text-xl font-serif text-[var(--c-ink-2)] font-normal">
                         {step.title}
                       </h3>
                     </div>
 
                     <div className="flex items-center gap-2">
-                      <span className="hidden sm:inline-flex items-center gap-1 text-xs text-[#68716D] bg-[#F7F8F6] px-2.5 py-1 rounded-full border border-black/5">
-                        <Clock className="h-3 w-3 text-[#246B5B]" />
+                      <span className="hidden sm:inline-flex items-center gap-1 text-xs text-[var(--c-ink-text-2)] bg-[var(--c-paper)] px-2.5 py-1 rounded-full border border-black/5">
+                        <Clock className="h-3 w-3 text-[var(--c-green-2)]" />
                         {step.duration}
                       </span>
                       {isSelected ? (
-                        <ChevronUp className="h-4 w-4 text-[#246B5B]" />
+                        <ChevronUp className="h-4 w-4 text-[var(--c-green-2)]" />
                       ) : (
-                        <ChevronDown className="h-4 w-4 text-[#68716D]" />
+                        <ChevronDown className="h-4 w-4 text-[var(--c-ink-text-2)]" />
                       )}
                     </div>
                   </div>
 
                   {isSelected && (
                     <div className="mt-4 pt-4 border-t border-black/5 transition-all">
-                      <p className="text-sm sm:text-base text-[#68716D] font-light leading-relaxed mb-4">
+                      <p className="text-sm sm:text-base text-[var(--c-ink-text-2)] font-light leading-relaxed mb-4">
                         {step.description}
                       </p>
                       <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
                         {step.details.map((detail, i) => (
                           <div
                             key={i}
-                            className="flex items-center gap-2 text-xs text-[#111816] bg-[#F7F8F6] p-2 rounded-lg"
+                            className="flex items-center gap-2 text-xs text-[var(--c-ink-2)] bg-[var(--c-paper)] p-2 rounded-lg"
                           >
-                            <CheckCircle2 className="h-3.5 w-3.5 text-[#246B5B] shrink-0" />
+                            <CheckCircle2 className="h-3.5 w-3.5 text-[var(--c-green-2)] shrink-0" />
                             <span>{detail}</span>
                           </div>
                         ))}
@@ -92,10 +92,10 @@ export function TreatmentProcess() {
           <div className="lg:col-span-5 sticky top-28">
             <div className="rounded-2xl bg-[#153F37] text-white p-8 sm:p-10 shadow-xl border border-white/10 relative overflow-hidden">
               {/* Subtle background glow */}
-              <div className="absolute top-0 right-0 w-64 h-64 bg-[#246B5B]/30 rounded-full blur-3xl pointer-events-none" />
+              <div className="absolute top-0 right-0 w-64 h-64 bg-[var(--c-green-2)]/30 rounded-full blur-3xl pointer-events-none" />
 
               <div className="relative z-10">
-                <div className="text-xs font-mono text-[#DCEDE7] uppercase tracking-widest mb-2">
+                <div className="text-xs font-mono text-[var(--c-green-soft)] uppercase tracking-widest mb-2">
                   ACTIVE PHASE SUMMARY
                 </div>
                 <div className="text-4xl font-serif text-white mb-2">
@@ -110,7 +110,7 @@ export function TreatmentProcess() {
                 </p>
 
                 <div className="rounded-xl bg-white/10 p-4 border border-white/10 text-xs space-y-2 mb-6">
-                  <div className="text-[#DCEDE7] font-semibold flex items-center gap-1.5">
+                  <div className="text-[var(--c-green-soft)] font-semibold flex items-center gap-1.5">
                     <Clock className="h-3.5 w-3.5" />
                     <span>Estimated Duration: {TREATMENT_PROCESS_STEPS[activeStep].duration}</span>
                   </div>
@@ -120,12 +120,12 @@ export function TreatmentProcess() {
                 </div>
 
                 <div className="space-y-2">
-                  <span className="text-[11px] font-mono uppercase text-[#DCEDE7] tracking-wider block">
+                  <span className="text-[11px] font-mono uppercase text-[var(--c-green-soft)] tracking-wider block">
                     Protocol Key Deliverables:
                   </span>
                   {TREATMENT_PROCESS_STEPS[activeStep].details.map((d, idx) => (
                     <div key={idx} className="flex items-center gap-2 text-xs text-white/90">
-                      <span className="h-1.5 w-1.5 rounded-full bg-[#DCEDE7]" />
+                      <span className="h-1.5 w-1.5 rounded-full bg-[var(--c-green-soft)]" />
                       <span>{d}</span>
                     </div>
                   ))}

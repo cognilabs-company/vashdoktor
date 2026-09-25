@@ -29,20 +29,20 @@ interface Props {
  * pointer labels, one line of copy and three numbers. */
 export function ImplantHero({ onOpenConsultation, onOpen3DViewer }: Props) {
   return (
-    <section className="relative w-full overflow-hidden bg-[#0a141d]">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_55%_60%_at_72%_55%,#10303c_0%,#0a141d_65%)]" />
+    <section className="relative w-full overflow-hidden bg-[var(--c-bg)]">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_55%_60%_at_72%_55%,#10303c_0%,var(--c-bg)_65%)]" />
       <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:4.5rem_4.5rem] [mask-image:radial-gradient(ellipse_at_70%_50%,black_20%,transparent_70%)]" />
 
       <div className="relative mx-auto grid min-h-[88svh] max-w-[1440px] items-center gap-10 px-6 pb-16 pt-32 sm:px-8 lg:grid-cols-12 lg:gap-6 lg:px-12 lg:pb-20 lg:pt-36">
         {/* copy */}
         <div className="order-2 lg:order-1 lg:col-span-5">
           <motion.div
-            className="inline-flex items-center gap-3 text-[13px] text-[#a9d8e4]"
+            className="inline-flex items-center gap-3 text-[13px] text-[var(--c-accent-2)]"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
           >
-            <span className="h-px w-7 bg-[#a9d8e4]/70" />
+            <span className="h-px w-7 bg-[var(--c-accent-2)]/70" />
             Implantatsiya
           </motion.div>
 
@@ -83,16 +83,16 @@ export function ImplantHero({ onOpenConsultation, onOpen3DViewer }: Props) {
           >
             <button
               onClick={onOpenConsultation}
-              className="group inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-medium text-[#0a141d] transition-colors hover:bg-[#e8f2f4]"
+              className="group inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-medium text-[var(--c-bg)] transition-colors hover:bg-[var(--c-mist)]"
             >
               Konsultatsiya
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </button>
             <button
               onClick={onOpen3DViewer}
-              className="group inline-flex items-center gap-1.5 text-sm text-[#c6dbe1] underline decoration-white/25 underline-offset-[6px] transition-colors hover:text-white hover:decoration-[#8fc7d4]"
+              className="group inline-flex items-center gap-1.5 text-sm text-[var(--c-text)] underline decoration-white/25 underline-offset-[6px] transition-colors hover:text-white hover:decoration-[var(--c-accent)]"
             >
-              <Rotate3d className="h-4 w-4 text-[#8fc7d4]" />
+              <Rotate3d className="h-4 w-4 text-[var(--c-accent)]" />
               3D model
             </button>
           </motion.div>
@@ -106,7 +106,7 @@ export function ImplantHero({ onOpenConsultation, onOpen3DViewer }: Props) {
             {FACTS.map((f) => (
               <div key={f.label} className="px-6 first:pl-0 last:pr-0">
                 <div className="whitespace-nowrap font-serif text-2xl font-medium leading-none text-white sm:text-3xl">{f.value}</div>
-                <div className="mt-1.5 text-[12px] text-[#8fb0ba]">{f.label}</div>
+                <div className="mt-1.5 text-[12px] text-[var(--c-text-3)]">{f.label}</div>
               </div>
             ))}
           </motion.div>
@@ -119,7 +119,7 @@ export function ImplantHero({ onOpenConsultation, onOpen3DViewer }: Props) {
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ delay: 0.3, duration: 1, ease: [0.22, 0.61, 0.36, 1] }}
         >
-          <div className="pointer-events-none absolute left-1/2 top-1/2 h-[80%] w-[80%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#8fc7d4]/12 blur-[100px]" />
+          <div className="pointer-events-none absolute left-1/2 top-1/2 h-[80%] w-[80%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[var(--c-accent)]/12 blur-[100px]" />
           <div className="pointer-events-none absolute left-1/2 top-[58%] h-[46%] w-[70%] -translate-x-1/2 rounded-[100%] bg-[#07111a]/70 blur-[40px]" />
           <div className="implant-float relative">
             <img
@@ -138,9 +138,9 @@ export function ImplantHero({ onOpenConsultation, onOpen3DViewer }: Props) {
                 animate={{ opacity: 1 }}
                 transition={{ delay: 1.3, duration: 0.6 }}
               >
-                <span className="h-2.5 w-2.5 rounded-full bg-[#8fc7d4] ring-4 ring-[#8fc7d4]/20" />
-                <span className="h-px w-10 bg-[#8fc7d4]/60" />
-                <span className="whitespace-nowrap rounded-full bg-[#0a141d]/80 px-3 py-1 text-[12px] text-[#dbe8ec] ring-1 ring-white/10">
+                <span className="h-2.5 w-2.5 rounded-full bg-[var(--c-accent)] ring-4 ring-[var(--c-accent)]/20" />
+                <span className="h-px w-10 bg-[var(--c-accent)]/60" />
+                <span className="whitespace-nowrap rounded-full bg-[var(--c-bg)]/80 px-3 py-1 text-[12px] text-[var(--c-mist-2)] ring-1 ring-white/10">
                   {l.text}
                 </span>
               </motion.div>

@@ -46,14 +46,14 @@ export function ServiceCatalog({ filter, onFilter, onOpenService }: Props) {
                 <button
                   key={t.key}
                   onClick={() => onFilter(t.key)}
-                  className={`relative pb-3 text-[14px] transition-colors ${active ? 'text-white' : 'text-[#7f9aa4] hover:text-[#c6dbe1]'}`}
+                  className={`relative pb-3 text-[14px] transition-colors ${active ? 'text-white' : 'text-[var(--c-text-4)] hover:text-[var(--c-text)]'}`}
                 >
                   {t.label}
-                  <sup className="ml-1 font-serif text-[11px] text-[#5c7580]">{t.count}</sup>
+                  <sup className="ml-1 font-serif text-[11px] text-[var(--c-text-5)]">{t.count}</sup>
                   {active && (
                     <motion.span
                       layoutId="catalog-underline"
-                      className="absolute inset-x-0 -bottom-px h-px bg-[#8fc7d4]"
+                      className="absolute inset-x-0 -bottom-px h-px bg-[var(--c-accent)]"
                       transition={{ type: 'spring', stiffness: 420, damping: 34 }}
                     />
                   )}
@@ -80,22 +80,22 @@ export function ServiceCatalog({ filter, onFilter, onOpenService }: Props) {
                   onClick={() => onOpenService(s)}
                   className="group grid w-full grid-cols-[2.5rem_minmax(0,1fr)_1.5rem] items-baseline gap-x-4 py-5 text-left transition-colors lg:grid-cols-[2.5rem_minmax(0,1.1fr)_minmax(0,1.6fr)_11rem_1.5rem]"
                 >
-                  <span className="font-serif text-[13px] text-[#5c7580]">{s.eyebrow}</span>
-                  <motion.span layoutId={`service-title-${s.slug}`} className="font-serif text-[17px] font-medium leading-snug text-white transition-colors group-hover:text-[#8fc7d4] sm:text-[19px]">
+                  <span className="font-serif text-[13px] text-[var(--c-text-5)]">{s.eyebrow}</span>
+                  <motion.span layoutId={`service-title-${s.slug}`} className="font-serif text-[17px] font-medium leading-snug text-white transition-colors group-hover:text-[var(--c-accent)] sm:text-[19px]">
                     {s.title}
                   </motion.span>
-                  <span className="col-span-full col-start-2 mt-1 text-[13px] leading-snug text-[#8fb0ba] lg:col-span-1 lg:col-start-auto lg:mt-0 lg:text-[14px]">
+                  <span className="col-span-full col-start-2 mt-1 text-[13px] leading-snug text-[var(--c-text-3)] lg:col-span-1 lg:col-start-auto lg:mt-0 lg:text-[14px]">
                     {s.short}
                   </span>
-                  <span className="hidden text-[12px] text-[#5c7580] lg:block">{categoryLabel(s.category)}</span>
-                  <ArrowUpRight className="col-start-3 row-start-1 h-4 w-4 self-center text-[#5c7580] transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-[#8fc7d4] lg:col-start-5" />
+                  <span className="hidden text-[12px] text-[var(--c-text-5)] lg:block">{categoryLabel(s.category)}</span>
+                  <ArrowUpRight className="col-start-3 row-start-1 h-4 w-4 self-center text-[var(--c-text-5)] transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-[var(--c-accent)] lg:col-start-5" />
                 </motion.button>
               </motion.li>
             ))}
           </AnimatePresence>
         </motion.ol>
 
-        <p className="mt-6 text-[12px] text-[#5c7580]">* Narx — ko‘rikdan keyin, davolash rejasi bilan birga.</p>
+        <p className="mt-6 text-[12px] text-[var(--c-text-5)]">* Narx — ko‘rikdan keyin, davolash rejasi bilan birga.</p>
       </div>
     </section>
   );

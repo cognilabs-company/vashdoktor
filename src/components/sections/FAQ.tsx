@@ -21,7 +21,7 @@ export function FAQ({
   title = (
     <>
       Bilishingiz kerak bo&#39;lgan <br />
-      <span className="font-medium text-[#8fc7d4]">hamma narsa.</span>
+      <span className="font-medium text-[var(--c-accent)]">hamma narsa.</span>
     </>
   ),
   subtitle = 'Klinik faktlar, davolash muddati va biologik integratsiya tafsilotlari tibbiy shaffoflik bilan tushuntirilgan.',
@@ -45,12 +45,12 @@ export function FAQ({
               {title}
             </h2>
 
-            <p className="mt-6 text-base sm:text-lg text-[#a7c2cb] font-light leading-relaxed max-w-md">{subtitle}</p>
+            <p className="mt-6 text-base sm:text-lg text-[var(--c-text-2)] font-light leading-relaxed max-w-md">{subtitle}</p>
 
             {aside && (
-              <div className="mt-8 p-6 rounded-2xl bg-white/[0.05] border border-white/10 text-xs text-[#7f9aa4] space-y-2">
+              <div className="mt-8 p-6 rounded-2xl bg-white/[0.05] border border-white/10 text-xs text-[var(--c-text-4)] space-y-2">
                 <div className="font-semibold text-white flex items-center gap-1.5">
-                  <HelpCircle className="h-4 w-4 text-[#8fc7d4]" />
+                  <HelpCircle className="h-4 w-4 text-[var(--c-accent)]" />
                   <span>{aside.title}</span>
                 </div>
                 <p>{aside.text}</p>
@@ -71,19 +71,19 @@ export function FAQ({
                   <button
                     onClick={() => toggle(idx)}
                     className={`w-full flex items-center justify-between p-6 sm:p-7 text-left cursor-pointer select-none transition-colors ${
-                      isOpen ? 'bg-[#8fc7d4]/[0.06]' : 'hover:bg-white/[0.03]'
+                      isOpen ? 'bg-[var(--c-accent)]/[0.06]' : 'hover:bg-white/[0.03]'
                     }`}
                   >
                     <span
                       className={`text-base sm:text-lg font-serif pr-4 transition-colors ${
-                        isOpen ? 'text-[#8fc7d4]' : 'text-white'
+                        isOpen ? 'text-[var(--c-accent)]' : 'text-white'
                       }`}
                     >
                       {item.question}
                     </span>
                     <div
                       className={`flex h-8 w-8 items-center justify-center rounded-full shrink-0 transition-all duration-300 ${
-                        isOpen ? 'bg-[#8fc7d4] text-[#0a141d] rotate-90' : 'bg-white/10 text-[#8fc7d4]'
+                        isOpen ? 'bg-[var(--c-accent)] text-[var(--c-bg)] rotate-90' : 'bg-white/10 text-[var(--c-accent)]'
                       }`}
                     >
                       {isOpen ? <Minus className="h-4 w-4" /> : <Plus className="h-4 w-4" />}
@@ -99,7 +99,7 @@ export function FAQ({
                     }}
                   >
                     <div className="overflow-hidden">
-                      <div className="px-6 pb-6 sm:px-7 sm:pb-7 text-sm sm:text-base text-[#a7c2cb] font-light leading-relaxed border-t border-white/10 pt-4">
+                      <div className="px-6 pb-6 sm:px-7 sm:pb-7 text-sm sm:text-base text-[var(--c-text-2)] font-light leading-relaxed border-t border-white/10 pt-4">
                         {item.answer}
                       </div>
                     </div>

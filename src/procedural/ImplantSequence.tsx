@@ -119,8 +119,8 @@ export function ImplantSequence({ getProgress, getExit, className = '' }: Props)
                   }`}
                 >
                   <div className={`flex items-center gap-2 ${a.side === 'left' ? 'justify-end' : ''}`}>
-                    <span className="h-px w-12 bg-[#9fd4e0]/70" />
-                    <span className="h-1.5 w-1.5 rounded-full bg-[#a9d8e4] ring-4 ring-[#03101c]/40" />
+                    <span className="h-px w-12 bg-[var(--c-accent-3)]/70" />
+                    <span className="h-1.5 w-1.5 rounded-full bg-[var(--c-accent-2)] ring-4 ring-[#03101c]/40" />
                   </div>
                   <div className="mt-2">
                     <div className="text-[11px] font-semibold uppercase tracking-[0.1em] text-white">{a.title}</div>

@@ -17,7 +17,7 @@ interface Props {
 /** One photo, one line, two buttons, two numbers. Everything else is below. */
 export function ServicesHero({ onOpenConsultation }: Props) {
   return (
-    <section className="relative flex min-h-[82svh] w-full items-end overflow-hidden bg-[#070f17] text-white">
+    <section className="relative flex min-h-[82svh] w-full items-end overflow-hidden bg-[var(--c-bg-deep)] text-white">
       <img
         src={CLINIC_IMAGES.hero}
         alt="Klinika kabineti"
@@ -35,12 +35,12 @@ export function ServicesHero({ onOpenConsultation }: Props) {
         <div className="flex flex-wrap items-end justify-between gap-x-10 gap-y-8">
           <div className="max-w-3xl">
             <motion.div
-              className="inline-flex items-center gap-3 text-[13px] text-[#a9d8e4]"
+              className="inline-flex items-center gap-3 text-[13px] text-[var(--c-accent-2)]"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5 }}
             >
-              <span className="h-px w-7 bg-[#a9d8e4]/70" />
+              <span className="h-px w-7 bg-[var(--c-accent-2)]/70" />
               Xizmatlar
             </motion.div>
 
@@ -72,14 +72,14 @@ export function ServicesHero({ onOpenConsultation }: Props) {
             >
               <button
                 onClick={onOpenConsultation}
-                className="group inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-medium text-[#0a141d] transition-colors hover:bg-[#e8f2f4]"
+                className="group inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-medium text-[var(--c-bg)] transition-colors hover:bg-[var(--c-mist)]"
               >
                 Ko‘rikka yozilish
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               </button>
               <button
                 onClick={() => scrollToEl('#catalog')}
-                className="group inline-flex items-center gap-1.5 text-sm text-[#c6dbe1] underline decoration-white/25 underline-offset-[6px] transition-colors hover:text-white hover:decoration-[#8fc7d4]"
+                className="group inline-flex items-center gap-1.5 text-sm text-[var(--c-text)] underline decoration-white/25 underline-offset-[6px] transition-colors hover:text-white hover:decoration-[var(--c-accent)]"
               >
                 Ro‘yxat
                 <ArrowDown className="h-3.5 w-3.5 transition-transform group-hover:translate-y-0.5" />
@@ -99,7 +99,7 @@ export function ServicesHero({ onOpenConsultation }: Props) {
             ].map((f) => (
               <div key={f.label} className="px-6 first:pl-0 last:pr-0">
                 <div className="font-serif text-3xl font-medium leading-none text-white">{f.value}</div>
-                <div className="mt-1.5 text-[12px] text-[#c6dbe1]">{f.label}</div>
+                <div className="mt-1.5 text-[12px] text-[var(--c-text)]">{f.label}</div>
               </div>
             ))}
           </motion.div>

@@ -38,7 +38,7 @@ export function ConsultationModal({ isOpen, onClose }: ConsultationModalProps) {
         particleCount: 80,
         spread: 60,
         origin: { y: 0.6 },
-        colors: ['#246B5B', '#DCEDE7', '#153F37', '#CBD3D8'],
+        colors: ['var(--c-green-2)', 'var(--c-green-soft)', '#153F37', '#CBD3D8'],
       });
     }, 600);
   };
@@ -55,8 +55,8 @@ export function ConsultationModal({ isOpen, onClose }: ConsultationModalProps) {
         <div className="flex items-center justify-between border-b border-white/10 px-6 py-5 bg-white/[0.04]">
           <div>
             <div className="flex items-center gap-2">
-              <span className="h-2 w-2 rounded-full bg-[#8fc7d4]" />
-              <span className="text-[11px] font-semibold tracking-wider text-[#8fc7d4] uppercase">
+              <span className="h-2 w-2 rounded-full bg-[var(--c-accent)]" />
+              <span className="text-[11px] font-semibold tracking-wider text-[var(--c-accent)] uppercase">
                 QABULGA YOZILISH
               </span>
             </div>
@@ -76,19 +76,19 @@ export function ConsultationModal({ isOpen, onClose }: ConsultationModalProps) {
         <div className="p-6 sm:p-8">
           {isSubmitted ? (
             <div className="flex flex-col items-center text-center py-6">
-              <div className="flex h-16 w-16 items-center justify-center rounded-full bg-[#8fc7d4]/10 text-[#8fc7d4] mb-4">
+              <div className="flex h-16 w-16 items-center justify-center rounded-full bg-[var(--c-accent)]/10 text-[var(--c-accent)] mb-4">
                 <CheckCircle2 className="h-8 w-8" />
               </div>
               <h4 className="text-xl font-serif text-white">
                 So&#39;rovingiz qabul qilindi
               </h4>
-              <p className="mt-2 text-sm text-[#a7c2cb] max-w-md leading-relaxed">
+              <p className="mt-2 text-sm text-[var(--c-text-2)] max-w-md leading-relaxed">
                 Rahmat, <strong className="text-white">{formData.fullName}</strong>. Administrator ish vaqtida 1–2 soat ichida <strong className="text-white">{formData.phone}</strong> raqamiga qo&#39;ng&#39;iroq qilib, qulay vaqtni kelishib oladi.
               </p>
 
-              <div className="mt-6 w-full rounded-xl bg-white/[0.06] p-4 text-left border border-white/10 text-xs text-[#a7c2cb] space-y-1.5">
+              <div className="mt-6 w-full rounded-xl bg-white/[0.06] p-4 text-left border border-white/10 text-xs text-[var(--c-text-2)] space-y-1.5">
                 <div className="font-semibold text-white flex items-center gap-1.5 mb-2">
-                  <ShieldCheck className="h-3.5 w-3.5 text-[#8fc7d4]" />
+                  <ShieldCheck className="h-3.5 w-3.5 text-[var(--c-accent)]" />
                   Birinchi tashrifda:
                 </div>
                 <div>• Shifokor ko&#39;rigi va kerak bo&#39;lsa raqamli rentgen</div>
@@ -106,7 +106,7 @@ export function ConsultationModal({ isOpen, onClose }: ConsultationModalProps) {
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-medium text-[#a7c2cb] mb-1.5">
+                  <label className="block text-xs font-medium text-[var(--c-text-2)] mb-1.5">
                     To&#39;liq ism *
                   </label>
                   <input
@@ -115,12 +115,12 @@ export function ConsultationModal({ isOpen, onClose }: ConsultationModalProps) {
                     placeholder="masalan, Aziz Karimov"
                     value={formData.fullName}
                     onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-                    className="w-full rounded-lg border border-white/12 bg-white/[0.06] px-3.5 py-2.5 text-sm text-white placeholder-[#7f9aa4] focus:border-[#8fc7d4] focus:bg-white/[0.09] focus:outline-none transition-colors"
+                    className="w-full rounded-lg border border-white/12 bg-white/[0.06] px-3.5 py-2.5 text-sm text-white placeholder-[var(--c-text-4)] focus:border-[var(--c-accent)] focus:bg-white/[0.09] focus:outline-none transition-colors"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-medium text-[#a7c2cb] mb-1.5">
+                  <label className="block text-xs font-medium text-[var(--c-text-2)] mb-1.5">
                     Telefon raqami *
                   </label>
                   <input
@@ -129,14 +129,14 @@ export function ConsultationModal({ isOpen, onClose }: ConsultationModalProps) {
                     placeholder="+998 90 000 00 00"
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    className="w-full rounded-lg border border-white/12 bg-white/[0.06] px-3.5 py-2.5 text-sm text-white placeholder-[#7f9aa4] focus:border-[#8fc7d4] focus:bg-white/[0.09] focus:outline-none transition-colors"
+                    className="w-full rounded-lg border border-white/12 bg-white/[0.06] px-3.5 py-2.5 text-sm text-white placeholder-[var(--c-text-4)] focus:border-[var(--c-accent)] focus:bg-white/[0.09] focus:outline-none transition-colors"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-medium text-[#a7c2cb] mb-1.5">
+                  <label className="block text-xs font-medium text-[var(--c-text-2)] mb-1.5">
                     Email manzil
                   </label>
                   <input
@@ -144,18 +144,18 @@ export function ConsultationModal({ isOpen, onClose }: ConsultationModalProps) {
                     placeholder="name@domain.com"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full rounded-lg border border-white/12 bg-white/[0.06] px-3.5 py-2.5 text-sm text-white placeholder-[#7f9aa4] focus:border-[#8fc7d4] focus:bg-white/[0.09] focus:outline-none transition-colors"
+                    className="w-full rounded-lg border border-white/12 bg-white/[0.06] px-3.5 py-2.5 text-sm text-white placeholder-[var(--c-text-4)] focus:border-[var(--c-accent)] focus:bg-white/[0.09] focus:outline-none transition-colors"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-medium text-[#a7c2cb] mb-1.5">
+                  <label className="block text-xs font-medium text-[var(--c-text-2)] mb-1.5">
                     Nima bo‘yicha?
                   </label>
                   <select
                     value={formData.treatmentType}
                     onChange={(e) => setFormData({ ...formData, treatmentType: e.target.value })}
-                    className="w-full rounded-lg border border-white/12 bg-white/[0.06] px-3.5 py-2.5 text-sm text-white placeholder-[#7f9aa4] focus:border-[#8fc7d4] focus:bg-white/[0.09] focus:outline-none transition-colors"
+                    className="w-full rounded-lg border border-white/12 bg-white/[0.06] px-3.5 py-2.5 text-sm text-white placeholder-[var(--c-text-4)] focus:border-[var(--c-accent)] focus:bg-white/[0.09] focus:outline-none transition-colors"
                   >
                     <option value={UNSURE}>{UNSURE}</option>
                     {SERVICES.map((s) => (
@@ -169,25 +169,25 @@ export function ConsultationModal({ isOpen, onClose }: ConsultationModalProps) {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-medium text-[#a7c2cb] mb-1.5">
+                  <label className="block text-xs font-medium text-[var(--c-text-2)] mb-1.5">
                     Afzal sana
                   </label>
                   <input
                     type="date"
                     value={formData.preferredDate}
                     onChange={(e) => setFormData({ ...formData, preferredDate: e.target.value })}
-                    className="w-full rounded-lg border border-white/12 bg-white/[0.06] px-3.5 py-2.5 text-sm text-white placeholder-[#7f9aa4] focus:border-[#8fc7d4] focus:bg-white/[0.09] focus:outline-none transition-colors"
+                    className="w-full rounded-lg border border-white/12 bg-white/[0.06] px-3.5 py-2.5 text-sm text-white placeholder-[var(--c-text-4)] focus:border-[var(--c-accent)] focus:bg-white/[0.09] focus:outline-none transition-colors"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-medium text-[#a7c2cb] mb-1.5">
+                  <label className="block text-xs font-medium text-[var(--c-text-2)] mb-1.5">
                     Vaqt afzalligi
                   </label>
                   <select
                     value={formData.preferredTime}
                     onChange={(e) => setFormData({ ...formData, preferredTime: e.target.value })}
-                    className="w-full rounded-lg border border-white/12 bg-white/[0.06] px-3.5 py-2.5 text-sm text-white placeholder-[#7f9aa4] focus:border-[#8fc7d4] focus:bg-white/[0.09] focus:outline-none transition-colors"
+                    className="w-full rounded-lg border border-white/12 bg-white/[0.06] px-3.5 py-2.5 text-sm text-white placeholder-[var(--c-text-4)] focus:border-[var(--c-accent)] focus:bg-white/[0.09] focus:outline-none transition-colors"
                   >
                     <option value="Ertalab (09:00 - 12:00)">Ertalab (09:00 - 12:00)</option>
                     <option value="Kunduzi (12:00 - 16:00)">Kunduzi (12:00 - 16:00)</option>
@@ -197,7 +197,7 @@ export function ConsultationModal({ isOpen, onClose }: ConsultationModalProps) {
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-[#a7c2cb] mb-1.5">
+                <label className="block text-xs font-medium text-[var(--c-text-2)] mb-1.5">
                   Shikoyat yoki savol (ixtiyoriy)
                 </label>
                 <textarea
@@ -205,7 +205,7 @@ export function ConsultationModal({ isOpen, onClose }: ConsultationModalProps) {
                   placeholder="Masalan: pastki o'ng tish 3 kundan beri og'riyapti..."
                   value={formData.notes}
                   onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
-                  className="w-full rounded-lg border border-white/12 bg-white/[0.06] px-3.5 py-2 text-sm text-white placeholder-[#7f9aa4] focus:border-[#8fc7d4] focus:bg-white/[0.09] focus:outline-none transition-colors resize-none"
+                  className="w-full rounded-lg border border-white/12 bg-white/[0.06] px-3.5 py-2 text-sm text-white placeholder-[var(--c-text-4)] focus:border-[var(--c-accent)] focus:bg-white/[0.09] focus:outline-none transition-colors resize-none"
                 />
               </div>
 
@@ -222,7 +222,7 @@ export function ConsultationModal({ isOpen, onClose }: ConsultationModalProps) {
                 </Button>
               </div>
 
-              <p className="text-[11px] text-center text-[#7f9aa4]">
+              <p className="text-[11px] text-center text-[var(--c-text-4)]">
                 Ma&#39;lumotlaringiz faqat qabulni kelishish uchun ishlatiladi
               </p>
             </form>

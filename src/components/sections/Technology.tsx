@@ -33,7 +33,7 @@ export function Technology() {
   ];
 
   return (
-    <section id="technology" className="py-28 sm:py-36 bg-[#0a141d] text-[#a7c2cb] border-t border-white/10 overflow-hidden">
+    <section id="technology" className="py-28 sm:py-36 bg-[var(--c-bg)] text-[var(--c-text-2)] border-t border-white/10 overflow-hidden">
       <div className="max-w-[1440px] mx-auto px-6 sm:px-8 lg:px-12">
         {/* Asymmetrical Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
@@ -43,24 +43,24 @@ export function Technology() {
 
             <h2 className="mt-6 text-3xl sm:text-4xl lg:text-[2.5rem] font-medium font-serif tracking-tight text-white leading-[1.08]">
               Aniqlik davolashdan <br />
-              <span className="font-medium text-[#8fc7d4]">oldin boshlanadi.</span>
+              <span className="font-medium text-[var(--c-accent)]">oldin boshlanadi.</span>
             </h2>
 
-            <p className="mt-6 text-base sm:text-lg text-[#a7c2cb] font-light leading-relaxed max-w-md">
+            <p className="mt-6 text-base sm:text-lg text-[var(--c-text-2)] font-light leading-relaxed max-w-md">
               Diagnostika va raqamli rejalashtirish davolashni klinik muolaja boshlanishidan oldin to&#39;liq belgilash imkonini beradi.
             </p>
 
-            <div className="mt-8 pt-8 border-t border-white/10 w-full space-y-3 text-xs text-[#7f9aa4]">
+            <div className="mt-8 pt-8 border-t border-white/10 w-full space-y-3 text-xs text-[var(--c-text-4)]">
               <div className="flex items-center gap-2">
-                <span className="h-1.5 w-1.5 rounded-full bg-[#8fc7d4]" />
+                <span className="h-1.5 w-1.5 rounded-full bg-[var(--c-accent)]" />
                 <span>Jismoniy qolip olish noqulayligisiz</span>
               </div>
               <div className="flex items-center gap-2">
-                <span className="h-1.5 w-1.5 rounded-full bg-[#8fc7d4]" />
+                <span className="h-1.5 w-1.5 rounded-full bg-[var(--c-accent)]" />
                 <span>Jarrohlik muddati sezilarli qisqargan</span>
               </div>
               <div className="flex items-center gap-2">
-                <span className="h-1.5 w-1.5 rounded-full bg-[#8fc7d4]" />
+                <span className="h-1.5 w-1.5 rounded-full bg-[var(--c-accent)]" />
                 <span>Bashoratli, biologik osseointegratsiya</span>
               </div>
             </div>
@@ -78,23 +78,23 @@ export function Technology() {
                   className="group relative pb-10 border-b border-white/10 transition-colors"
                 >
                   <div className="flex items-baseline justify-between mb-3">
-                    <span className="text-xs font-mono tracking-widest text-[#8fc7d4]">
+                    <span className="text-xs font-mono tracking-widest text-[var(--c-accent)]">
                       {feature.number} / JARAYON
                     </span>
-                    <span className="text-xs text-[#7f9aa4] font-mono">
+                    <span className="text-xs text-[var(--c-text-4)] font-mono">
                       BOSQICH 0{idx + 1}
                     </span>
                   </div>
 
-                  <h3 className="text-2xl sm:text-3xl font-serif text-white group-hover:text-[#8fc7d4] transition-colors mb-2">
+                  <h3 className="text-2xl sm:text-3xl font-serif text-white group-hover:text-[var(--c-accent)] transition-colors mb-2">
                     {feature.title}
                   </h3>
 
-                  <p className="text-sm font-medium text-[#8fc7d4] mb-4">
+                  <p className="text-sm font-medium text-[var(--c-accent)] mb-4">
                     {feature.subtitle}
                   </p>
 
-                  <p className="text-sm sm:text-base text-[#a7c2cb] font-light leading-relaxed mb-6">
+                  <p className="text-sm sm:text-base text-[var(--c-text-2)] font-light leading-relaxed mb-6">
                     {feature.description}
                   </p>
 
@@ -103,7 +103,7 @@ export function Technology() {
                     {feature.specs.map((spec, i) => (
                       <span
                         key={i}
-                        className="px-3 py-1 rounded-full bg-[#8fc7d4]/10 border border-[#8fc7d4]/20 text-xs text-[#8fc7d4] font-mono"
+                        className="px-3 py-1 rounded-full bg-[var(--c-accent)]/10 border border-[var(--c-accent)]/20 text-xs text-[var(--c-accent)] font-mono"
                       >
                         {spec}
                       </span>
@@ -112,7 +112,7 @@ export function Technology() {
 
                   {/* Active accent line indicator */}
                   <div
-                    className={`absolute bottom-0 left-0 h-[2px] bg-[#8fc7d4] transition-all duration-300 ${
+                    className={`absolute bottom-0 left-0 h-[2px] bg-[var(--c-accent)] transition-all duration-300 ${
                       isCurrent ? 'w-full' : 'w-0 group-hover:w-24'
                     }`}
                   />

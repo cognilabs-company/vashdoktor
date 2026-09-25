@@ -32,12 +32,12 @@ export function Button({
 
   const variantStyles = {
     primary:
-      'overflow-hidden bg-[#173D35] hover:bg-[#101715] text-white shadow-xs hover:shadow-lg border border-black/5',
+      'overflow-hidden bg-[var(--c-green-deep)] hover:bg-[var(--c-ink)] text-white shadow-xs hover:shadow-lg border border-black/5',
     secondary:
-      'bg-transparent text-[#101715] hover:text-[#286A5B] p-0 min-h-0 underline-offset-4 hover:underline',
+      'bg-transparent text-[var(--c-ink)] hover:text-[var(--c-green)] p-0 min-h-0 underline-offset-4 hover:underline',
     outline:
-      'bg-transparent border border-black/15 hover:border-[#173D35] text-[#101715] hover:bg-black/5',
-    white: 'overflow-hidden bg-white hover:bg-[#F5F7F4] text-[#101715] shadow-sm',
+      'bg-transparent border border-black/15 hover:border-[var(--c-green-deep)] text-[var(--c-ink)] hover:bg-black/5',
+    white: 'overflow-hidden bg-white hover:bg-[var(--c-paper-2)] text-[var(--c-ink)] shadow-sm',
   };
 
   const widthStyle = fullWidth ? 'w-full' : '';

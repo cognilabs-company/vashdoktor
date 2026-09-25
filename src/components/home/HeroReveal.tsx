@@ -110,8 +110,8 @@ function RevealStage({ onOpenConsultation }: Props) {
         <Hero onOpenConsultation={onOpenConsultation} />
 
         {/* the opening — above the hero's own dark dissolve (z-30), below the navbar (z-40) */}
-        <div ref={panelRef} className="absolute inset-0 z-[35] bg-[#0a141d] will-change-[clip-path]" style={{ clipPath: CLOSED }}>
-          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_50%_45%,#0e2536,transparent_70%)]" />
+        <div ref={panelRef} className="absolute inset-0 z-[35] bg-[var(--c-bg)] will-change-[clip-path]" style={{ clipPath: CLOSED }}>
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_50%_45%,var(--c-backdrop),transparent_70%)]" />
           <HomeServices staged />
         </div>
       </div>

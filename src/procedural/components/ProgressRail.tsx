@@ -30,14 +30,14 @@ export function ProgressRail({ progressRef, containerRef }: Props) {
       <div className="relative h-56 w-px bg-white/15">
         <div
           ref={progressRef}
-          className="absolute inset-x-0 top-0 h-full origin-top bg-[#a9d8e4]"
+          className="absolute inset-x-0 top-0 h-full origin-top bg-[var(--c-accent-2)]"
           style={{ transform: 'scaleY(0)' }}
         />
         {SECTIONS.map((s, i) => (
           <span
             key={s.id}
             className={`absolute -left-[3px] h-[7px] w-[7px] rounded-full transition-all duration-300 ${
-              i <= active ? 'bg-[#a9d8e4] scale-100' : 'bg-white/25 scale-90'
+              i <= active ? 'bg-[var(--c-accent-2)] scale-100' : 'bg-white/25 scale-90'
             }`}
             style={{ top: `${(i / (SECTIONS.length - 1)) * 100}%` }}
           />

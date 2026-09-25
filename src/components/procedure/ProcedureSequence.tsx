@@ -155,7 +155,7 @@ export function ProcedureSequence() {
       if (active === lastActive) return;
       lastActive = active;
       stepsRef.current.forEach((el, i) => {
-        if (el) el.style.color = i === active ? '#a9d8e4' : '#5c7580';
+        if (el) el.style.color = i === active ? 'var(--c-accent-2)' : 'var(--c-text-5)';
       });
     };
 
@@ -233,7 +233,7 @@ export function ProcedureSequence() {
     <section
       id="jarayon"
       ref={sectionRef}
-      className="relative w-full bg-[#0a141d] h-[560vh] md:h-[600vh] lg:h-[760vh]"
+      className="relative w-full bg-[var(--c-bg)] h-[560vh] md:h-[600vh] lg:h-[760vh]"
     >
       <div
         ref={stageRef}
@@ -241,7 +241,7 @@ export function ProcedureSequence() {
         style={{ position: 'absolute', top: 0 }}
       >
         {/* LAYER 0 — background depth (CSS) */}
-        <div className="pointer-events-none absolute inset-0 z-0 bg-[radial-gradient(ellipse_at_50%_42%,#0e2536_0%,#0a141d_60%,#070f17_100%)]" />
+        <div className="pointer-events-none absolute inset-0 z-0 bg-[radial-gradient(ellipse_at_50%_42%,var(--c-backdrop)_0%,var(--c-bg)_60%,var(--c-bg-deep)_100%)]" />
 
         {/* LAYER 2 — two safe columns (never overlap): text | canvas.
             Mobile: stacked flex-col (canvas top 58vh, text below). */}
@@ -262,7 +262,7 @@ export function ProcedureSequence() {
         </div>
 
         {/* LAYER 2.5 — soft bottom scrim (mobile canvas→text blend + progress legibility) */}
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 z-[25] h-[46vh] bg-gradient-to-t from-[#0a141d] via-[#0a141d]/45 to-transparent md:h-[26vh]" />
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 z-[25] h-[46vh] bg-gradient-to-t from-[var(--c-bg)] via-[var(--c-bg)]/45 to-transparent md:h-[26vh]" />
 
         {/* LAYER 3 — eyebrow + progress (aligned to the same container) */}
         <div className="pointer-events-none absolute inset-0 z-30">
@@ -288,7 +288,7 @@ export function ProcedureSequence() {
 /** prefers-reduced-motion: three static representative frames + text, no scrub. */
 function ProcedureReduced() {
   return (
-    <section id="jarayon" className="relative w-full bg-[#0a141d] py-24 lg:py-32">
+    <section id="jarayon" className="relative w-full bg-[var(--c-bg)] py-24 lg:py-32">
       <div className="mx-auto max-w-[1440px] px-6 sm:px-8 lg:px-12">
         <div className="mb-14">
           <TechnicalBadge label="Har bir davolash — uch bosqich" variant="dark" />
@@ -300,7 +300,7 @@ function ProcedureReduced() {
         <div className="space-y-16">
           {PHASES.map((phase) => (
             <article key={phase.id} className="grid items-center gap-8 lg:grid-cols-2 lg:gap-14">
-              <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-[radial-gradient(ellipse_at_50%_45%,#0e2536,#0a141d)]">
+              <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-[radial-gradient(ellipse_at_50%_45%,var(--c-backdrop),var(--c-bg))]">
                 <img
                   src={getFrameSrc(phase.poster)}
                   alt={`${phase.title} bosqichi`}
@@ -313,7 +313,7 @@ function ProcedureReduced() {
                 <h3 className="mt-5 font-serif text-[clamp(2rem,4vw,3rem)] font-medium leading-[1.0] tracking-tight text-white">
                   {phase.title}
                 </h3>
-                <p className="mt-4 max-w-md text-[clamp(0.875rem,1.1vw,1.0625rem)] leading-[1.55] text-[#a7c2cb]">
+                <p className="mt-4 max-w-md text-[clamp(0.875rem,1.1vw,1.0625rem)] leading-[1.55] text-[var(--c-text-2)]">
                   {phase.body}
                 </p>
               </div>

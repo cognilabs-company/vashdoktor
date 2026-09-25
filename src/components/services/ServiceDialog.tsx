@@ -47,14 +47,14 @@ export function ServiceDialog({ service: s, morph = true, onClose, onOpenConsult
             <button
               onClick={onClose}
               aria-label="Yopish"
-              className="absolute right-4 top-4 z-10 flex h-9 w-9 items-center justify-center rounded-full text-[#a7c2cb] transition-colors hover:bg-white/[0.06] hover:text-white"
+              className="absolute right-4 top-4 z-10 flex h-9 w-9 items-center justify-center rounded-full text-[var(--c-text-2)] transition-colors hover:bg-white/[0.06] hover:text-white"
             >
               <X className="h-4 w-4" />
             </button>
 
             <div className="max-h-[86vh] overflow-y-auto px-6 pb-6 pt-7 sm:px-9 sm:pb-8 sm:pt-9">
-              <div className="flex items-baseline gap-3 text-[12px] text-[#7f9aa4]">
-                <span className="font-serif text-[#8fc7d4]">{s.eyebrow}</span>
+              <div className="flex items-baseline gap-3 text-[12px] text-[var(--c-text-4)]">
+                <span className="font-serif text-[var(--c-accent)]">{s.eyebrow}</span>
                 <span>·</span>
                 <span>{categoryLabel(s.category)}</span>
               </div>
@@ -62,7 +62,7 @@ export function ServiceDialog({ service: s, morph = true, onClose, onOpenConsult
                 {s.title}
               </motion.h3>
               <motion.p
-                className="mt-4 max-w-xl text-[15px] leading-relaxed text-[#c6dbe1]"
+                className="mt-4 max-w-xl text-[15px] leading-relaxed text-[var(--c-text)]"
                 initial={{ opacity: 0, y: 6 }}
                 animate={{ opacity: 1, y: 0, transition: { delay: 0.12 } }}
               >
@@ -81,8 +81,8 @@ export function ServiceDialog({ service: s, morph = true, onClose, onOpenConsult
                     variants={{ hidden: { opacity: 0, x: -6 }, show: { opacity: 1, x: 0 } }}
                     className="flex items-baseline gap-4 border-b border-white/10 py-3 text-[14px]"
                   >
-                    <dt className="w-6 shrink-0 font-serif text-[12px] text-[#5c7580]">{i + 1}</dt>
-                    <dd className="text-[#dbe8ec]">{p}</dd>
+                    <dt className="w-6 shrink-0 font-serif text-[12px] text-[var(--c-text-5)]">{i + 1}</dt>
+                    <dd className="text-[var(--c-mist-2)]">{p}</dd>
                   </motion.div>
                 ))}
               </motion.dl>
@@ -92,13 +92,13 @@ export function ServiceDialog({ service: s, morph = true, onClose, onOpenConsult
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1, transition: { delay: 0.28 } }}
               >
-                <p className="text-[13px] text-[#7f9aa4]">Narx va muddat — ko‘rikdan keyin.</p>
+                <p className="text-[13px] text-[var(--c-text-4)]">Narx va muddat — ko‘rikdan keyin.</p>
                 <button
                   onClick={() => {
                     onClose();
                     onOpenConsultation();
                   }}
-                  className="group inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-medium text-[#0a141d] transition-colors hover:bg-[#e8f2f4]"
+                  className="group inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-medium text-[var(--c-bg)] transition-colors hover:bg-[var(--c-mist)]"
                 >
                   Ko‘rikka yozilish
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -110,9 +110,9 @@ export function ServiceDialog({ service: s, morph = true, onClose, onOpenConsult
                   <Link
                     to="/implantatsiya"
                     onClick={onClose}
-                    className="inline-flex items-center gap-2 rounded-xl border border-[#8fc7d4]/30 bg-[#8fc7d4]/[0.07] px-4 py-3 text-[13px] text-white transition-colors hover:bg-[#8fc7d4]/[0.14]"
+                    className="inline-flex items-center gap-2 rounded-xl border border-[var(--c-accent)]/30 bg-[var(--c-accent)]/[0.07] px-4 py-3 text-[13px] text-white transition-colors hover:bg-[var(--c-accent)]/[0.14]"
                   >
-                    <Rotate3d className="h-4 w-4 text-[#8fc7d4]" />
+                    <Rotate3d className="h-4 w-4 text-[var(--c-accent)]" />
                     Implant 3D modelda
                     <ArrowRight className="h-3.5 w-3.5" />
                   </Link>
@@ -124,10 +124,10 @@ export function ServiceDialog({ service: s, morph = true, onClose, onOpenConsult
                 if (!related.length) return null;
                 return (
                   <motion.div className="mt-7 text-[13px]" initial={{ opacity: 0 }} animate={{ opacity: 1, transition: { delay: 0.34 } }}>
-                    <span className="text-[#7f9aa4]">Shu yo‘nalishda yana: </span>
+                    <span className="text-[var(--c-text-4)]">Shu yo‘nalishda yana: </span>
                     {related.map((r, i) => (
                       <span key={r.slug}>
-                        <button onClick={() => onPick(r)} className="text-[#a9d8e4] underline decoration-[#8fc7d4]/40 underline-offset-4 hover:decoration-[#8fc7d4]">
+                        <button onClick={() => onPick(r)} className="text-[var(--c-accent-2)] underline decoration-[var(--c-accent)]/40 underline-offset-4 hover:decoration-[var(--c-accent)]">
                           {r.title}
                         </button>
                         {i < related.length - 1 ? ', ' : '.'}

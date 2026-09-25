@@ -49,12 +49,12 @@ export function FirstVisit({ onOpenConsultation }: Props) {
               Birinchi kelganingizda
             </h2>
           </div>
-          <p className="text-[14px] text-[#8fb0ba]">
+          <p className="text-[14px] text-[var(--c-text-3)]">
             To‘rt qadam, <span className="text-white">~30 daqiqa</span>.
           </p>
         </div>
 
-        <div className="mt-10 grid overflow-hidden rounded-[28px] border border-white/10 bg-[#0d1d28] lg:grid-cols-12" data-reveal="up">
+        <div className="mt-10 grid overflow-hidden rounded-[28px] border border-white/10 bg-[var(--c-bg-3)] lg:grid-cols-12" data-reveal="up">
           {/* photo stage */}
           <div className="relative aspect-[4/3] overflow-hidden lg:col-span-7 lg:aspect-auto lg:min-h-[540px]">
             {STEPS.map((s, i) => (
@@ -69,9 +69,9 @@ export function FirstVisit({ onOpenConsultation }: Props) {
                 }`}
               />
             ))}
-            <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_top,#0d1d28_0%,rgba(13,29,40,0.45)_40%,rgba(13,29,40,0.05)_70%)] lg:bg-[linear-gradient(to_right,rgba(13,29,40,0.1),transparent_40%),linear-gradient(to_top,#0d1d28_0%,rgba(13,29,40,0.4)_38%,transparent_65%)]" />
+            <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_top,var(--c-bg-3)_0%,rgba(13,29,40,0.45)_40%,rgba(13,29,40,0.05)_70%)] lg:bg-[linear-gradient(to_right,rgba(13,29,40,0.1),transparent_40%),linear-gradient(to_top,var(--c-bg-3)_0%,rgba(13,29,40,0.4)_38%,transparent_65%)]" />
 
-            <span className="absolute right-5 top-5 rounded-full bg-[#0a141d]/75 px-3 py-1.5 font-mono text-[12px] text-[#a9d8e4] ring-1 ring-white/10">
+            <span className="absolute right-5 top-5 rounded-full bg-[var(--c-bg)]/75 px-3 py-1.5 font-mono text-[12px] text-[var(--c-accent-2)] ring-1 ring-white/10">
               {step.time}
             </span>
 
@@ -84,7 +84,7 @@ export function FirstVisit({ onOpenConsultation }: Props) {
                   <h3 className="font-serif text-[clamp(1.5rem,2.6vw,2.2rem)] font-medium leading-tight tracking-tight text-white">
                     {step.title}
                   </h3>
-                  <p className="mt-1.5 max-w-md text-[14px] leading-relaxed text-[#c6dbe1] sm:text-[15px]">{step.note}</p>
+                  <p className="mt-1.5 max-w-md text-[14px] leading-relaxed text-[var(--c-text)] sm:text-[15px]">{step.note}</p>
                 </div>
               </div>
             </div>
@@ -102,22 +102,22 @@ export function FirstVisit({ onOpenConsultation }: Props) {
                     <button onClick={() => pick(i)} className="group flex w-full items-center gap-4 py-4 text-left lg:py-5">
                       <span
                         className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full font-serif text-[13px] ring-1 transition-colors ${
-                          on ? 'bg-[#8fc7d4] text-[#0a141d] ring-[#8fc7d4]' : done ? 'text-[#8fc7d4] ring-[#8fc7d4]/50' : 'text-[#7f9aa4] ring-white/15 group-hover:ring-white/40'
+                          on ? 'bg-[var(--c-accent)] text-[var(--c-bg)] ring-[var(--c-accent)]' : done ? 'text-[var(--c-accent)] ring-[var(--c-accent)]/50' : 'text-[var(--c-text-4)] ring-white/15 group-hover:ring-white/40'
                         }`}
                       >
                         {i + 1}
                       </span>
-                      <span className={`flex-1 font-serif text-[17px] transition-colors ${on ? 'text-white' : 'text-[#a7c2cb] group-hover:text-white'}`}>
+                      <span className={`flex-1 font-serif text-[17px] transition-colors ${on ? 'text-white' : 'text-[var(--c-text-2)] group-hover:text-white'}`}>
                         {s.title}
                       </span>
-                      <span className={`font-mono text-[12px] ${on ? 'text-[#a9d8e4]' : 'text-[#5c7580]'}`}>{s.time}</span>
+                      <span className={`font-mono text-[12px] ${on ? 'text-[var(--c-accent-2)]' : 'text-[var(--c-text-5)]'}`}>{s.time}</span>
                     </button>
                     {/* progress under the active stop */}
                     <div className="h-px w-full bg-white/[0.06]">
                       {on && (
                         <div
                           key={`${active}-${round}`}
-                          className={`step-progress h-px w-full bg-[#8fc7d4] ${paused ? 'is-paused' : ''}`}
+                          className={`step-progress h-px w-full bg-[var(--c-accent)] ${paused ? 'is-paused' : ''}`}
                           style={{ ['--step-duration' as string]: `${STEP_MS}ms` }}
                         />
                       )}
@@ -130,11 +130,11 @@ export function FirstVisit({ onOpenConsultation }: Props) {
             <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-white/10 pt-6">
               <div>
                 <div className="font-serif text-2xl font-medium leading-none text-white">~30 daq</div>
-                <div className="mt-1 text-[12px] text-[#7f9aa4]">davolashsiz, majburiyatsiz</div>
+                <div className="mt-1 text-[12px] text-[var(--c-text-4)]">davolashsiz, majburiyatsiz</div>
               </div>
               <button
                 onClick={onOpenConsultation}
-                className="group inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-medium text-[#0a141d] transition-colors hover:bg-[#e8f2f4]"
+                className="group inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-medium text-[var(--c-bg)] transition-colors hover:bg-[var(--c-mist)]"
               >
                 Qabulga yozilish
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />

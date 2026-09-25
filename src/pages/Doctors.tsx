@@ -59,7 +59,7 @@ export function Doctors() {
 
       {/* One school, one standard — the author-clinic promise, in the chief's voice */}
       <section data-bg={FLOW.blue} className="relative w-full overflow-hidden py-20 lg:py-28">
-        <div className="pointer-events-none absolute -right-[10%] top-1/3 h-[420px] w-[420px] rounded-full bg-[#8fc7d4]/8 blur-[110px]" />
+        <div className="pointer-events-none absolute -right-[10%] top-1/3 h-[420px] w-[420px] rounded-full bg-[var(--c-accent)]/8 blur-[110px]" />
         <div className="relative mx-auto max-w-[1440px] px-6 sm:px-8 lg:px-12">
           <div className="grid gap-12 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:gap-16">
             <div data-reveal="left">
@@ -67,7 +67,7 @@ export function Doctors() {
               <h2 className="mt-6 font-serif text-[clamp(2rem,4.5vw,3.5rem)] font-medium leading-[1.05] tracking-tight text-white">
                 Bir maktab, bir standart
               </h2>
-              <p className="mt-5 max-w-xl text-base leading-relaxed text-[#a7c2cb] sm:text-lg">
+              <p className="mt-5 max-w-xl text-base leading-relaxed text-[var(--c-text-2)] sm:text-lg">
                 Bemor uchun eng muhimi — qaysi shifokorga borishidan qat'i nazar, bir xil sifatli davolash olishi.
                 Bizda buni maktab tizimi ta'minlaydi.
               </p>
@@ -76,13 +76,13 @@ export function Doctors() {
                 {STANDARDS.map((s) => (
                   <div
                     key={s.title}
-                    className="group rounded-2xl border border-white/10 bg-white/[0.04] p-5 backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:border-[#8fc7d4]/40"
+                    className="group rounded-2xl border border-white/10 bg-white/[0.04] p-5 backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:border-[var(--c-accent)]/40"
                   >
-                    <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#8fc7d4]/12 text-[#a9d8e4] ring-1 ring-white/10 transition-colors group-hover:bg-[#8fc7d4]/20">
+                    <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--c-accent)]/12 text-[var(--c-accent-2)] ring-1 ring-white/10 transition-colors group-hover:bg-[var(--c-accent)]/20">
                       <s.icon className="h-5 w-5" strokeWidth={1.6} />
                     </span>
                     <h3 className="mt-4 font-serif text-base font-medium tracking-tight text-white">{s.title}</h3>
-                    <p className="mt-1.5 text-[13px] leading-relaxed text-[#a7c2cb]">{s.text}</p>
+                    <p className="mt-1.5 text-[13px] leading-relaxed text-[var(--c-text-2)]">{s.text}</p>
                   </div>
                 ))}
               </div>
@@ -90,24 +90,24 @@ export function Doctors() {
 
             {/* the chief's word */}
             <figure
-              className="relative flex flex-col justify-between rounded-3xl border border-[#8fc7d4]/25 bg-[linear-gradient(150deg,#0f2836,#0a141d)] p-7 lg:p-9"
+              className="relative flex flex-col justify-between rounded-3xl border border-[var(--c-accent)]/25 bg-[linear-gradient(150deg,var(--c-bg-4),var(--c-bg))] p-7 lg:p-9"
               data-reveal="right"
             >
-              <Quote className="h-8 w-8 text-[#8fc7d4]/40" />
+              <Quote className="h-8 w-8 text-[var(--c-accent)]/40" />
               <blockquote className="mt-5 font-serif text-[clamp(1.15rem,1.6vw,1.45rem)] font-medium leading-snug tracking-tight text-white">
                 “{FOUNDER.statement}”
               </blockquote>
               <figcaption className="mt-8 flex items-center gap-4 border-t border-white/10 pt-6">
-                <div className="h-14 w-14 shrink-0 overflow-hidden rounded-full ring-2 ring-[#8fc7d4]/50">
+                <div className="h-14 w-14 shrink-0 overflow-hidden rounded-full ring-2 ring-[var(--c-accent)]/50">
                   <Portrait photo={FOUNDER.photo} name={FOUNDER.name} rounded="rounded-full" className="h-full w-full" />
                 </div>
                 <div className="min-w-0">
                   <div className="font-serif text-base font-medium text-white">{FOUNDER.name}</div>
-                  <div className="text-[12px] text-[#8fc7d4]">{FOUNDER.title}</div>
+                  <div className="text-[12px] text-[var(--c-accent)]">{FOUNDER.title}</div>
                 </div>
                 <Link
                   to="/bosh-shifokor"
-                  className="group ml-auto inline-flex shrink-0 items-center gap-1.5 rounded-full border border-white/15 bg-white/[0.04] px-4 py-2 text-[12px] font-medium text-white transition-colors hover:border-[#8fc7d4]/50"
+                  className="group ml-auto inline-flex shrink-0 items-center gap-1.5 rounded-full border border-white/15 bg-white/[0.04] px-4 py-2 text-[12px] font-medium text-white transition-colors hover:border-[var(--c-accent)]/50"
                 >
                   Batafsil
                   <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
@@ -136,7 +136,7 @@ export function Doctors() {
         title={
           <>
             Shifokorlar haqida <br />
-            <span className="font-medium text-[#8fc7d4]">ko‘p so‘raladigan savollar.</span>
+            <span className="font-medium text-[var(--c-accent)]">ko‘p so‘raladigan savollar.</span>
           </>
         }
         subtitle="Shifokor tanlash, bosh shifokor qabuli, bolalar bilan birinchi tashrif."

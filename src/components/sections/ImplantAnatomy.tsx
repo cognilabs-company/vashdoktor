@@ -68,7 +68,7 @@ export function ImplantAnatomy() {
     <section
       id="anatomy"
       ref={sectionRef}
-      className="relative w-full bg-[#F7F8F6] text-[#101715]"
+      className="relative w-full bg-[var(--c-paper)] text-[var(--c-ink)]"
     >
       <div
         ref={stageRef}
@@ -80,10 +80,10 @@ export function ImplantAnatomy() {
         <div className="relative z-10 w-full max-w-[1400px] mx-auto px-6 sm:px-8 lg:px-12 grid grid-cols-1 lg:grid-cols-2 gap-8 items-center h-full">
           {/* LEFT — title, intro, part cards */}
           <div className="flex flex-col justify-center py-16 lg:py-0 order-2 lg:order-1">
-            <div className="text-[10.5px] font-mono tracking-[0.22em] text-[#286A5B] uppercase mb-3.5">
+            <div className="text-[10.5px] font-mono tracking-[0.22em] text-[var(--c-green)] uppercase mb-3.5">
               Anatomiya
             </div>
-            <h2 className="text-2xl sm:text-3xl lg:text-[2.1rem] font-medium tracking-[-0.02em] leading-[1.15] text-[#101715]">
+            <h2 className="text-2xl sm:text-3xl lg:text-[2.1rem] font-medium tracking-[-0.02em] leading-[1.15] text-[var(--c-ink)]">
               Implant qanday ishlaydi?
             </h2>
             <p className="mt-4 text-sm sm:text-[15px] text-[#5F6B66] leading-relaxed max-w-md">
@@ -98,14 +98,14 @@ export function ImplantAnatomy() {
                     key={p.key}
                     className={`group relative rounded-xl border px-4 py-3 transition-all duration-300 ${
                       on
-                        ? 'border-[#286A5B]/30 bg-white shadow-sm'
+                        ? 'border-[var(--c-green)]/30 bg-white shadow-sm'
                         : 'border-black/6 bg-white/40'
                     }`}
                   >
                     <div className="flex items-baseline gap-3">
                       <span
                         className={`text-[11px] font-mono tabular-nums transition-colors ${
-                          on ? 'text-[#286A5B]' : 'text-[#A7AEA9]'
+                          on ? 'text-[var(--c-green)]' : 'text-[#A7AEA9]'
                         }`}
                       >
                         0{i + 1}
@@ -129,7 +129,7 @@ export function ImplantAnatomy() {
                     </div>
                     {/* active accent bar */}
                     <span
-                      className={`absolute left-0 top-1/2 -translate-y-1/2 w-[3px] rounded-full bg-[#286A5B] transition-all duration-300 ${
+                      className={`absolute left-0 top-1/2 -translate-y-1/2 w-[3px] rounded-full bg-[var(--c-green)] transition-all duration-300 ${
                         on ? 'h-8 opacity-100' : 'h-0 opacity-0'
                       }`}
                     />

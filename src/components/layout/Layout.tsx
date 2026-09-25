@@ -7,6 +7,7 @@ import { scrollToEl } from '../../lib/scroll';
 import { useSectionFlow } from '../../lib/flow';
 import { ClinicUIContext } from '../../lib/uiContext';
 import { Navbar } from './Navbar';
+import { PalettePicker } from '../ui/PalettePicker';
 import { Footer } from './Footer';
 import { ConsultationModal } from './ConsultationModal';
 import { InteractiveViewerModal } from '../three/InteractiveViewerModal';
@@ -113,7 +114,7 @@ export function Layout() {
         open3DViewer: () => setIs3DViewerOpen(true),
       }}
     >
-      <div ref={rootRef} className="relative min-h-screen bg-[#0a141d] text-[#eaf2f4] font-sans antialiased overflow-x-clip selection:bg-[#8fc7d4] selection:text-[#0a141d]">
+      <div ref={rootRef} className="relative min-h-screen bg-[var(--c-bg)] text-[#eaf2f4] font-sans antialiased overflow-x-clip selection:bg-[var(--c-accent)] selection:text-[var(--c-bg)]">
         <Navbar
           onOpenConsultation={() => setIsConsultationOpen(true)}
           onOpen3DViewer={() => setIs3DViewerOpen(true)}
@@ -121,6 +122,9 @@ export function Layout() {
         <main>
           <Outlet />
         </main>
+
+        {/* temporary: choosing the site's colour palette */}
+        <PalettePicker />
         <Footer />
         <ConsultationModal isOpen={isConsultationOpen} onClose={() => setIsConsultationOpen(false)} />
         <InteractiveViewerModal isOpen={is3DViewerOpen} onClose={() => setIs3DViewerOpen(false)} />

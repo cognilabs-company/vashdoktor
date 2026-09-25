@@ -20,7 +20,7 @@ export function TeamStats() {
   return (
     <section data-bg={FLOW.base} className="relative w-full">
       {/* bridge from the opaque constellation stage above */}
-      <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-[#0b1720] to-transparent" />
+      <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-[var(--c-bg-2)] to-transparent" />
       <div
         className="mx-auto grid max-w-[1440px] grid-cols-2 px-6 sm:px-8 lg:grid-cols-4 lg:px-12 [&>*]:border-white/10 [&>*:nth-child(even)]:border-l [&>*:nth-child(even)]:pl-6 [&>*:nth-child(n+3)]:border-t lg:[&>*:nth-child(n+3)]:border-t-0 lg:[&>*:not(:first-child)]:border-l lg:[&>*:not(:first-child)]:pl-10"
         data-stagger
@@ -30,8 +30,8 @@ export function TeamStats() {
             <div className="font-serif text-4xl font-medium tracking-tight text-white lg:text-5xl">
               <CountUp value={s.value} />
             </div>
-            <div className="mt-2 text-sm font-medium text-[#a9d8e4]">{s.label}</div>
-            <div className="mt-1 text-[12px] text-[#7f9aa4]">{s.note}</div>
+            <div className="mt-2 text-sm font-medium text-[var(--c-accent-2)]">{s.label}</div>
+            <div className="mt-1 text-[12px] text-[var(--c-text-4)]">{s.note}</div>
           </div>
         ))}
       </div>

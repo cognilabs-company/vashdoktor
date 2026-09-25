@@ -23,13 +23,13 @@ export function ImplantDoctor() {
           <h2 className="mt-4 font-serif text-[clamp(1.9rem,4vw,3.1rem)] font-medium leading-[1.06] tracking-tight text-white">
             {FOUNDER.name}
           </h2>
-          <p className="mt-2 text-[14px] text-[#8fc7d4]">{FOUNDER.credentials}</p>
+          <p className="mt-2 text-[14px] text-[var(--c-accent)]">{FOUNDER.credentials}</p>
 
           <div className="mt-8 flex flex-wrap items-stretch divide-x divide-white/10 border-y border-white/10 py-6">
             {STATS.map((s) => (
               <div key={s.label} className="px-6 first:pl-0 last:pr-0">
                 <div className="font-serif text-3xl font-medium leading-none text-white">{s.value}</div>
-                <div className="mt-1.5 text-[12px] text-[#8fb0ba]">{s.label}</div>
+                <div className="mt-1.5 text-[12px] text-[var(--c-text-3)]">{s.label}</div>
               </div>
             ))}
           </div>
@@ -37,10 +37,10 @@ export function ImplantDoctor() {
           <ul className="mt-6 grid gap-x-8 sm:grid-cols-2">
             {CERTS.map((c) => (
               <li key={c.title} className="flex items-start gap-3 border-b border-white/[0.07] py-3">
-                <Award className="mt-0.5 h-4 w-4 shrink-0 text-[#8fc7d4]/80" strokeWidth={1.6} />
-                <span className="text-[14px] text-[#dbe8ec]">
+                <Award className="mt-0.5 h-4 w-4 shrink-0 text-[var(--c-accent)]/80" strokeWidth={1.6} />
+                <span className="text-[14px] text-[var(--c-mist-2)]">
                   {c.title}
-                  <span className="block text-[12px] text-[#7f9aa4]">
+                  <span className="block text-[12px] text-[var(--c-text-4)]">
                     {c.place} · {c.year}
                   </span>
                 </span>
@@ -50,7 +50,7 @@ export function ImplantDoctor() {
 
           <Link
             to="/bosh-shifokor"
-            className="group mt-7 inline-flex items-center gap-1.5 text-[14px] text-white underline decoration-white/25 underline-offset-[6px] transition-colors hover:decoration-[#8fc7d4]"
+            className="group mt-7 inline-flex items-center gap-1.5 text-[14px] text-white underline decoration-white/25 underline-offset-[6px] transition-colors hover:decoration-[var(--c-accent)]"
           >
             Barcha {FOUNDER.certificatesTotal} sertifikat va yo‘li
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />

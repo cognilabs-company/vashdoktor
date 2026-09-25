@@ -18,7 +18,7 @@ export function TechnicalBadge({
       <span
         className={`inline-flex items-center gap-1.5 rounded-full bg-white/10 px-3 py-1 text-[11px] font-medium text-white/90 backdrop-blur-md border border-white/10 ${className}`}
       >
-        {code && <span className="font-mono text-[#DCEDE7]">{code}</span>}
+        {code && <span className="font-mono text-[var(--c-green-soft)]">{code}</span>}
         {code && <span className="text-white/30">/</span>}
         <span>{label}</span>
       </span>
@@ -27,10 +27,10 @@ export function TechnicalBadge({
 
   return (
     <span
-      className={`inline-flex items-center gap-1.5 rounded-full bg-[#246B5B]/8 px-3 py-1 text-[11px] font-medium text-[#246B5B] border border-[#246B5B]/15 ${className}`}
+      className={`inline-flex items-center gap-1.5 rounded-full bg-[var(--c-green-2)]/8 px-3 py-1 text-[11px] font-medium text-[var(--c-green-2)] border border-[var(--c-green-2)]/15 ${className}`}
     >
       {code && <span className="font-mono font-semibold">{code}</span>}
-      {code && <span className="text-[#246B5B]/40">/</span>}
+      {code && <span className="text-[var(--c-green-2)]/40">/</span>}
       <span>{label}</span>
     </span>
   );

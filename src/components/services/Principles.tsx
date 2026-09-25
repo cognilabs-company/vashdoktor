@@ -46,7 +46,7 @@ export function Principles() {
               referrerPolicy="no-referrer"
               className="aspect-[4/3] w-full rounded-2xl border border-white/10 object-cover"
             />
-            <figcaption className="mt-3 text-[12px] text-[#7f9aa4]">Davolash kabineti.</figcaption>
+            <figcaption className="mt-3 text-[12px] text-[var(--c-text-4)]">Davolash kabineti.</figcaption>
           </figure>
 
           <div className="mt-9 flex items-baseline gap-8 border-t border-white/10 pt-6">
@@ -54,13 +54,13 @@ export function Principles() {
               <div className="font-serif text-3xl font-medium text-white">
                 <CountUp value="20 000+" />
               </div>
-              <div className="mt-1 text-[12px] text-[#7f9aa4]">bemor, 2019-yildan beri</div>
+              <div className="mt-1 text-[12px] text-[var(--c-text-4)]">bemor, 2019-yildan beri</div>
             </div>
             <div>
               <div className="font-serif text-3xl font-medium text-white">
                 <CountUp value="15+" />
               </div>
-              <div className="mt-1 text-[12px] text-[#7f9aa4]">yillik amaliyot</div>
+              <div className="mt-1 text-[12px] text-[var(--c-text-4)]">yillik amaliyot</div>
             </div>
           </div>
         </div>
@@ -68,10 +68,10 @@ export function Principles() {
         <ol className="border-t border-white/10 lg:col-span-6 lg:col-start-7" data-stagger>
           {PRINCIPLES.map((p, i) => (
             <li key={p.title} className="grid grid-cols-[2.5rem_1fr] gap-x-4 border-b border-white/10 py-7">
-              <span className="font-serif text-[13px] text-[#5c7580]">{String(i + 1).padStart(2, '0')}</span>
+              <span className="font-serif text-[13px] text-[var(--c-text-5)]">{String(i + 1).padStart(2, '0')}</span>
               <div>
                 <h3 className="font-serif text-xl font-medium leading-snug tracking-tight text-white">{p.title}</h3>
-                <p className="mt-2 max-w-lg text-[15px] leading-relaxed text-[#a7c2cb]">{p.text}</p>
+                <p className="mt-2 max-w-lg text-[15px] leading-relaxed text-[var(--c-text-2)]">{p.text}</p>
               </div>
             </li>
           ))}

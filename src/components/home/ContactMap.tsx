@@ -30,36 +30,36 @@ export function ContactMap({ onOpenConsultation }: Props) {
 
           <dl className="mt-9 border-t border-white/10">
             <div className="grid grid-cols-[1.5rem_1fr] gap-x-4 border-b border-white/10 py-4">
-              <MapPin className="mt-0.5 h-4 w-4 text-[#8fc7d4]" />
+              <MapPin className="mt-0.5 h-4 w-4 text-[var(--c-accent)]" />
               <div>
                 <dd className="text-[15px] text-white">{CLINIC_CONFIG.address}</dd>
-                {m && <dd className="mt-1 text-[13px] leading-relaxed text-[#8fb0ba]">{m.directions}</dd>}
+                {m && <dd className="mt-1 text-[13px] leading-relaxed text-[var(--c-text-3)]">{m.directions}</dd>}
                 <a
                   href={mapsLink}
                   target="_blank"
                   rel="noreferrer"
-                  className="mt-2 inline-flex items-center gap-1 text-[13px] text-[#a9d8e4] underline decoration-[#8fc7d4]/40 underline-offset-4 hover:decoration-[#8fc7d4]"
+                  className="mt-2 inline-flex items-center gap-1 text-[13px] text-[var(--c-accent-2)] underline decoration-[var(--c-accent)]/40 underline-offset-4 hover:decoration-[var(--c-accent)]"
                 >
                   Xaritada ochish <ArrowUpRight className="h-3.5 w-3.5" />
                 </a>
               </div>
             </div>
             <div className="grid grid-cols-[1.5rem_1fr] gap-x-4 border-b border-white/10 py-4">
-              <Clock className="mt-0.5 h-4 w-4 text-[#8fc7d4]" />
+              <Clock className="mt-0.5 h-4 w-4 text-[var(--c-accent)]" />
               <dd className="text-[15px] text-white">{CLINIC_CONFIG.hours}</dd>
             </div>
             <div className="grid grid-cols-[1.5rem_1fr] gap-x-4 border-b border-white/10 py-4">
-              <Phone className="mt-0.5 h-4 w-4 text-[#8fc7d4]" />
+              <Phone className="mt-0.5 h-4 w-4 text-[var(--c-accent)]" />
               <dd>
-                <a href={`tel:${CLINIC_CONFIG.phone}`} className="text-[15px] text-white hover:text-[#8fc7d4]">
+                <a href={`tel:${CLINIC_CONFIG.phone}`} className="text-[15px] text-white hover:text-[var(--c-accent)]">
                   {CLINIC_CONFIG.phone}
                 </a>
               </dd>
             </div>
             <div className="grid grid-cols-[1.5rem_1fr] gap-x-4 border-b border-white/10 py-4">
-              <Send className="mt-0.5 h-4 w-4 text-[#8fc7d4]" />
+              <Send className="mt-0.5 h-4 w-4 text-[var(--c-accent)]" />
               <dd>
-                <a href={CLINIC_CONFIG.socials.telegram} target="_blank" rel="noreferrer" className="text-[15px] text-white hover:text-[#8fc7d4]">
+                <a href={CLINIC_CONFIG.socials.telegram} target="_blank" rel="noreferrer" className="text-[15px] text-white hover:text-[var(--c-accent)]">
                   Telegram
                 </a>
               </dd>
@@ -69,7 +69,7 @@ export function ContactMap({ onOpenConsultation }: Props) {
           <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
             <button
               onClick={onOpenConsultation}
-              className="group inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-medium text-[#0a141d] transition-colors hover:bg-[#e8f2f4]"
+              className="group inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-medium text-[var(--c-bg)] transition-colors hover:bg-[var(--c-mist)]"
             >
               Qabulga yozilish
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -78,7 +78,7 @@ export function ContactMap({ onOpenConsultation }: Props) {
         </div>
 
         <figure className="lg:col-span-7" data-reveal="right">
-          <div className="overflow-hidden rounded-3xl border border-white/10 bg-[#0d1d28]">
+          <div className="overflow-hidden rounded-3xl border border-white/10 bg-[var(--c-bg-3)]">
             {embed ? (
               <iframe
                 title="Klinika xaritada"
@@ -87,7 +87,7 @@ export function ContactMap({ onOpenConsultation }: Props) {
                 className="block h-[380px] w-full grayscale-[0.35] contrast-[1.05] lg:h-[520px]"
               />
             ) : (
-              <div className="flex h-[380px] items-center justify-center text-sm text-[#5c7580] lg:h-[520px]">Xarita qo‘shiladi</div>
+              <div className="flex h-[380px] items-center justify-center text-sm text-[var(--c-text-5)] lg:h-[520px]">Xarita qo‘shiladi</div>
             )}
           </div>
         </figure>

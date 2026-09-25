@@ -65,7 +65,7 @@ export function SectionBlock({ section, index, panelRefs, reduced, onOpenConsult
             {/* readability scrim (mobile/tablet, where text sits over the object) */}
             <div className="absolute -inset-10 -z-10 rounded-[2.5rem] bg-[radial-gradient(ellipse_at_center,rgba(8,16,24,0.72),rgba(8,16,24,0)_74%)]" />
 
-            <div className="text-[11px] font-mono tracking-[0.24em] text-[#8fc7d4] uppercase mb-5">
+            <div className="text-[11px] font-mono tracking-[0.24em] text-[var(--c-accent)] uppercase mb-5">
               {section.eyebrow}
             </div>
 
@@ -85,7 +85,7 @@ export function SectionBlock({ section, index, panelRefs, reduced, onOpenConsult
               ))}
             </h2>
 
-            <p className="mt-6 text-[15px] sm:text-base font-light leading-relaxed text-[#a7c2cb] max-w-md">
+            <p className="mt-6 text-[15px] sm:text-base font-light leading-relaxed text-[var(--c-text-2)] max-w-md">
               {section.body}
             </p>
 
@@ -96,7 +96,7 @@ export function SectionBlock({ section, index, panelRefs, reduced, onOpenConsult
                     <div className="text-2xl sm:text-3xl font-medium text-white tracking-tight">
                       {st.value}
                     </div>
-                    <div className="text-[11px] font-mono uppercase tracking-wider text-[#8fb0ba] mt-1">
+                    <div className="text-[11px] font-mono uppercase tracking-wider text-[var(--c-text-3)] mt-1">
                       {st.label}
                     </div>
                   </div>

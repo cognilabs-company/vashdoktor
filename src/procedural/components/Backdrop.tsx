@@ -1,4 +1,4 @@
-import { useMemo, useRef } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 import { view } from '../lib/state';
@@ -75,6 +75,12 @@ const FRAG = /* glsl */ `
 `;
 
 const lin = (hex: string) => new THREE.Color(hex).convertSRGBToLinear();
+/** the palette's value for a token, falling back to the colour we shipped with */
+const tok = (name: string, fallback: string) => {
+  if (typeof window === 'undefined') return lin(fallback);
+  const v = getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+  return lin(v || fallback);
+};
 
 interface Props {
   reduced: boolean;
@@ -94,13 +100,25 @@ export function Backdrop({ reduced }: Props) {
       uTime: { value: 0 },
       uLightX: { value: 0.4 },
       uAspect: { value: 1 },
-      uBase: { value: lin('#0a141d') }, // deep navy (top)
-      uMineral: { value: lin('#102b36') }, // teal-navy (bottom / water)
-      uTeal: { value: lin('#1d4453') }, // fog highlight
-      uWarm: { value: lin('#aed2db') }, // cold misty glow
+      uBase: { value: tok('--c3d-base', '#0a141d') }, // deep tone (top)
+      uMineral: { value: tok('--c3d-mineral', '#102b36') }, // bottom / water
+      uTeal: { value: tok('--c3d-teal', '#1d4453') }, // fog highlight
+      uWarm: { value: tok('--c3d-warm', '#aed2db') }, // misty glow
     }),
     []
   );
+
+  // the picker can change the palette while the scene is up
+  useEffect(() => {
+    const onChange = () => {
+      uniforms.uBase.value.copy(tok('--c3d-base', '#0a141d'));
+      uniforms.uMineral.value.copy(tok('--c3d-mineral', '#102b36'));
+      uniforms.uTeal.value.copy(tok('--c3d-teal', '#1d4453'));
+      uniforms.uWarm.value.copy(tok('--c3d-warm', '#aed2db'));
+    };
+    window.addEventListener('palettechange', onChange);
+    return () => window.removeEventListener('palettechange', onChange);
+  }, [uniforms]);
 
   useFrame((state, delta) => {
     const u = uniforms;

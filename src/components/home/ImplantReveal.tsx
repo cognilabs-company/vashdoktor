@@ -211,7 +211,7 @@ function Reveal({ onOpen3DViewer, onOpenConsultation }: Props) {
       ref={sectionRef}
       data-bg={FLOW.base}
       className="relative w-full"
-      style={{ height: `${SHOWCASE_VH + FINALE_VH}vh`, backgroundColor: FLOW.base }}
+      style={{ height: `${SHOWCASE_VH + FINALE_VH}vh`, backgroundColor: 'var(--c-bg)' }}
     >
       <div
         ref={stageRef}
@@ -252,11 +252,11 @@ function Reveal({ onOpen3DViewer, onOpenConsultation }: Props) {
         <div
           ref={fogRef}
           className="pointer-events-none absolute inset-0 z-20"
-          style={{ opacity: 1, background: '#dbe7ef' }}
+          style={{ opacity: 1, background: 'var(--c-fog)' }}
         />
         <div
           ref={fogFlatRef}
-          className="pointer-events-none absolute inset-0 z-[21] bg-[#dbe7ef]"
+          className="pointer-events-none absolute inset-0 z-[21] bg-[var(--c-fog)]"
           style={{ opacity: 1 }}
         />
         {/* the light that comes through the opening */}
@@ -290,14 +290,14 @@ function Reveal({ onOpen3DViewer, onOpenConsultation }: Props) {
                     }`
               }
             >
-              <div className="mb-5 inline-flex items-center gap-3 text-[13px] text-[#8fc7d4]">
-                <span className="h-px w-7 bg-[#8fc7d4]/60" />
+              <div className="mb-5 inline-flex items-center gap-3 text-[13px] text-[var(--c-accent)]">
+                <span className="h-px w-7 bg-[var(--c-accent)]/60" />
                 {s.eyebrow}
               </div>
               <h2 className="font-serif text-[clamp(1.7rem,3.4vw,2.9rem)] font-medium leading-[1.05] tracking-tight text-white">
                 {s.title[0]}
                 <br />
-                <span className="text-[#8fc7d4]">{s.title[1]}</span>
+                <span className="text-[var(--c-accent)]">{s.title[1]}</span>
               </h2>
               <p className="mt-5 max-w-md text-[15px] leading-relaxed text-[#b9cfd7]">{s.body}</p>
 
@@ -306,7 +306,7 @@ function Reveal({ onOpen3DViewer, onOpenConsultation }: Props) {
                   {s.stats.map((st) => (
                     <div key={st.label}>
                       <div className="font-serif text-2xl font-medium leading-none text-white">{st.value}</div>
-                      <div className="mt-1.5 text-[12px] text-[#8fb0ba]">{st.label}</div>
+                      <div className="mt-1.5 text-[12px] text-[var(--c-text-3)]">{st.label}</div>
                     </div>
                   ))}
                 </div>
@@ -324,7 +324,7 @@ function Reveal({ onOpen3DViewer, onOpenConsultation }: Props) {
                   </Button>
                   <Link
                     to="/implantatsiya"
-                    className="group inline-flex items-center gap-1.5 text-sm text-[#c6dbe1] underline decoration-white/25 underline-offset-[6px] transition-colors hover:text-white hover:decoration-[#8fc7d4]"
+                    className="group inline-flex items-center gap-1.5 text-sm text-[var(--c-text)] underline decoration-white/25 underline-offset-[6px] transition-colors hover:text-white hover:decoration-[var(--c-accent)]"
                   >
                     Implantatsiya sahifasi
                     <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
@@ -340,12 +340,12 @@ function Reveal({ onOpen3DViewer, onOpenConsultation }: Props) {
           className="absolute left-6 top-1/2 z-30 w-[min(30vw,380px)] -translate-y-1/2 lg:left-14"
           style={{ opacity: 0 }}
         >
-          <div className="mb-5 inline-flex items-center gap-3 text-[13px] text-[#8fc7d4]">
-            <span className="h-px w-7 bg-[#8fc7d4]/60" />
+          <div className="mb-5 inline-flex items-center gap-3 text-[13px] text-[var(--c-accent)]">
+            <span className="h-px w-7 bg-[var(--c-accent)]/60" />
             Va joyida
           </div>
           <h2 className="font-serif text-[clamp(1.8rem,3.6vw,2.9rem)] font-medium leading-[1.05] tracking-tight text-white">
-            O‘z tishingizdan <span className="text-[#8fc7d4]">farq qilmaydi.</span>
+            O‘z tishingizdan <span className="text-[var(--c-accent)]">farq qilmaydi.</span>
           </h2>
           <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
             <Button variant="white" size="lg" onClick={onOpenConsultation} icon={<ArrowUpRight className="h-4 w-4" />}>
@@ -353,7 +353,7 @@ function Reveal({ onOpen3DViewer, onOpenConsultation }: Props) {
             </Button>
             <Link
               to="/implantatsiya"
-              className="group inline-flex items-center gap-1.5 text-sm text-[#c6dbe1] underline decoration-white/25 underline-offset-[6px] transition-colors hover:text-white hover:decoration-[#8fc7d4]"
+              className="group inline-flex items-center gap-1.5 text-sm text-[var(--c-text)] underline decoration-white/25 underline-offset-[6px] transition-colors hover:text-white hover:decoration-[var(--c-accent)]"
             >
               Implantatsiya sahifasi
               <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
@@ -371,12 +371,12 @@ function Reveal({ onOpen3DViewer, onOpenConsultation }: Props) {
 function ImplantStill({ onOpen3DViewer, onOpenConsultation }: Props) {
   return (
     <section data-bg={FLOW.base} className="relative w-full px-6 py-20">
-      <div className="mb-5 inline-flex items-center gap-3 text-[13px] text-[#8fc7d4]">
-        <span className="h-px w-7 bg-[#8fc7d4]/60" />
+      <div className="mb-5 inline-flex items-center gap-3 text-[13px] text-[var(--c-accent)]">
+        <span className="h-px w-7 bg-[var(--c-accent)]/60" />
         {SECTIONS[1].eyebrow}
       </div>
       <h2 className="font-serif text-[clamp(1.9rem,7vw,2.6rem)] font-medium leading-[1.06] tracking-tight text-white">
-        {SECTIONS[1].title[0]} <span className="text-[#8fc7d4]">{SECTIONS[1].title[1]}</span>
+        {SECTIONS[1].title[0]} <span className="text-[var(--c-accent)]">{SECTIONS[1].title[1]}</span>
       </h2>
       <ul className="mt-7">
         {SECTIONS.slice(2, 7).map((s, i) => (
@@ -384,9 +384,9 @@ function ImplantStill({ onOpen3DViewer, onOpenConsultation }: Props) {
             key={s.id}
             className="flex items-baseline gap-4 border-t border-white/10 py-3.5 last:border-b last:border-white/10"
           >
-            <span className="w-5 shrink-0 font-serif text-[15px] text-[#8fc7d4]">{i + 1}</span>
+            <span className="w-5 shrink-0 font-serif text-[15px] text-[var(--c-accent)]">{i + 1}</span>
             <span className="text-[15px] font-medium text-white">{s.eyebrow.split('— ')[1] ?? s.eyebrow}</span>
-            <span className="ml-auto max-w-[55%] text-right text-[13px] text-[#8fb0ba]">{s.title.join(' ')}</span>
+            <span className="ml-auto max-w-[55%] text-right text-[13px] text-[var(--c-text-3)]">{s.title.join(' ')}</span>
           </li>
         ))}
       </ul>
@@ -396,7 +396,7 @@ function ImplantStill({ onOpen3DViewer, onOpenConsultation }: Props) {
         </Button>
         <button
           onClick={onOpen3DViewer}
-          className="group inline-flex items-center gap-1.5 text-sm text-[#c6dbe1] underline decoration-white/25 underline-offset-[6px] transition-colors hover:text-white"
+          className="group inline-flex items-center gap-1.5 text-sm text-[var(--c-text)] underline decoration-white/25 underline-offset-[6px] transition-colors hover:text-white"
         >
           3D modelni aylantirish
           <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />

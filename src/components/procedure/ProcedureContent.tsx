@@ -34,14 +34,14 @@ export function ProcedureContent({
           <h3 className="mt-4 font-serif text-[clamp(2rem,3.5vw,3.5rem)] font-medium leading-[1.0] tracking-tight text-white">
             {phase.title}
           </h3>
-          <p className="mt-3.5 text-[clamp(0.875rem,1.1vw,1.0625rem)] leading-[1.55] text-[#a7c2cb]">
+          <p className="mt-3.5 text-[clamp(0.875rem,1.1vw,1.0625rem)] leading-[1.55] text-[var(--c-text-2)]">
             {phase.body}
           </p>
           {/* O'RNATISH sub-stage line — frame-driven, filled by the parent's rAF */}
           <p
             ref={i === 2 ? subRef : undefined}
             className={clsx(
-              'mt-3 text-[clamp(0.75rem,0.95vw,0.875rem)] font-medium leading-[1.5] text-[#8fc7d4] will-change-[opacity]',
+              'mt-3 text-[clamp(0.75rem,0.95vw,0.875rem)] font-medium leading-[1.5] text-[var(--c-accent)] will-change-[opacity]',
               i !== 2 && 'hidden'
             )}
             style={{ opacity: 0 }}

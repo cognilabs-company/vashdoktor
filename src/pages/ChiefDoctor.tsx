@@ -10,18 +10,18 @@ const SCIENCE_ICON = { Konferensiya: Presentation, 'Ilmiy ish': BookOpen, Ustozl
 
 function CertTile({ c, compact }: { c: Certificate; compact?: boolean }) {
   return (
-    <div className={`flex flex-col rounded-2xl border border-white/10 bg-[linear-gradient(160deg,#0f2431,#0b1720)] ${compact ? 'p-4' : 'p-5'}`}>
+    <div className={`flex flex-col rounded-2xl border border-white/10 bg-[linear-gradient(160deg,#0f2431,var(--c-bg-2))] ${compact ? 'p-4' : 'p-5'}`}>
       <div className="flex items-center justify-between">
-        <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#8fc7d4]/12 text-[#a9d8e4] ring-1 ring-white/10">
+        <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-[var(--c-accent)]/12 text-[var(--c-accent-2)] ring-1 ring-white/10">
           <Award className="h-4 w-4" strokeWidth={1.6} />
         </span>
-        {c.year && <span className="font-mono text-[11px] tracking-[0.15em] text-[#5c7580]">{c.year}</span>}
+        {c.year && <span className="font-mono text-[11px] tracking-[0.15em] text-[var(--c-text-5)]">{c.year}</span>}
       </div>
       <h3 className={`mt-3 font-medium tracking-tight text-white ${compact ? 'text-sm' : 'text-[15px]'}`}>{c.title}</h3>
-      {c.place && <p className="mt-1 text-[12px] text-[#8fb0ba]">{c.place}</p>}
+      {c.place && <p className="mt-1 text-[12px] text-[var(--c-text-3)]">{c.place}</p>}
       {c.gain && !compact && (
-        <p className="mt-3 flex items-start gap-1.5 text-[12px] leading-snug text-[#a7c2cb]">
-          <Check className="mt-0.5 h-3 w-3 shrink-0 text-[#8fc7d4]" /> {c.gain}
+        <p className="mt-3 flex items-start gap-1.5 text-[12px] leading-snug text-[var(--c-text-2)]">
+          <Check className="mt-0.5 h-3 w-3 shrink-0 text-[var(--c-accent)]" /> {c.gain}
         </p>
       )}
     </div>
@@ -46,8 +46,8 @@ export function ChiefDoctor() {
   return (
     <>
       {/* HERO */}
-      <section className="relative w-full overflow-hidden bg-[#0a141d] pt-32 pb-16 lg:pt-40 lg:pb-24">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_70%_10%,#0e2536,#0a141d_62%)]" />
+      <section className="relative w-full overflow-hidden bg-[var(--c-bg)] pt-32 pb-16 lg:pt-40 lg:pb-24">
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_70%_10%,var(--c-backdrop),var(--c-bg)_62%)]" />
         <div className="relative mx-auto grid max-w-[1440px] items-center gap-12 px-6 sm:px-8 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-16 lg:px-12">
           <div className="relative mx-auto w-full max-w-sm lg:max-w-none" data-reveal="left">
             <Portrait photo={FOUNDER.photo} name={FOUNDER.name} className="aspect-[4/5] w-full" />
@@ -57,21 +57,21 @@ export function ChiefDoctor() {
             <h1 className="mt-6 font-serif text-[clamp(2.25rem,5vw,4rem)] font-medium leading-[0.98] tracking-tight text-white">
               {FOUNDER.name}
             </h1>
-            <p className="mt-3 text-base text-[#8fc7d4]">{FOUNDER.credentials}</p>
-            <p className="mt-6 max-w-xl text-base leading-relaxed text-[#a7c2cb] sm:text-lg">{FOUNDER.statement}</p>
+            <p className="mt-3 text-base text-[var(--c-accent)]">{FOUNDER.credentials}</p>
+            <p className="mt-6 max-w-xl text-base leading-relaxed text-[var(--c-text-2)] sm:text-lg">{FOUNDER.statement}</p>
 
             <div className="mt-9 grid grid-cols-2 gap-x-8 gap-y-6 border-t border-white/10 pt-8 sm:grid-cols-4">
               {FOUNDER.heroStats.map((s) => (
                 <div key={s.label}>
                   <div className="font-serif text-2xl font-medium text-white lg:text-3xl">{s.value}</div>
-                  <div className="mt-1 text-[12px] leading-snug text-[#8fb0ba]">{s.label}</div>
+                  <div className="mt-1 text-[12px] leading-snug text-[var(--c-text-3)]">{s.label}</div>
                 </div>
               ))}
             </div>
 
             <button
               onClick={openConsultation}
-              className="mt-9 inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-medium text-[#0a141d] transition-colors hover:bg-[#e8f2f4]"
+              className="mt-9 inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-medium text-[var(--c-bg)] transition-colors hover:bg-[var(--c-mist)]"
             >
               Qabulga yozilish
             </button>
@@ -80,7 +80,7 @@ export function ChiefDoctor() {
       </section>
 
       {/* TIMELINE — the clinic's history IS the doctor's path */}
-      <section className="relative w-full border-t border-white/10 bg-[#0b1720] py-20 lg:py-28">
+      <section className="relative w-full border-t border-white/10 bg-[var(--c-bg-2)] py-20 lg:py-28">
         <div className="mx-auto max-w-[1440px] px-6 sm:px-8 lg:px-12">
           <div className="max-w-2xl" data-reveal="left">
             <TechnicalBadge label="Yo‘l" variant="dark" />
@@ -91,10 +91,10 @@ export function ChiefDoctor() {
           <ol className="relative mt-12 border-l border-white/12 pl-8" data-stagger>
             {FOUNDER.timeline.map((t) => (
               <li key={t.year} className="relative mb-9 last:mb-0">
-                <span className="absolute -left-[38px] top-1 flex h-4 w-4 items-center justify-center rounded-full border-2 border-[#8fc7d4] bg-[#0b1720]" />
-                <div className="font-mono text-[13px] tracking-[0.15em] text-[#8fc7d4]">{t.year}</div>
+                <span className="absolute -left-[38px] top-1 flex h-4 w-4 items-center justify-center rounded-full border-2 border-[var(--c-accent)] bg-[var(--c-bg-2)]" />
+                <div className="font-mono text-[13px] tracking-[0.15em] text-[var(--c-accent)]">{t.year}</div>
                 <h3 className="mt-1 font-serif text-xl font-medium tracking-tight text-white">{t.title}</h3>
-                <p className="mt-1.5 max-w-xl text-sm leading-relaxed text-[#a7c2cb]">{t.text}</p>
+                <p className="mt-1.5 max-w-xl text-sm leading-relaxed text-[var(--c-text-2)]">{t.text}</p>
               </li>
             ))}
           </ol>
@@ -102,7 +102,7 @@ export function ChiefDoctor() {
       </section>
 
       {/* SPECIALIZATIONS */}
-      <section className="relative w-full border-t border-white/10 bg-[#0a141d] py-20 lg:py-28">
+      <section className="relative w-full border-t border-white/10 bg-[var(--c-bg)] py-20 lg:py-28">
         <div className="mx-auto max-w-[1440px] px-6 sm:px-8 lg:px-12">
           <div className="grid gap-12 lg:grid-cols-[minmax(0,0.7fr)_minmax(0,1.3fr)] lg:gap-16">
             <div data-reveal="left">
@@ -114,8 +114,8 @@ export function ChiefDoctor() {
             <ul className="grid gap-3 sm:grid-cols-2" data-stagger="right">
               {FOUNDER.specializations.map((s) => (
                 <li key={s} className="flex items-start gap-3 rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3.5">
-                  <Stethoscope className="mt-0.5 h-4 w-4 shrink-0 text-[#8fc7d4]" strokeWidth={1.6} />
-                  <span className="text-sm leading-snug text-[#c6dbe1]">{s}</span>
+                  <Stethoscope className="mt-0.5 h-4 w-4 shrink-0 text-[var(--c-accent)]" strokeWidth={1.6} />
+                  <span className="text-sm leading-snug text-[var(--c-text)]">{s}</span>
                 </li>
               ))}
             </ul>
@@ -124,7 +124,7 @@ export function ChiefDoctor() {
       </section>
 
       {/* CERTIFICATES — curated, captioned; the rest behind a lightbox */}
-      <section className="relative w-full border-t border-white/10 bg-[#0b1720] py-20 lg:py-28">
+      <section className="relative w-full border-t border-white/10 bg-[var(--c-bg-2)] py-20 lg:py-28">
         <div className="mx-auto max-w-[1440px] px-6 sm:px-8 lg:px-12">
           <div className="flex flex-wrap items-end justify-between gap-6" data-reveal="left">
             <div className="max-w-2xl">
@@ -132,15 +132,15 @@ export function ChiefDoctor() {
               <h2 className="mt-6 font-serif text-[clamp(1.9rem,4vw,3rem)] font-medium leading-tight tracking-tight text-white">
                 Diplom va sertifikatlar
               </h2>
-              <p className="mt-4 max-w-xl text-base leading-relaxed text-[#a7c2cb]">
+              <p className="mt-4 max-w-xl text-base leading-relaxed text-[var(--c-text-2)]">
                 9 ta davlatda malaka oshirilgan. Quyida asosiylari — har biri qanday imkoniyat berganini ko‘rsatib.
               </p>
             </div>
             <button
               onClick={() => setGalleryOpen(true)}
-              className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.04] px-5 py-2.5 text-sm font-medium text-white transition-colors hover:border-[#8fc7d4]/50 hover:bg-white/[0.08]"
+              className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.04] px-5 py-2.5 text-sm font-medium text-white transition-colors hover:border-[var(--c-accent)]/50 hover:bg-white/[0.08]"
             >
-              <Award className="h-4 w-4 text-[#8fc7d4]" />
+              <Award className="h-4 w-4 text-[var(--c-accent)]" />
               Barcha sertifikatlar ({FOUNDER.certificatesTotal})
             </button>
           </div>
@@ -154,7 +154,7 @@ export function ChiefDoctor() {
       </section>
 
       {/* SCIENCE / CONFERENCES / MENTORSHIP */}
-      <section className="relative w-full border-t border-white/10 bg-[#0a141d] py-20 lg:py-28">
+      <section className="relative w-full border-t border-white/10 bg-[var(--c-bg)] py-20 lg:py-28">
         <div className="mx-auto max-w-[1440px] px-6 sm:px-8 lg:px-12">
           <div className="max-w-2xl" data-reveal="left">
             <TechnicalBadge label="Ilmiy faoliyat" variant="dark" />
@@ -167,12 +167,12 @@ export function ChiefDoctor() {
               const Icon = SCIENCE_ICON[s.kind] ?? GraduationCap;
               return (
                 <div key={s.title} className="rounded-2xl border border-white/10 bg-white/[0.04] p-6">
-                  <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#8fc7d4]/12 text-[#a9d8e4] ring-1 ring-white/10">
+                  <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-[var(--c-accent)]/12 text-[var(--c-accent-2)] ring-1 ring-white/10">
                     <Icon className="h-5 w-5" strokeWidth={1.6} />
                   </span>
-                  <div className="mt-5 font-mono text-[11px] uppercase tracking-[0.18em] text-[#5c7580]">{s.kind}</div>
+                  <div className="mt-5 font-mono text-[11px] uppercase tracking-[0.18em] text-[var(--c-text-5)]">{s.kind}</div>
                   <h3 className="mt-1.5 font-serif text-lg font-medium tracking-tight text-white">{s.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-[#a7c2cb]">{s.detail}</p>
+                  <p className="mt-2 text-sm leading-relaxed text-[var(--c-text-2)]">{s.detail}</p>
                 </div>
               );
             })}
@@ -189,13 +189,13 @@ export function ChiefDoctor() {
           onClick={() => setGalleryOpen(false)}
         >
           <div
-            className="flex max-h-[86vh] w-full max-w-5xl flex-col overflow-hidden rounded-2xl border border-white/10 bg-[#0b1720]"
+            className="flex max-h-[86vh] w-full max-w-5xl flex-col overflow-hidden rounded-2xl border border-white/10 bg-[var(--c-bg-2)]"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-center justify-between border-b border-white/10 px-6 py-4">
               <div>
                 <div className="font-serif text-lg font-medium text-white">Barcha sertifikatlar</div>
-                <div className="text-[12px] text-[#8fb0ba]">{FOUNDER.certificatesTotal} ta malaka oshirish hujjati</div>
+                <div className="text-[12px] text-[var(--c-text-3)]">{FOUNDER.certificatesTotal} ta malaka oshirish hujjati</div>
               </div>
               <button
                 onClick={() => setGalleryOpen(false)}

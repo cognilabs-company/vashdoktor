@@ -21,11 +21,11 @@ export function Testimonials() {
               {TESTIMONIALS.map((t) => (
                 <figure
                   key={`${copy}-${t.name}`}
-                  className="flex w-[300px] shrink-0 flex-col justify-between rounded-2xl border border-white/10 bg-[#0d1d28] p-5 sm:w-[340px]"
+                  className="flex w-[300px] shrink-0 flex-col justify-between rounded-2xl border border-white/10 bg-[var(--c-bg-3)] p-5 sm:w-[340px]"
                 >
                   <blockquote className="font-serif text-[17px] leading-snug text-white">“{t.text}”</blockquote>
-                  <figcaption className="mt-5 text-[12px] text-[#7f9aa4]">
-                    <span className="text-[#c6dbe1]">{t.name}</span> · {t.meta}
+                  <figcaption className="mt-5 text-[12px] text-[var(--c-text-4)]">
+                    <span className="text-[var(--c-text)]">{t.name}</span> · {t.meta}
                   </figcaption>
                 </figure>
               ))}

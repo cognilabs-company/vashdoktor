@@ -7,8 +7,8 @@ export function Statistics() {
   return (
     <section className="py-24 sm:py-32 bg-[#153F37] text-white overflow-hidden relative">
       {/* Subtle Background Glow & Grid */}
-      <div className="absolute top-1/2 -left-32 w-96 h-96 bg-[#246B5B]/30 rounded-full blur-3xl pointer-events-none -z-10" />
-      <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#DCEDE7]/10 rounded-full blur-3xl pointer-events-none -z-10" />
+      <div className="absolute top-1/2 -left-32 w-96 h-96 bg-[var(--c-green-2)]/30 rounded-full blur-3xl pointer-events-none -z-10" />
+      <div className="absolute bottom-0 right-0 w-96 h-96 bg-[var(--c-green-soft)]/10 rounded-full blur-3xl pointer-events-none -z-10" />
       <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(to_right,#ffffff08_1px,transparent_1px),linear-gradient(to_bottom,#ffffff08_1px,transparent_1px)] bg-[size:4rem_4rem] -z-10" />
 
       <div className="max-w-[1440px] mx-auto px-6 sm:px-8 lg:px-12">
@@ -35,7 +35,7 @@ export function Statistics() {
               className="relative flex flex-col justify-between rounded-2xl bg-white/5 p-8 sm:p-10 border border-white/10 backdrop-blur-xs hover:bg-white/[0.08] transition-all duration-300"
             >
               <div>
-                <div className="text-[10px] font-mono tracking-widest text-[#DCEDE7] uppercase mb-4">
+                <div className="text-[10px] font-mono tracking-widest text-[var(--c-green-soft)] uppercase mb-4">
                   0{idx + 1} / METRIC
                 </div>
 
@@ -43,7 +43,7 @@ export function Statistics() {
                   {stat.value}
                 </div>
 
-                <div className="text-sm font-semibold text-[#DCEDE7] uppercase tracking-wider mb-3">
+                <div className="text-sm font-semibold text-[var(--c-green-soft)] uppercase tracking-wider mb-3">
                   {stat.label}
                 </div>
 

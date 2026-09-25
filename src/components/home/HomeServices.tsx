@@ -27,7 +27,7 @@ export function HomeServices({ staged = false }: { staged?: boolean } = {}) {
           </div>
           <Link
             to="/services"
-            className="group inline-flex items-center gap-1.5 text-[14px] text-[#c6dbe1] underline decoration-white/25 underline-offset-[6px] transition-colors hover:text-white hover:decoration-[#8fc7d4]"
+            className="group inline-flex items-center gap-1.5 text-[14px] text-[var(--c-text)] underline decoration-white/25 underline-offset-[6px] transition-colors hover:text-white hover:decoration-[var(--c-accent)]"
           >
             Barcha {SERVICES.length} xizmat
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -42,7 +42,7 @@ export function HomeServices({ staged = false }: { staged?: boolean } = {}) {
                 key={c.key}
                 to={`/services#chapter-${c.key}`}
                 data-tile={staged ? '' : undefined}
-                className={`group relative block overflow-hidden rounded-2xl border border-white/10 bg-[#0d1d28] ${
+                className={`group relative block overflow-hidden rounded-2xl border border-white/10 bg-[var(--c-bg-3)] ${
                   staged ? 'h-[26svh] lg:h-[min(46svh,440px)]' : 'aspect-[3/4] sm:aspect-[4/5]'
                 }`}
               >
@@ -53,21 +53,21 @@ export function HomeServices({ staged = false }: { staged?: boolean } = {}) {
                   referrerPolicy="no-referrer"
                   className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1.2s] ease-out group-hover:scale-[1.06]"
                 />
-                <div className="absolute inset-0 bg-[linear-gradient(to_top,#0a141d_8%,rgba(10,20,29,0.55)_45%,rgba(10,20,29,0.05))]" />
+                <div className="absolute inset-0 bg-[linear-gradient(to_top,var(--c-bg)_8%,rgba(10,20,29,0.55)_45%,rgba(10,20,29,0.05))]" />
 
                 <span className="absolute left-4 top-4 font-serif text-[13px] text-white/70">{String(i + 1).padStart(2, '0')}</span>
-                <span className="absolute right-4 top-4 flex h-8 w-8 items-center justify-center rounded-full bg-[#0a141d]/60 text-white/70 ring-1 ring-white/15 transition-all group-hover:bg-[#8fc7d4] group-hover:text-[#0a141d]">
+                <span className="absolute right-4 top-4 flex h-8 w-8 items-center justify-center rounded-full bg-[var(--c-bg)]/60 text-white/70 ring-1 ring-white/15 transition-all group-hover:bg-[var(--c-accent)] group-hover:text-[var(--c-bg)]">
                   <ArrowUpRight className="h-4 w-4" />
                 </span>
 
                 <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5">
                   <h3 className="font-serif text-lg font-medium leading-tight tracking-tight text-white sm:text-[22px]">{c.label}</h3>
-                  <ul className="mt-2.5 hidden text-[12px] leading-[1.7] text-[#c6dbe1]/80 sm:block">
+                  <ul className="mt-2.5 hidden text-[12px] leading-[1.7] text-[var(--c-text)]/80 sm:block">
                     {items.map((s) => (
                       <li key={s.slug}>{s.title}</li>
                     ))}
                   </ul>
-                  <span className="mt-2 block text-[12px] text-[#8fc7d4] sm:hidden">{items.length} xizmat</span>
+                  <span className="mt-2 block text-[12px] text-[var(--c-accent)] sm:hidden">{items.length} xizmat</span>
                 </div>
               </Link>
             );

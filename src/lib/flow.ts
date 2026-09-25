@@ -6,16 +6,27 @@ gsap.registerPlugin(ScrollTrigger);
 
 /** Page-background tones. Sections declare one with `data-bg`, stay
  * transparent themselves, and the page colour glides between them on scroll —
- * no hard seams. All tones sit close to the base so text contrast holds. */
+ * no hard seams. All tones sit close to the base so text contrast holds.
+ *
+ * These are custom-property NAMES, not colours: the palette decides the values
+ * and GSAP cannot tween to a `var()`, so they are resolved against the document
+ * at the moment a tween starts (see `resolve`). */
 export const FLOW = {
-  base: '#0a141d',
-  teal: '#0a1e27',
-  blue: '#0b192b',
-  green: '#0b1f21',
-  ink: '#10151f',
-  deep: '#0e2531', // closing CTA — a touch lighter, still in family
-  footer: '#070f17',
+  base: '--c-bg',
+  teal: '--flow-teal',
+  blue: '--flow-blue',
+  green: '--flow-green',
+  ink: '--flow-ink',
+  deep: '--flow-deep', // closing CTA — a touch lighter, still in family
+  footer: '--c-bg-deep',
 } as const;
+
+/** a token name → the colour the current palette gives it */
+export function resolve(token: string): string {
+  if (!token.startsWith('--')) return token;
+  const v = getComputedStyle(document.documentElement).getPropertyValue(token).trim();
+  return v || '#0a141d';
+}
 
 /**
  * Tweens `root`'s background to the colour of whichever `[data-bg]` section
@@ -27,7 +38,7 @@ export function useSectionFlow(root: RefObject<HTMLElement | null>, key: string)
     if (!el) return;
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const go = (color: string) =>
-      gsap.to(el, { backgroundColor: color, duration: reduced ? 0 : 1.1, ease: 'power2.out', overwrite: 'auto' });
+      gsap.to(el, { backgroundColor: resolve(color), duration: reduced ? 0 : 1.1, ease: 'power2.out', overwrite: 'auto' });
 
     let triggers: ScrollTrigger[] = [];
     // the page's own sections must be mounted (and pinned) before we measure
@@ -51,7 +62,7 @@ export function useSectionFlow(root: RefObject<HTMLElement | null>, key: string)
     return () => {
       window.clearTimeout(t);
       triggers.forEach((tr) => tr.kill());
-      gsap.set(el, { backgroundColor: FLOW.base });
+      gsap.set(el, { backgroundColor: resolve(FLOW.base) });
     };
   }, [root, key]);
 }

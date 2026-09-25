@@ -43,7 +43,7 @@ export function Implantation() {
         title={
           <>
             Implant haqida <br />
-            <span className="font-medium text-[#8fc7d4]">ko‘p so‘raladigan savollar.</span>
+            <span className="font-medium text-[var(--c-accent)]">ko‘p so‘raladigan savollar.</span>
           </>
         }
         subtitle="Og‘riq, muddat, suyak va xizmat muddati."

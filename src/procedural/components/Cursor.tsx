@@ -64,11 +64,11 @@ export function Cursor() {
     <div className="pointer-events-none fixed inset-0 z-[60] hidden lg:block">
       <div
         ref={ringRef}
-        className="absolute top-0 left-0 h-7 w-7 rounded-full border border-[#173D35]/40 opacity-0 transition-opacity duration-300"
+        className="absolute top-0 left-0 h-7 w-7 rounded-full border border-[var(--c-green-deep)]/40 opacity-0 transition-opacity duration-300"
       />
       <div
         ref={dotRef}
-        className="absolute top-0 left-0 h-1 w-1 rounded-full bg-[#173D35] opacity-0 transition-opacity duration-300"
+        className="absolute top-0 left-0 h-1 w-1 rounded-full bg-[var(--c-green-deep)] opacity-0 transition-opacity duration-300"
       />
     </div>
   );

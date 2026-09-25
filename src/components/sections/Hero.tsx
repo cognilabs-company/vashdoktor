@@ -118,28 +118,28 @@ export function Hero({ onOpenConsultation, onOpen3DViewer }: HeroProps) {
   return (
     <section
       ref={sectionRef}
-      className="relative min-h-[92vh] sm:min-h-[95vh] w-full pt-32 pb-16 flex flex-col justify-between overflow-hidden bg-gradient-to-b from-[#F7F8F6] via-[#FFFFFF] to-[#F5F7F4]"
+      className="relative min-h-[92vh] sm:min-h-[95vh] w-full pt-32 pb-16 flex flex-col justify-between overflow-hidden bg-gradient-to-b from-[var(--c-paper)] via-[#FFFFFF] to-[var(--c-paper-2)]"
     >
       {/* Animated Aurora Glows */}
       <div className="hero-aurora hero-aurora--a pointer-events-none -z-10" />
       <div className="hero-aurora hero-aurora--b pointer-events-none -z-10" />
-      <div className="absolute bottom-10 left-10 w-[350px] h-[350px] bg-[#246B5B]/5 rounded-full blur-2xl pointer-events-none -z-10" />
+      <div className="absolute bottom-10 left-10 w-[350px] h-[350px] bg-[var(--c-green-2)]/5 rounded-full blur-2xl pointer-events-none -z-10" />
 
       {/* Subtle Micro-Grid */}
-      <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(to_right,#14201c05_1px,transparent_1px),linear-gradient(to_bottom,#14201c05_1px,transparent_1px)] bg-[size:4rem_4rem] -z-10" />
+      <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(to_right,var(--c-ink-3)05_1px,transparent_1px),linear-gradient(to_bottom,var(--c-ink-3)05_1px,transparent_1px)] bg-[size:4rem_4rem] -z-10" />
 
       <div className="max-w-[1440px] mx-auto px-6 sm:px-8 lg:px-12 w-full flex-1 flex flex-col justify-center my-auto">
         <div className="max-w-4xl">
           {/* Eyebrow */}
           <div data-hero="eyebrow" className="flex items-center gap-3 mb-6 flex-wrap">
             <TechnicalBadge code="IMPLANT DENTISTRY" label="DIGITAL PRECISION" />
-            <span className="hidden sm:inline-block text-[11px] text-[#747D79] font-mono">
+            <span className="hidden sm:inline-block text-[11px] text-[var(--c-ink-text)] font-mono">
               • SWISS SURGICAL STANDARDS
             </span>
           </div>
 
           {/* Main Display Headline — each line clips + rises on load */}
-          <h1 className="text-3xl sm:text-5xl lg:text-[3.4rem] font-medium font-serif tracking-tight text-[#101715] leading-[1.08]">
+          <h1 className="text-3xl sm:text-5xl lg:text-[3.4rem] font-medium font-serif tracking-tight text-[var(--c-ink)] leading-[1.08]">
             <span className="block overflow-hidden pb-1">
               <span data-hero="line" className="block">A tooth,</span>
             </span>
@@ -147,7 +147,7 @@ export function Hero({ onOpenConsultation, onOpen3DViewer }: HeroProps) {
               <span data-hero="line" className="block">rebuilt from</span>
             </span>
             <span className="block overflow-hidden pb-1">
-              <span data-hero="line" className="block font-medium text-[#173D35]">
+              <span data-hero="line" className="block font-medium text-[var(--c-green-deep)]">
                 the foundation.
               </span>
             </span>
@@ -156,7 +156,7 @@ export function Hero({ onOpenConsultation, onOpen3DViewer }: HeroProps) {
           {/* Subheading */}
           <p
             data-hero="sub"
-            className="mt-6 text-lg sm:text-xl text-[#747D79] max-w-2xl font-light leading-relaxed"
+            className="mt-6 text-lg sm:text-xl text-[var(--c-ink-text)] max-w-2xl font-light leading-relaxed"
           >
             From digital planning to the final crown — every layer is designed around precision, stability and a natural result.
           </p>
@@ -177,10 +177,10 @@ export function Hero({ onOpenConsultation, onOpen3DViewer }: HeroProps) {
             <button
               data-hero="cta"
               onClick={scrollToStory}
-              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-white hover:bg-[#F5F7F4] text-sm font-medium text-[#101715] border border-black/10 shadow-2xs transition-all cursor-pointer group"
+              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-white hover:bg-[var(--c-paper-2)] text-sm font-medium text-[var(--c-ink)] border border-black/10 shadow-2xs transition-all cursor-pointer group"
             >
               <span>See how it works</span>
-              <ChevronDown className="h-4 w-4 text-[#286A5B] transition-transform group-hover:translate-y-0.5" />
+              <ChevronDown className="h-4 w-4 text-[var(--c-green)] transition-transform group-hover:translate-y-0.5" />
             </button>
           </div>
 
@@ -188,7 +188,7 @@ export function Hero({ onOpenConsultation, onOpen3DViewer }: HeroProps) {
           <div className="mt-14 pt-8 border-t border-black/8 grid grid-cols-2 sm:grid-cols-4 gap-6 max-w-3xl">
             {STATS.map((s) => (
               <div key={s.key} data-hero="stat">
-                <div className="text-2xl sm:text-3xl font-serif text-[#173D35] tabular-nums">
+                <div className="text-2xl sm:text-3xl font-serif text-[var(--c-green-deep)] tabular-nums">
                   {s.staticLabel ? (
                     s.staticLabel
                   ) : (
@@ -201,12 +201,12 @@ export function Hero({ onOpenConsultation, onOpen3DViewer }: HeroProps) {
                         {formatNumber(prefersReducedMotion ? s.to : 0, s.decimals, s.thousands)}
                       </span>
                       {s.unit && (
-                        <span className="text-sm font-sans font-light text-[#747D79]">{s.unit}</span>
+                        <span className="text-sm font-sans font-light text-[var(--c-ink-text)]">{s.unit}</span>
                       )}
                     </>
                   )}
                 </div>
-                <div className="text-[11px] font-mono text-[#747D79] uppercase mt-1">{s.caption}</div>
+                <div className="text-[11px] font-mono text-[var(--c-ink-text)] uppercase mt-1">{s.caption}</div>
               </div>
             ))}
           </div>
@@ -216,19 +216,19 @@ export function Hero({ onOpenConsultation, onOpen3DViewer }: HeroProps) {
       {/* Bottom Scroll Prompt */}
       <div
         data-hero="footer"
-        className="max-w-[1440px] mx-auto px-6 sm:px-8 lg:px-12 w-full flex items-center justify-between text-xs text-[#747D79] pt-6 border-t border-black/5"
+        className="max-w-[1440px] mx-auto px-6 sm:px-8 lg:px-12 w-full flex items-center justify-between text-xs text-[var(--c-ink-text)] pt-6 border-t border-black/5"
       >
         <button
           onClick={scrollToStory}
-          className="flex items-center gap-2 hover:text-[#101715] transition-colors cursor-pointer group"
+          className="flex items-center gap-2 hover:text-[var(--c-ink)] transition-colors cursor-pointer group"
         >
-          <ChevronDown className="h-4 w-4 text-[#286A5B] animate-bounce" />
+          <ChevronDown className="h-4 w-4 text-[var(--c-green)] animate-bounce" />
           <span className="font-mono text-[11px] uppercase tracking-wider">
             Scroll down to enter 3D anatomical story
           </span>
         </button>
 
-        <div className="hidden sm:flex items-center gap-4 text-[11px] font-mono text-[#747D79]">
+        <div className="hidden sm:flex items-center gap-4 text-[11px] font-mono text-[var(--c-ink-text)]">
           <span>HARLEY STREET, LONDON</span>
           <span>•</span>
           <span>ACCEPTED BY REFERRAL</span>

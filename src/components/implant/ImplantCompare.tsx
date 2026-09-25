@@ -13,7 +13,7 @@ const ROWS: { label: string; cells: [string, string, string]; marks: [Mark, Mark
 ];
 const COLS = ['Implant', 'Ko‘prik', 'Olinadigan protez'];
 const ICON = { good: Check, mid: Minus, bad: X } as const;
-const TONE = { good: 'text-[#8fc7d4]', mid: 'text-[#8fb0ba]', bad: 'text-[#5c7580]' } as const;
+const TONE = { good: 'text-[var(--c-accent)]', mid: 'text-[var(--c-text-3)]', bad: 'text-[var(--c-text-5)]' } as const;
 
 /** Why an implant — three ways to replace a tooth, side by side. */
 export function ImplantCompare() {
@@ -31,11 +31,11 @@ export function ImplantCompare() {
           <table className="w-full min-w-[640px] border-collapse text-left">
             <thead>
               <tr className="border-b border-white/10">
-                <th className="py-4 pr-4 text-[12px] font-normal text-[#5c7580]" />
+                <th className="py-4 pr-4 text-[12px] font-normal text-[var(--c-text-5)]" />
                 {COLS.map((c, i) => (
-                  <th key={c} className={`py-4 px-4 font-serif text-lg font-medium ${i === 0 ? 'text-[#8fc7d4]' : 'text-white'}`}>
+                  <th key={c} className={`py-4 px-4 font-serif text-lg font-medium ${i === 0 ? 'text-[var(--c-accent)]' : 'text-white'}`}>
                     {c}
-                    {i === 0 && <span className="ml-2 rounded-full bg-[#8fc7d4]/15 px-2 py-0.5 align-middle text-[10px] text-[#a9d8e4]">tavsiya</span>}
+                    {i === 0 && <span className="ml-2 rounded-full bg-[var(--c-accent)]/15 px-2 py-0.5 align-middle text-[10px] text-[var(--c-accent-2)]">tavsiya</span>}
                   </th>
                 ))}
               </tr>
@@ -43,11 +43,11 @@ export function ImplantCompare() {
             <tbody>
               {ROWS.map((r) => (
                 <tr key={r.label} className="border-b border-white/[0.07]">
-                  <td className="py-4 pr-4 text-[14px] text-[#8fb0ba]">{r.label}</td>
+                  <td className="py-4 pr-4 text-[14px] text-[var(--c-text-3)]">{r.label}</td>
                   {r.cells.map((cell, i) => {
                     const Icon = ICON[r.marks[i]];
                     return (
-                      <td key={i} className={`py-4 px-4 text-[15px] ${i === 0 ? 'bg-[#8fc7d4]/[0.05] text-white' : 'text-[#c6dbe1]'}`}>
+                      <td key={i} className={`py-4 px-4 text-[15px] ${i === 0 ? 'bg-[var(--c-accent)]/[0.05] text-white' : 'text-[var(--c-text)]'}`}>
                         <span className="inline-flex items-center gap-2">
                           <Icon className={`h-4 w-4 shrink-0 ${TONE[r.marks[i]]}`} strokeWidth={2} />
                           {cell}
@@ -60,7 +60,7 @@ export function ImplantCompare() {
             </tbody>
           </table>
         </div>
-        <p className="mt-4 text-[12px] text-[#5c7580]">* O‘rtacha ko‘rsatkichlar. Aniq tavsiya — ko‘rik va 3D skandan keyin.</p>
+        <p className="mt-4 text-[12px] text-[var(--c-text-5)]">* O‘rtacha ko‘rsatkichlar. Aniq tavsiya — ko‘rik va 3D skandan keyin.</p>
       </div>
     </section>
   );

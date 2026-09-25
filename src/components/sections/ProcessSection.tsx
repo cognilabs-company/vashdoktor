@@ -45,7 +45,7 @@ interface Props {
  * 2 → 3 → 4 before the section lets go. Small screens get a plain vertical
  * timeline. */
 export function ProcessSection({
-  bg = '#0b1720',
+  bg = 'var(--c-bg-2)',
   eyebrow = 'Jarayon',
   title = 'Qanday ishlaymiz',
   subtitle,
@@ -88,7 +88,7 @@ export function ProcessSection({
     const ctx = gsap.context(() => {
       // stop 1 is lit from the start
       if (markers[0]) gsap.set(markers[0], { scale: 1, autoAlpha: 1 });
-      if (nums[0]) gsap.set(nums[0], { color: '#8fc7d4', opacity: 1 });
+      if (nums[0]) gsap.set(nums[0], { color: 'var(--c-accent)', opacity: 1 });
 
       const tl = gsap.timeline({
         defaults: { ease: 'none' },
@@ -107,7 +107,7 @@ export function ProcessSection({
       at.forEach((t, i) => {
         if (i === 0) return;
         if (markers[i]) tl.fromTo(markers[i], { scale: 0.3, autoAlpha: 0 }, { scale: 1, autoAlpha: 1, duration: 0.06, ease: 'back.out(2)' }, Math.max(0, t - 0.04));
-        if (nums[i]) tl.to(nums[i], { color: '#8fc7d4', opacity: 1, duration: 0.08 }, Math.max(0, t - 0.03));
+        if (nums[i]) tl.to(nums[i], { color: 'var(--c-accent)', opacity: 1, duration: 0.08 }, Math.max(0, t - 0.03));
       });
     }, section);
     const r = window.setTimeout(() => ScrollTrigger.refresh(), 400);
@@ -134,7 +134,7 @@ export function ProcessSection({
                 {title}
               </h2>
             </div>
-            {subtitle && <p className="max-w-xs text-[14px] leading-snug text-[#8fb0ba]">{subtitle}</p>}
+            {subtitle && <p className="max-w-xs text-[14px] leading-snug text-[var(--c-text-3)]">{subtitle}</p>}
           </div>
 
           <div className="relative mt-12">
@@ -150,7 +150,7 @@ export function ProcessSection({
               ref={pathRef}
               d={WAVE}
               fill="none"
-              stroke="#8fc7d4"
+              stroke="var(--c-accent)"
               strokeWidth={1.5}
               pathLength={1}
               strokeDasharray={1}
@@ -166,7 +166,7 @@ export function ProcessSection({
               ref={(el) => {
                 markerRefs.current[i] = el;
               }}
-              className="absolute z-10 flex h-12 w-12 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-[#8fc7d4]/60 bg-[#0a141d] text-[#a9d8e4] shadow-[0_0_0_8px_rgba(10,20,29,1),0_0_30px_-6px_rgba(143,199,212,0.6)]"
+              className="absolute z-10 flex h-12 w-12 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-[var(--c-accent)]/60 bg-[var(--c-bg)] text-[var(--c-accent-2)] shadow-[0_0_0_8px_rgba(10,20,29,1),0_0_30px_-6px_rgba(143,199,212,0.6)]"
               style={{ left: `${(NODE_X[i] / 1200) * 100}%`, top: NODE_Y[i], opacity: animate ? 0 : 1 }}
             >
               <s.icon className="h-5 w-5" strokeWidth={1.6} />
@@ -186,7 +186,7 @@ export function ProcessSection({
                     {s.step}
                   </span>
                   <h3 className="mt-3 font-serif text-xl font-medium tracking-tight text-white">{s.title}</h3>
-                  <p className="mx-auto mt-2 max-w-[240px] text-[14px] leading-relaxed text-[#8fb0ba]">{s.text}</p>
+                  <p className="mx-auto mt-2 max-w-[240px] text-[14px] leading-relaxed text-[var(--c-text-3)]">{s.text}</p>
                 </li>
               ))}
             </ol>
@@ -201,17 +201,17 @@ export function ProcessSection({
           <h2 className="mt-4 font-serif text-[clamp(1.9rem,4vw,3.1rem)] font-medium leading-[1.06] tracking-tight text-white">
             {title}
           </h2>
-          {subtitle && <p className="mt-3 max-w-xs text-[14px] leading-snug text-[#8fb0ba]">{subtitle}</p>}
+          {subtitle && <p className="mt-3 max-w-xs text-[14px] leading-snug text-[var(--c-text-3)]">{subtitle}</p>}
         </div>
         <ol className="relative mt-10 ml-5 border-l border-white/10" data-stagger>
           {steps.map((s) => (
             <li key={s.step} className="relative pb-10 pl-10 last:pb-0">
-              <span className="absolute -left-6 top-0 flex h-12 w-12 items-center justify-center rounded-full border border-[#8fc7d4]/50 bg-[#0a141d] text-[#a9d8e4]">
+              <span className="absolute -left-6 top-0 flex h-12 w-12 items-center justify-center rounded-full border border-[var(--c-accent)]/50 bg-[var(--c-bg)] text-[var(--c-accent-2)]">
                 <s.icon className="h-5 w-5" strokeWidth={1.6} />
               </span>
-              <span className="font-serif text-[13px] text-[#8fc7d4]">{s.step}</span>
+              <span className="font-serif text-[13px] text-[var(--c-accent)]">{s.step}</span>
               <h3 className="mt-1 font-serif text-xl font-medium tracking-tight text-white">{s.title}</h3>
-              <p className="mt-1.5 text-[14px] leading-relaxed text-[#8fb0ba]">{s.text}</p>
+              <p className="mt-1.5 text-[14px] leading-relaxed text-[var(--c-text-3)]">{s.text}</p>
             </li>
           ))}
         </ol>

@@ -47,7 +47,7 @@ const pad2 = (n: number) => String(n).padStart(2, '0');
 /* -------------------------------------------------------------------------- */
 
 const CARD_HOVER =
-  'transition-[transform,border-color,box-shadow] duration-300 hover:-translate-y-1 hover:border-[#8fc7d4]/40 hover:shadow-[0_24px_60px_-28px_rgba(143,199,212,0.55)]';
+  'transition-[transform,border-color,box-shadow] duration-300 hover:-translate-y-1 hover:border-[var(--c-accent)]/40 hover:shadow-[0_24px_60px_-28px_rgba(143,199,212,0.55)]';
 
 /** Centre: the chief — bigger, haloed, a slow-turning light ring, and a faint
  * "deck" of ghost cards behind the portrait that the team emerges from. */
@@ -64,11 +64,11 @@ function ChiefCard({ fluid, ghostsRef, portraitRef }: {
         {/* ghost deck — hints that more cards are stacked behind */}
         {!fluid && (
           <div ref={ghostsRef} className="pointer-events-none absolute inset-0">
-            <div className="absolute inset-0 -rotate-[7deg] scale-[0.92] rounded-[26px] border border-white/10 bg-[#0f1f2a]" />
+            <div className="absolute inset-0 -rotate-[7deg] scale-[0.92] rounded-[26px] border border-white/10 bg-[var(--c-bg-5)]" />
             <div className="absolute inset-0 rotate-[5deg] scale-[0.96] rounded-[26px] border border-white/10 bg-[#0e1d28]" />
           </div>
         )}
-        <div className="relative overflow-hidden rounded-[26px] bg-[#0d2230] ring-1 ring-[#8fc7d4]/50 shadow-[0_30px_90px_-20px_rgba(143,199,212,0.5)]">
+        <div className="relative overflow-hidden rounded-[26px] bg-[#0d2230] ring-1 ring-[var(--c-accent)]/50 shadow-[0_30px_90px_-20px_rgba(143,199,212,0.5)]">
           <Portrait
             photo={FOUNDER.photo}
             name={FOUNDER.name}
@@ -77,18 +77,18 @@ function ChiefCard({ fluid, ghostsRef, portraitRef }: {
             className={fluid ? 'aspect-[4/5] w-full' : 'aspect-[4/5] h-[min(46vh,520px)] w-auto'}
           />
           <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_top,rgba(10,20,29,0.8),rgba(10,20,29,0.1)_50%,transparent)]" />
-          <span className="absolute left-4 top-4 inline-flex items-center gap-1.5 rounded-full bg-[#0a141d]/85 px-3 py-1 text-[11px] font-medium text-[#a9d8e4] ring-1 ring-white/10">
-            <span className="h-1.5 w-1.5 rounded-full bg-[#8fc7d4]" />
+          <span className="absolute left-4 top-4 inline-flex items-center gap-1.5 rounded-full bg-[var(--c-bg)]/85 px-3 py-1 text-[11px] font-medium text-[var(--c-accent-2)] ring-1 ring-white/10">
+            <span className="h-1.5 w-1.5 rounded-full bg-[var(--c-accent)]" />
             {FOUNDER.title}
           </span>
-          <span className="absolute right-4 top-4 flex h-8 w-8 items-center justify-center rounded-full bg-[#8fc7d4] text-[#0a141d] shadow-[0_6px_20px_-4px_rgba(143,199,212,0.8)]" title="Klinika asoschisi">
+          <span className="absolute right-4 top-4 flex h-8 w-8 items-center justify-center rounded-full bg-[var(--c-accent)] text-[var(--c-bg)] shadow-[0_6px_20px_-4px_rgba(143,199,212,0.8)]" title="Klinika asoschisi">
             <ShieldCheck className="h-4 w-4" strokeWidth={2.2} />
           </span>
           <div className="absolute inset-x-0 bottom-0 p-5 text-left">
             <h2 className="font-serif text-[clamp(1.4rem,2.2vw,1.9rem)] font-medium leading-tight tracking-tight text-white">
               {FOUNDER.name}
             </h2>
-            <p className="mt-1 text-[12px] text-[#a9d8e4]">{FOUNDER.credentials}</p>
+            <p className="mt-1 text-[12px] text-[var(--c-accent-2)]">{FOUNDER.credentials}</p>
           </div>
         </div>
       </div>
@@ -97,14 +97,14 @@ function ChiefCard({ fluid, ghostsRef, portraitRef }: {
         {FOUNDER.heroStats.slice(0, 3).map((s) => (
           <div key={s.label} className="px-4 text-center first:pl-0 last:pr-0">
             <div className="font-serif text-lg font-medium text-white">{s.value}</div>
-            <div className="text-[10px] leading-tight text-[#8fb0ba]">{s.label}</div>
+            <div className="text-[10px] leading-tight text-[var(--c-text-3)]">{s.label}</div>
           </div>
         ))}
       </div>
 
       <Link
         to="/bosh-shifokor"
-        className="group mt-4 inline-flex items-center gap-2 rounded-full border border-[#8fc7d4]/30 bg-[#8fc7d4]/10 px-4 py-2 text-[12px] font-medium text-white transition-colors hover:bg-[#8fc7d4]/20"
+        className="group mt-4 inline-flex items-center gap-2 rounded-full border border-[var(--c-accent)]/30 bg-[var(--c-accent)]/10 px-4 py-2 text-[12px] font-medium text-white transition-colors hover:bg-[var(--c-accent)]/20"
       >
         Bosh shifokor haqida
         <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
@@ -118,28 +118,28 @@ function ChiefCard({ fluid, ghostsRef, portraitRef }: {
 function DossierCard({ d, index }: { d: Doctor; index: number }) {
   const years = Math.min(20, parseInt(d.experience, 10) || 0);
   return (
-    <article className={`flex gap-4 rounded-2xl border border-white/10 border-l-2 border-l-[#8fc7d4] bg-[linear-gradient(135deg,#132836,#0f1f2a_60%)] p-4 shadow-[0_20px_50px_-30px_rgba(0,0,0,0.8)] ${CARD_HOVER}`}>
+    <article className={`flex gap-4 rounded-2xl border border-white/10 border-l-2 border-l-[var(--c-accent)] bg-[linear-gradient(135deg,#132836,var(--c-bg-5)_60%)] p-4 shadow-[0_20px_50px_-30px_rgba(0,0,0,0.8)] ${CARD_HOVER}`}>
       <div className="relative shrink-0">
         <Portrait photo={d.photo} name={d.name} rounded="rounded-xl" loading="eager" className="h-24 w-20" />
-        <span className="absolute -bottom-2 -right-2 flex h-7 w-7 items-center justify-center rounded-lg bg-[#8fc7d4] font-mono text-[11px] font-semibold text-[#0a141d] shadow-md">
+        <span className="absolute -bottom-2 -right-2 flex h-7 w-7 items-center justify-center rounded-lg bg-[var(--c-accent)] font-mono text-[11px] font-semibold text-[var(--c-bg)] shadow-md">
           {pad2(index)}
         </span>
       </div>
       <div className="min-w-0 flex-1">
-        <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#5c7580]">{d.role}</div>
+        <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--c-text-5)]">{d.role}</div>
         <h3 className="mt-1 truncate font-serif text-base font-medium tracking-tight text-white">{d.name}</h3>
         {/* experience meter — one segment per ~2 years, capped at 20 */}
         <div className="mt-2 flex items-center gap-2">
           <div className="flex gap-[3px]">
             {Array.from({ length: 10 }, (_, i) => (
-              <span key={i} className={`h-2 w-1.5 rounded-sm ${i < Math.round(years / 2) ? 'bg-[#8fc7d4]' : 'bg-white/10'}`} />
+              <span key={i} className={`h-2 w-1.5 rounded-sm ${i < Math.round(years / 2) ? 'bg-[var(--c-accent)]' : 'bg-white/10'}`} />
             ))}
           </div>
-          <span className="text-[11px] text-[#8fc7d4]">{d.experience}</span>
+          <span className="text-[11px] text-[var(--c-accent)]">{d.experience}</span>
         </div>
         <div className="mt-2.5 flex flex-wrap gap-1">
           {d.tags.slice(0, 2).map((t) => (
-            <span key={t} className="rounded-full bg-white/[0.06] px-2 py-0.5 text-[10px] text-[#8fb0ba] ring-1 ring-white/10">
+            <span key={t} className="rounded-full bg-white/[0.06] px-2 py-0.5 text-[10px] text-[var(--c-text-3)] ring-1 ring-white/10">
               {t}
             </span>
           ))}
@@ -153,23 +153,23 @@ function DossierCard({ d, index }: { d: Doctor; index: number }) {
  * watermark, tags at the foot. */
 function PortraitCard({ d, index }: { d: Doctor; index: number }) {
   return (
-    <article className={`relative aspect-[3/4] overflow-hidden rounded-[22px] border border-white/10 bg-[#0f1f2a] shadow-[0_20px_50px_-30px_rgba(0,0,0,0.8)] ${CARD_HOVER}`}>
+    <article className={`relative aspect-[3/4] overflow-hidden rounded-[22px] border border-white/10 bg-[var(--c-bg-5)] shadow-[0_20px_50px_-30px_rgba(0,0,0,0.8)] ${CARD_HOVER}`}>
       <Portrait photo={d.photo} name={d.name} rounded="rounded-none" loading="eager" className="h-full w-full" />
       <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_top,rgba(10,20,29,0.95)_0%,rgba(10,20,29,0.45)_45%,transparent_72%)]" />
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#8fc7d4]/70 to-transparent" />
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[var(--c-accent)]/70 to-transparent" />
       <span className="pointer-events-none absolute -right-1 -top-3 font-serif text-[64px] font-medium leading-none text-white/[0.08]">
         {pad2(index)}
       </span>
-      <span className="absolute left-3 top-3 rounded-full bg-[#0a141d]/85 px-2.5 py-1 text-[10px] font-medium text-[#a9d8e4] ring-1 ring-white/10">
+      <span className="absolute left-3 top-3 rounded-full bg-[var(--c-bg)]/85 px-2.5 py-1 text-[10px] font-medium text-[var(--c-accent-2)] ring-1 ring-white/10">
         {d.experience}
       </span>
       <div className="absolute inset-x-0 bottom-0 p-4">
-        <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#a9d8e4]">{d.role}</div>
+        <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--c-accent-2)]">{d.role}</div>
         <h3 className="mt-1 font-serif text-lg font-medium leading-tight tracking-tight text-white">{d.name}</h3>
-        <p className="mt-1.5 line-clamp-2 text-[12px] leading-snug text-[#c6dbe1]">{d.bio}</p>
+        <p className="mt-1.5 line-clamp-2 text-[12px] leading-snug text-[var(--c-text)]">{d.bio}</p>
         <div className="mt-2.5 flex flex-wrap gap-1">
           {d.tags.slice(0, 3).map((t) => (
-            <span key={t} className="rounded-full bg-[#0a141d]/60 px-2 py-0.5 text-[10px] text-white/80">
+            <span key={t} className="rounded-full bg-[var(--c-bg)]/60 px-2 py-0.5 text-[10px] text-white/80">
               {t}
             </span>
           ))}
@@ -183,30 +183,30 @@ function PortraitCard({ d, index }: { d: Doctor; index: number }) {
  * overlapping the band, centred facts, relation footer. */
 function BadgeCard({ d, index }: { d: Doctor; index: number }) {
   return (
-    <article className={`overflow-hidden rounded-2xl border border-white/10 bg-[#0f1f2a] shadow-[0_20px_50px_-30px_rgba(0,0,0,0.8)] ${CARD_HOVER}`}>
-      <div className="relative h-16 bg-[linear-gradient(120deg,#1a4a5a,#0f2836)]">
-        <span className="absolute left-1/2 top-2.5 h-1.5 w-10 -translate-x-1/2 rounded-full bg-[#0a141d]/70 ring-1 ring-white/10" />
-        <div className="absolute inset-x-4 bottom-2.5 flex items-center justify-between font-mono text-[9px] uppercase tracking-[0.22em] text-[#a9d8e4]/80">
+    <article className={`overflow-hidden rounded-2xl border border-white/10 bg-[var(--c-bg-5)] shadow-[0_20px_50px_-30px_rgba(0,0,0,0.8)] ${CARD_HOVER}`}>
+      <div className="relative h-16 bg-[linear-gradient(120deg,#1a4a5a,var(--c-bg-4))]">
+        <span className="absolute left-1/2 top-2.5 h-1.5 w-10 -translate-x-1/2 rounded-full bg-[var(--c-bg)]/70 ring-1 ring-white/10" />
+        <div className="absolute inset-x-4 bottom-2.5 flex items-center justify-between font-mono text-[9px] uppercase tracking-[0.22em] text-[var(--c-accent-2)]/80">
           <span>{CLINIC_CONFIG.name}</span>
           <span>ID · {pad2(index)}</span>
         </div>
       </div>
       <div className="-mt-9 px-5 pb-5 text-center">
-        <div className="relative z-10 mx-auto h-[76px] w-[76px] overflow-hidden rounded-full ring-4 ring-[#0f1f2a]">
+        <div className="relative z-10 mx-auto h-[76px] w-[76px] overflow-hidden rounded-full ring-4 ring-[var(--c-bg-5)]">
           <Portrait photo={d.photo} name={d.name} rounded="rounded-full" loading="eager" className="h-full w-full" />
         </div>
         <h3 className="mt-3 font-serif text-base font-medium tracking-tight text-white">{d.name}</h3>
-        <div className="mt-0.5 text-[12px] text-[#8fc7d4]">{d.role}</div>
-        <div className="mt-0.5 text-[11px] text-[#8fb0ba]">{d.experience}</div>
+        <div className="mt-0.5 text-[12px] text-[var(--c-accent)]">{d.role}</div>
+        <div className="mt-0.5 text-[11px] text-[var(--c-text-3)]">{d.experience}</div>
         <div className="mt-3 flex flex-wrap justify-center gap-1.5">
           {d.tags.map((t) => (
-            <span key={t} className="rounded-full bg-white/[0.06] px-2.5 py-1 text-[10px] text-[#8fb0ba] ring-1 ring-white/10">
+            <span key={t} className="rounded-full bg-white/[0.06] px-2.5 py-1 text-[10px] text-[var(--c-text-3)] ring-1 ring-white/10">
               {t}
             </span>
           ))}
         </div>
-        <div className="mt-4 flex items-center justify-center gap-1.5 border-t border-dashed border-white/10 pt-3 text-[11px] text-[#7f9aa4]">
-          <GraduationCap className="h-3.5 w-3.5 text-[#8fc7d4]/70" />
+        <div className="mt-4 flex items-center justify-center gap-1.5 border-t border-dashed border-white/10 pt-3 text-[11px] text-[var(--c-text-4)]">
+          <GraduationCap className="h-3.5 w-3.5 text-[var(--c-accent)]/70" />
           {d.relation}
         </div>
       </div>
@@ -218,18 +218,18 @@ function BadgeCard({ d, index }: { d: Doctor; index: number }) {
  * author line sits at the foot like a signature. */
 function QuoteCard({ d, index }: { d: Doctor; index: number }) {
   return (
-    <article className={`relative rounded-2xl border border-white/10 bg-[linear-gradient(160deg,#122a38,#0b1720)] p-5 pt-6 shadow-[0_20px_50px_-30px_rgba(0,0,0,0.8)] ${CARD_HOVER}`}>
-      <span className="pointer-events-none absolute left-4 top-1 font-serif text-[72px] leading-none text-[#8fc7d4]/20">“</span>
-      <span className="absolute right-4 top-4 font-mono text-[10px] tracking-[0.2em] text-[#5c7580]">{pad2(index)}</span>
-      <p className="relative mt-3 line-clamp-3 pl-6 text-[13px] italic leading-relaxed text-[#dbe8ec]">{d.bio}</p>
+    <article className={`relative rounded-2xl border border-white/10 bg-[linear-gradient(160deg,#122a38,var(--c-bg-2))] p-5 pt-6 shadow-[0_20px_50px_-30px_rgba(0,0,0,0.8)] ${CARD_HOVER}`}>
+      <span className="pointer-events-none absolute left-4 top-1 font-serif text-[72px] leading-none text-[var(--c-accent)]/20">“</span>
+      <span className="absolute right-4 top-4 font-mono text-[10px] tracking-[0.2em] text-[var(--c-text-5)]">{pad2(index)}</span>
+      <p className="relative mt-3 line-clamp-3 pl-6 text-[13px] italic leading-relaxed text-[var(--c-mist-2)]">{d.bio}</p>
       <div className="mt-5 flex items-center gap-3 border-t border-white/10 pt-4">
-        <div className="h-11 w-11 shrink-0 overflow-hidden rounded-full ring-2 ring-[#8fc7d4]/40">
+        <div className="h-11 w-11 shrink-0 overflow-hidden rounded-full ring-2 ring-[var(--c-accent)]/40">
           <Portrait photo={d.photo} name={d.name} rounded="rounded-full" loading="eager" className="h-full w-full" />
         </div>
         <div className="min-w-0 flex-1">
           <h3 className="truncate font-serif text-[15px] font-medium tracking-tight text-white">{d.name}</h3>
-          <div className="text-[11px] text-[#8fb0ba]">
-            <span className="text-[#8fc7d4]">{d.role}</span> · {d.experience}
+          <div className="text-[11px] text-[var(--c-text-3)]">
+            <span className="text-[var(--c-accent)]">{d.role}</span> · {d.experience}
           </div>
         </div>
       </div>
@@ -388,10 +388,10 @@ function ConstellationStage({ doctors, eyebrow, title, subtitle }: Props) {
   const [left, right, bottomLeft, bottomRight] = doctors;
 
   return (
-    <section ref={sectionRef} className="relative w-full bg-[#0b1720]">
+    <section ref={sectionRef} className="relative w-full bg-[var(--c-bg-2)]">
       <div ref={stageRef} className="relative flex h-[100svh] min-h-[640px] w-full flex-col overflow-hidden">
         {/* backdrop: glow + faint grid + orbit rings around the centre */}
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_40%,#0f2836_0%,#0b1720_55%)]" />
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_40%,var(--c-bg-4)_0%,var(--c-bg-2)_55%)]" />
         <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:4.5rem_4.5rem] [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_75%)]" />
         <div className="pointer-events-none absolute left-1/2 top-[54%] h-[68vh] w-[68vh] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/[0.05]" />
         <div className="pointer-events-none absolute left-1/2 top-[54%] h-[96vh] w-[96vh] -translate-x-1/2 -translate-y-1/2 rounded-full border border-dashed border-white/[0.04]" />
@@ -415,7 +415,7 @@ function ConstellationStage({ doctors, eyebrow, title, subtitle }: Props) {
                   dotRefs.current[i] = el;
                 }}
                 r={0}
-                fill="#8fc7d4"
+                fill="var(--c-accent)"
                 style={{ opacity: 0 }}
               />
             </g>
@@ -429,7 +429,7 @@ function ConstellationStage({ doctors, eyebrow, title, subtitle }: Props) {
             {title}
           </h1>
           {subtitle && (
-            <p className="mx-auto mt-2.5 hidden max-w-xl text-[13px] leading-relaxed text-[#a7c2cb] [@media(min-height:800px)]:block">
+            <p className="mx-auto mt-2.5 hidden max-w-xl text-[13px] leading-relaxed text-[var(--c-text-2)] [@media(min-height:800px)]:block">
               {subtitle}
             </p>
           )}
@@ -487,7 +487,7 @@ function ConstellationStage({ doctors, eyebrow, title, subtitle }: Props) {
 
         {/* footer: scroll hint (fades out) + reveal counter */}
         <div className="pointer-events-none absolute inset-x-0 bottom-5 z-[3] flex items-end justify-between px-6 sm:px-8 lg:px-12">
-          <div ref={hintRef} className="flex items-center text-[#8fc7d4]">
+          <div ref={hintRef} className="flex items-center text-[var(--c-accent)]">
             <ChevronDown className="h-5 w-5 animate-bounce" />
           </div>
           <div className="flex items-center gap-3">
@@ -495,12 +495,12 @@ function ConstellationStage({ doctors, eyebrow, title, subtitle }: Props) {
               {Array.from({ length: SLOTS.length + 1 }, (_, i) => (
                 <span
                   key={i}
-                  className={`h-1 rounded-full transition-all duration-300 ${i <= revealed ? 'w-5 bg-[#8fc7d4]' : 'w-2 bg-white/15'}`}
+                  className={`h-1 rounded-full transition-all duration-300 ${i <= revealed ? 'w-5 bg-[var(--c-accent)]' : 'w-2 bg-white/15'}`}
                 />
               ))}
             </div>
-            <div className="font-mono text-[11px] tracking-[0.2em] text-[#5c7580]">
-              <span className="text-[#a9d8e4]">{pad2(revealed + 1)}</span> / {pad2(SLOTS.length + 1)}
+            <div className="font-mono text-[11px] tracking-[0.2em] text-[var(--c-text-5)]">
+              <span className="text-[var(--c-accent-2)]">{pad2(revealed + 1)}</span> / {pad2(SLOTS.length + 1)}
             </div>
           </div>
         </div>
@@ -516,15 +516,15 @@ function ConstellationStage({ doctors, eyebrow, title, subtitle }: Props) {
 function TeamStack({ doctors, eyebrow, title, subtitle }: Props) {
   const REVEAL = ['left', 'right', 'left', 'right'] as const;
   return (
-    <section className="relative w-full overflow-hidden bg-[#0b1720] pb-20 pt-32">
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-[70vh] bg-[radial-gradient(ellipse_at_50%_0%,#0f2836_0%,#0b1720_60%)]" />
+    <section className="relative w-full overflow-hidden bg-[var(--c-bg-2)] pb-20 pt-32">
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-[70vh] bg-[radial-gradient(ellipse_at_50%_0%,var(--c-bg-4)_0%,var(--c-bg-2)_60%)]" />
       <div className="relative mx-auto max-w-[1440px] px-6 sm:px-8 lg:px-12">
         <div className="mx-auto max-w-2xl text-center" data-reveal>
           <TechnicalBadge label={eyebrow ?? 'Jamoa'} variant="dark" />
           <h1 className="mt-5 font-serif text-[clamp(2rem,6vw,3rem)] font-medium leading-[1.02] tracking-tight text-white">
             {title}
           </h1>
-          {subtitle && <p className="mt-4 text-base leading-relaxed text-[#a7c2cb]">{subtitle}</p>}
+          {subtitle && <p className="mt-4 text-base leading-relaxed text-[var(--c-text-2)]">{subtitle}</p>}
         </div>
 
         <div className="mx-auto mt-12 max-w-[360px]" data-reveal="scale">

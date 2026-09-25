@@ -61,7 +61,7 @@ export function ServiceChapters({ onPickCategory, onOpenService }: Props) {
   return (
     <section data-bg={FLOW.teal} className="relative w-full py-16 lg:py-24">
       {/* bridge from the photo hero above */}
-      <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-[#070f17] to-transparent" />
+      <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-[var(--c-bg-deep)] to-transparent" />
       <div className="mx-auto max-w-[1440px] px-6 sm:px-8 lg:px-12">
         <div className="grid gap-6 lg:grid-cols-12" data-reveal>
           <div className="lg:col-span-7">
@@ -86,28 +86,28 @@ export function ServiceChapters({ onPickCategory, onOpenService }: Props) {
                 style={stack ? { top: STICKY_TOP + STEP * i } : undefined}
                 data-reveal={stack ? undefined : 'up'}
               >
-                <article className="relative grid overflow-hidden rounded-[28px] border border-white/10 bg-[#0d1d28] lg:min-h-[560px] lg:grid-cols-2">
+                <article className="relative grid overflow-hidden rounded-[28px] border border-white/10 bg-[var(--c-bg-3)] lg:min-h-[560px] lg:grid-cols-2">
                   {/* copy */}
                   <div className="flex flex-col p-7 sm:p-9 lg:p-12">
                     <div className="flex items-end justify-between">
                       <span className="font-serif text-6xl font-light leading-none text-white/[0.14]">{String(i + 1).padStart(2, '0')}</span>
-                      <span className="pb-1 text-[13px] text-[#7f9aa4]">{items.length} ta xizmat</span>
+                      <span className="pb-1 text-[13px] text-[var(--c-text-4)]">{items.length} ta xizmat</span>
                     </div>
                     <h3 className="mt-6 font-serif text-[clamp(1.7rem,2.8vw,2.4rem)] font-medium leading-[1.08] tracking-tight text-white">
                       {cat.label}
                     </h3>
-                    <p className="mt-3 max-w-md text-[15px] leading-relaxed text-[#a7c2cb]">{cat.note}</p>
+                    <p className="mt-3 max-w-md text-[15px] leading-relaxed text-[var(--c-text-2)]">{cat.note}</p>
 
                     <ol className="mt-8 border-t border-white/10">
                       {items.map((s) => (
                         <li key={s.slug} className="border-b border-white/10">
                           <button onClick={() => onOpenService(s)} className="group flex w-full items-baseline gap-4 py-3.5 text-left">
-                            <span className="w-6 shrink-0 font-serif text-[12px] text-[#5c7580]">{s.eyebrow}</span>
+                            <span className="w-6 shrink-0 font-serif text-[12px] text-[var(--c-text-5)]">{s.eyebrow}</span>
                             <span className="min-w-0 flex-1">
-                              <span className="block text-[15px] font-medium text-white transition-colors group-hover:text-[#8fc7d4]">{s.title}</span>
-                              <span className="mt-0.5 block text-[13px] leading-snug text-[#8fb0ba]">{s.short}</span>
+                              <span className="block text-[15px] font-medium text-white transition-colors group-hover:text-[var(--c-accent)]">{s.title}</span>
+                              <span className="mt-0.5 block text-[13px] leading-snug text-[var(--c-text-3)]">{s.short}</span>
                             </span>
-                            <ArrowUpRight className="h-4 w-4 shrink-0 self-center text-[#5c7580] transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-[#8fc7d4]" />
+                            <ArrowUpRight className="h-4 w-4 shrink-0 self-center text-[var(--c-text-5)] transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-[var(--c-accent)]" />
                           </button>
                         </li>
                       ))}
@@ -119,7 +119,7 @@ export function ServiceChapters({ onPickCategory, onOpenService }: Props) {
                           onPickCategory(cat.key);
                           scrollToEl('#catalog');
                         }}
-                        className="group inline-flex items-center gap-1.5 text-[14px] text-[#c6dbe1] underline decoration-white/25 underline-offset-[6px] transition-colors hover:text-white hover:decoration-[#8fc7d4]"
+                        className="group inline-flex items-center gap-1.5 text-[14px] text-[var(--c-text)] underline decoration-white/25 underline-offset-[6px] transition-colors hover:text-white hover:decoration-[var(--c-accent)]"
                       >
                         Yo‘nalishning to‘liq ro‘yxati
                         <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
@@ -136,7 +136,7 @@ export function ServiceChapters({ onPickCategory, onOpenService }: Props) {
                       referrerPolicy="no-referrer"
                       className="absolute inset-0 h-full w-full object-cover"
                     />
-                    <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#0d1d28] via-[#0d1d28]/70 to-transparent px-6 pb-5 pt-14 text-[12px] leading-snug text-[#c6dbe1]">
+                    <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[var(--c-bg-3)] via-[var(--c-bg-3)]/70 to-transparent px-6 pb-5 pt-14 text-[12px] leading-snug text-[var(--c-text)]">
                       {cat.caption}
                     </figcaption>
                   </figure>

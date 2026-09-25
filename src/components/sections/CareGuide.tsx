@@ -32,7 +32,7 @@ export function CareGuide({ onOpenConsultation }: Props) {
           </div>
           <button
             onClick={onOpenConsultation}
-            className="group inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-medium text-[#0a141d] transition-colors hover:bg-[#e8f2f4]"
+            className="group inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-medium text-[var(--c-bg)] transition-colors hover:bg-[var(--c-mist)]"
           >
             Qaysi shifokor kerakligini so‘rash
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -46,28 +46,28 @@ export function CareGuide({ onOpenConsultation }: Props) {
             return (
               <article
                 key={g.problem}
-                className="group flex flex-col justify-between rounded-2xl border border-white/10 bg-white/[0.04] p-6 backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:border-[#8fc7d4]/40 hover:bg-white/[0.06]"
+                className="group flex flex-col justify-between rounded-2xl border border-white/10 bg-white/[0.04] p-6 backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:border-[var(--c-accent)]/40 hover:bg-white/[0.06]"
               >
                 <div>
-                  <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#8fc7d4]/12 text-[#a9d8e4] ring-1 ring-white/10 transition-colors group-hover:bg-[#8fc7d4]/20">
+                  <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-[var(--c-accent)]/12 text-[var(--c-accent-2)] ring-1 ring-white/10 transition-colors group-hover:bg-[var(--c-accent)]/20">
                     <Icon className="h-5 w-5" strokeWidth={1.6} />
                   </span>
                   <h3 className="mt-5 font-serif text-lg font-medium leading-snug tracking-tight text-white">{g.problem}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-[#a7c2cb]">{g.hint}</p>
+                  <p className="mt-2 text-sm leading-relaxed text-[var(--c-text-2)]">{g.hint}</p>
                 </div>
                 {t && (
-                  <div className={`mt-6 flex items-center gap-3 rounded-xl border p-3 ${t.chief ? 'border-[#8fc7d4]/30 bg-[#8fc7d4]/[0.07]' : 'border-white/10 bg-[#0a141d]/60'}`}>
-                    <div className={`h-10 w-10 shrink-0 overflow-hidden rounded-full ${t.chief ? 'ring-2 ring-[#8fc7d4]/60' : 'ring-1 ring-white/10'}`}>
+                  <div className={`mt-6 flex items-center gap-3 rounded-xl border p-3 ${t.chief ? 'border-[var(--c-accent)]/30 bg-[var(--c-accent)]/[0.07]' : 'border-white/10 bg-[var(--c-bg)]/60'}`}>
+                    <div className={`h-10 w-10 shrink-0 overflow-hidden rounded-full ${t.chief ? 'ring-2 ring-[var(--c-accent)]/60' : 'ring-1 ring-white/10'}`}>
                       <Portrait photo={t.photo} name={t.name} rounded="rounded-full" className="h-full w-full" />
                     </div>
                     <div className="min-w-0">
-                      <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-[#5c7580]">Sizga kerak</div>
+                      <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-[var(--c-text-5)]">Sizga kerak</div>
                       <div className="truncate text-[13px] font-medium text-white">
                         {t.role}
-                        {t.chief && <span className="ml-1.5 text-[#8fc7d4]">★</span>}
+                        {t.chief && <span className="ml-1.5 text-[var(--c-accent)]">★</span>}
                       </div>
                     </div>
-                    <ArrowRight className="ml-auto h-4 w-4 shrink-0 text-[#8fc7d4]/60 transition-transform group-hover:translate-x-1" />
+                    <ArrowRight className="ml-auto h-4 w-4 shrink-0 text-[var(--c-accent)]/60 transition-transform group-hover:translate-x-1" />
                   </div>
                 )}
               </article>

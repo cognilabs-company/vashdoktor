@@ -55,7 +55,7 @@ export function Home() {
         title={
           <>
             Odatda so‘raladigan <br />
-            <span className="font-medium text-[#8fc7d4]">savollar.</span>
+            <span className="font-medium text-[var(--c-accent)]">savollar.</span>
           </>
         }
         subtitle="Og‘riq, narx, bolalar, kafolat."

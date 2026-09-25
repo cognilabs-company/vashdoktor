@@ -29,10 +29,10 @@ export function SectionHeading({
     <div className={`flex flex-col max-w-3xl ${alignClass} ${className}`}>
       {eyebrow && (
         <div className="flex items-center gap-2 mb-3">
-          <span className={`h-1.5 w-1.5 rounded-full ${isDark ? 'bg-[#DCEDE7]' : 'bg-[#246B5B]'}`} />
+          <span className={`h-1.5 w-1.5 rounded-full ${isDark ? 'bg-[var(--c-green-soft)]' : 'bg-[var(--c-green-2)]'}`} />
           <span
             className={`text-xs font-semibold tracking-[0.18em] uppercase ${
-              isDark ? 'text-[#DCEDE7]' : 'text-[#246B5B]'
+              isDark ? 'text-[var(--c-green-soft)]' : 'text-[var(--c-green-2)]'
             }`}
           >
             {eyebrow}
@@ -42,7 +42,7 @@ export function SectionHeading({
 
       <h2
         className={`text-3xl sm:text-4xl lg:text-5xl font-normal tracking-tight font-serif leading-[1.15] ${
-          isDark ? 'text-white' : 'text-[#111816]'
+          isDark ? 'text-white' : 'text-[var(--c-ink-2)]'
         }`}
       >
         {title.split('\n').map((line, i) => (
@@ -56,7 +56,7 @@ export function SectionHeading({
       {subtitle && (
         <p
           className={`mt-4 text-base sm:text-lg leading-relaxed max-w-2xl font-light ${
-            isDark ? 'text-white/70' : 'text-[#68716D]'
+            isDark ? 'text-white/70' : 'text-[var(--c-ink-text-2)]'
           }`}
         >
           {subtitle}

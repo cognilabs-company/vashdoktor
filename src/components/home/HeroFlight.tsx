@@ -214,7 +214,7 @@ function Flight({ onOpenConsultation }: Props) {
   };
 
   return (
-    <section ref={sectionRef} className="relative w-full bg-[#dbe7ef]" style={{ height: `${FLIGHT_VH}vh` }}>
+    <section ref={sectionRef} className="relative w-full bg-[var(--c-fog)]" style={{ height: `${FLIGHT_VH}vh` }}>
       <div
         ref={stageRef}
         className="left-0 h-[100svh] w-full overflow-hidden bg-cover bg-center"
@@ -244,8 +244,8 @@ function Flight({ onOpenConsultation }: Props) {
 
         {/* opening headline */}
         <div ref={headlineRef} className="pointer-events-none absolute bottom-[14vh] right-6 z-10 w-[min(56vw,660px)] lg:right-14">
-          <div className="mb-5 inline-flex items-center gap-3 text-[13px] text-[#a9d8e4]">
-            <span className="h-px w-7 bg-[#a9d8e4]/70" />
+          <div className="mb-5 inline-flex items-center gap-3 text-[13px] text-[var(--c-accent-2)]">
+            <span className="h-px w-7 bg-[var(--c-accent-2)]/70" />
             Stomatologiya · Toshkent
           </div>
           <h1 className="text-[12vw] leading-[0.95] tracking-[-0.03em] text-white sm:text-5xl lg:text-[4.2rem]">
@@ -258,7 +258,7 @@ function Flight({ onOpenConsultation }: Props) {
             </Button>
             <Link
               to="/services"
-              className="group inline-flex items-center gap-1.5 text-sm text-[#c6dbe1] underline decoration-white/25 underline-offset-[6px] transition-colors hover:text-white hover:decoration-[#8fc7d4]"
+              className="group inline-flex items-center gap-1.5 text-sm text-[var(--c-text)] underline decoration-white/25 underline-offset-[6px] transition-colors hover:text-white hover:decoration-[var(--c-accent)]"
             >
               Barcha xizmatlar
               <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
@@ -271,7 +271,7 @@ function Flight({ onOpenConsultation }: Props) {
           {FACTS.map((f) => (
             <div key={f.label} className="px-6 first:pl-0 last:pr-0">
               <div className="font-serif text-3xl font-medium leading-none text-white">{f.value}</div>
-              <div className="mt-1.5 text-[12px] text-[#c6dbe1]">{f.label}</div>
+              <div className="mt-1.5 text-[12px] text-[var(--c-text)]">{f.label}</div>
             </div>
           ))}
         </div>
@@ -324,8 +324,8 @@ function Flight({ onOpenConsultation }: Props) {
                 />
                 <div className="absolute inset-0 bg-[linear-gradient(0deg,rgba(6,16,24,0.97),rgba(6,16,24,0.35)_58%,rgba(6,16,24,0.08))]" />
                 <div className="absolute inset-x-6 bottom-4 lg:inset-x-7">
-                  <div className="flex items-center gap-3 text-[12px] tracking-wide text-[#a9d8e4]">
-                    <span className="h-px w-6 bg-[#a9d8e4]/70" />
+                  <div className="flex items-center gap-3 text-[12px] tracking-wide text-[var(--c-accent-2)]">
+                    <span className="h-px w-6 bg-[var(--c-accent-2)]/70" />
                     {String(i + 1).padStart(2, '0')} / {String(STOPS.length).padStart(2, '0')}
                   </div>
                   <h2 className="mt-2 font-serif text-[clamp(1.45rem,2.2vw,2rem)] font-medium leading-[1.06] tracking-tight text-white">
@@ -344,17 +344,17 @@ function Flight({ onOpenConsultation }: Props) {
                     key={title}
                     className="flight-card-el flex items-center gap-3 border-t border-white/[0.08] py-2.5 text-[14px] text-[#e4eef1]"
                   >
-                    <span className="h-1 w-1 shrink-0 rounded-full bg-[#8fc7d4]" />
+                    <span className="h-1 w-1 shrink-0 rounded-full bg-[var(--c-accent)]" />
                     {title}
                   </li>
                 ))}
               </ul>
 
               <div className="flight-card-el mt-1 flex items-center justify-between gap-4 border-t border-white/[0.08] px-6 py-5 lg:px-7">
-                <span className="text-[13px] text-[#8fb0ba]">{stop.items.length} ta xizmat</span>
+                <span className="text-[13px] text-[var(--c-text-3)]">{stop.items.length} ta xizmat</span>
                 <Link
                   to={`/services#chapter-${stop.category.key}`}
-                  className="group inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-[13px] font-medium text-[#0a141d] transition-colors hover:bg-[#e8f2f4]"
+                  className="group inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-[13px] font-medium text-[var(--c-bg)] transition-colors hover:bg-[var(--c-mist)]"
                 >
                   Batafsil
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -382,13 +382,13 @@ function Flight({ onOpenConsultation }: Props) {
         </div>
         <button
           onClick={skip}
-          className="absolute bottom-6 right-6 z-20 rounded-full bg-[#0a141d]/50 px-4 py-2 text-[12px] text-white/80 ring-1 ring-white/15 backdrop-blur-md transition-colors hover:text-white lg:right-14"
+          className="absolute bottom-6 right-6 z-20 rounded-full bg-[var(--c-bg)]/50 px-4 py-2 text-[12px] text-white/80 ring-1 ring-white/15 backdrop-blur-md transition-colors hover:text-white lg:right-14"
         >
           O‘tkazib yuborish
         </button>
 
         {/* the fog thickens until nothing is left of the landscape */}
-        <div ref={fogRef} className="pointer-events-none absolute inset-0 z-30 bg-[#dbe7ef]" style={{ opacity: 0 }} />
+        <div ref={fogRef} className="pointer-events-none absolute inset-0 z-30 bg-[var(--c-fog)]" style={{ opacity: 0 }} />
       </div>
     </section>
   );
@@ -399,7 +399,7 @@ function Flight({ onOpenConsultation }: Props) {
 /** Phones / reduced motion: the flight's opening frame, no scroll choreography. */
 function HeroStill({ onOpenConsultation }: Props) {
   return (
-    <section className="relative min-h-[100svh] w-full overflow-hidden bg-[#070f17] text-white">
+    <section className="relative min-h-[100svh] w-full overflow-hidden bg-[var(--c-bg-deep)] text-white">
       <img
         src="/hero-flight-poster.jpg"
         alt="Muzli fjord ustida suzayotgan tish — klinika sahnasi"
@@ -410,8 +410,8 @@ function HeroStill({ onOpenConsultation }: Props) {
       />
       <div className="absolute inset-0 bg-[linear-gradient(0deg,rgba(6,13,21,0.85),rgba(6,13,21,0.15)_45%,transparent_70%)]" />
       <div className="absolute bottom-[12vh] left-6 z-10 max-w-2xl lg:left-14">
-        <div className="mb-5 inline-flex items-center gap-3 text-[13px] text-[#a9d8e4]">
-          <span className="h-px w-7 bg-[#a9d8e4]/70" />
+        <div className="mb-5 inline-flex items-center gap-3 text-[13px] text-[var(--c-accent-2)]">
+          <span className="h-px w-7 bg-[var(--c-accent-2)]/70" />
           Stomatologiya · Toshkent
         </div>
         <h1 className="text-[13vw] leading-[0.95] tracking-[-0.03em] sm:text-6xl">
@@ -424,7 +424,7 @@ function HeroStill({ onOpenConsultation }: Props) {
           </Button>
           <Link
             to="/services"
-            className="group inline-flex items-center gap-1.5 text-sm text-[#c6dbe1] underline decoration-white/25 underline-offset-[6px] transition-colors hover:text-white"
+            className="group inline-flex items-center gap-1.5 text-sm text-[var(--c-text)] underline decoration-white/25 underline-offset-[6px] transition-colors hover:text-white"
           >
             Barcha xizmatlar
             <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />

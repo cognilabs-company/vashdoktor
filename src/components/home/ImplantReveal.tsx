@@ -77,12 +77,12 @@ function Reveal({ onOpen3DViewer, onOpenConsultation }: Props) {
       else if (-rect.top < total) setPin('pinned', '0px', 'auto');
       else setPin('after', 'auto', '0px');
 
-      // Build the scene while the flight is still in its opening seconds —
-      // compiling shaders and uploading geometry takes long enough that doing
-      // it just before the section arrives means scrolling into a blank stage.
-      // The hero flight is ~7.8 viewports tall, so this lands a moment after
-      // the first frames of the video.
-      if (!wasMounted && rect.top < vh * 7) {
+      // Build the scene the moment the visitor scrolls at all. Compiling the
+      // shaders and uploading the geometry takes long enough that starting any
+      // later means arriving at a stage that is still coming up; the whole
+      // flight in front of it is what buys that time. Nothing is built while
+      // the page is merely sitting at the top, so first paint is untouched.
+      if (!wasMounted && (window.scrollY > 4 || rect.top < vh * 7)) {
         wasMounted = true;
         setMounted(true);
       }

@@ -474,3 +474,46 @@
   --c3d-teal: #2f3646;
   --c3d-warm: #d4bab5;
 }
+
+/* Iliq ko‘k */
+[data-palette='warmblue'] {
+  --c-accent: #99a8ca;
+  --c-accent-2: #b1bedc;
+  --c-accent-3: #a8b7d7;
+  --c-bg: #12151d;
+  --c-bg-2: #131620;
+  --c-bg-3: #171b26;
+  --c-bg-4: #1c2131;
+  --c-bg-5: #191d28;
+  --c-bg-deep: #0e1118;
+  --c-backdrop: #1b2031;
+  --c-text: #ced1d9;
+  --c-text-2: #b1b6c1;
+  --c-text-3: #9ba1ae;
+  --c-text-4: #8a8f99;
+  --c-text-5: #666b76;
+  --c-mist: #f1eeeb;
+  --c-mist-2: #e7e4e0;
+  --c-fog: #e9e6e1;
+  --c-ink: #15161a;
+  --c-ink-2: #16171b;
+  --c-ink-3: #1b1c22;
+  --c-ink-text: #7a7b7f;
+  --c-ink-text-2: #6e6f73;
+  --c-green: #3b4657;
+  --c-green-2: #394556;
+  --c-green-3: #4e5866;
+  --c-green-deep: #222832;
+  --c-green-soft: #e1e4e8;
+  --c-paper: #f7f7f7;
+  --c-paper-2: #f6f6f5;
+  --flow-teal: #141825;
+  --flow-blue: #161a28;
+  --flow-green: #141721;
+  --flow-ink: #171920;
+  --flow-deep: #1a1f2d;
+  --c3d-base: #12151d;
+  --c3d-mineral: #1c2232;
+  --c3d-teal: #2e354b;
+  --c3d-warm: #cec6bb;
+}

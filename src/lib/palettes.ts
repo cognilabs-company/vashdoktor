@@ -12,4 +12,5 @@ export const PALETTES: Palette[] = [
   { slug: 'graphite', label: 'Iliq grafit' },
   { slug: 'amber', label: 'Kunbotar' },
   { slug: 'coral', label: 'Marjon' },
+  { slug: 'warmblue', label: 'Iliq ko‘k' },
 ];

@@ -14,6 +14,8 @@ const clamp01 = (v: number) => Math.min(1, Math.max(0, v));
 interface Props {
   /** read the same 0..1 scroll value the WebGL version is driven by */
   getProgress: () => number;
+  /** world units the assembly is pushed down by, matched to the WebGL scene */
+  getExit?: () => number;
   className?: string;
 }
 
@@ -29,9 +31,10 @@ interface Props {
  * The frames are only ever requested when this component mounts, so a browser
  * that does have WebGL never downloads them.
  */
-export function ImplantSequence({ getProgress, className = '' }: Props) {
+export function ImplantSequence({ getProgress, getExit, className = '' }: Props) {
   const canvasRef = useRef<SequenceCanvasHandle | null>(null);
   const labelRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const boxRef = useRef<HTMLDivElement | null>(null);
 
   useLayoutEffect(() => {
     let raf = 0;
@@ -66,11 +69,20 @@ export function ImplantSequence({ getProgress, className = '' }: Props) {
           el.style.opacity = o.toFixed(3);
         }
       }
+      // Each baked frame carries the scene's backdrop with it, so sliding the
+      // picture down would drag the backdrop off too and leave a hard edge
+      // across the stage. It sinks AND fades instead — no edge, same reading.
+      if (boxRef.current && getExit) {
+        const e = clamp01(getExit() / 8);
+        boxRef.current.style.transform = e > 0.001 ? `translate3d(0, ${(e * 42).toFixed(2)}%, 0)` : '';
+        boxRef.current.style.opacity = e > 0.001 ? (1 - e).toFixed(3) : '';
+      }
+
       raf = requestAnimationFrame(tick);
     };
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
-  }, [getProgress]);
+  }, [getProgress, getExit]);
 
   return (
     <div className={className}>
@@ -78,6 +90,7 @@ export function ImplantSequence({ getProgress, className = '' }: Props) {
         {/* the baked frame's own aspect, so a recorded label always lands on
             the part it belongs to whatever the viewport is */}
         <div
+          ref={boxRef}
           className="relative w-full"
           style={{ aspectRatio: `${IMPLANT_SEQ_ASPECT}`, maxHeight: '100%' }}
         >

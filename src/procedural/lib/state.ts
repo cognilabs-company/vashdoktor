@@ -23,6 +23,9 @@ export interface View {
     homes: Record<GroupKey, number>; // per-group return, 0..1
     objectX: number; // target world-x of the whole assembly (opposite the text)
     objectScale: number; // target fit-scale (narrow viewports shrink the object)
+    /** world-y the assembly is pushed DOWN by — it leaves the frame this way at
+     * the end of the home page's story, and the backdrop stays put behind it. */
+    exitY: number;
   };
 
   /** live explode amount per part id, written by the model each frame. */
@@ -45,6 +48,7 @@ export const view: View = {
     homes: { crown: 0, abutment: 0, implant: 0, gum: 0, bone: 0 },
     objectX: -1.75,
     objectScale: 1,
+    exitY: 0,
   },
   explodeById: {},
   camera: { frameProgress: 0 },

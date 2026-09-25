@@ -46,7 +46,13 @@ function Waker({ active }: { active: boolean }) {
  * the same mapping the full experience's scroll engine uses, so the camera
  * walks every shot: assembled → apart → crown → abutment → screw → fixture →
  * threads → back together. */
-function Driver({ progressRef }: { progressRef: MutableRefObject<number> }) {
+function Driver({
+  progressRef,
+  exitRef,
+}: {
+  progressRef: MutableRefObject<number>;
+  exitRef?: MutableRefObject<number>;
+}) {
   useFrame(() => {
     const op = clamp(progressRef.current);
     view.overallProgress = op;
@@ -73,6 +79,7 @@ function Driver({ progressRef }: { progressRef: MutableRefObject<number> }) {
     // the page centres the closing shot behind centred text; in one pinned
     // stage that lands the words on the model, so it keeps a side here too
     view.model.objectX = layoutToObjectX(layout === 'right' ? 'right' : 'left');
+    view.model.exitY = exitRef ? exitRef.current : 0;
   }, -1);
   return null;
 }
@@ -80,6 +87,8 @@ function Driver({ progressRef }: { progressRef: MutableRefObject<number> }) {
 interface Props {
   /** 0 = assembled … 1 = back together, across the whole sequence */
   progressRef: MutableRefObject<number>;
+  /** world units the assembly is pushed down by, to leave the frame */
+  exitRef?: MutableRefObject<number>;
   active?: boolean;
   className?: string;
 }
@@ -89,7 +98,7 @@ interface Props {
  * procedural model, camera framing and leader-line labels, but driven by a
  * scroll value the caller owns instead of the page-long scroll engine.
  */
-export function ImplantShowcase({ progressRef, active = true, className = '' }: Props) {
+export function ImplantShowcase({ progressRef, exitRef, active = true, className = '' }: Props) {
   const reduced = useReducedMotion();
   const perf = useDevicePerformance();
   const webgl = useWebGL();
@@ -101,7 +110,8 @@ export function ImplantShowcase({ progressRef, active = true, className = '' }: 
   const full = !perf.isLowEnd && !perf.isMobile;
 
   // no WebGL context to be had — play the baked scrub of the same scene
-  if (!webgl) return <ImplantSequence className={className} getProgress={readProgress} />;
+  if (!webgl)
+    return <ImplantSequence className={className} getProgress={readProgress} getExit={() => (exitRef ? exitRef.current : 0)} />;
 
   return (
     <div className={className}>
@@ -121,7 +131,7 @@ export function ImplantShowcase({ progressRef, active = true, className = '' }: 
           }}
           camera={{ fov: 30, near: 0.1, far: 100, position: [5, 2, 11] }}
         >
-          <Driver progressRef={progressRef} />
+          <Driver progressRef={progressRef} exitRef={exitRef} />
           <Waker active={active} />
           <Backdrop reduced={reduced} />
           <ImplantModel groupRef={modelGroupRef} reduced={reduced} />

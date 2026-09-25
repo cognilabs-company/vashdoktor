@@ -74,7 +74,9 @@ export function CameraRig({ groupRef, reduced }: Props) {
     cur.current.focusY = damp(cur.current.focusY, tf.focusY, lambda, dt);
 
     const scale = g ? g.scale.x : 1;
-    const swayY = g ? g.position.y : 0;
+    // the camera tracks the assembly's own sway, but NOT its exit — otherwise
+    // it follows the model down and the model never appears to leave the frame
+    const swayY = g ? g.position.y + view.model.exitY : 0;
     const worldFocusY = cur.current.focusY * scale + swayY;
 
     const { dist, azimuth, pitch } = cur.current;

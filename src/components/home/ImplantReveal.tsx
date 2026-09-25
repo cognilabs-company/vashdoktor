@@ -22,9 +22,8 @@ const MODEL_AT = '37% 46%';
 // clinic's own procedure sequence; frame 120 is the drilled socket with no tool
 // in shot, and 240 is the finished jaw. Measured on the 1280x720 frame, the
 // socket sits at (635, 423) and a seated fixture is 70 x 236 px.
-const FINALE_VH = 190;
-const JAW_OPEN = 120; // socket drilled, nothing above it yet
-const SOCKET = { x: 635 / 1280, y: 423 / 720 };
+const FINALE_VH = 250;
+const JAW_OPEN = 118; // socket drilled, nothing above it yet
 /** share of the pinned scroll the implant sequence itself owns */
 const SHOW_SHARE = (SHOWCASE_VH - 100) / (SHOWCASE_VH + FINALE_VH - 100);
 const smoothstep = (a: number, b: number, x: number) => {
@@ -65,6 +64,8 @@ function Reveal({ onOpen3DViewer, onOpenConsultation }: Props) {
   const panelRefs = useRef<(HTMLDivElement | null)[]>([]);
   // the showcase reads this every frame — no React state on the scroll path
   const showcaseProgress = useRef(0);
+  // world units the assembly is pushed down by as it leaves the frame
+  const showcaseExit = useRef(0);
   const [live, setLive] = useState(false); // draw only while in view
   const [mounted, setMounted] = useState(false); // build the WebGL context just before
 
@@ -120,10 +121,12 @@ function Reveal({ onOpen3DViewer, onOpenConsultation }: Props) {
 
       // FINALE — the jaw comes up under the implant, the implant goes down into
       // the socket, and the footage carries it from there to a finished tooth
+      // the jaw rises into the empty stage the implant just left
       if (jawRef.current) {
-        const inJaw = smoothstep(0, 0.12, q);
-        jawRef.current.style.opacity = inJaw.toFixed(3);
-        jawRef.current.style.visibility = inJaw < 0.01 ? 'hidden' : 'visible';
+        const up = smoothstep(0.26, 0.46, q);
+        jawRef.current.style.opacity = up.toFixed(3);
+        jawRef.current.style.visibility = up < 0.01 ? 'hidden' : 'visible';
+        jawRef.current.style.transform = `translate3d(11vw, ${(2 + (1 - up) * 34).toFixed(1)}vh, 0) scale(0.8)`;
       }
       if (endRef.current) {
         const t = smoothstep(0.84, 0.95, q);
@@ -134,7 +137,7 @@ function Reveal({ onOpen3DViewer, onOpenConsultation }: Props) {
       if (jawCanvasRef.current) {
         // hold on the open socket while the implant is still on its way down,
         // then play through to the finished jaw
-        const f = Math.round(JAW_OPEN + smoothstep(0.34, 1, q) * (JAW_FRAMES - JAW_OPEN));
+        const f = Math.round(JAW_OPEN + smoothstep(0.5, 1, q) * (JAW_FRAMES - JAW_OPEN));
         if (f !== lastJawFrame) {
           lastJawFrame = f;
           jawCanvasRef.current.draw(f);
@@ -163,16 +166,15 @@ function Reveal({ onOpen3DViewer, onOpenConsultation }: Props) {
         fogRef.current.style.opacity = (1 - smoothstep(0.05, 0.085, p)).toFixed(3);
       }
       if (modelRef.current) {
-        // in out of the mist, then down into the socket at the end
-        const land = smoothstep(0.04, 0.34, q);
-        const sc = (1.05 - smoothstep(0, 0.075, p) * 0.05) * (1 - land * 0.6);
-        const dx = land * (SOCKET.x - 0.5) * 100;
-        const dy = land * (SOCKET.y - 0.5) * 100;
-        modelRef.current.style.opacity = (
-          smoothstep(0.008, 0.045, p) * (1 - smoothstep(0.24, 0.36, q))
-        ).toFixed(3);
-        modelRef.current.style.transform = `translate3d(${dx.toFixed(2)}vw, ${dy.toFixed(2)}vh, 0) scale(${sc.toFixed(4)})`;
+        // In out of the mist at the start. At the end it sinks out of the
+        // bottom of the frame — moved inside the scene, so the backdrop behind
+        // it stays put instead of sliding away and leaving a seam.
+        const sc = 1.05 - smoothstep(0, 0.075, p) * 0.05;
+        modelRef.current.style.opacity = smoothstep(0.008, 0.045, p).toFixed(3);
+        modelRef.current.style.transform = `scale(${sc.toFixed(4)})`;
       }
+      // 8 world units clears the frame at this camera distance
+      showcaseExit.current = smoothstep(0.02, 0.34, q) * 8;
       // light blooms where the mist parts, then goes
       if (bloomRef.current) {
         const bloom = Math.sin(Math.PI * clampN(p / 0.085)) * 0.6;
@@ -219,9 +221,11 @@ function Reveal({ onOpen3DViewer, onOpenConsultation }: Props) {
         {/* the jaw the implant lands in */}
         <div
           ref={jawRef}
-          className="absolute inset-0"
+          // above the 3D canvas: its backdrop is opaque and stays put once the
+          // implant has sunk through it, so the jaw arrives in the same space
+          className="absolute inset-0 z-10"
           // kept to its own side of the stage, so the words never sit on it
-          style={{ opacity: 0, visibility: 'hidden', transform: 'translate3d(11vw, 2vh, 0) scale(0.8)' }}
+          style={{ opacity: 0, visibility: 'hidden', transform: 'translate3d(11vw, 36vh, 0) scale(0.8)' }}
         >
           <SequenceCanvas
             ref={jawCanvasRef}
@@ -235,7 +239,12 @@ function Reveal({ onOpen3DViewer, onOpenConsultation }: Props) {
 
         <div ref={modelRef} className="absolute inset-0" style={{ opacity: 0 }}>
           {mounted && (
-            <ImplantShowcase className="absolute inset-0 h-full w-full" progressRef={showcaseProgress} active={live} />
+            <ImplantShowcase
+              className="absolute inset-0 h-full w-full"
+              progressRef={showcaseProgress}
+              exitRef={showcaseExit}
+              active={live}
+            />
           )}
         </div>
 

@@ -81,7 +81,9 @@ export function ImplantModel({ groupRef, reduced, onReady }: Props) {
     g.position.x = curX.current;
     // NO idle bob/drift — any continuous micro-motion makes the projected DOM
     // annotation labels shiver. Motion comes only from scroll + gentle pointer.
-    g.position.y = 0;
+    // The one exception is the exit: the assembly sinks out of the bottom of
+    // the frame while the backdrop behind it stays where it is.
+    g.position.y = -m.exitY;
     g.position.z = 0;
     g.scale.setScalar(curScale.current);
 

@@ -1,26 +1,58 @@
-A single unbroken 10-second take. One camera, one continuous move, filmed in one go. There is no edit, no cut, no montage, no shot change and no transition anywhere in it: the picture runs without interruption from the first frame to the last. This is one shot, not a sequence of shots.
+ONE CONTINUOUS 10-SECOND SHOT. One camera. One subject. The camera starts extremely close on a woman's lower teeth and pulls steadily back until her whole smiling face is in frame. Nothing transforms into anything else at any point: it is the same mouth, the same person, the same take, from the first frame to the last. No cut, no edit, no dissolve, no montage, no scene change.
+
+THE TWO RULES THAT MATTER MOST
+1. SCALE. The implant is ONE TOOTH. Its ceramic crown is exactly the same width and height as the natural teeth on either side of it — a single lower molar. It is never bigger than one tooth, never the size of the jaw, never a giant object. If it looks larger than its neighbours, the shot is wrong.
+2. NO TRANSFORMATION. The jaw never turns into a person, never morphs, melts, stretches, grows or changes into anything. It was always her mouth. The face is revealed only because the camera moves back and the light widens — the way a face appears when you step away from it.
+
+SUBJECT
+A young woman, late twenties, fair skin, clear smooth complexion, soft natural make-up, hair simply tied back. Photoreal, not stylised. Her lower teeth are natural white and even, with one gap in the lower row on her left side where a molar is missing. Everything outside the pool of light is deep blue-black, so at the start only the teeth are lit and nothing else can be seen.
 
 THE IMPLANT — match the attached reference image exactly
-A single dental implant, upright, seen from the side: a wide off-white ceramic molar crown on top, a short pale grey tapered abutment under it, and below that a light grey titanium root with smooth rounded spiral threads narrowing to a rounded point. Matte-to-satin finish, no chrome, no mirror reflections, no engraving, no text. It keeps exactly this shape and these proportions for the whole shot — it never changes design, never gains or loses parts, never becomes a natural tooth with roots.
+A single dental implant, upright: a wide off-white ceramic molar crown on top, a short pale grey tapered abutment beneath it, and below that a light grey titanium root with smooth rounded spiral threads narrowing to a rounded point. Matte-to-satin, no chrome, no mirror finish, no engraving, no text. It keeps this exact shape and these proportions for the whole shot. It is the size of one molar and no larger.
 
-THE MOVE
-The shot opens on empty space — a deep blue-black void with a soft cool haze in it and nothing else in frame. The implant drops gently into the top of the picture, upright and unhurried, as if lowered on an invisible thread, and keeps descending through the middle of the frame. As it comes down, a jaw rises into the lower part of the picture to meet it: a clean, premium arch of natural white teeth in smooth pale gum, one gap waiting in the lower row. The implant descends into that gap and seats itself into the arch, and the gum closes softly around it so the new tooth sits level with its neighbours and is indistinguishable from them.
+TIMELINE — every half second, all of it inside the same unbroken camera move
 
-Still in the same unbroken move, the camera begins to draw back. The arch turns very slightly toward the lens and the rest of the face comes into view around it — the jaw was always part of a person. A young woman in her late twenties, fair skin, clear smooth complexion, soft natural make-up, hair simply tied back. She is already smiling as she is revealed, and the smile opens and warms as the camera settles: a genuine, easy smile, eyes alive, showing an even row of natural white teeth. The take ends with her held in a calm, steady frame, still smiling, the camera at rest.
+0.0–0.5s  Extreme close-up on the lower row of teeth, filling the frame: four or five natural white teeth across the width of the picture, pale gum below them, and one empty gap. Everything around the teeth falls away into deep blue-black. The camera is already easing backward, very slowly.
+0.5–1.0s  The same view, a hair wider. The gap in the row is clearly readable now. Nothing else has entered the frame.
+1.0–1.5s  The implant enters from the top of the frame, upright, tip down, lowered slowly and steadily as if on an invisible thread. It is plainly the size of ONE of the teeth below it — its crown matches its neighbours exactly. It hangs above the gap.
+1.5–2.0s  The implant continues down. It is now about one tenth of the frame's height. The camera keeps easing back at the same rate, so the implant appears to grow slightly smaller while it descends.
+2.0–2.5s  The titanium tip reaches the gum line of the empty gap and starts to enter it.
+2.5–3.0s  The threaded root sinks into the gap, unhurried and straight, without spinning fast, without a tool, without hands.
+3.0–3.5s  Only the abutment and crown are still above the gum. The crown lines up with the row of teeth on either side.
+3.5–4.0s  The implant seats fully. Its crown sits level with the neighbouring teeth, the same height, the same white, the same size — it reads as one more tooth in the row.
+4.0–4.5s  The gum closes softly around the new tooth. The row of lower teeth is now complete and even. The camera keeps pulling back.
+4.5–5.0s  Wider. The whole lower arch is now in frame, all of its teeth visible, the new one indistinguishable from the rest. Light begins to reach the lower lip below.
+5.0–5.5s  Wider still. The lower lip and a sliver of the upper lip come into the light. The teeth are now about half the frame's height.
+5.5–6.0s  Both lips are in frame, slightly parted, the upper teeth appearing above the lower ones. The mouth is relaxed.
+6.0–6.5s  The mouth and chin are in frame. The corners of the mouth begin to lift into the start of a smile.
+6.5–7.0s  The lower half of the face is in frame — mouth, chin, the line of the jaw. The smile is opening, natural and unforced.
+7.0–7.5s  Nose and cheeks come into the light. The smile widens; the teeth stay natural white and even.
+7.5–8.0s  The whole face is in frame, head and shoulders. Her eyes are open, alive, smiling with the mouth.
+8.0–8.5s  A calm portrait: head and shoulders, centred, warm genuine smile, background still deep blue-black. The camera slows almost to rest.
+8.5–9.0s  The camera drifts back a last few centimetres, almost imperceptibly. She holds the smile.
+9.0–9.5s  Still drifting, still smiling. Nothing else moves.
+9.5–10.0s The camera settles. The final frame is a calm, sharp portrait of her smiling, framed head and shoulders, left of centre or centred, with clear dark space around her.
 
-The tooth is the subject the whole way through. It stays close to the middle of the picture from the moment it drops in until the end, and it is the last thing that is still sharp and centred when the shot settles — the face is revealed around it, not instead of it.
+THE TOOTH IS THE SUBJECT
+The new tooth stays near the centre of the frame from the moment it is placed until the end. As the camera pulls back it becomes a small detail inside her smile, but it is always in the middle of the picture and always in focus. The face is revealed around it, not instead of it.
 
-HOW THE CAMERA MOVES — this is the most important part of the shot
-The camera only ever moves slowly BACKWARD, away from the subject, and very slightly upward as the face is revealed. It must never swing, whip, sweep or snap sideways, and it must never rotate on the spot.
-At every instant, both halves of the picture must move at the same rate. The left side and the right side of the frame travel at the same speed — never one side sweeping past while the other stands still.
-Speed changes are gradual and continuous, on a smooth ease-in ease-out curve. Over any one second the speed never more than doubles and never more than halves, and it never changes in a single step.
-The camera is still moving, however slowly, at every instant including the last second. The final second is not a frozen image: it is a slow settle, not a stop.
-The reveal of the face is a PULL-BACK, not a morph. The jaw does not melt, stretch or transform into a person; the camera simply widens and the person is already there around it.
+HOW THE CAMERA MOVES
+The camera only ever moves slowly BACKWARD, in a straight line away from the mouth, and rises very slightly as the face comes into frame. It never swings, whips, sweeps or snaps sideways, and it never rotates on the spot.
+At every instant, both halves of the picture move at the same rate — never one side sweeping past while the other stands still.
+The pull-back is one smooth continuous ease: the speed never more than doubles and never more than halves over any one second, and it never changes in a single step.
+The camera is still moving, however slightly, at every instant including the last second. The final second is a slow settle, not a freeze.
 
-WHAT NEVER CHANGES
-Cool, calm, premium light throughout: a deep blue-black background (#0a141d), cool teal-navy shadows, pale blue-white key light from the upper left, a soft cyan rim (#8fc7d4) separating the subject from the dark. No warm or golden tint at any point. The background stays dark and simple behind the face — a soft gradient and haze, no room, no furniture, no window, no props, no logo. Exposure and white balance are constant from the first frame to the last. The teeth stay the same natural white the whole way, and never glow, sparkle or flash.
+LIGHT AND COLOUR — constant throughout
+Deep blue-black background (#0a141d) with a soft cool haze. Pale blue-white key light from the upper left. A soft cyan rim (#8fc7d4) separating the subject from the dark. The pool of light widens as the camera pulls back — that widening is what reveals the face. No warm, golden or orange tint at any point. No room, no furniture, no window, no props, no logo, no text. Exposure and white balance constant from first frame to last. The teeth stay the same natural white all the way through and never glow, sparkle or flash.
 
 TECHNICAL
-Photorealistic 3D render moving into photoreal live-action portrait, cinematic product-commercial look, 50mm lens, 16:9, 24 fps, 3840x2160 if available, otherwise 1920x1080 — never lower. Every single frame must be sharp enough to stand alone as a still: almost no motion blur, no shutter smear, no grain, no vignette, no lens flare, no chromatic aberration, no depth-of-field so shallow that the tooth goes soft. No zoom, no focal-length change, no handheld shake.
+Photoreal, cinematic product-commercial look, 50mm lens, 16:9, 24 fps, 3840x2160 if available, otherwise 1920x1080 — never lower. Every single frame must be sharp enough to stand alone as a still: almost no motion blur, no shutter smear, no grain, no vignette, no lens flare, no chromatic aberration, and never so shallow a depth of field that the new tooth goes soft. No zoom, no focal-length change, no handheld shake.
 
-AVOID: cuts, jump cuts, cross-fades, dissolves, a second shot, montage, the camera teleporting or re-framing; the jaw morphing, melting or stretching into a face; the camera swinging sideways faster than it moves back, one side of the frame sweeping past while the other barely moves, whip pans, sudden yaw, a lurch or a jolt, any single-frame jump in speed or direction; the camera stopping dead, or a still or frozen final second; the implant changing shape, proportions or finish, extra implants, the implant turning into a natural tooth with roots, the implant landing anywhere but the waiting gap; crooked, uneven, oversized or extra teeth, teeth that change shape or number as the camera pulls back, a gummy or forced grin, a distorted or uncanny face, warped eyes, asymmetric features, visible teeth braces or metal; text, letters, numbers, subtitles, watermarks, logos, UI overlays; a clinical or surgical look, blood, gums cut open, bone cutaway, dental tools, gloves, hands; warm, golden, orange or sunset light, a bright or white studio background, a room or clinic interior behind the face; cartoon style, oversaturated colour, heavy retouching that makes the skin look plastic.
+AVOID
+The implant larger than one tooth; an implant the size of the jaw, the mouth or the head; a giant implant descending onto a small jaw; the implant out of proportion with the teeth beside it; more than one implant; the implant landing anywhere but the waiting gap; the implant turning into a natural tooth with roots, or changing shape, proportions or finish.
+The jaw morphing, melting, stretching, growing or transforming into a person or a face; a jaw model floating in space with no person attached; a disembodied jaw; a dental cast, a model on a table, a denture; the person appearing as a different subject rather than being revealed by the pull-back.
+Cuts, jump cuts, cross-fades, dissolves, a second shot, montage, the camera teleporting or re-framing; the camera swinging sideways faster than it pulls back; whip pans, sudden yaw, a lurch or a jolt; any single-frame jump in speed or direction; the camera stopping dead; a still or frozen final second.
+Crooked, uneven, oversized, doubled or extra teeth; teeth that change shape or number as the camera pulls back; a gummy or forced grin; a distorted or uncanny face; warped eyes; asymmetric features; braces or visible metal in the mouth.
+Clinical or surgical look; blood; gums cut open; bone cutaway; dental tools, drills, tweezers, gloves or hands anywhere in frame.
+Text, letters, numbers, subtitles, watermarks, logos, UI overlays.
+Warm, golden or orange light; a bright or white studio background; a room, clinic or interior behind the face; cartoon style; oversaturated colour; retouching so heavy the skin looks plastic.

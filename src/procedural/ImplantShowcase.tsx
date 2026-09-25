@@ -1,5 +1,5 @@
-import { useCallback, useRef, type MutableRefObject } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
+import { useCallback, useEffect, useRef, type MutableRefObject } from 'react';
+import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import * as THREE from 'three';
 import { ImplantModel } from './components/ImplantModel';
 import { CameraRig } from './components/CameraRig';
@@ -17,6 +17,30 @@ import { useWebGL } from '../hooks/useWebGL';
 /** How tall a host section must be for the sequence to play at its own pace:
  * the experience's own scroll length plus the pinned viewport. */
 export const SHOWCASE_VH = TOTAL_VH + 100;
+
+/**
+ * R3F stops its global render loop whenever a root on 'demand' has no frames
+ * left to draw. Flipping the frameloop prop to 'always' only writes the store
+ * value — `setFrameloop` does not restart the loop — so the scene sits frozen
+ * on its last drawn frame until something invalidates it, and a single mouse
+ * click was enough to make it spring to life. Nudge it when the switch lands.
+ */
+function Waker({ active }: { active: boolean }) {
+  const invalidate = useThree((s) => s.invalidate);
+  useEffect(() => {
+    if (!active) return;
+    let id = 0;
+    let n = 0;
+    // across a few frames, so at least one lands after the prop has been applied
+    const step = () => {
+      invalidate();
+      if (++n < 3) id = requestAnimationFrame(step);
+    };
+    id = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(id);
+  }, [active, invalidate]);
+  return null;
+}
 
 /** Writes the shared view from our own scroll value, before anything reads it —
  * the same mapping the full experience's scroll engine uses, so the camera
@@ -85,6 +109,8 @@ export function ImplantShowcase({ progressRef, active = true, className = '' }: 
         <Canvas
           // mounted early so the scene is compiled and warm; 'demand' renders
           // it once and then idles until the section is actually on screen
+          // mounted early so the scene is compiled and warm; 'demand' renders
+          // it once and then idles until the section is actually on screen
           frameloop={active ? 'always' : 'demand'}
           dpr={dpr}
           gl={{
@@ -96,6 +122,7 @@ export function ImplantShowcase({ progressRef, active = true, className = '' }: 
           camera={{ fov: 30, near: 0.1, far: 100, position: [5, 2, 11] }}
         >
           <Driver progressRef={progressRef} />
+          <Waker active={active} />
           <Backdrop reduced={reduced} />
           <ImplantModel groupRef={modelGroupRef} reduced={reduced} />
           <CameraRig groupRef={modelGroupRef} reduced={reduced} />

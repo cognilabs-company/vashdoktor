@@ -58,6 +58,7 @@ function Reveal({ onOpen3DViewer, onOpenConsultation }: Props) {
     let lastPhase = '';
     let wasLive = false;
     let wasMounted = false;
+    let lastRadius = -1; // a full-viewport gradient is expensive to restyle
     const setPin = (phase: string, top: string, bottom: string) => {
       if (phase === lastPhase) return;
       lastPhase = phase;
@@ -102,10 +103,19 @@ function Reveal({ onOpen3DViewer, onOpenConsultation }: Props) {
       // A flat sheet carries the handover from the flight — the opening must
       // never show as a speck on the seam — and lifts once the gap behind it is
       // already wide and soft.
-      if (fogFlatRef.current) fogFlatRef.current.style.opacity = (1 - smoothstep(0, 0.022, p)).toFixed(3);
+      if (fogFlatRef.current) {
+        const flat = 1 - smoothstep(0, 0.022, p);
+        fogFlatRef.current.style.visibility = flat < 0.01 ? 'hidden' : 'visible';
+        fogFlatRef.current.style.opacity = flat.toFixed(3);
+      }
       if (fogRef.current) {
-        const r = smoothstep(0, 0.06, p) * 160;
-        fogRef.current.style.background = `radial-gradient(circle at ${MODEL_AT}, rgba(219,231,239,0) ${(r * 0.45).toFixed(1)}%, rgba(219,231,239,1) ${r.toFixed(1)}%)`;
+        // rewriting a full-screen radial gradient costs a style recalc and a
+        // repaint, so only when the opening has actually moved
+        const r = Math.round(smoothstep(0, 0.06, p) * 1600) / 10;
+        if (r !== lastRadius) {
+          lastRadius = r;
+          fogRef.current.style.background = `radial-gradient(circle at ${MODEL_AT}, rgba(219,231,239,0) ${(r * 0.45).toFixed(1)}%, rgba(219,231,239,1) ${r.toFixed(1)}%)`;
+        }
         fogRef.current.style.opacity = (1 - smoothstep(0.05, 0.085, p)).toFixed(3);
       }
       if (modelRef.current) {
@@ -115,7 +125,11 @@ function Reveal({ onOpen3DViewer, onOpenConsultation }: Props) {
       }
       // light blooms where the mist parts, then goes
       if (bloomRef.current) {
-        bloomRef.current.style.opacity = (Math.sin(Math.PI * clampN(p / 0.085)) * 0.6).toFixed(3);
+        const bloom = Math.sin(Math.PI * clampN(p / 0.085)) * 0.6;
+        // a mix-blend layer is composited even at zero opacity, so take it out
+        // of painting entirely outside its moment
+        bloomRef.current.style.visibility = bloom < 0.01 ? 'hidden' : 'visible';
+        bloomRef.current.style.opacity = bloom.toFixed(3);
       }
 
       // one block of words per shot, in and out on its own window
@@ -149,7 +163,7 @@ function Reveal({ onOpen3DViewer, onOpenConsultation }: Props) {
         className="left-0 h-[100svh] w-full overflow-hidden"
         style={{ position: 'absolute', top: 0 }}
       >
-        <div ref={modelRef} className="absolute inset-0 will-change-transform" style={{ opacity: 0 }}>
+        <div ref={modelRef} className="absolute inset-0" style={{ opacity: 0 }}>
           {mounted && (
             <ImplantShowcase className="absolute inset-0 h-full w-full" progressRef={showcaseProgress} active={live} />
           )}
@@ -172,6 +186,7 @@ function Reveal({ onOpen3DViewer, onOpenConsultation }: Props) {
           className="pointer-events-none absolute inset-0 z-[25] mix-blend-screen"
           style={{
             opacity: 0,
+            visibility: 'hidden',
             background: `radial-gradient(40% 46% at ${MODEL_AT}, rgba(169,216,228,0.55), transparent 70%)`,
           }}
         />

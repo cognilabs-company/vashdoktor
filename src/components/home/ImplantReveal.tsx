@@ -23,6 +23,13 @@ const MODEL_AT = '37% 46%';
 // socket sits at (635, 423) and a seated fixture is 70 x 236 px.
 const FINALE_VH = 250;
 const JAW_OPEN = 118; // socket drilled, nothing above it yet
+// Where in the finale the jaw falls. Wide on purpose — 0.30 of 250vh is about
+// 75vh of scrolling, long enough to watch it come down. It starts while the
+// implant is still on its way out of the bottom of the frame: left until the
+// implant had gone there was a dead beat with nothing on the stage at all, and
+// the two never meet anyway, the implant being low by then and the jaw high.
+const JAW_FALL_FROM = 0.22;
+const JAW_FALL_TO = 0.52;
 /** share of the pinned scroll the implant sequence itself owns */
 const SHOW_SHARE = (SHOWCASE_VH - 100) / (SHOWCASE_VH + FINALE_VH - 100);
 const smoothstep = (a: number, b: number, x: number) => {
@@ -118,14 +125,27 @@ function Reveal({ onOpen3DViewer, onOpenConsultation }: Props) {
       showcaseProgress.current = op;
       const q = clampN((p - SHOW_SHARE) / (1 - SHOW_SHARE));
 
-      // FINALE — the jaw comes up under the implant, the implant goes down into
-      // the socket, and the footage carries it from there to a finished tooth
-      // the jaw rises into the empty stage the implant just left
+      // FINALE — the implant sinks out of the bottom of the frame and the jaw
+      // comes down from above into the space it left, and the footage carries
+      // it from there to a finished tooth.
+      // The jaw drops IN, it does not rise up. Scrolling down is a downward
+      // gesture; a jaw climbing up to meet it ran against the hand doing the
+      // scrolling, and the two crossing in opposite directions read as two
+      // separate things happening rather than one handing over to the other.
+      // Now both move the way the page does. It comes forward as it comes
+      // down — a little smaller at the top of its fall — so it arrives in
+      // front rather than just sliding into place.
       if (jawRef.current) {
-        const up = smoothstep(0.26, 0.46, q);
-        jawRef.current.style.opacity = up.toFixed(3);
-        jawRef.current.style.visibility = up < 0.01 ? 'hidden' : 'visible';
-        jawRef.current.style.transform = `translate3d(11vw, ${(2 + (1 - up) * 34).toFixed(1)}vh, 0) scale(0.8)`;
+        // Eased out, not smoothstepped: it should carry its own weight down
+        // and then take its time settling, the way something landing does.
+        const t = clampN((q - JAW_FALL_FROM) / (JAW_FALL_TO - JAW_FALL_FROM));
+        const land = 1 - Math.pow(1 - t, 3);
+        // opacity leads the travel, so it is already there to watch fall
+        const fade = smoothstep(JAW_FALL_FROM, JAW_FALL_FROM + 0.1, q);
+        jawRef.current.style.opacity = fade.toFixed(3);
+        jawRef.current.style.visibility = fade < 0.01 ? 'hidden' : 'visible';
+        jawRef.current.style.transform =
+          `translate3d(11vw, ${(2 - (1 - land) * 30).toFixed(1)}vh, 0) scale(${(0.8 - (1 - land) * 0.08).toFixed(3)})`;
       }
       if (endRef.current) {
         const t = smoothstep(0.84, 0.95, q);
@@ -136,7 +156,7 @@ function Reveal({ onOpen3DViewer, onOpenConsultation }: Props) {
       if (jawCanvasRef.current) {
         // hold on the open socket while the implant is still on its way down,
         // then play through to the finished jaw
-        const f = Math.round(JAW_OPEN + smoothstep(0.5, 1, q) * (JAW_FRAMES - JAW_OPEN));
+        const f = Math.round(JAW_OPEN + smoothstep(JAW_FALL_TO + 0.04, 1, q) * (JAW_FRAMES - JAW_OPEN));
         if (f !== lastJawFrame) {
           lastJawFrame = f;
           jawCanvasRef.current.draw(f);
@@ -173,7 +193,7 @@ function Reveal({ onOpen3DViewer, onOpenConsultation }: Props) {
         modelRef.current.style.transform = `scale(${sc.toFixed(4)})`;
       }
       // 8 world units clears the frame at this camera distance
-      showcaseExit.current = smoothstep(0.02, 0.34, q) * 8;
+      showcaseExit.current = smoothstep(0.02, 0.28, q) * 8;
       // light blooms where the mist parts, then goes
       if (bloomRef.current) {
         const bloom = Math.sin(Math.PI * clampN(p / 0.085)) * 0.6;
@@ -192,10 +212,10 @@ function Reveal({ onOpen3DViewer, onOpenConsultation }: Props) {
         const last = i === SECTION_RANGES.length - 1;
         // The closing words stay exactly where they are while the implant sinks
         // out of frame — the tooth is what moves, not the text. They only hand
-        // over once the jaw has started to rise in its place.
+        // over once the jaw has started to come down in its place.
         const o =
           clampN(Math.min((op - r.start) / pad, last ? 1 : (r.end - op) / pad)) *
-          (last ? 1 - smoothstep(0.34, 0.46, q) : 1);
+          (last ? 1 - smoothstep(JAW_FALL_FROM + 0.02, JAW_FALL_FROM + 0.16, q) : 1);
         el.style.opacity = o.toFixed(3);
         // no drift on the closing block: it holds its position until it goes
         el.style.transform = last ? 'none' : `translate3d(0, ${((1 - o) * 18).toFixed(1)}px, 0)`;
@@ -227,7 +247,7 @@ function Reveal({ onOpen3DViewer, onOpenConsultation }: Props) {
           // implant has sunk through it, so the jaw arrives in the same space
           className="absolute inset-0 z-10"
           // kept to its own side of the stage, so the words never sit on it
-          style={{ opacity: 0, visibility: 'hidden', transform: 'translate3d(11vw, 36vh, 0) scale(0.8)' }}
+          style={{ opacity: 0, visibility: 'hidden', transform: 'translate3d(11vw, -28vh, 0) scale(0.72)' }}
         >
           <SequenceCanvas
             ref={jawCanvasRef}

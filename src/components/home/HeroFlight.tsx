@@ -176,10 +176,6 @@ function Flight({ onOpenConsultation }: Props) {
           el.style.clipPath = crumple > 0.02 ? crumplePath(crumple, i * 7) : '';
           el.style.pointerEvents = o > 0.85 ? 'auto' : 'none';
           el.classList.toggle('is-in', o > 0.3); // inner lines cascade in (CSS)
-          el.classList.toggle('is-left', dir === -1);
-          // the glass and its tether only once it has arrived and flattened —
-          // a backdrop filter through a scaling, clipped element is expensive
-          el.classList.toggle('is-settled', o > 0.92 && crumple < 0.02);
         }
         const crease = creaseRefs.current[i];
         if (crease) {
@@ -304,22 +300,11 @@ function Flight({ onOpenConsultation }: Props) {
               cardRefs.current[i] = el;
             }}
             style={{ opacity: 0 }}
-            className={`flight-card absolute top-1/2 z-20 w-[min(38vw,430px)] will-change-transform ${
+            className={`flight-card absolute top-1/2 z-20 w-[min(44vw,500px)] will-change-transform ${
               stop.side === 'left' ? 'left-6 lg:left-14' : 'right-6 lg:right-14'
             }`}
           >
-            {/* the line it travelled out on, still tying it to the rock face */}
-            <span
-              aria-hidden="true"
-              className={`flight-tether pointer-events-none absolute top-1/2 hidden lg:block ${
-                stop.side === 'left' ? 'left-full' : 'right-full'
-              }`}
-            >
-              <span className="flight-tether-line" />
-              <span className="flight-tether-dot" />
-            </span>
-
-            <article className="flight-glass relative overflow-hidden rounded-[14px]">
+            <article className="relative overflow-hidden rounded-[26px] bg-[linear-gradient(180deg,rgba(6,16,24,0.93),rgba(8,22,31,0.88))] shadow-[0_40px_90px_-35px_rgba(0,0,0,0.95)] ring-1 ring-white/12">
               {/* the creases of the sheet it was, fading out as it opens */}
               <div
                 ref={(el) => {
@@ -328,23 +313,36 @@ function Flight({ onOpenConsultation }: Props) {
                 className="flight-crease"
                 style={{ opacity: 0, visibility: 'hidden' }}
               />
-
-              <div className="flight-card-el px-6 pt-6 lg:px-7">
-                <div className="flex items-center gap-3 text-[12px] tracking-[0.14em] text-[var(--c-accent-2)]">
-                  <span className="h-px w-6 bg-[var(--c-accent-2)]/70" />
-                  {String(i + 1).padStart(2, '0')} / {String(STOPS.length).padStart(2, '0')}
+              <div className="flight-card-el relative h-[148px] w-full overflow-hidden">
+                <img
+                  src={stop.category.image}
+                  alt=""
+                  aria-hidden="true"
+                  loading="lazy"
+                  referrerPolicy="no-referrer"
+                  className="h-full w-full object-cover"
+                />
+                <div className="absolute inset-0 bg-[linear-gradient(0deg,rgba(6,16,24,0.97),rgba(6,16,24,0.35)_58%,rgba(6,16,24,0.08))]" />
+                <div className="absolute inset-x-6 bottom-4 lg:inset-x-7">
+                  <div className="flex items-center gap-3 text-[12px] tracking-wide text-[var(--c-accent-2)]">
+                    <span className="h-px w-6 bg-[var(--c-accent-2)]/70" />
+                    {String(i + 1).padStart(2, '0')} / {String(STOPS.length).padStart(2, '0')}
+                  </div>
+                  <h2 className="mt-2 font-serif text-[clamp(1.45rem,2.2vw,2rem)] font-medium leading-[1.06] tracking-tight text-white">
+                    {stop.category.label}
+                  </h2>
                 </div>
-                <h2 className="mt-3 font-serif text-[clamp(1.4rem,2.1vw,1.9rem)] font-medium leading-[1.06] tracking-tight text-white">
-                  {stop.category.label}
-                </h2>
-                <p className="mt-3 text-[14px] leading-relaxed text-[var(--c-text-2)]">{stop.category.note}</p>
               </div>
 
-              <ul className="mt-5 px-6 lg:px-7">
+              <p className="flight-card-el px-6 pt-4 text-[14px] leading-relaxed text-[#b9cfd7] lg:px-7">
+                {stop.category.note}
+              </p>
+
+              <ul className="mt-3 px-6 lg:px-7">
                 {stop.items.map((title) => (
                   <li
                     key={title}
-                    className="flight-card-el flex items-center gap-3 border-t border-white/[0.10] py-2.5 text-[14px] text-[var(--c-text)]"
+                    className="flight-card-el flex items-center gap-3 border-t border-white/[0.08] py-2.5 text-[14px] text-[#e4eef1]"
                   >
                     <span className="h-1 w-1 shrink-0 rounded-full bg-[var(--c-accent)]" />
                     {title}
@@ -352,11 +350,11 @@ function Flight({ onOpenConsultation }: Props) {
                 ))}
               </ul>
 
-              <div className="flight-card-el mt-1 flex items-center justify-between gap-4 border-t border-white/[0.10] px-6 py-5 lg:px-7">
+              <div className="flight-card-el mt-1 flex items-center justify-between gap-4 border-t border-white/[0.08] px-6 py-5 lg:px-7">
                 <span className="text-[13px] text-[var(--c-text-3)]">{stop.items.length} ta xizmat</span>
                 <Link
                   to={`/services#chapter-${stop.category.key}`}
-                  className="group inline-flex items-center gap-2 text-[13px] font-medium text-white underline decoration-white/30 underline-offset-[6px] transition-colors hover:decoration-[var(--c-accent)]"
+                  className="group inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-[13px] font-medium text-[var(--c-bg)] transition-colors hover:bg-[var(--c-mist)]"
                 >
                   Batafsil
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />

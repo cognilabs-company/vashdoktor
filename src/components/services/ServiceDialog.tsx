@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
-import { Link } from 'react-router-dom';
-import { X, ArrowRight, Rotate3d } from 'lucide-react';
+import { X, ArrowRight } from 'lucide-react';
 import { SERVICES, SERVICE_CATEGORIES, type Service } from '../../lib/services';
 
 export const categoryLabel = (key: Service['category']) => SERVICE_CATEGORIES.find((c) => c.key === key)?.label ?? key;
@@ -104,20 +103,6 @@ export function ServiceDialog({ service: s, morph = true, onClose, onOpenConsult
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </button>
               </motion.div>
-
-              {s.slug === 'implantatsiya' && (
-                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1, transition: { delay: 0.3 } }} className="mt-6">
-                  <Link
-                    to="/implantatsiya"
-                    onClick={onClose}
-                    className="inline-flex items-center gap-2 rounded-xl border border-[var(--c-accent)]/30 bg-[var(--c-accent)]/[0.07] px-4 py-3 text-[13px] text-white transition-colors hover:bg-[var(--c-accent)]/[0.14]"
-                  >
-                    <Rotate3d className="h-4 w-4 text-[var(--c-accent)]" />
-                    Implant 3D modelda
-                    <ArrowRight className="h-3.5 w-3.5" />
-                  </Link>
-                </motion.div>
-              )}
 
               {(() => {
                 const related = SERVICES.filter((x) => x.category === s.category && x.slug !== s.slug);

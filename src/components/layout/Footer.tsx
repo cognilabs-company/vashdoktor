@@ -78,7 +78,6 @@ export function Footer() {
             <ul className="space-y-2.5 text-sm text-[var(--c-text-2)] font-light">
               <li><Link to="/" className="hover:text-white transition-colors">Bosh sahifa</Link></li>
               <li><Link to="/services" className="hover:text-white transition-colors">Xizmatlar</Link></li>
-              <li><Link to="/implantatsiya" className="hover:text-white transition-colors">Implantatsiya (3D)</Link></li>
               <li><Link to="/about" className="hover:text-white transition-colors">Biz haqimizda</Link></li>
               <li><Link to="/doctors" className="hover:text-white transition-colors">Doktorlar</Link></li>
             </ul>

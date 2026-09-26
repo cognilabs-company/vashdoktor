@@ -1,6 +1,5 @@
 import { HeroFlight } from '../components/home/HeroFlight';
 import { ImplantReveal } from '../components/home/ImplantReveal';
-import { ImplantTeaser } from '../components/home/ImplantTeaser';
 import { Testimonials } from '../components/home/Testimonials';
 import { ContactMap } from '../components/home/ContactMap';
 import { FirstVisit } from '../components/home/FirstVisit';
@@ -16,7 +15,7 @@ import { FLOW } from '../lib/flow';
  * Home = the whole clinic, in the order a first-time visitor needs it:
  * what we do → how every treatment goes (3D) → implants as one door → what a
  * first visit is like → what patients say → who treats you → questions →
- * where we are. The deep implant story lives on /implantatsiya.
+ * where we are. The implant story is told here, in the reveal above.
  */
 export function Home() {
   const { openConsultation, open3DViewer } = useClinicUI();
@@ -31,8 +30,6 @@ export function Home() {
           and lands in the jaw — the procedure footage carries the last beat, so
           it is no longer told a second time in its own section below */}
       <ImplantReveal onOpen3DViewer={open3DViewer} onOpenConsultation={openConsultation} />
-
-      <ImplantTeaser onOpen3DViewer={open3DViewer} />
 
       <FirstVisit onOpenConsultation={openConsultation} />
 

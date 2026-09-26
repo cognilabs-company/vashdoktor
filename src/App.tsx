@@ -5,7 +5,6 @@ import { Services } from './pages/Services';
 import { About } from './pages/About';
 import { Doctors } from './pages/Doctors';
 import { ChiefDoctor } from './pages/ChiefDoctor';
-import { Implantation } from './pages/Implantation';
 
 export default function App() {
   return (
@@ -17,7 +16,6 @@ export default function App() {
           <Route path="/about" element={<About />} />
           <Route path="/doctors" element={<Doctors />} />
           <Route path="/bosh-shifokor" element={<ChiefDoctor />} />
-          <Route path="/implantatsiya" element={<Implantation />} />
           <Route path="*" element={<Home />} />
         </Route>
       </Routes>

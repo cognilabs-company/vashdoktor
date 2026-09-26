@@ -1,6 +1,5 @@
 import { useLayoutEffect, useRef, useState } from 'react';
 import { ArrowRight, ArrowUpRight } from 'lucide-react';
-import { Link } from 'react-router-dom';
 import { ImplantShowcase, SHOWCASE_VH } from '../../procedural/ImplantShowcase';
 import { SequenceCanvas, type SequenceCanvasHandle } from '../procedure/SequenceCanvas';
 import {
@@ -38,7 +37,7 @@ interface Props {
 
 /**
  * The handover out of the flight: the fog the camera ended in is still on
- * screen and the implant comes out of it. From there the whole /implantatsiya
+ * screen and the implant comes out of it. From there the whole implant
  * sequence plays inside one pinned stage — assembled, apart, a shot per part,
  * then back together — with each shot's words opposite the model.
  */
@@ -325,13 +324,6 @@ function Reveal({ onOpen3DViewer, onOpenConsultation }: Props) {
                   >
                     {s.id === 'hero' ? s.cta : '3D modelni aylantirish'}
                   </Button>
-                  <Link
-                    to="/implantatsiya"
-                    className="group inline-flex items-center gap-1.5 text-sm text-[var(--c-text)] underline decoration-white/25 underline-offset-[6px] transition-colors hover:text-white hover:decoration-[var(--c-accent)]"
-                  >
-                    Implantatsiya sahifasi
-                    <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
-                  </Link>
                 </div>
               )}
             </div>
@@ -354,13 +346,6 @@ function Reveal({ onOpen3DViewer, onOpenConsultation }: Props) {
             <Button variant="white" size="lg" onClick={onOpenConsultation} icon={<ArrowUpRight className="h-4 w-4" />}>
               Konsultatsiyaga yozilish
             </Button>
-            <Link
-              to="/implantatsiya"
-              className="group inline-flex items-center gap-1.5 text-sm text-[var(--c-text)] underline decoration-white/25 underline-offset-[6px] transition-colors hover:text-white hover:decoration-[var(--c-accent)]"
-            >
-              Implantatsiya sahifasi
-              <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
-            </Link>
           </div>
         </div>
       </div>

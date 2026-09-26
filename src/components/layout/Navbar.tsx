@@ -24,7 +24,6 @@ export function Navbar({ onOpenConsultation, onOpen3DViewer }: NavbarProps) {
   const navLinks = [
     { label: 'Bosh sahifa', to: '/' },
     { label: 'Xizmatlar', to: '/services' },
-    { label: 'Implantatsiya', to: '/implantatsiya' },
     { label: 'Biz haqimizda', to: '/about' },
     { label: 'Doktorlar', to: '/doctors' },
   ];

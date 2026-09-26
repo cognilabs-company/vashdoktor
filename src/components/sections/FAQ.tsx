@@ -59,14 +59,15 @@ export function FAQ({
           </div>
 
           {/* Right Column: Accordion */}
-          <div data-stagger className="lg:col-span-7 space-y-4">
+          <div className="lg:col-span-7 space-y-4">
             {items.map((item, idx) => {
               const isOpen = openIdx === idx;
 
               return (
                 <div
                   key={idx}
-                  className="rounded-2xl bg-white/[0.05] border border-white/10 backdrop-blur-md overflow-hidden transition-all duration-200 shadow-2xs"
+                  data-scroll
+                  className="sp-item rounded-2xl bg-white/[0.05] border border-white/10 backdrop-blur-md overflow-hidden transition-all duration-200 shadow-2xs"
                 >
                   <button
                     onClick={() => toggle(idx)}

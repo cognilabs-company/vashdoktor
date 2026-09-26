@@ -29,7 +29,8 @@ export function FounderSection({ bg = 'var(--c-bg)', compact = false, flow }: { 
         </div>
 
         {/* content */}
-        <div data-reveal="right">
+        {/* set against the portrait: it rises while the portrait sinks */}
+        <div className="sp-counter">
           <TechnicalBadge label="Asoschi" variant="dark" />
           {compact ? (
             <>

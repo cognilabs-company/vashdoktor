@@ -22,8 +22,7 @@ export function ImplantTeaser({ onOpen3DViewer }: Props) {
             src={getFrameSrc(195)}
             alt="Implant o‘rnatilgan jag‘ — 3D model"
             loading="lazy"
-            className="sp-drift relative mx-auto w-full max-w-[640px] object-contain"
-            style={{ ['--sp-dist' as string]: '70px' }}
+            className="sp-zoom relative mx-auto w-full max-w-[640px] object-contain"
           />
         </figure>
 

@@ -63,12 +63,13 @@ export function DoctorsSection({ doctors, eyebrow = 'Jamoa', title, subtitle, ct
         )}
 
         {/* team grid */}
-        <div className={`grid gap-6 sm:grid-cols-2 lg:grid-cols-4 ${compact ? 'mt-10 gap-4' : 'mt-8'}`} data-stagger>
+        <div className={`grid gap-6 sm:grid-cols-2 lg:grid-cols-4 ${compact ? 'mt-10 gap-4' : 'mt-8'}`}>
           {doctors.map((d) => compact ? (
             <Link
               key={d.id}
               to="/doctors"
-              className="group relative block aspect-[4/5] overflow-hidden rounded-2xl border border-white/10 bg-[var(--c-bg-3)]"
+              data-scroll
+              className="sp-item group relative block aspect-[4/5] overflow-hidden rounded-2xl border border-white/10 bg-[var(--c-bg-3)]"
             >
               <Portrait photo={d.photo} name={d.name} rounded="rounded-none" className="sp-drift h-full w-full" />
               <div className="absolute inset-0 bg-[linear-gradient(to_top,var(--c-bg)_5%,rgba(10,20,29,0.5)_35%,transparent_60%)]" />

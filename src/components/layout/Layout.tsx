@@ -102,8 +102,11 @@ export function Layout() {
         if (rect.bottom < -vh * 0.5 || rect.top > vh * 1.5) continue;
         const span = vh + rect.height;
         const sp = Math.min(1, Math.max(0, (vh - rect.top) / span));
-        const shown = Math.min(1, Math.max(0, (vh - rect.top) / Math.max(1, Math.min(rect.height, vh))));
-        const se = Math.min(1, Math.max(0, (shown - 0.12) / 0.43));
+        // The arrival is measured against the VIEWPORT, not the element: it
+        // begins when the top crosses 92% of the way down the screen and is
+        // finished by 54%. Tied to the element's own height instead, a short
+        // row completed its reveal before it was even on screen.
+        const se = Math.min(1, Math.max(0, (vh * 0.92 - rect.top) / (vh * 0.38)));
         el.style.setProperty('--sp', sp.toFixed(4));
         el.style.setProperty('--se', (se * se * (3 - 2 * se)).toFixed(4));
       }

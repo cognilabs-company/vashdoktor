@@ -9,15 +9,6 @@ export interface StoryScene {
   highlightPart?: 'all' | 'exploded' | 'titanium' | 'bone-insertion' | 'abutment' | 'crown';
 }
 
-export interface DoctorProfile {
-  name: string;
-  title: string;
-  credentials: string[];
-  bio: string;
-  quote: string;
-  stats: { value: string; label: string }[];
-}
-
 export interface ClinicConfig {
   name: string;
   tagline: string;
@@ -40,19 +31,6 @@ export interface ProcessStep {
   description: string;
   duration: string;
   details: string[];
-}
-
-export interface BeforeAfterCase {
-  id: string;
-  title: string;
-  category: string;
-  patientAge: string;
-  treatmentDuration: string;
-  description: string;
-  beforeImage: string;
-  afterImage: string;
-  shade: string;
-  implantType: string;
 }
 
 export interface FAQItem {

@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import { FAQ_ITEMS } from '../../lib/clinicConfig';
 import type { FAQItem } from '../../types';
 import { TechnicalBadge } from '../ui/TechnicalBadge';
 import { FLOW } from '../../lib/flow';
 import { Plus, Minus, HelpCircle } from 'lucide-react';
 
 interface Props {
-  items?: FAQItem[];
+  items: FAQItem[];
   code?: string;
   eyebrow?: string;
   title?: React.ReactNode;
@@ -15,7 +14,7 @@ interface Props {
 }
 
 export function FAQ({
-  items = FAQ_ITEMS,
+  items,
   code = "BEMOR MA'LUMOTI",
   eyebrow = "KO'P BERILADIGAN",
   title = (
@@ -26,7 +25,7 @@ export function FAQ({
   ),
   subtitle = 'Klinik faktlar, davolash muddati va biologik integratsiya tafsilotlari tibbiy shaffoflik bilan tushuntirilgan.',
   aside,
-}: Props = {}) {
+}: Props) {
   const [openIdx, setOpenIdx] = useState<number | null>(0);
 
   const toggle = (idx: number) => {

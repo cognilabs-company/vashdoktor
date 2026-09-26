@@ -69,8 +69,8 @@ export function DoctorsSection({ doctors, eyebrow = 'Jamoa', title, subtitle, ct
               key={d.id}
               to="/doctors"
               data-scroll
-              className="sp-3d group relative block aspect-[4/5] overflow-hidden rounded-2xl border border-white/10 bg-[var(--c-bg-3)]"
-              style={{ ['--sp-n' as string]: i % 4, ['--sp-persp' as string]: '1300px', ['--sp-tilt' as string]: '52deg', ['--sp-depth' as string]: '220px', ['--sp-rise' as string]: '130px' }}
+              className="sp-3d sp-grid-4 group relative block aspect-[4/5] overflow-hidden rounded-2xl border border-white/10 bg-[var(--c-bg-3)]"
+              style={{ ['--sp-n' as string]: i % 4, ['--sp-persp' as string]: '1500px', ['--sp-tilt' as string]: '20deg', ['--sp-bend' as string]: '38deg', ['--sp-bow' as string]: '120px', ['--sp-depth' as string]: '190px', ['--sp-rise' as string]: '120px' }}
             >
               <Portrait photo={d.photo} name={d.name} rounded="rounded-none" className="sp-drift h-full w-full" />
               <div className="absolute inset-0 bg-[linear-gradient(to_top,var(--c-bg)_5%,rgba(10,20,29,0.5)_35%,transparent_60%)]" />
@@ -86,8 +86,8 @@ export function DoctorsSection({ doctors, eyebrow = 'Jamoa', title, subtitle, ct
             <article
               key={d.id}
               data-scroll
-              className="sp-3d group overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] transition-colors duration-300 hover:border-[var(--c-accent)]/40"
-              style={{ ['--sp-n' as string]: i % 4, ['--sp-persp' as string]: '1300px', ['--sp-tilt' as string]: '52deg', ['--sp-depth' as string]: '220px', ['--sp-rise' as string]: '130px' }}
+              className="sp-3d sp-grid-4 group overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] transition-colors duration-300 hover:border-[var(--c-accent)]/40"
+              style={{ ['--sp-n' as string]: i % 4, ['--sp-persp' as string]: '1500px', ['--sp-tilt' as string]: '20deg', ['--sp-bend' as string]: '38deg', ['--sp-bow' as string]: '120px', ['--sp-depth' as string]: '190px', ['--sp-rise' as string]: '120px' }}
             >
               <div className="relative aspect-[4/5] w-full">
                 <Portrait photo={d.photo} name={d.name} rounded="rounded-none" className="h-full w-full" />

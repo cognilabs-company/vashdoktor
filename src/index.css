@@ -384,52 +384,73 @@
 }
 
 /* ---------------------------------------------------------------------------
-   The same two numbers, read as depth. A panel does not slide up the page —
-   it comes up out of the back of it. It starts low, far down Z and folded
-   away from you, hinged along its own bottom edge, so all you see is a
-   foreshortened plane lying off toward the horizon; as it arrives it swings
-   up, comes forward and lands square to the screen.
+   The same two numbers, read as a curved screen. Panels standing side by side
+   turn about a shared vertical axis — the outer ones angled away and pushed
+   further back — so the row reads as one surface bowed backwards at its edges,
+   flat in the middle, the way a phone with curved sides looks. It comes up out
+   of the back of the page at the same time, and unbends flat as it lands.
 
-   The hinge is what does the work. With the perspective origin on that same
-   bottom edge, folding back makes the top converge toward it — the element
-   reads as a plane running away into the distance rather than as a rectangle
-   that has been squashed.
+   CSS can only turn a flat plane, never bend one, so the curve is made of the
+   panels themselves: --sp-c is where a panel sits across its row, -1 at the
+   left edge through 0 in the middle to 1 at the right. A row of one gets 0 and
+   simply rises. Squaring it (never abs(), which is newer) gives the extra
+   depth the outer panels need to sit on a circle rather than in a V.
 
    Per element:
-     --sp-tilt   how far back it starts folded
+     --sp-bend   how far the edges of the row turn away
+     --sp-bow    how much further back the outer panels sit
+     --sp-tilt   how far it starts folded back along its own bottom edge
      --sp-depth  how far back down Z, --sp-rise how far below
-     --sp-persp  the lens. A tall panel needs a long one or its far edge fans
-                 out; a short row can take a short one and a much bigger fold.
-     --sp-n      its place in a row's stagger; the breakpoints below decide
-                 how much of that counts.
-   The stagger shifts the ramp rather than rescaling it, so no calc() has to
-   divide by a variable, and keeping --sp-n under --sp-gain / --sp-step means
-   the no-JS state (--se: 1) still resolves to a finished, flat element.
+     --sp-persp  the lens; a tall panel needs a long one or its far edge fans out
+     --sp-n      its place in the row, left to right, counting from 0
+   The stagger and the curve both shift rather than rescale, so no calc() has
+   to divide by a variable, and the no-JS state (--se: 1) still resolves to a
+   finished, flat element.
 --------------------------------------------------------------------------- */
 .sp-3d {
-  /* The stagger only means anything for cards standing side by side. Stacked
-     into one column on a narrow screen they already arrive one after another,
-     so a delay on top of that just holds the last one back. */
+  /* A row of one. Stacked into a single column on a narrow screen there is no
+     row to curve and no queue to stagger, so both fall away and the panel just
+     rises; the breakpoint classes below put them back. */
+  --sp-c: 0;
   --sp-i: 0;
   --sp-t: clamp(0, calc(var(--se, 1) * var(--sp-gain, 1.4) - var(--sp-i, 0) * var(--sp-step, 0.12)), 1);
   opacity: var(--sp-t);
+  /* rotateX hinges on the bottom edge; rotateY spins about the vertical centre
+     line, which the same origin gives us, since only its x matters there */
   transform-origin: 50% var(--sp-hinge, 100%);
   transform:
-    perspective(var(--sp-persp, 1200px))
-    translate3d(0, calc((1 - var(--sp-t)) * var(--sp-rise, 90px)), calc((1 - var(--sp-t)) * var(--sp-depth, 220px) * -1))
-    rotateX(calc((1 - var(--sp-t)) * var(--sp-tilt, 58deg)));
+    perspective(var(--sp-persp, 1500px))
+    translate3d(
+      0,
+      calc((1 - var(--sp-t)) * var(--sp-rise, 130px)),
+      calc((1 - var(--sp-t)) * (var(--sp-depth, 200px) + var(--sp-c) * var(--sp-c) * var(--sp-bow, 110px)) * -1))
+    rotateY(calc((1 - var(--sp-t)) * var(--sp-c) * var(--sp-bend, 34deg)))
+    rotateX(calc((1 - var(--sp-t)) * var(--sp-tilt, 22deg)));
   backface-visibility: hidden;
   will-change: transform, opacity;
 }
-/* two across: only the column matters, so the index wraps every two.
-   If mod() is missing the property is invalid at computed-value time, the
-   consumer falls back to 0, and the cards simply arrive together. */
-@media (min-width: 640px) {
-  .sp-3d { --sp-i: mod(var(--sp-n, 0), 2); }
-}
-/* four across: every card in the row gets its own place in the queue */
+/* Two columns side by side, from lg. The pair carries its own -1 / 1 because
+   which side it is on is a fact about the markup, not about the count.
+   Below lg they are stacked and the base rule leaves them flat. */
 @media (min-width: 1024px) {
-  .sp-3d { --sp-i: var(--sp-n, 0); }
+  .sp-pair { --sp-c: var(--sp-cn, 0); }
+}
+/* A four-up grid that collapses to two. At two across only the column counts,
+   so the index wraps and the curve is just left or right; at four across every
+   card gets its own place in the queue and its own angle on the cylinder.
+   If mod() is missing the property is invalid at computed-value time, the
+   consumer falls back to 0, and the cards arrive together and flat. */
+@media (min-width: 640px) {
+  .sp-grid-4 {
+    --sp-i: mod(var(--sp-n, 0), 2);
+    --sp-c: calc(mod(var(--sp-n, 0), 2) * 2 - 1);
+  }
+}
+@media (min-width: 1024px) {
+  .sp-grid-4 {
+    --sp-i: var(--sp-n, 0);
+    --sp-c: calc((var(--sp-n, 0) - 1.5) / 1.5);
+  }
 }
 @media (prefers-reduced-motion: reduce) {
   .sp-rise,

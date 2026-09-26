@@ -21,8 +21,11 @@ export function ContactMap({ onOpenConsultation }: Props) {
 
   return (
     <section id="contact" data-bg={FLOW.green} data-scroll className="relative w-full py-20 lg:py-28">
-      <div className="mx-auto grid max-w-[1440px] gap-10 px-6 sm:px-8 lg:grid-cols-12 lg:gap-8 lg:px-12">
-        <div className="sp-rise lg:col-span-5">
+      <div data-scroll className="mx-auto grid max-w-[1440px] gap-10 px-6 sm:px-8 lg:grid-cols-12 lg:gap-8 lg:px-12">
+        <div
+          className="sp-3d sp-pair lg:col-span-5"
+          style={{ ['--sp-cn' as string]: -1, ['--sp-persp' as string]: '1800px', ['--sp-tilt' as string]: '20deg', ['--sp-bend' as string]: '26deg', ['--sp-bow' as string]: '90px', ['--sp-depth' as string]: '200px', ['--sp-rise' as string]: '140px' }}
+        >
           <Eyebrow>Manzil</Eyebrow>
           <h2 className="mt-5 font-serif text-[clamp(1.9rem,4vw,3.1rem)] font-medium leading-[1.06] tracking-tight text-white">
             Kelish oson. Yozilish undan ham oson.
@@ -78,9 +81,8 @@ export function ContactMap({ onOpenConsultation }: Props) {
         </div>
 
         <figure
-          data-scroll
-          className="sp-3d lg:col-span-7"
-          style={{ ['--sp-persp' as string]: '1900px', ['--sp-tilt' as string]: '48deg', ['--sp-depth' as string]: '210px', ['--sp-rise' as string]: '140px' }}
+          className="sp-3d sp-pair lg:col-span-7"
+          style={{ ['--sp-cn' as string]: 1, ['--sp-persp' as string]: '1800px', ['--sp-tilt' as string]: '20deg', ['--sp-bend' as string]: '26deg', ['--sp-bow' as string]: '90px', ['--sp-depth' as string]: '200px', ['--sp-rise' as string]: '140px' }}
         >
           <div className="overflow-hidden rounded-3xl border border-white/10 bg-[var(--c-bg-3)]">
             {embed ? (

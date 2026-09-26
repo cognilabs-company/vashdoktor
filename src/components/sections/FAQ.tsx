@@ -71,7 +71,7 @@ export function FAQ({
                      every frame from the scroll, and a transition on them lags a frame behind
                      the tilt. Nothing on the row itself animates besides colour anyway. */
                   className="sp-3d rounded-2xl bg-white/[0.05] border border-white/10 backdrop-blur-md overflow-hidden transition-colors duration-200 shadow-2xs"
-                  style={{ ['--sp-persp' as string]: '800px', ['--sp-tilt' as string]: '64deg', ['--sp-depth' as string]: '170px', ['--sp-rise' as string]: '105px' }}
+                  style={{ ['--sp-persp' as string]: '900px', ['--sp-tilt' as string]: '30deg', ['--sp-depth' as string]: '170px', ['--sp-rise' as string]: '105px' }}
                 >
                   <button
                     onClick={() => toggle(idx)}

@@ -65,9 +65,14 @@ export function Principles() {
           </div>
         </div>
 
-        <ol className="border-t border-white/10 lg:col-span-6 lg:col-start-7" data-stagger>
+        <ol className="border-t border-white/10 lg:col-span-6 lg:col-start-7">
           {PRINCIPLES.map((p, i) => (
-            <li key={p.title} className="grid grid-cols-[2.5rem_1fr] gap-x-4 border-b border-white/10 py-7">
+            <li
+              key={p.title}
+              data-scroll
+              className="sp-3d grid grid-cols-[2.5rem_1fr] gap-x-4 border-b border-white/10 py-7"
+              style={{ ['--sp-persp' as string]: '900px', ['--sp-tilt' as string]: '28deg', ['--sp-depth' as string]: '160px', ['--sp-rise' as string]: '90px' }}
+            >
               <span className="font-serif text-[13px] text-[var(--c-text-5)]">{String(i + 1).padStart(2, '0')}</span>
               <div>
                 <h3 className="font-serif text-xl font-medium leading-snug tracking-tight text-white">{p.title}</h3>

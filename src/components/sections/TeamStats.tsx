@@ -18,12 +18,11 @@ const STATS = [
 /** Compact numbers band right after the constellation — the team at a glance. */
 export function TeamStats() {
   return (
-    <section data-bg={FLOW.base} className="relative w-full">
+    <section data-bg={FLOW.base} data-scroll className="relative w-full">
       {/* bridge from the opaque constellation stage above */}
       <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-[var(--c-bg-2)] to-transparent" />
       <div
-        className="mx-auto grid max-w-[1440px] grid-cols-2 px-6 sm:px-8 lg:grid-cols-4 lg:px-12 [&>*]:border-white/10 [&>*:nth-child(even)]:border-l [&>*:nth-child(even)]:pl-6 [&>*:nth-child(n+3)]:border-t lg:[&>*:nth-child(n+3)]:border-t-0 lg:[&>*:not(:first-child)]:border-l lg:[&>*:not(:first-child)]:pl-10"
-        data-stagger
+        className="sp-rise mx-auto grid max-w-[1440px] grid-cols-2 px-6 sm:px-8 lg:grid-cols-4 lg:px-12 [&>*]:border-white/10 [&>*:nth-child(even)]:border-l [&>*:nth-child(even)]:pl-6 [&>*:nth-child(n+3)]:border-t lg:[&>*:nth-child(n+3)]:border-t-0 lg:[&>*:not(:first-child)]:border-l lg:[&>*:not(:first-child)]:pl-10"
       >
         {STATS.map((s) => (
           <div key={s.label} className="py-9 lg:py-12">

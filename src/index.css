@@ -429,15 +429,40 @@
   backface-visibility: hidden;
   will-change: transform, opacity;
 }
-/* Two columns side by side, from lg. The pair carries its own -1 / 1 because
-   which side it is on is a fact about the markup, not about the count.
-   Below lg they are stacked and the base rule leaves them flat. */
+/* The two shapes this is made of carry their own tuning, so a call site only
+   has to say which one it is and where it sits. A row of one overrides these
+   itself — a tall panel wants a longer lens, a short row a bigger fold. */
+
+/* One panel standing beside one other, the pair hinged on the middle of the
+   page. It carries its own -1 / 1: which side it is on is a fact about the
+   markup, not about the count. Below lg they stack and the base rule leaves
+   them flat. */
+.sp-pair {
+  --sp-persp: 1800px;
+  --sp-tilt: 20deg;
+  --sp-bend: 25deg;
+  --sp-bow: 90px;
+  --sp-depth: 200px;
+  --sp-rise: 140px;
+}
 @media (min-width: 1024px) {
   .sp-pair { --sp-c: var(--sp-cn, 0); }
 }
-/* A four-up grid that collapses to two. At two across only the column counts,
-   so the index wraps and the curve is just left or right; at four across every
-   card gets its own place in the queue and its own angle on the cylinder.
+
+/* One card in a row of cards. --sp-n is its place in that row, left to right,
+   and how much of it counts is the grid's business, below. */
+.sp-grid-4,
+.sp-grid-3 {
+  --sp-persp: 1500px;
+  --sp-tilt: 20deg;
+  --sp-bend: 36deg;
+  --sp-bow: 115px;
+  --sp-depth: 190px;
+  --sp-rise: 120px;
+}
+/* Four across, collapsing to two. At two across only the column counts, so the
+   index wraps and the curve is just left or right; at four across every card
+   gets its own place in the queue and its own angle on the cylinder.
    If mod() is missing the property is invalid at computed-value time, the
    consumer falls back to 0, and the cards arrive together and flat. */
 @media (min-width: 640px) {
@@ -450,6 +475,14 @@
   .sp-grid-4 {
     --sp-i: var(--sp-n, 0);
     --sp-c: calc((var(--sp-n, 0) - 1.5) / 1.5);
+  }
+}
+/* Three across is one column either side of a middle that stays flat — the
+   shape the whole thing is named after. Stacked below md, so nothing to curve. */
+@media (min-width: 768px) {
+  .sp-grid-3 {
+    --sp-i: var(--sp-n, 0);
+    --sp-c: calc(var(--sp-n, 0) - 1);
   }
 }
 @media (prefers-reduced-motion: reduce) {

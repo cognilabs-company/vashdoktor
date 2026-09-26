@@ -59,11 +59,11 @@ export function ServiceChapters({ onPickCategory, onOpenService }: Props) {
   }, [stack]);
 
   return (
-    <section data-bg={FLOW.teal} className="relative w-full py-16 lg:py-24">
+    <section data-bg={FLOW.teal} data-scroll className="relative w-full py-16 lg:py-24">
       {/* bridge from the photo hero above */}
       <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-[var(--c-bg-deep)] to-transparent" />
       <div className="mx-auto max-w-[1440px] px-6 sm:px-8 lg:px-12">
-        <div className="grid gap-6 lg:grid-cols-12" data-reveal>
+        <div className="sp-rise grid gap-6 lg:grid-cols-12">
           <div className="lg:col-span-7">
             <Eyebrow>Yo‘nalishlar</Eyebrow>
             <h2 className="mt-5 font-serif text-[clamp(1.9rem,4vw,3.1rem)] font-medium leading-[1.06] tracking-tight text-white">
@@ -82,9 +82,13 @@ export function ServiceChapters({ onPickCategory, onOpenService }: Props) {
                 ref={(el) => {
                   cardRefs.current[i] = el;
                 }}
-                className={stack ? 'sticky origin-top will-change-transform' : ''}
-                style={stack ? { top: STICKY_TOP + STEP * i } : undefined}
-                data-reveal={stack ? undefined : 'up'}
+                className={stack ? 'sticky origin-top will-change-transform' : 'sp-3d'}
+                style={
+                  stack
+                    ? { top: STICKY_TOP + STEP * i }
+                    : { ['--sp-persp' as string]: '2000px', ['--sp-tilt' as string]: '22deg', ['--sp-depth' as string]: '200px', ['--sp-rise' as string]: '130px' }
+                }
+                {...(stack ? {} : { 'data-scroll': '' })}
               >
                 <article className="relative grid overflow-hidden rounded-[28px] border border-white/10 bg-[var(--c-bg-3)] lg:min-h-[560px] lg:grid-cols-2">
                   {/* copy */}

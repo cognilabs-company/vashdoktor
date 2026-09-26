@@ -22,10 +22,15 @@ export function FounderSection({ bg = 'var(--c-bg)', compact = false, flow }: { 
       >
         {/* portrait */}
         <div
-          className="sp-3d sp-pair relative mx-auto w-full max-w-sm overflow-hidden rounded-2xl lg:max-w-none"
-          style={{ ['--sp-cn' as string]: -1, ['--sp-persp' as string]: '1800px', ['--sp-tilt' as string]: '20deg', ['--sp-bend' as string]: '26deg', ['--sp-bow' as string]: '90px', ['--sp-depth' as string]: '200px', ['--sp-rise' as string]: '140px' }}
+          className="sp-3d sp-pair relative mx-auto w-full max-w-sm lg:max-w-none"
+          style={{ ['--sp-cn' as string]: -1 }}
         >
-          <Portrait photo={FOUNDER.photo} name={FOUNDER.name} className="sp-drift aspect-[4/5] w-full" />
+          {/* the clip belongs to the photo, which drifts inside it, not to the
+              frame: on the outer box it also cut off the name card that is
+              meant to hang over the bottom edge */}
+          <div className="overflow-hidden rounded-2xl">
+            <Portrait photo={FOUNDER.photo} name={FOUNDER.name} className="sp-drift aspect-[4/5] w-full" />
+          </div>
           {!compact && (
             <div className="absolute -bottom-5 left-5 right-5 rounded-2xl border border-white/10 bg-[var(--c-bg-2)]/90 px-5 py-4">
               <div className="font-serif text-lg font-medium text-white">{FOUNDER.name}</div>
@@ -38,7 +43,7 @@ export function FounderSection({ bg = 'var(--c-bg)', compact = false, flow }: { 
         {/* set against the portrait: it rises while the portrait sinks */}
         <div
           className="sp-3d sp-pair"
-          style={{ ['--sp-cn' as string]: 1, ['--sp-persp' as string]: '1800px', ['--sp-tilt' as string]: '20deg', ['--sp-bend' as string]: '26deg', ['--sp-bow' as string]: '90px', ['--sp-depth' as string]: '200px', ['--sp-rise' as string]: '140px' }}
+          style={{ ['--sp-cn' as string]: 1 }}
         >
           <TechnicalBadge label="Asoschi" variant="dark" />
           {compact ? (

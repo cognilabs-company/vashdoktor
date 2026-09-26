@@ -195,17 +195,22 @@ export function ProcessSection({
       </div>
 
       {/* small screens: header + a vertical line */}
-      <div className="mx-auto max-w-[1440px] px-6 sm:px-8 lg:hidden">
-        <div data-reveal>
+      <div data-scroll className="mx-auto max-w-[1440px] px-6 sm:px-8 lg:hidden">
+        <div className="sp-rise">
           <Eyebrow>{eyebrow}</Eyebrow>
           <h2 className="mt-4 font-serif text-[clamp(1.9rem,4vw,3.1rem)] font-medium leading-[1.06] tracking-tight text-white">
             {title}
           </h2>
           {subtitle && <p className="mt-3 max-w-xs text-[14px] leading-snug text-[var(--c-text-3)]">{subtitle}</p>}
         </div>
-        <ol className="relative mt-10 ml-5 border-l border-white/10" data-stagger>
+        <ol className="relative mt-10 ml-5 border-l border-white/10">
           {steps.map((s) => (
-            <li key={s.step} className="relative pb-10 pl-10 last:pb-0">
+            <li
+              key={s.step}
+              data-scroll
+              className="sp-3d relative pb-10 pl-10 last:pb-0"
+              style={{ ['--sp-persp' as string]: '900px', ['--sp-tilt' as string]: '28deg', ['--sp-depth' as string]: '160px', ['--sp-rise' as string]: '90px' }}
+            >
               <span className="absolute -left-6 top-0 flex h-12 w-12 items-center justify-center rounded-full border border-[var(--c-accent)]/50 bg-[var(--c-bg)] text-[var(--c-accent-2)]">
                 <s.icon className="h-5 w-5" strokeWidth={1.6} />
               </span>

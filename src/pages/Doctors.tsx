@@ -61,8 +61,8 @@ export function Doctors() {
       <section data-bg={FLOW.blue} className="relative w-full overflow-hidden py-20 lg:py-28">
         <div className="pointer-events-none absolute -right-[10%] top-1/3 h-[420px] w-[420px] rounded-full bg-[var(--c-accent)]/8 blur-[110px]" />
         <div className="relative mx-auto max-w-[1440px] px-6 sm:px-8 lg:px-12">
-          <div className="grid gap-12 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:gap-16">
-            <div data-reveal="left">
+          <div data-scroll className="grid gap-12 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:gap-16">
+            <div className="sp-3d sp-pair" style={{ ['--sp-cn' as string]: -1 }}>
               <TechnicalBadge label="Sifat kafolati" variant="dark" />
               <h2 className="mt-6 font-serif text-[clamp(2rem,4.5vw,3.5rem)] font-medium leading-[1.05] tracking-tight text-white">
                 Bir maktab, bir standart
@@ -72,11 +72,13 @@ export function Doctors() {
                 Bizda buni maktab tizimi ta'minlaydi.
               </p>
 
-              <div className="mt-10 grid gap-4 sm:grid-cols-3" data-stagger>
-                {STANDARDS.map((s) => (
+              <div className="mt-10 grid gap-4 sm:grid-cols-3">
+                {STANDARDS.map((s, i) => (
                   <div
                     key={s.title}
-                    className="group rounded-2xl border border-white/10 bg-white/[0.04] p-5 backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:border-[var(--c-accent)]/40"
+                    data-scroll
+                    className="sp-3d sp-grid-3 group rounded-2xl border border-white/10 bg-white/[0.04] p-5 backdrop-blur-md transition-[translate,border-color,background-color] duration-300 hover:-translate-y-1 hover:border-[var(--c-accent)]/40"
+                    style={{ ['--sp-n' as string]: i % 3 }}
                   >
                     <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--c-accent)]/12 text-[var(--c-accent-2)] ring-1 ring-white/10 transition-colors group-hover:bg-[var(--c-accent)]/20">
                       <s.icon className="h-5 w-5" strokeWidth={1.6} />
@@ -90,8 +92,8 @@ export function Doctors() {
 
             {/* the chief's word */}
             <figure
-              className="relative flex flex-col justify-between rounded-3xl border border-[var(--c-accent)]/25 bg-[linear-gradient(150deg,var(--c-bg-4),var(--c-bg))] p-7 lg:p-9"
-              data-reveal="right"
+              className="sp-3d sp-pair relative flex flex-col justify-between rounded-3xl border border-[var(--c-accent)]/25 bg-[linear-gradient(150deg,var(--c-bg-4),var(--c-bg))] p-7 lg:p-9"
+              style={{ ['--sp-cn' as string]: 1 }}
             >
               <Quote className="h-8 w-8 text-[var(--c-accent)]/40" />
               <blockquote className="mt-5 font-serif text-[clamp(1.15rem,1.6vw,1.45rem)] font-medium leading-snug tracking-tight text-white">

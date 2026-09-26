@@ -21,9 +21,9 @@ interface Props {
 /** "Which doctor do I need?" — everyday complaints routed to the right person. */
 export function CareGuide({ onOpenConsultation }: Props) {
   return (
-    <section data-bg={FLOW.teal} className="relative w-full py-20 lg:py-28">
+    <section data-bg={FLOW.teal} data-scroll className="relative w-full py-20 lg:py-28">
       <div className="mx-auto max-w-[1440px] px-6 sm:px-8 lg:px-12">
-        <div className="flex flex-wrap items-end justify-between gap-6" data-reveal="left">
+        <div className="sp-rise flex flex-wrap items-end justify-between gap-6">
           <div className="max-w-2xl">
             <TechnicalBadge label="Yo‘naltirish" variant="dark" />
             <h2 className="mt-6 font-serif text-[clamp(2rem,4.5vw,3.5rem)] font-medium leading-[1.05] tracking-tight text-white">
@@ -39,14 +39,16 @@ export function CareGuide({ onOpenConsultation }: Props) {
           </button>
         </div>
 
-        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3" data-stagger>
-          {CARE_GUIDE.map((g) => {
+        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {CARE_GUIDE.map((g, i) => {
             const Icon = ICONS[g.icon] ?? Stethoscope;
             const t = target(g.doctorId);
             return (
               <article
                 key={g.problem}
-                className="group flex flex-col justify-between rounded-2xl border border-white/10 bg-white/[0.04] p-6 backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:border-[var(--c-accent)]/40 hover:bg-white/[0.06]"
+                data-scroll
+                className="sp-3d sp-grid-3 group flex flex-col justify-between rounded-2xl border border-white/10 bg-white/[0.04] p-6 backdrop-blur-md transition-[translate,border-color,background-color] duration-300 hover:-translate-y-1 hover:border-[var(--c-accent)]/40 hover:bg-white/[0.06]"
+                style={{ ['--sp-n' as string]: i % 3 }}
               >
                 <div>
                   <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-[var(--c-accent)]/12 text-[var(--c-accent-2)] ring-1 ring-white/10 transition-colors group-hover:bg-[var(--c-accent)]/20">

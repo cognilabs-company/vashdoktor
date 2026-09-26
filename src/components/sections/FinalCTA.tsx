@@ -23,9 +23,12 @@ export function FinalCTA({ onOpenConsultation }: FinalCTAProps) {
       </div>
 
       <div className="relative z-10 max-w-[1440px] mx-auto px-6 sm:px-8 lg:px-12">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+        <div data-scroll className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           {/* Left Column: Headline & Action */}
-          <div data-stagger="left" className="lg:col-span-8 flex flex-col items-start">
+          <div
+            className="sp-3d sp-pair lg:col-span-8 flex flex-col items-start"
+            style={{ ['--sp-cn' as string]: -1 }}
+          >
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.06] border border-white/10 backdrop-blur-md text-[11px] font-mono text-[var(--c-accent)] uppercase tracking-widest mb-6">
               <span className="h-1.5 w-1.5 rounded-full bg-[var(--c-accent)] animate-pulse" />
               <span>KONSULTATSIYA & DIAGNOSTIKA</span>
@@ -76,7 +79,10 @@ export function FinalCTA({ onOpenConsultation }: FinalCTAProps) {
           </div>
 
           {/* Right Column: Appointment Card Info */}
-          <div data-reveal="right" className="lg:col-span-4 rounded-3xl bg-white/[0.06] backdrop-blur-md border border-white/10 p-8 text-white">
+          <div
+            className="sp-3d sp-pair lg:col-span-4 rounded-3xl bg-white/[0.06] backdrop-blur-md border border-white/10 p-8 text-white"
+            style={{ ['--sp-cn' as string]: 1 }}
+          >
             <div className="text-xs font-mono text-[var(--c-accent)] uppercase tracking-widest mb-2">
               KLINIKA BANDLIGI
             </div>

@@ -13,16 +13,19 @@ interface Props {
 /** The whole team as a scannable list — one row per doctor, booking on each. */
 export function TeamRoster({ onOpenConsultation }: Props) {
   return (
-    <section id="roster" data-bg={FLOW.ink} className="relative w-full py-20 lg:py-28">
+    <section id="roster" data-bg={FLOW.ink} data-scroll className="relative w-full py-20 lg:py-28">
       <div className="mx-auto max-w-[1440px] px-6 sm:px-8 lg:px-12">
-        <div className="max-w-2xl" data-reveal="left">
+        <div className="sp-rise max-w-2xl">
           <TechnicalBadge label="Ro‘yxat" variant="dark" />
           <h2 className="mt-6 font-serif text-[clamp(2rem,4.5vw,3.5rem)] font-medium leading-[1.05] tracking-tight text-white">
             Butun jamoa — bir qarashda
           </h2>
         </div>
 
-        <div className="mt-12 overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03]" data-stagger>
+        <div
+          className="sp-3d mt-12 overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03]"
+          style={{ ['--sp-persp' as string]: '2000px', ['--sp-tilt' as string]: '22deg', ['--sp-depth' as string]: '200px', ['--sp-rise' as string]: '130px' }}
+        >
           {/* chief — highlighted first row */}
           <div className="grid items-center gap-5 border-b border-white/10 bg-[linear-gradient(120deg,rgba(143,199,212,0.10),transparent_60%)] p-5 md:grid-cols-[auto_minmax(0,1.3fr)_minmax(0,1fr)_auto] md:gap-8 md:px-7">
             <div className="h-16 w-16 overflow-hidden rounded-2xl ring-2 ring-[var(--c-accent)]/60">

@@ -28,9 +28,9 @@ export function ServiceCatalog({ filter, onFilter, onOpenService }: Props) {
   const visible = filter === 'all' ? SERVICES : SERVICES.filter((s) => s.category === filter);
 
   return (
-    <section id="catalog" data-bg={FLOW.base} className="relative w-full py-20 lg:py-28">
+    <section id="catalog" data-bg={FLOW.base} data-scroll className="relative w-full py-20 lg:py-28">
       <div className="mx-auto max-w-[1440px] px-6 sm:px-8 lg:px-12">
-        <div className="grid gap-8 lg:grid-cols-12" data-reveal>
+        <div className="sp-rise grid gap-8 lg:grid-cols-12">
           <div className="lg:col-span-5">
             <Eyebrow>To‘liq ro‘yxat</Eyebrow>
             <h2 className="mt-5 font-serif text-[clamp(1.9rem,4vw,3.1rem)] font-medium leading-[1.06] tracking-tight text-white">

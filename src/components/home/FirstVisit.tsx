@@ -42,7 +42,7 @@ export function FirstVisit({ onOpenConsultation }: Props) {
   return (
     <section data-bg={FLOW.blue} className="relative w-full py-16 lg:py-24">
       <div className="mx-auto max-w-[1440px] px-6 sm:px-8 lg:px-12">
-        <div className="flex flex-wrap items-end justify-between gap-4" data-reveal>
+        <div data-scroll className="sp-rise flex flex-wrap items-end justify-between gap-4">
           <div>
             <Eyebrow>Birinchi tashrif</Eyebrow>
             <h2 className="mt-4 font-serif text-[clamp(1.9rem,4vw,3.1rem)] font-medium leading-[1.06] tracking-tight text-white">

@@ -80,17 +80,24 @@ export function ChiefDoctor() {
       </section>
 
       {/* TIMELINE — the clinic's history IS the doctor's path */}
-      <section className="relative w-full border-t border-white/10 bg-[var(--c-bg-2)] py-20 lg:py-28">
+      <section data-scroll className="relative w-full border-t border-white/10 bg-[var(--c-bg-2)] py-20 lg:py-28">
         <div className="mx-auto max-w-[1440px] px-6 sm:px-8 lg:px-12">
-          <div className="max-w-2xl" data-reveal="left">
+          <div className="sp-rise max-w-2xl">
             <TechnicalBadge label="Yo‘l" variant="dark" />
             <h2 className="mt-6 font-serif text-[clamp(1.9rem,4vw,3rem)] font-medium leading-tight tracking-tight text-white">
               Ta’lim va amaliyot yo‘li
             </h2>
           </div>
-          <ol className="relative mt-12 border-l border-white/12 pl-8" data-stagger>
+          <ol className="relative mt-12 border-l border-white/12 pl-8">
             {FOUNDER.timeline.map((t) => (
-              <li key={t.year} className="relative mb-9 last:mb-0">
+              // stacked, so there is no row to curve — each stop simply comes
+              // up out of the back of the page as it is reached
+              <li
+                key={t.year}
+                data-scroll
+                className="sp-3d relative mb-9 last:mb-0"
+                style={{ ['--sp-persp' as string]: '900px', ['--sp-tilt' as string]: '28deg', ['--sp-depth' as string]: '160px', ['--sp-rise' as string]: '90px' }}
+              >
                 <span className="absolute -left-[38px] top-1 flex h-4 w-4 items-center justify-center rounded-full border-2 border-[var(--c-accent)] bg-[var(--c-bg-2)]" />
                 <div className="font-mono text-[13px] tracking-[0.15em] text-[var(--c-accent)]">{t.year}</div>
                 <h3 className="mt-1 font-serif text-xl font-medium tracking-tight text-white">{t.title}</h3>
@@ -104,14 +111,14 @@ export function ChiefDoctor() {
       {/* SPECIALIZATIONS */}
       <section className="relative w-full border-t border-white/10 bg-[var(--c-bg)] py-20 lg:py-28">
         <div className="mx-auto max-w-[1440px] px-6 sm:px-8 lg:px-12">
-          <div className="grid gap-12 lg:grid-cols-[minmax(0,0.7fr)_minmax(0,1.3fr)] lg:gap-16">
-            <div data-reveal="left">
+          <div data-scroll className="grid gap-12 lg:grid-cols-[minmax(0,0.7fr)_minmax(0,1.3fr)] lg:gap-16">
+            <div className="sp-3d sp-pair" style={{ ['--sp-cn' as string]: -1 }}>
               <TechnicalBadge label="Ixtisos" variant="dark" />
               <h2 className="mt-6 font-serif text-[clamp(1.9rem,4vw,3rem)] font-medium leading-tight tracking-tight text-white">
                 Asosiy yo‘nalishlar
               </h2>
             </div>
-            <ul className="grid gap-3 sm:grid-cols-2" data-stagger="right">
+            <ul className="sp-3d sp-pair grid gap-3 sm:grid-cols-2" style={{ ['--sp-cn' as string]: 1 }}>
               {FOUNDER.specializations.map((s) => (
                 <li key={s} className="flex items-start gap-3 rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3.5">
                   <Stethoscope className="mt-0.5 h-4 w-4 shrink-0 text-[var(--c-accent)]" strokeWidth={1.6} />
@@ -124,9 +131,9 @@ export function ChiefDoctor() {
       </section>
 
       {/* CERTIFICATES — curated, captioned; the rest behind a lightbox */}
-      <section className="relative w-full border-t border-white/10 bg-[var(--c-bg-2)] py-20 lg:py-28">
+      <section data-scroll className="relative w-full border-t border-white/10 bg-[var(--c-bg-2)] py-20 lg:py-28">
         <div className="mx-auto max-w-[1440px] px-6 sm:px-8 lg:px-12">
-          <div className="flex flex-wrap items-end justify-between gap-6" data-reveal="left">
+          <div className="sp-rise flex flex-wrap items-end justify-between gap-6">
             <div className="max-w-2xl">
               <TechnicalBadge label="Malaka" variant="dark" />
               <h2 className="mt-6 font-serif text-[clamp(1.9rem,4vw,3rem)] font-medium leading-tight tracking-tight text-white">
@@ -145,28 +152,30 @@ export function ChiefDoctor() {
             </button>
           </div>
 
-          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4" data-stagger>
-            {FOUNDER.certificates.map((c) => (
-              <CertTile key={c.title} c={c} />
+          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {FOUNDER.certificates.map((c, i) => (
+              <div key={c.title} data-scroll className="sp-3d sp-grid-4" style={{ ['--sp-n' as string]: i % 4 }}>
+                <CertTile c={c} />
+              </div>
             ))}
           </div>
         </div>
       </section>
 
       {/* SCIENCE / CONFERENCES / MENTORSHIP */}
-      <section className="relative w-full border-t border-white/10 bg-[var(--c-bg)] py-20 lg:py-28">
+      <section data-scroll className="relative w-full border-t border-white/10 bg-[var(--c-bg)] py-20 lg:py-28">
         <div className="mx-auto max-w-[1440px] px-6 sm:px-8 lg:px-12">
-          <div className="max-w-2xl" data-reveal="left">
+          <div className="sp-rise max-w-2xl">
             <TechnicalBadge label="Ilmiy faoliyat" variant="dark" />
             <h2 className="mt-6 font-serif text-[clamp(1.9rem,4vw,3rem)] font-medium leading-tight tracking-tight text-white">
               Ilm, konferensiyalar va ustozlik
             </h2>
           </div>
-          <div className="mt-10 grid gap-5 md:grid-cols-3" data-stagger>
-            {FOUNDER.science.map((s) => {
+          <div className="mt-10 grid gap-5 md:grid-cols-3">
+            {FOUNDER.science.map((s, i) => {
               const Icon = SCIENCE_ICON[s.kind] ?? GraduationCap;
               return (
-                <div key={s.title} className="rounded-2xl border border-white/10 bg-white/[0.04] p-6">
+                <div key={s.title} data-scroll className="sp-3d sp-grid-3 rounded-2xl border border-white/10 bg-white/[0.04] p-6" style={{ ['--sp-n' as string]: i % 3 }}>
                   <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-[var(--c-accent)]/12 text-[var(--c-accent-2)] ring-1 ring-white/10">
                     <Icon className="h-5 w-5" strokeWidth={1.6} />
                   </span>

@@ -30,11 +30,15 @@ export function DoctorsSection({ doctors, eyebrow = 'Jamoa', title, subtitle, ct
 
         {/* founder — prominent first card */}
         {featureFounder && (
-          <div className="mt-12 grid items-center gap-8 overflow-hidden rounded-3xl border border-[var(--c-accent)]/25 bg-[linear-gradient(150deg,var(--c-bg-4),var(--c-bg))] p-6 md:grid-cols-[minmax(0,0.6fr)_minmax(0,1.4fr)] md:gap-10 md:p-8">
-            <div data-reveal="left">
+          <div
+            data-scroll
+            className="sp-3d mt-12 grid items-center gap-8 overflow-hidden rounded-3xl border border-[var(--c-accent)]/25 bg-[linear-gradient(150deg,var(--c-bg-4),var(--c-bg))] p-6 md:grid-cols-[minmax(0,0.6fr)_minmax(0,1.4fr)] md:gap-10 md:p-8"
+            style={{ ['--sp-persp' as string]: '2000px', ['--sp-tilt' as string]: '22deg', ['--sp-depth' as string]: '200px', ['--sp-rise' as string]: '130px' }}
+          >
+            <div>
               <Portrait photo={FOUNDER.photo} name={FOUNDER.name} className="aspect-[4/5] w-full max-w-[280px] md:max-w-none" />
             </div>
-            <div data-reveal="right">
+            <div>
               <span className="inline-flex items-center gap-1.5 rounded-full bg-[var(--c-accent)]/12 px-3 py-1 text-[11px] font-medium text-[var(--c-accent-2)] ring-1 ring-white/10">
                 {FOUNDER.title}
               </span>
@@ -70,7 +74,7 @@ export function DoctorsSection({ doctors, eyebrow = 'Jamoa', title, subtitle, ct
               to="/doctors"
               data-scroll
               className="sp-3d sp-grid-4 group relative block aspect-[4/5] overflow-hidden rounded-2xl border border-white/10 bg-[var(--c-bg-3)]"
-              style={{ ['--sp-n' as string]: i % 4, ['--sp-persp' as string]: '1500px', ['--sp-tilt' as string]: '20deg', ['--sp-bend' as string]: '38deg', ['--sp-bow' as string]: '120px', ['--sp-depth' as string]: '190px', ['--sp-rise' as string]: '120px' }}
+              style={{ ['--sp-n' as string]: i % 4 }}
             >
               <Portrait photo={d.photo} name={d.name} rounded="rounded-none" className="sp-drift h-full w-full" />
               <div className="absolute inset-0 bg-[linear-gradient(to_top,var(--c-bg)_5%,rgba(10,20,29,0.5)_35%,transparent_60%)]" />
@@ -87,7 +91,7 @@ export function DoctorsSection({ doctors, eyebrow = 'Jamoa', title, subtitle, ct
               key={d.id}
               data-scroll
               className="sp-3d sp-grid-4 group overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] transition-colors duration-300 hover:border-[var(--c-accent)]/40"
-              style={{ ['--sp-n' as string]: i % 4, ['--sp-persp' as string]: '1500px', ['--sp-tilt' as string]: '20deg', ['--sp-bend' as string]: '38deg', ['--sp-bow' as string]: '120px', ['--sp-depth' as string]: '190px', ['--sp-rise' as string]: '120px' }}
+              style={{ ['--sp-n' as string]: i % 4 }}
             >
               <div className="relative aspect-[4/5] w-full">
                 <Portrait photo={d.photo} name={d.name} rounded="rounded-none" className="h-full w-full" />
@@ -116,7 +120,7 @@ export function DoctorsSection({ doctors, eyebrow = 'Jamoa', title, subtitle, ct
         </div>
 
         {cta && (
-          <div className="mt-12 flex justify-center" data-reveal>
+          <div className="sp-rise mt-12 flex justify-center">
             <Link
               to={cta.to}
               className="group inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.04] px-6 py-3 text-sm font-medium text-white transition-colors hover:border-[var(--c-accent)]/50 hover:bg-white/[0.08]"

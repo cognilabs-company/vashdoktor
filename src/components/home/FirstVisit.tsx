@@ -57,7 +57,7 @@ export function FirstVisit({ onOpenConsultation }: Props) {
         <div
           data-scroll
           className="sp-3d mt-10 grid overflow-hidden rounded-[28px] border border-white/10 bg-[var(--c-bg-3)] lg:grid-cols-12"
-          style={{ ['--sp-persp' as string]: '2400px', ['--sp-tilt' as string]: '11deg', ['--sp-depth' as string]: '200px' }}
+          style={{ ['--sp-persp' as string]: '2000px', ['--sp-tilt' as string]: '46deg', ['--sp-depth' as string]: '210px', ['--sp-rise' as string]: '150px' }}
         >
           {/* photo stage */}
           <div className="relative aspect-[4/3] overflow-hidden lg:col-span-7 lg:aspect-auto lg:min-h-[540px]">

@@ -79,8 +79,8 @@ export function ContactMap({ onOpenConsultation }: Props) {
 
         <figure
           data-scroll
-          className="sp-3d-y lg:col-span-7"
-          style={{ ['--sp-hinge-x' as string]: '0%', ['--sp-turn' as string]: '17deg', ['--sp-shift' as string]: '34px' }}
+          className="sp-3d lg:col-span-7"
+          style={{ ['--sp-persp' as string]: '1900px', ['--sp-tilt' as string]: '48deg', ['--sp-depth' as string]: '210px', ['--sp-rise' as string]: '140px' }}
         >
           <div className="overflow-hidden rounded-3xl border border-white/10 bg-[var(--c-bg-3)]">
             {embed ? (

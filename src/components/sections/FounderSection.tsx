@@ -20,8 +20,8 @@ export function FounderSection({ bg = 'var(--c-bg)', compact = false, flow }: { 
         {/* portrait */}
         <div
           data-scroll
-          className="sp-3d-y relative mx-auto w-full max-w-sm overflow-hidden rounded-2xl lg:max-w-none"
-          style={{ ['--sp-hinge-x' as string]: '100%', ['--sp-turn' as string]: '-17deg', ['--sp-shift' as string]: '-34px' }}
+          className="sp-3d relative mx-auto w-full max-w-sm overflow-hidden rounded-2xl lg:max-w-none"
+          style={{ ['--sp-persp' as string]: '2200px', ['--sp-tilt' as string]: '44deg', ['--sp-depth' as string]: '220px', ['--sp-rise' as string]: '150px' }}
         >
           <Portrait photo={FOUNDER.photo} name={FOUNDER.name} className="sp-drift aspect-[4/5] w-full" />
           {!compact && (

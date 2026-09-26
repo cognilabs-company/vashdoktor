@@ -17,7 +17,7 @@ export function Testimonials() {
       <div
         data-scroll
         className="sp-3d marquee mt-10 [mask-image:linear-gradient(to_right,transparent,black_6%,black_94%,transparent)]"
-        style={{ ['--sp-persp' as string]: '1700px', ['--sp-tilt' as string]: '17deg', ['--sp-hinge' as string]: '100%' }}
+        style={{ ['--sp-persp' as string]: '1100px', ['--sp-tilt' as string]: '62deg', ['--sp-depth' as string]: '200px', ['--sp-rise' as string]: '120px' }}
       >
         <div className="marquee-track" style={{ ['--marquee-duration' as string]: '55s' }}>
           {[0, 1].map((copy) => (

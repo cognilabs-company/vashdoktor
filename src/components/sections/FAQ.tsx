@@ -67,7 +67,11 @@ export function FAQ({
                 <div
                   key={idx}
                   data-scroll
-                  className="sp-item rounded-2xl bg-white/[0.05] border border-white/10 backdrop-blur-md overflow-hidden transition-all duration-200 shadow-2xs"
+                  /* transition-colors, not -all: the row's opacity and transform are written
+                     every frame from the scroll, and a transition on them lags a frame behind
+                     the tilt. Nothing on the row itself animates besides colour anyway. */
+                  className="sp-3d rounded-2xl bg-white/[0.05] border border-white/10 backdrop-blur-md overflow-hidden transition-colors duration-200 shadow-2xs"
+                  style={{ ['--sp-persp' as string]: '900px', ['--sp-tilt' as string]: '19deg', ['--sp-depth' as string]: '170px' }}
                 >
                   <button
                     onClick={() => toggle(idx)}

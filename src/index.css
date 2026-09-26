@@ -382,6 +382,62 @@
   transform: scaleX(var(--se, 1));
   transform-origin: left center;
 }
+
+/* ---------------------------------------------------------------------------
+   The same two numbers, read as depth. A panel starts lying back in space —
+   pushed away down Z and tipped on its own X axis — and turns up square to
+   the screen as it arrives, so the page reads as planes standing up rather
+   than as things sliding. Everything is tunable where it is used:
+     --sp-tilt / --sp-turn   how far it starts rotated
+     --sp-depth              how far down Z it starts
+     --sp-persp              how strong the lens is — big panels want a long
+                             one, or the far edge fans out
+     --sp-i                  its place in a row's stagger, 0..3
+   The stagger shifts the ramp instead of rescaling it, so no calc() has to
+   divide by a variable; keeping --sp-i under --sp-gain / --sp-step means the
+   no-JS state (--se: 1) still resolves to a finished, flat element.
+--------------------------------------------------------------------------- */
+.sp-3d,
+.sp-3d-y {
+  /* The stagger only means anything for cards standing side by side. Stacked
+     into one column on a narrow screen they already arrive one after another,
+     so a delay on top of that just holds the last one back. --sp-n is the
+     card's raw index; how much of it counts is the grid's business. */
+  --sp-i: 0;
+  --sp-t: clamp(0, calc(var(--se, 1) * var(--sp-gain, 1.4) - var(--sp-i, 0) * var(--sp-step, 0.12)), 1);
+  opacity: var(--sp-t);
+  backface-visibility: hidden;
+  will-change: transform, opacity;
+}
+/* lying back, hinged low, standing up to face you */
+.sp-3d {
+  transform-origin: 50% var(--sp-hinge, 78%);
+  transform:
+    perspective(var(--sp-persp, 1500px))
+    translate3d(0, calc((1 - var(--sp-t)) * var(--sp-rise, 34px)), calc((1 - var(--sp-t)) * var(--sp-depth, 260px) * -1))
+    rotateX(calc((1 - var(--sp-t)) * var(--sp-tilt, 15deg)));
+}
+/* turned away on its Y axis and swinging square — two of these hinged on
+   their inner edges open like a book across the middle of the page */
+.sp-3d-y {
+  transform-origin: var(--sp-hinge-x, 50%) 50%;
+  transform:
+    perspective(var(--sp-persp, 1400px))
+    translate3d(calc((1 - var(--sp-t)) * var(--sp-shift, 0px)), 0, calc((1 - var(--sp-t)) * var(--sp-depth, 220px) * -1))
+    rotateY(calc((1 - var(--sp-t)) * var(--sp-turn, 18deg)));
+}
+/* two across: only the column matters, so the index wraps every two.
+   If mod() is missing the property is invalid at computed-value time, the
+   consumer falls back to 0, and the cards simply arrive together. */
+@media (min-width: 640px) {
+  .sp-3d,
+  .sp-3d-y { --sp-i: mod(var(--sp-n, 0), 2); }
+}
+/* four across: every card in the row gets its own place in the queue */
+@media (min-width: 1024px) {
+  .sp-3d,
+  .sp-3d-y { --sp-i: var(--sp-n, 0); }
+}
 @media (prefers-reduced-motion: reduce) {
   .sp-rise,
   .sp-rise-sm,
@@ -390,7 +446,9 @@
   .sp-counter,
   .sp-drift-x,
   .sp-zoom,
-  .sp-draw {
+  .sp-draw,
+  .sp-3d,
+  .sp-3d-y {
     opacity: 1;
     transform: none;
   }

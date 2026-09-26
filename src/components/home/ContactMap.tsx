@@ -77,7 +77,11 @@ export function ContactMap({ onOpenConsultation }: Props) {
           </div>
         </div>
 
-        <figure className="lg:col-span-7" data-reveal="right">
+        <figure
+          data-scroll
+          className="sp-3d-y lg:col-span-7"
+          style={{ ['--sp-hinge-x' as string]: '0%', ['--sp-turn' as string]: '17deg', ['--sp-shift' as string]: '34px' }}
+        >
           <div className="overflow-hidden rounded-3xl border border-white/10 bg-[var(--c-bg-3)]">
             {embed ? (
               <iframe

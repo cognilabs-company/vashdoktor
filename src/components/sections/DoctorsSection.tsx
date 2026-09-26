@@ -64,12 +64,13 @@ export function DoctorsSection({ doctors, eyebrow = 'Jamoa', title, subtitle, ct
 
         {/* team grid */}
         <div className={`grid gap-6 sm:grid-cols-2 lg:grid-cols-4 ${compact ? 'mt-10 gap-4' : 'mt-8'}`}>
-          {doctors.map((d) => compact ? (
+          {doctors.map((d, i) => compact ? (
             <Link
               key={d.id}
               to="/doctors"
               data-scroll
-              className="sp-item group relative block aspect-[4/5] overflow-hidden rounded-2xl border border-white/10 bg-[var(--c-bg-3)]"
+              className="sp-3d group relative block aspect-[4/5] overflow-hidden rounded-2xl border border-white/10 bg-[var(--c-bg-3)]"
+              style={{ ['--sp-n' as string]: i % 4, ['--sp-persp' as string]: '1100px', ['--sp-tilt' as string]: '17deg', ['--sp-depth' as string]: '210px' }}
             >
               <Portrait photo={d.photo} name={d.name} rounded="rounded-none" className="sp-drift h-full w-full" />
               <div className="absolute inset-0 bg-[linear-gradient(to_top,var(--c-bg)_5%,rgba(10,20,29,0.5)_35%,transparent_60%)]" />
@@ -84,7 +85,9 @@ export function DoctorsSection({ doctors, eyebrow = 'Jamoa', title, subtitle, ct
           ) : (
             <article
               key={d.id}
-              className="group overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] transition-colors duration-300 hover:border-[var(--c-accent)]/40"
+              data-scroll
+              className="sp-3d group overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] transition-colors duration-300 hover:border-[var(--c-accent)]/40"
+              style={{ ['--sp-n' as string]: i % 4, ['--sp-persp' as string]: '1400px', ['--sp-tilt' as string]: '15deg', ['--sp-depth' as string]: '210px' }}
             >
               <div className="relative aspect-[4/5] w-full">
                 <Portrait photo={d.photo} name={d.name} rounded="rounded-none" className="h-full w-full" />

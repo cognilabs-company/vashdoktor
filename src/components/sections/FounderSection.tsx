@@ -18,7 +18,11 @@ export function FounderSection({ bg = 'var(--c-bg)', compact = false, flow }: { 
       <div className="pointer-events-none absolute -left-[8%] top-1/3 h-[380px] w-[380px] rounded-full bg-[var(--c-accent)]/8 blur-[110px]" />
       <div className="relative mx-auto grid max-w-[1440px] items-center gap-10 px-6 sm:px-8 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-16 lg:px-12">
         {/* portrait */}
-        <div className="relative mx-auto w-full max-w-sm overflow-hidden rounded-2xl lg:max-w-none">
+        <div
+          data-scroll
+          className="sp-3d-y relative mx-auto w-full max-w-sm overflow-hidden rounded-2xl lg:max-w-none"
+          style={{ ['--sp-hinge-x' as string]: '100%', ['--sp-turn' as string]: '-17deg', ['--sp-shift' as string]: '-34px' }}
+        >
           <Portrait photo={FOUNDER.photo} name={FOUNDER.name} className="sp-drift aspect-[4/5] w-full" />
           {!compact && (
             <div className="absolute -bottom-5 left-5 right-5 rounded-2xl border border-white/10 bg-[var(--c-bg-2)]/90 px-5 py-4">

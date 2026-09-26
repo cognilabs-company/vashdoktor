@@ -14,7 +14,11 @@ export function Testimonials() {
         </h2>
       </div>
 
-      <div className="marquee mt-10 [mask-image:linear-gradient(to_right,transparent,black_6%,black_94%,transparent)]">
+      <div
+        data-scroll
+        className="sp-3d marquee mt-10 [mask-image:linear-gradient(to_right,transparent,black_6%,black_94%,transparent)]"
+        style={{ ['--sp-persp' as string]: '1700px', ['--sp-tilt' as string]: '17deg', ['--sp-hinge' as string]: '100%' }}
+      >
         <div className="marquee-track" style={{ ['--marquee-duration' as string]: '55s' }}>
           {[0, 1].map((copy) => (
             <div key={copy} className="flex shrink-0 gap-4 pr-4" aria-hidden={copy === 1}>

@@ -315,3 +315,20 @@
 @media (prefers-reduced-motion: reduce) {
   .flight-crease { display: none; }
 }
+
+/* The photograph inside a flight card is a clinic interior — a different world
+   from the fjord it flies out of. Measured, the scene behind the card sits at
+   7% saturation and 90% lightness; the photo arrives fully saturated. It is
+   graded into the scene's own two tones instead: greyscale first, then the
+   blacks lifted to the card's slate and the whites pulled down to the mist. */
+.flight-photo { isolation: isolate; }
+.flight-photo img { filter: grayscale(1) contrast(1.08) brightness(1.02); }
+.flight-photo::before,
+.flight-photo::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.flight-photo::before { background: #1b262c; mix-blend-mode: lighten; }
+.flight-photo::after { background: #a8bec8; mix-blend-mode: darken; }

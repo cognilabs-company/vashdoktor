@@ -304,7 +304,7 @@ function Flight({ onOpenConsultation }: Props) {
               stop.side === 'left' ? 'left-6 lg:left-14' : 'right-6 lg:right-14'
             }`}
           >
-            <article className="relative overflow-hidden rounded-[26px] bg-[linear-gradient(180deg,rgba(6,16,24,0.93),rgba(8,22,31,0.88))] shadow-[0_40px_90px_-35px_rgba(0,0,0,0.95)] ring-1 ring-white/12">
+            <article className="relative overflow-hidden rounded-[26px] bg-[linear-gradient(180deg,rgba(24,33,37,0.94),rgba(33,44,48,0.90))] shadow-[0_40px_90px_-35px_rgba(6,12,16,0.85)] ring-1 ring-white/14">
               {/* the creases of the sheet it was, fading out as it opens */}
               <div
                 ref={(el) => {
@@ -314,16 +314,20 @@ function Flight({ onOpenConsultation }: Props) {
                 style={{ opacity: 0, visibility: 'hidden' }}
               />
               <div className="flight-card-el relative h-[148px] w-full overflow-hidden">
-                <img
-                  src={stop.category.image}
-                  alt=""
-                  aria-hidden="true"
-                  loading="lazy"
-                  referrerPolicy="no-referrer"
-                  className="h-full w-full object-cover"
-                />
-                <div className="absolute inset-0 bg-[linear-gradient(0deg,rgba(6,16,24,0.97),rgba(6,16,24,0.35)_58%,rgba(6,16,24,0.08))]" />
-                <div className="absolute inset-x-6 bottom-4 lg:inset-x-7">
+                {/* the duotone wraps the picture alone, so the scrim and the
+                    title above it are not caught by the blend */}
+                <div className="flight-photo absolute inset-0">
+                  <img
+                    src={stop.category.image}
+                    alt=""
+                    aria-hidden="true"
+                    loading="lazy"
+                    referrerPolicy="no-referrer"
+                    className="h-full w-full object-cover"
+                  />
+                </div>
+                <div className="absolute inset-0 z-[2] bg-[linear-gradient(0deg,rgba(24,33,37,0.97),rgba(24,33,37,0.45)_58%,rgba(24,33,37,0.15))]" />
+                <div className="absolute inset-x-6 bottom-4 z-[3] lg:inset-x-7">
                   <div className="flex items-center gap-3 text-[12px] tracking-wide text-[var(--c-accent-2)]">
                     <span className="h-px w-6 bg-[var(--c-accent-2)]/70" />
                     {String(i + 1).padStart(2, '0')} / {String(STOPS.length).padStart(2, '0')}

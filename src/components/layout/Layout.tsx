@@ -78,8 +78,16 @@ export function Layout() {
     }
 
     const parallaxEls = Array.from(document.querySelectorAll<HTMLElement>('[data-parallax]'));
+    // Sections that want their motion tied to the scroll position rather than
+    // fired once on entry. Each gets two numbers it can build anything from:
+    //   --sp  how far it has crossed the viewport, 0 (just below) to 1 (just above)
+    //   --se  how far it has entered, 0 until a little of it shows, 1 when it is well in
+    // Written as plain custom properties so the motion lives in CSS, and read
+    // back and forth — scrolling up runs it in reverse, which a one-shot
+    // observer cannot do.
+    const scrollEls = reduced ? [] : Array.from(document.querySelectorAll<HTMLElement>('[data-scroll]'));
     let raf = 0;
-    const applyParallax = () => {
+    const applyScroll = () => {
       raf = 0;
       const vh = window.innerHeight;
       for (const el of parallaxEls) {
@@ -88,12 +96,23 @@ export function Layout() {
         const offset = (rect.top + rect.height / 2 - vh / 2) * speed;
         el.style.transform = `translate3d(0, ${offset.toFixed(1)}px, 0)`;
       }
+      for (const el of scrollEls) {
+        const rect = el.getBoundingClientRect();
+        // skip anything nowhere near the viewport — this runs on every frame
+        if (rect.bottom < -vh * 0.5 || rect.top > vh * 1.5) continue;
+        const span = vh + rect.height;
+        const sp = Math.min(1, Math.max(0, (vh - rect.top) / span));
+        const shown = Math.min(1, Math.max(0, (vh - rect.top) / Math.max(1, Math.min(rect.height, vh))));
+        const se = Math.min(1, Math.max(0, (shown - 0.12) / 0.43));
+        el.style.setProperty('--sp', sp.toFixed(4));
+        el.style.setProperty('--se', (se * se * (3 - 2 * se)).toFixed(4));
+      }
     };
     const onScroll = () => {
-      if (!raf && parallaxEls.length) raf = requestAnimationFrame(applyParallax);
+      if (!raf && (parallaxEls.length || scrollEls.length)) raf = requestAnimationFrame(applyScroll);
     };
-    if (parallaxEls.length) {
-      applyParallax();
+    if (parallaxEls.length || scrollEls.length) {
+      applyScroll();
       window.addEventListener('scroll', onScroll, { passive: true });
       window.addEventListener('resize', onScroll, { passive: true });
     }

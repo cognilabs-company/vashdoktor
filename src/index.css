@@ -332,3 +332,46 @@
 }
 .flight-photo::before { background: #1b262c; mix-blend-mode: lighten; }
 .flight-photo::after { background: #a8bec8; mix-blend-mode: darken; }
+
+/* ---------------------------------------------------------------------------
+   Scroll-linked motion. A section marked [data-scroll] carries two live numbers
+   (--sp: how far it has crossed the viewport, --se: how far it has entered),
+   and these classes are the vocabulary built on them. Unlike the one-shot
+   reveal above, all of it runs in reverse when you scroll back up.
+   Defaults are the finished state, so nothing is stuck if JS never runs.
+--------------------------------------------------------------------------- */
+.sp-rise {
+  opacity: var(--se, 1);
+  transform: translate3d(0, calc((1 - var(--se, 1)) * 34px), 0);
+  will-change: transform, opacity;
+}
+.sp-rise-sm {
+  opacity: var(--se, 1);
+  transform: translate3d(0, calc((1 - var(--se, 1)) * 18px), 0);
+}
+/* a photo drifting inside its own frame — the frame clips, the picture moves
+   slower than the page, which is what reads as depth */
+.sp-drift {
+  transform: translate3d(0, calc((var(--sp, 0.5) - 0.5) * var(--sp-dist, 56px) * -1), 0) scale(1.12);
+  will-change: transform;
+}
+.sp-drift-x {
+  transform: translate3d(calc((var(--sp, 0.5) - 0.5) * var(--sp-dist, 60px) * -1), 0, 0);
+  will-change: transform;
+}
+/* a rule or bar that draws itself across as the section crosses */
+.sp-draw {
+  transform: scaleX(var(--se, 1));
+  transform-origin: left center;
+}
+@media (prefers-reduced-motion: reduce) {
+  .sp-rise,
+  .sp-rise-sm,
+  .sp-drift,
+  .sp-drift-x,
+  .sp-draw {
+    opacity: 1;
+    transform: none;
+  }
+  .sp-drift { transform: scale(1.12); }
+}

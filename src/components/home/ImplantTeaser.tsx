@@ -12,7 +12,7 @@ interface Props {
  * /implantatsiya so the home page stays about the whole clinic. */
 export function ImplantTeaser({ onOpen3DViewer }: Props) {
   return (
-    <section data-bg={FLOW.teal} className="relative w-full overflow-hidden">
+    <section data-bg={FLOW.teal} data-scroll className="relative w-full overflow-hidden">
       {/* bridge from the opaque 3D section above */}
       <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-[var(--c-bg)] to-transparent" />
       <div className="mx-auto grid max-w-[1440px] items-center gap-10 px-6 py-16 sm:px-8 lg:grid-cols-12 lg:gap-8 lg:px-12 lg:py-20">
@@ -22,11 +22,12 @@ export function ImplantTeaser({ onOpen3DViewer }: Props) {
             src={getFrameSrc(195)}
             alt="Implant o‘rnatilgan jag‘ — 3D model"
             loading="lazy"
-            className="relative mx-auto w-full max-w-[640px] object-contain"
+            className="sp-drift relative mx-auto w-full max-w-[640px] object-contain"
+            style={{ ['--sp-dist' as string]: '70px' }}
           />
         </figure>
 
-        <div className="lg:col-span-5 lg:col-start-8" data-reveal="right">
+        <div className="sp-rise lg:col-span-5 lg:col-start-8">
           <Eyebrow>Implantatsiya</Eyebrow>
           <h2 className="mt-5 font-serif text-[clamp(1.9rem,3.6vw,2.8rem)] font-medium leading-[1.06] tracking-tight text-white">
             Implant qanday tuzilgan? Beshta qism, bitta vazifa.

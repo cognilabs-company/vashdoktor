@@ -18,9 +18,9 @@ interface Props {
 
 export function DoctorsSection({ doctors, eyebrow = 'Jamoa', title, subtitle, cta, featureFounder, compact }: Props) {
   return (
-    <section id="doctors" data-bg={FLOW.base} className="relative w-full py-20 lg:py-28">
+    <section id="doctors" data-bg={FLOW.base} data-scroll className="relative w-full py-20 lg:py-28">
       <div className="mx-auto max-w-[1440px] px-6 sm:px-8 lg:px-12">
-        <div className="max-w-2xl" data-reveal="left">
+        <div className="sp-rise max-w-2xl">
           <TechnicalBadge label={eyebrow} variant="dark" />
           <h2 className="mt-6 font-serif text-[clamp(2rem,4.5vw,3.5rem)] font-medium leading-[1.05] tracking-tight text-white">
             {title}
@@ -70,7 +70,7 @@ export function DoctorsSection({ doctors, eyebrow = 'Jamoa', title, subtitle, ct
               to="/doctors"
               className="group relative block aspect-[4/5] overflow-hidden rounded-2xl border border-white/10 bg-[var(--c-bg-3)]"
             >
-              <Portrait photo={d.photo} name={d.name} rounded="rounded-none" className="h-full w-full transition-transform duration-[1.2s] ease-out group-hover:scale-[1.05]" />
+              <Portrait photo={d.photo} name={d.name} rounded="rounded-none" className="sp-drift h-full w-full" />
               <div className="absolute inset-0 bg-[linear-gradient(to_top,var(--c-bg)_5%,rgba(10,20,29,0.5)_35%,transparent_60%)]" />
               <span className="absolute left-4 top-4 rounded-full bg-[var(--c-bg)]/70 px-2.5 py-1 text-[11px] text-[var(--c-accent-2)] ring-1 ring-white/10">
                 {d.experience}

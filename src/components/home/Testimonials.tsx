@@ -6,8 +6,8 @@ import { FLOW } from '../../lib/flow';
  * stops the moment you hover to read one. */
 export function Testimonials() {
   return (
-    <section data-bg={FLOW.ink} className="relative w-full overflow-hidden py-16 lg:py-24">
-      <div className="mx-auto max-w-[1440px] px-6 sm:px-8 lg:px-12" data-reveal>
+    <section data-bg={FLOW.ink} data-scroll className="relative w-full overflow-hidden py-16 lg:py-24">
+      <div className="sp-rise mx-auto max-w-[1440px] px-6 sm:px-8 lg:px-12">
         <Eyebrow>Bemorlar aytadi</Eyebrow>
         <h2 className="mt-4 font-serif text-[clamp(1.9rem,4vw,3.1rem)] font-medium leading-[1.06] tracking-tight text-white">
           Odamlarning o‘z so‘zlari

@@ -20,9 +20,9 @@ export function ContactMap({ onOpenConsultation }: Props) {
     : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(CLINIC_CONFIG.address)}`;
 
   return (
-    <section id="contact" data-bg={FLOW.green} className="relative w-full py-20 lg:py-28">
+    <section id="contact" data-bg={FLOW.green} data-scroll className="relative w-full py-20 lg:py-28">
       <div className="mx-auto grid max-w-[1440px] gap-10 px-6 sm:px-8 lg:grid-cols-12 lg:gap-8 lg:px-12">
-        <div className="lg:col-span-5" data-reveal="left">
+        <div className="sp-rise lg:col-span-5">
           <Eyebrow>Manzil</Eyebrow>
           <h2 className="mt-5 font-serif text-[clamp(1.9rem,4vw,3.1rem)] font-medium leading-[1.06] tracking-tight text-white">
             Kelish oson. Yozilish undan ham oson.
@@ -84,7 +84,7 @@ export function ContactMap({ onOpenConsultation }: Props) {
                 title="Klinika xaritada"
                 src={embed}
                 loading="lazy"
-                className="block h-[380px] w-full grayscale-[0.35] contrast-[1.05] lg:h-[520px]"
+                className="sp-drift block h-[380px] w-full grayscale-[0.35] contrast-[1.05] lg:h-[520px]"
               />
             ) : (
               <div className="flex h-[380px] items-center justify-center text-sm text-[var(--c-text-5)] lg:h-[520px]">Xarita qo‘shiladi</div>
